@@ -10,5 +10,9 @@ All graphic and sound assets in this mod are properties of Blizzard Entertainmen
 * Factorio Standard Library >= 1.4.6
 * Factorio Base >= 1.1
 
+
+Technical Note
+--------------------
 Unit/Building Name Convention
+
 name = MOD_NAME..'-'..name .. '-' .. level,
