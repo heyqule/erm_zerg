@@ -1,6 +1,2 @@
-# ERM_Zerg
-Add Zergs to factorio as biters.  It is still WIP.
-
-# Requirement
-* Enemy Race Manager
-* Factorio Standard Library
+Unit Name Convention
+name = MOD_NAME..'-'..name .. '-' .. level,
