@@ -10,7 +10,7 @@ local Table = require('__stdlib__/stdlib/utils/table')
 
 
 local get_unit = function(unit_name)
-    local current_tier = remote.call('enemy_race_manager', 'get_tier')
+    local current_tier = remote.call('enemy_race_manager', 'get_race_tier', MOD_NAME)
     return unit_name[current_tier][Math.random(#unit_name[current_tier])]
 end
 
@@ -25,9 +25,9 @@ end
 
 local get_drone_buildable_turrets = function()
     local unit_name = {
-        {'sunker_colony', 'spore_colony'},
-        {'sunker_colony', 'spore_colony'},
-        {'sunker_colony', 'spore_colony', 'nydus'},
+        {'spore_colony'},
+        {'spore_colony'},
+        {'spore_colony', 'nydus'},
     }
     return get_unit(unit_name)
 end

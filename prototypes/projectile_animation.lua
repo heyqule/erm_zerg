@@ -192,27 +192,42 @@ end
 
 function ProjectileAnimation.create_defiler_cloud()
     return
+    {
+        type = "explosion",
+        name = "defiler-cloud-explosion",
+        flags = { "not-on-map" },
+        animations =
         {
-            filename = "__erm_zerg__/graphics/entity/projectiles/defiler_blood.png",
-            priority = "extra-high",
-            width = 128,
-            height = 128,
-            frame_count = 14,
-            animation_speed = 0.2,
-            scale = 2
+            {
+                filename = "__erm_zerg__/graphics/entity/projectiles/defiler_blood.png",
+                priority = "extra-high",
+                width = 128,
+                height = 128,
+                frame_count = 14,
+                animation_speed = 0.2,
+                scale = 2
+            }
         }
+    }
 end
 
 function ProjectileAnimation.create_queen_cloud()
     return
     {
-        filename = "__erm_zerg__/graphics/entity/projectiles/queen_heal.png",
-        priority = "extra-high",
-        width = 128,
-        height = 128,
-        frame_count = 14,
-        animation_speed = 0.2,
-        scale = 2
+        type = "explosion",
+        name = "queen-cloud-explosion",
+        flags = { "not-on-map" },
+        animations = {
+            {
+                filename = "__erm_zerg__/graphics/entity/projectiles/queen_heal.png",
+                priority = "extra-high",
+                width = 128,
+                height = 128,
+                frame_count = 14,
+                animation_speed = 0.2,
+                scale = 2
+            }
+        }
     }
 end
 

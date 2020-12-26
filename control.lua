@@ -23,42 +23,64 @@ local createZergRace = function()
     if not zerg_force then
         zerg_force = game.create_force(FORCE_NAME)
     end
+
     zerg_force.ai_controllable = true;
     zerg_force.disable_research()
     zerg_force.friendly_fire = false;
 
     game.forces['enemy'].set_friend(zerg_force, true)
     game.forces[FORCE_NAME].set_friend(game.forces['enemy'], true)
+
+    if game.surfaces.nauvis.peaceful_mode then
+        game.forces[FORCE_NAME].set_cease_fire(game.forces['player'], true)
+    end
 end
 
 local addRaceSettings = function()
+    if remote.call('enemy_race_manager','get_race', MOD_NAME) then
+        return
+    end
     local race_settings = {
         race = MOD_NAME,
         version = MOD_VERSION,
+        level = 1, -- Race level
+        tier = 1, -- Race tier
+        angry_meter = 0, -- Build by killing their force (unit = 1, building = 10)
+        send_attack_threshold = 2000, -- When threshold reach, sends attack to the base
+        send_attack_threshold_deviation = 0.2,
+        next_attack_threshold = 0, -- Used by system to calculate next move
         units = {
-            tier_1 = {'zergling','hydralisk','mutalisk'},
-            tier_2 = {'overlord','guardian','devourer','drone'},
-            tier_3 = {'ultralisk','queen','defiler','overlord'},
+            {'zergling','hydralisk','mutalisk'},
+            {'overlord','guardian','devourer','drone'},
+            {'ultralisk','queen','defiler'},
         },
+        current_units_tier = {},
         turrets = {
-            tier_1 = {'sunker','spore'},
-            tier_2 = {'sunker','spore'},
-            tier_3 = {'sunker','spore','nydus'},
+            {'sunker_colony','spore_colony'},
+            {},
+            {'nyduspit'},
         },
+        current_turrets_tier = {},
         command_centers = {
-            tier_1 = {'hatchery'},
-            tier_2 = {'lair'},
-            tier_3 = {'hive'}
+            {'hatchery'},
+            {'lair'},
+            {'hive'}
         },
+        current_command_centers_tier = {},
         support_structures = {
-            tier_1 = {'pool','hydraden','spire', 'chamber'},
-            tier_2 = {'greater_spire'},
-            tier_3 = {'ultralisk_carvern','queen_nest','defiler_mound'},
-        }
+            {'spawning_pool','hydraden','spire', 'chamber'},
+            {'greater_spire'},
+            {'ultralisk_cavern','queen_nest','defiler_mound'},
+        },
+        current_support_structures_tier = {},
     }
-    if not remote.call('enemy_race_manager','get_race', MOD_NAME) then
-        remote.call('enemy_race_manager','register_race', race_settings)
-    end
+
+    race_settings.current_units_tier = race_settings.units[1]
+    race_settings.current_turrets_tier = race_settings.turrets[1]
+    race_settings.current_command_centers_tier = race_settings.command_centers[1]
+    race_settings.current_support_structures_tier = race_settings.support_structures[1]
+
+    remote.call('enemy_race_manager','register_race', race_settings)
 end
 
 Event.on_init(function(event)
@@ -67,17 +89,16 @@ Event.on_init(function(event)
 end)
 
 Event.on_load(function(event)
+end)
 
+Event.on_configuration_changed(function(event)
+    createZergRace()
+    addRaceSettings()
 end)
 
 
 Event.register(defines.events.on_script_trigger_effect, function (event)
     if not event.source_entity then
-        print(event.source_entity)
-        print(event.source_position.x)
-        print(event.target_entity)
-        print(event.target_position.x)
-        print(event.effect_id)
         return
     end
 
@@ -87,4 +108,6 @@ Event.register(defines.events.on_script_trigger_effect, function (event)
         CustomAttacks.process_drone(event)
     end
 end)
+
+
 

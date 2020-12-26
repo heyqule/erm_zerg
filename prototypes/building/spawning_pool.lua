@@ -8,6 +8,7 @@ require('__stdlib__/stdlib/utils/defines/time')
 
 local ERM_UnitHelper = require('__enemyracemanager__/lib/unit_helper')
 local ERM_UnitTint = require('__enemyracemanager__/lib/unit_tint')
+local ERM_DebugHelper = require('__enemyracemanager__/lib/debug_helper')
 local ZergSound = require('__erm_zerg__/prototypes/sound')
 
 local enemy_autoplace = require ("__enemyracemanager__/lib/enemy-autoplace-utils")
@@ -29,8 +30,8 @@ local incremental_physical_resistance = 80
 local base_fire_resistance = 0
 local incremental_fire_resistance = 80
 -- Handles laser and electric resistance
-local base_eletric_resistance = 0
-local incremental_eletric_resistance = 80
+local base_electric_resistance = 0
+local incremental_electric_resistance = 80
 -- Handles cold resistance
 local base_cold_resistance = 15
 local incremental_cold_resistance = 65
@@ -41,21 +42,24 @@ local unit_scale = 2
 local pollution_absorption_absolute = 20
 local spawning_cooldown = {450, 180}
 local spawning_radius = 10
-local max_count_of_owned_units = 20
-local max_friends_around_to_spawn = 15
+local max_count_of_owned_units = 7
+local max_friends_around_to_spawn = 5
 local spawn_table = function(level)
     local res = {}
     res[1] = {MOD_NAME.."-zergling-"..level, {{0.0, 1}, {1, 1}}}
     return res
 end
 
-local collision_box = {{-3, -3.5}, {3.2, 3}}
+local collision_box = {{-3.25, -3}, {3.25, 2.75}}
 local map_generator_bounding_box = {{-5, -5}, {5, 5}}
-local selection_box = {{-3, -3.5}, {3.2, 3}}
+local selection_box = {{-3.25, -3}, {3.25, 2.75}}
 
 
 function ErmZerg.make_spawning_pool(level)
     level = level or 1
+    if DEBUG_MODE then
+        ERM_DebugHelper.print_translate_to_console(MOD_NAME, name, level)
+    end
     data:extend({
         {
             type = "unit-spawner",
@@ -74,8 +78,8 @@ function ErmZerg.make_spawning_pool(level)
                 { type = "physical", percent = ERM_UnitHelper.get_resistance(base_physical_resistance, incremental_physical_resistance, resistance_mutiplier, level) },
                 { type = "fire", percent = ERM_UnitHelper.get_resistance(base_fire_resistance, incremental_fire_resistance, resistance_mutiplier, level) },
                 { type = "explosion", percent = ERM_UnitHelper.get_resistance(base_fire_resistance, incremental_fire_resistance, resistance_mutiplier, level) },
-                { type = "laser", percent = ERM_UnitHelper.get_resistance(base_eletric_resistance, incremental_eletric_resistance, resistance_mutiplier, level) },
-                { type = "electric", percent = ERM_UnitHelper.get_resistance(base_eletric_resistance, incremental_eletric_resistance, resistance_mutiplier, level) },
+                { type = "laser", percent = ERM_UnitHelper.get_resistance(base_electric_resistance, incremental_electric_resistance, resistance_mutiplier, level) },
+                { type = "electric", percent = ERM_UnitHelper.get_resistance(base_electric_resistance, incremental_electric_resistance, resistance_mutiplier, level) },
                 { type = "cold", percent = ERM_UnitHelper.get_resistance(base_cold_resistance, incremental_cold_resistance, resistance_mutiplier, level) }
             },
             healing_per_tick = ERM_UnitHelper.get_healing(hitpoint, max_hitpoint_multiplier, health_multiplier, level),
