@@ -38,11 +38,11 @@ local incremental_cold_resistance = 65
 -- Animation Settings
 local unit_scale = 2
 
-local pollution_absorption_absolute = 50
-local spawning_cooldown = {900, 600}
+local pollution_absorption_absolute = 20
+local spawning_cooldown = {1800, 900}
 local spawning_radius = 10
-local max_count_of_owned_units = 7
-local max_friends_around_to_spawn = 5
+local max_count_of_owned_units = 5
+local max_friends_around_to_spawn = 3
 local spawn_table = function(level)
     local res = {}
     res[1] = {MOD_NAME.."-zergling-"..level, {{0.0, 0.2},{0.2, 0.2},{0.4, 0.0},{0.6, 0.0},{0.8, 0.0}}}
@@ -56,7 +56,7 @@ local spawn_table = function(level)
 end
 
 local collision_box = {{-3, -3.25}, {3.25, 2.75}}
-local map_generator_bounding_box = {{-5, -5}, {5, 5}}
+local map_generator_bounding_box = {{-4, -4}, {4, 4}}
 local selection_box = {{-3, -3.25}, {3.25, 2.75}}
 
 

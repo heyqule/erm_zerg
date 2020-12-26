@@ -52,12 +52,12 @@ local incremental_movement_speed = 0.05
 
 -- Misc Settings
 local vision_distance = 45
-local pollution_to_join_attack = 50
+local pollution_to_join_attack = 75
 local distraction_cooldown = 20
 
 -- Animation Settings
 local unit_scale = 1.5
-
+local collision_box = { { -0.25, -0.25 }, { 0.25, 0.25 } }
 local selection_box = { { -0.75, -1.25 }, { 0.75, 1.25 } }
 
 function ErmZerg.make_overlord(level)
@@ -89,7 +89,7 @@ function ErmZerg.make_overlord(level)
             },
             healing_per_tick = ERM_UnitHelper.get_healing(hitpoint, max_hitpoint_multiplier, health_multiplier, level),
             collision_mask = {},
-            collision_box = selection_box,
+            collision_box = collision_box,
             selection_box = selection_box,
             sticker_box = selection_box,
             vision_distance = vision_distance,

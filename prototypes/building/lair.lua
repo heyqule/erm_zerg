@@ -17,7 +17,7 @@ local name = 'lair'
 -- Hitpoints
 local health_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
 local hitpoint = 1800
-local max_hitpoint_multiplier = settings.startup["enemyracemanager-max-hitpoint-multipliers"].value * 1.5
+local max_hitpoint_multiplier = settings.startup["enemyracemanager-max-hitpoint-multipliers"].value
 
 local resistance_mutiplier = settings.startup["enemyracemanager-level-multipliers"].value
 -- Handles acid and poison resistance
@@ -39,11 +39,11 @@ local incremental_cold_resistance = 65
 -- Animation Settings
 local unit_scale = 2
 
-local pollution_absorption_absolute = 100
+local pollution_absorption_absolute = 20
 local spawning_cooldown = {600, 300}
 local spawning_radius = 20
-local max_count_of_owned_units = 20
-local max_friends_around_to_spawn = 15
+local max_count_of_owned_units = 7
+local max_friends_around_to_spawn = 5
 local spawn_table = function(level)
     local res = {}
     --Tire 1
@@ -59,7 +59,7 @@ local spawn_table = function(level)
 end
 
 local collision_box = {{-3, -3.5}, {3.2, 3}}
-local map_generator_bounding_box = {{-5, -5}, {5, 5}}
+local map_generator_bounding_box = {{-4, -4}, {4, 4}}
 local selection_box = {{-3, -3.5}, {3.2, 3}}
 
 

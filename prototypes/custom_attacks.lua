@@ -18,7 +18,7 @@ local get_overlord_droppable_unit = function()
     local unit_name = {
         {'zergling', 'hydralisk'},
         {'hydralisk', 'lurker'},
-        {'lurker', 'infested'},
+        {'hydralisk', 'lurker', 'infested'},
     }
     return get_unit(unit_name)
 end

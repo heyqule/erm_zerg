@@ -45,6 +45,7 @@ local addRaceSettings = function()
         version = MOD_VERSION,
         level = 1, -- Race level
         tier = 1, -- Race tier
+        xp_point = 0,
         angry_meter = 0, -- Build by killing their force (unit = 1, building = 10)
         send_attack_threshold = 2000, -- When threshold reach, sends attack to the base
         send_attack_threshold_deviation = 0.2,
@@ -93,7 +94,6 @@ end)
 
 Event.on_configuration_changed(function(event)
     createZergRace()
-    addRaceSettings()
 end)
 
 
