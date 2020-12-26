@@ -6,9 +6,10 @@
 -- To change this template use File | Settings | File Templates.
 --
 require('__stdlib__/stdlib/utils/defines/time')
-
+local Sprites = require('__stdlib__/stdlib/data/modules/sprites')
 local ERM_UnitHelper = require('__enemyracemanager__/lib/unit_helper')
 local ERM_UnitTint = require('__enemyracemanager__/lib/unit_tint')
+local ERM_DebugHelper = require('__enemyracemanager__/lib/debug_helper')
 local ZergSound = require('__erm_zerg__/prototypes/sound')
 local ZergProjectileAnimation = require('__erm_zerg__/prototypes/projectile_animation')
 local name = 'queen'
@@ -28,8 +29,8 @@ local incremental_physical_resistance = 95
 local base_fire_resistance = 10
 local incremental_fire_resistance = 85
 -- Handles laser and electric resistance
-local base_eletric_resistance = 0
-local incremental_eletric_resistance = 95
+local base_electric_resistance = 0
+local incremental_electric_resistance = 95
 -- Handles cold resistance
 local base_cold_resistance = 25
 local incremental_cold_resistance = 70
@@ -57,12 +58,15 @@ local pollution_to_join_attack = 250
 local distraction_cooldown = 20
 
 -- Animation Settings
-local unit_scale = 1
+local unit_scale = 1.5
 
-local selection_box = { { -0.5, -0.5 }, { 0.5, 0.5 } }
+local selection_box = { { -0.75, -0.75 }, { 0.75, 0.75 } }
 
 function ErmZerg.make_queen(level)
 level = level or 1
+    if DEBUG_MODE then
+        ERM_DebugHelper.print_translate_to_console(MOD_NAME, name, level)
+    end
 data:extend({
     {
         type = "unit",
@@ -81,8 +85,8 @@ data:extend({
             { type = "physical", percent = ERM_UnitHelper.get_resistance(base_physical_resistance, incremental_physical_resistance, resistance_mutiplier, level)},
             { type = "fire", percent = ERM_UnitHelper.get_resistance(base_fire_resistance, incremental_fire_resistance, resistance_mutiplier, level)},
             { type = "explosion", percent = ERM_UnitHelper.get_resistance(base_fire_resistance, incremental_fire_resistance, resistance_mutiplier, level)},
-            { type = "laser", percent = ERM_UnitHelper.get_resistance(base_eletric_resistance, incremental_eletric_resistance, resistance_mutiplier, level)},
-            { type = "electric", percent = ERM_UnitHelper.get_resistance(base_eletric_resistance, incremental_eletric_resistance, resistance_mutiplier, level)},
+            { type = "laser", percent = ERM_UnitHelper.get_resistance(base_electric_resistance, incremental_electric_resistance, resistance_mutiplier, level)},
+            { type = "electric", percent = ERM_UnitHelper.get_resistance(base_electric_resistance, incremental_electric_resistance, resistance_mutiplier, level)},
             { type = "cold", percent = ERM_UnitHelper.get_resistance(base_cold_resistance, incremental_cold_resistance, resistance_mutiplier, level)}
         },
         healing_per_tick = ERM_UnitHelper.get_healing(hitpoint, max_hitpoint_multiplier, health_multiplier, level),
@@ -114,6 +118,10 @@ data:extend({
                                 type="create-smoke",
                                 show_in_tooltip = true,
                                 entity_name = name.."-healing-cloud-"..level
+                            },
+                            {
+                                type="create-explosion",
+                                entity_name="queen-cloud-explosion"
                             }
                         }
                     }
@@ -140,7 +148,7 @@ data:extend({
                         frame_count = 6,
                         axially_symmetrical = false,
                         direction_count = 16,
-                        flags = { "mask" },
+
                         scale = unit_scale,
                         draw_as_shadow = true,
                         tint = ERM_UnitTint.tint_shadow(),
@@ -170,7 +178,7 @@ data:extend({
                     frame_count = 5,
                     axially_symmetrical = false,
                     direction_count = 16,
-                    flags = { "mask" },
+
                     scale = unit_scale,
                     tint = ERM_UnitTint.tint_shadow(),
                     draw_as_shadow = true,
@@ -179,10 +187,7 @@ data:extend({
             }
         },
         dying_explosion = "blood-explosion-small",
-        dying_sound = {
-            filename = "__erm_zerg__/sound/enemies/" .. name .. "/death.ogg",
-            volume = 0.6
-        },
+        dying_sound = ZergSound.enemy_death(name, 0.75),
         corpse = name .. '-corpse'
     },
     {
@@ -222,15 +227,15 @@ data:extend({
         --wave_distance = { 0.3, 0.2 },
         --spread_duration_variation = 20,
         --particle_duration_variation = 60 * 3,
-        render_layer = "smoke",
+        render_layer = "explosion",
 
         affected_by_wind = false,
         cyclic = true,
         duration = 120,
-        fade_away_duration = 1,
+        fade_away_duration = 120,
         --spread_duration = 20,
 
-        animation = ZergProjectileAnimation.create_queen_cloud(),
+        animation = Sprites.empty_picture(),
         action =
         {
             type = "direct",

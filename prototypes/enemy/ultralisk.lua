@@ -9,6 +9,7 @@ require('__stdlib__/stdlib/utils/defines/time')
 
 local ERM_UnitHelper = require('__enemyracemanager__/lib/unit_helper')
 local ERM_UnitTint = require('__enemyracemanager__/lib/unit_tint')
+local ERM_DebugHelper = require('__enemyracemanager__/lib/debug_helper')
 local ZergSound = require('__erm_zerg__/prototypes/sound')
 local name = 'ultralisk'
 
@@ -27,8 +28,8 @@ local incremental_physical_resistance = 120
 local base_fire_resistance = 10
 local incremental_fire_resistance = 120
 -- Handles laser and electric resistance
-local base_eletric_resistance = 0
-local incremental_eletric_resistance = 120
+local base_electric_resistance = 0
+local incremental_electric_resistance = 120
 -- Handles cold resistance
 local base_cold_resistance = 25
 local incremental_cold_resistance = 120
@@ -61,6 +62,9 @@ local selection_box = { { -1, -1 }, { 1, 1 } }
 
 function ErmZerg.make_ultralisk(level)
     level = level or 1
+    if DEBUG_MODE then
+        ERM_DebugHelper.print_translate_to_console(MOD_NAME, name, level)
+    end
     data:extend({
         {
             type = "unit",
@@ -80,8 +84,8 @@ function ErmZerg.make_ultralisk(level)
                 { type = "physical", percent = ERM_UnitHelper.get_resistance(base_physical_resistance, incremental_physical_resistance, resistance_mutiplier, level)},
                 { type = "fire", percent = ERM_UnitHelper.get_resistance(base_fire_resistance, incremental_fire_resistance, resistance_mutiplier, level)},
                 { type = "explosion", percent = ERM_UnitHelper.get_resistance(base_fire_resistance, incremental_fire_resistance, resistance_mutiplier, level)},
-                { type = "laser", percent = ERM_UnitHelper.get_resistance(base_eletric_resistance, incremental_eletric_resistance, resistance_mutiplier, level)},
-                { type = "electric", percent = ERM_UnitHelper.get_resistance(base_eletric_resistance, incremental_eletric_resistance, resistance_mutiplier, level)},
+                { type = "laser", percent = ERM_UnitHelper.get_resistance(base_electric_resistance, incremental_electric_resistance, resistance_mutiplier, level)},
+                { type = "electric", percent = ERM_UnitHelper.get_resistance(base_electric_resistance, incremental_electric_resistance, resistance_mutiplier, level)},
                 { type = "cold", percent = ERM_UnitHelper.get_resistance(base_cold_resistance, incremental_cold_resistance, resistance_mutiplier, level)}
             },
             healing_per_tick = ERM_UnitHelper.get_healing(hitpoint, max_hitpoint_multiplier, health_multiplier, level),
@@ -144,7 +148,7 @@ function ErmZerg.make_ultralisk(level)
                             frame_count = 5,
                             axially_symmetrical = false,
                             direction_count = 16,
-                            flags = { "mask" },
+
                             scale = unit_scale,
                             tint = ERM_UnitTint.tint_shadow(),
                             draw_as_shadow = true,
@@ -173,7 +177,7 @@ function ErmZerg.make_ultralisk(level)
                         frame_count = 5,
                         axially_symmetrical = false,
                         direction_count = 16,
-                        flags = { "mask" },
+
                         scale = unit_scale,
                         tint = ERM_UnitTint.tint_shadow(),
                         draw_as_shadow = true,
@@ -182,10 +186,7 @@ function ErmZerg.make_ultralisk(level)
                 }
             },
             dying_explosion = "blood-explosion-small",
-            dying_sound = {
-                filename = "__erm_zerg__/sound/enemies/" .. name .. "/death.ogg",
-                volume = 1
-            },
+            dying_sound = ZergSound.enemy_death(name, 0.75),
             corpse = name .. '-corpse'
         },
         {

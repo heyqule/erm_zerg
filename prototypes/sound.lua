@@ -7,6 +7,13 @@
 --
 local ZergSound = {}
 
+function ZergSound.enemy_death(name, volume)
+    return {
+        filename = "__erm_zerg__/sound/enemies/" .. name .. "/death.ogg",
+        volume = volume
+    }
+end
+
 function ZergSound.meele_attack(volume)
     return
     {

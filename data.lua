@@ -41,6 +41,8 @@ data:extend({ZergProjectileAnimation.create_mutalisk_ball()})
 data:extend({ZergProjectileAnimation.create_mutalisk_hit_effect()})
 data:extend({ZergProjectileAnimation.create_hydralisk_projectile()})
 data:extend({ZergProjectileAnimation.create_hydralisk_hit()})
+data:extend({ZergProjectileAnimation.create_defiler_cloud()})
+data:extend({ZergProjectileAnimation.create_queen_cloud()})
 
 local level = ErmConfig.get_max_level(settings)
 
@@ -70,7 +72,6 @@ for i=1,level do
     ErmZerg.make_queen_nest(i)
     ErmZerg.make_ultralisk_cavern(i)
     ErmZerg.make_nyduspit(i)
-    ErmZerg.make_spawning_pool(i)
     ErmZerg.make_spore_colony(i)
     ErmZerg.make_sunker_colony(i)
 end
