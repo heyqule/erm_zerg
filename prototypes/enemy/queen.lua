@@ -38,7 +38,7 @@ local incremental_cold_resistance = 70
 -- Handles physical damages
 local damage_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
 local base_heal_damage = 100 / 4 / 2
-local incremental_heal_damage = 900 / 4 / 2
+local incremental_heal_damage = 400 / 4 / 2
 local base_acid_damage = 25 / 4 / 2
 local incremental_acid_damage = 50 / 4 / 2
 
