@@ -39,13 +39,15 @@ local incremental_cold_resistance = 70
 local damage_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
 local base_heal_damage = 100 / 4 / 2
 local incremental_heal_damage = 900 / 4 / 2
+local base_acid_damage = 25 / 4 / 2
+local incremental_acid_damage = 50 / 4 / 2
 
 -- Handles Attack Speed
 local attack_speed_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
 local base_attack_speed = 600
 local incremental_attack_speed = 180
 
-local attack_range = 22
+local attack_range = 20
 
 local movement_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
 local base_movement_speed = 0.125
@@ -59,7 +61,7 @@ local distraction_cooldown = 20
 
 -- Animation Settings
 local unit_scale = 1.5
-
+local collision_box = { { -0.25, -0.25 }, { 0.25, 0.25 } }
 local selection_box = { { -0.75, -0.75 }, { 0.75, 0.75 } }
 
 function ErmZerg.make_queen(level)
@@ -91,7 +93,7 @@ data:extend({
         },
         healing_per_tick = ERM_UnitHelper.get_healing(hitpoint, max_hitpoint_multiplier, health_multiplier, level),
         --collision_mask = { "player-layer" },
-        collision_box = selection_box,
+        collision_box = collision_box,
         selection_box = selection_box,
         sticker_box = selection_box,
         vision_distance = vision_distance,
@@ -148,7 +150,7 @@ data:extend({
                         frame_count = 6,
                         axially_symmetrical = false,
                         direction_count = 16,
-
+                        shift = {4, 0},
                         scale = unit_scale,
                         draw_as_shadow = true,
                         tint = ERM_UnitTint.tint_shadow(),
@@ -178,7 +180,7 @@ data:extend({
                     frame_count = 5,
                     axially_symmetrical = false,
                     direction_count = 16,
-
+                    shift = {4, 0},
                     scale = unit_scale,
                     tint = ERM_UnitTint.tint_shadow(),
                     draw_as_shadow = true,
@@ -205,9 +207,9 @@ data:extend({
         final_render_layer = "lower-object-above-shadow",
         animation = {
             filename = "__erm_zerg__/graphics/entity/units/" .. name .. "/" .. name .. "-death.png",
-            width = 128,
-            height = 128,
-            frame_count = 7,
+            width = 140,
+            height = 140,
+            frame_count = 9,
             direction_count = 1,
             axially_symmetrical = false,
             scale = unit_scale,
@@ -244,19 +246,39 @@ data:extend({
                 type = "instant",
                 target_effects =
                 {
-                    type = "nested-result",
-                    action =
                     {
-                        type = "area",
-                        radius = 5,
-                        force='ally',
-                        action_delivery =
+                        type = "nested-result",
+                        action =
                         {
-                            type = "instant",
-                            target_effects =
+                            type = "area",
+                            radius = 5,
+                            force='ally',
+                            action_delivery =
                             {
-                                type = "damage",
-                                damage = { amount = -1 * ERM_UnitHelper.get_damage(base_heal_damage, incremental_heal_damage, damage_multiplier, level), type = "healing"}
+                                type = "instant",
+                                target_effects =
+                                {
+                                    type = "damage",
+                                    damage = { amount = -1 * ERM_UnitHelper.get_damage(base_heal_damage, incremental_heal_damage, damage_multiplier, level), type = "healing"}
+                                }
+                            }
+                        }
+                    },
+                    {
+                        type = "nested-result",
+                        action =
+                        {
+                            type = "area",
+                            radius = 5,
+                            force='enemy',
+                            action_delivery =
+                            {
+                                type = "instant",
+                                target_effects =
+                                {
+                                    type = "damage",
+                                    damage = { amount = ERM_UnitHelper.get_damage(base_acid_damage, incremental_acid_damage, damage_multiplier, level), type = "acid"}
+                                }
                             }
                         }
                     }

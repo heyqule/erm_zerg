@@ -52,7 +52,7 @@ local spawn_table = function(level)
 end
 
 local collision_box = {{-3, -3.5}, {3.2, 3}}
-local map_generator_bounding_box = {{-5, -5}, {5, 5}}
+local map_generator_bounding_box = {{-4, -4}, {4, 4}}
 local selection_box = {{-3, -3.5}, {3.2, 3}}
 
 

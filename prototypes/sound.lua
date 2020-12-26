@@ -46,6 +46,20 @@ function ZergSound.mutalisk_attack(volume)
     }
 end
 
+function ZergSound.guardian_attack(volume)
+    return
+    {
+        audible_distance_modifier = 0.5,
+        variations =
+        {
+            {
+                filename = "__erm_zerg__/sound/enemies/guardian/attack.ogg",
+                volume = volume
+            }
+        }
+    }
+end
+
 function ZergSound.hydralisk_attack(volume)
 return
 {

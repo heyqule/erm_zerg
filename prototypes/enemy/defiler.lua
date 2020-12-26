@@ -47,7 +47,7 @@ local attack_speed_multiplier = settings.startup["enemyracemanager-level-multipl
 local base_attack_speed = 600
 local incremental_attack_speed = 180
 
-local attack_range = 22
+local attack_range = 20
 
 local movement_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
 local base_movement_speed = 0.125
@@ -62,6 +62,7 @@ local distraction_cooldown = 20
 -- Animation Settings
 local unit_scale = 1.5
 
+local collision_box = { { -0.25, -0.25 }, { 0.25, 0.25 } }
 local selection_box = { { -0.75, -0.75 }, { 0.75, 0.75 } }
 
 function ErmZerg.make_defiler(level)
@@ -94,7 +95,7 @@ data:extend({
         },
         healing_per_tick = ERM_UnitHelper.get_healing(hitpoint, max_hitpoint_multiplier, health_multiplier, level),
         --collision_mask = { "player-layer" },
-        collision_box = selection_box,
+        collision_box = collision_box,
         selection_box = selection_box,
         sticker_box = selection_box,
         vision_distance = vision_distance,

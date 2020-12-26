@@ -58,6 +58,7 @@ local distraction_cooldown = 20
 -- Animation Settings
 local unit_scale = 1.5
 
+local collision_box = { { -0.5, -0.5 }, { 0.5, 0.5 } }
 local selection_box = { { -1, -1 }, { 1, 1 } }
 
 function ErmZerg.make_ultralisk(level)
@@ -90,7 +91,7 @@ function ErmZerg.make_ultralisk(level)
             },
             healing_per_tick = ERM_UnitHelper.get_healing(hitpoint, max_hitpoint_multiplier, health_multiplier, level),
             --collision_mask = { "player-layer" },
-            collision_box = selection_box,
+            collision_box = collision_box,
             selection_box = selection_box,
             sticker_box = selection_box,
             vision_distance = vision_distance,

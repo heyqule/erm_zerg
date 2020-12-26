@@ -58,7 +58,7 @@ local distraction_cooldown = 20
 
 -- Animation Settings
 local unit_scale = 1
-
+local collision_box = { { -0.25, -0.25 }, { 0.25, 0.25 } }
 local selection_box = { { -0.5, -0.5 }, { 0.5, 0.5 } }
 
 function ErmZerg.make_infested(level)
@@ -90,7 +90,7 @@ data:extend({
         },
         healing_per_tick = ERM_UnitHelper.get_healing(hitpoint, max_hitpoint_multiplier, health_multiplier, level),
         --collision_mask = { "player-layer" },
-        collision_box = selection_box,
+        collision_box = collision_box,
         selection_box = selection_box,
         sticker_box = selection_box,
         vision_distance = vision_distance,

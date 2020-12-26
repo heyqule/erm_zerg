@@ -45,7 +45,7 @@ local attack_speed_multiplier = settings.startup["enemyracemanager-level-multipl
 local base_attack_speed = 150
 local incremental_attack_speed = 75
 
-local attack_range = 22
+local attack_range = 20
 
 local movement_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
 local base_movement_speed = 0.15
@@ -53,12 +53,13 @@ local incremental_movement_speed = 0.05
 
 -- Misc Settings
 local vision_distance = 45
-local pollution_to_join_attack = 50
+local pollution_to_join_attack = 100
 local distraction_cooldown = 20
 
 -- Animation Settings
 local unit_scale = 1.5
 
+local collision_box = { { -0.25, -0.25 }, { 0.25, 0.25 } }
 local selection_box = {{-1.0, -1.0}, {1.0, 1.0}}
 
 function ErmZerg.make_guardian(level)
@@ -90,7 +91,7 @@ function ErmZerg.make_guardian(level)
             },
             healing_per_tick = ERM_UnitHelper.get_healing(hitpoint, max_hitpoint_multiplier, health_multiplier, level),
             collision_mask = {},
-            collision_box = selection_box,
+            collision_box = collision_box,
             selection_box = selection_box,
             sticker_box = selection_box,
             vision_distance = vision_distance,
@@ -117,7 +118,7 @@ function ErmZerg.make_guardian(level)
                         }
                     }
                 },
-                sound = ZergSound.mutalisk_attack(0.75),
+                sound = ZergSound.guardian_attack(0.75),
                 animation = {
                     layers={
                         {
