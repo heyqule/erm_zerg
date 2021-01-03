@@ -80,7 +80,7 @@ function ErmZerg.make_spore_colony(level)
     data:extend({
         {
             type = "turret",
-            name = MOD_NAME.."-"..name.."-"..level,
+            name = MOD_NAME..'/'..name..'/'..level,
             icon = "__erm_zerg__/graphics/entity/icons/buildings/advisor.png",
             icon_size = 64,
             flags = { "placeable-player", "placeable-enemy", "placeable-off-grid", "breaths-air" },

@@ -41,17 +41,17 @@ local unit_scale = 2
 local pollution_absorption_absolute = 20
 local spawning_cooldown = {900, 600}
 local spawning_radius = 10
-local max_count_of_owned_units = 7
-local max_friends_around_to_spawn = 5
+local max_count_of_owned_units = 3
+local max_friends_around_to_spawn = 2
 local spawn_table = function(level)
     local res = {}
-    res[1] = {MOD_NAME.."-zergling-"..level, {{0.0, 0.4},{0.2, 0.3},{0.4, 0.2},{0.6, 0.0},{0.8, 0.0}}}
-    res[2] = {MOD_NAME.."-hydralisk-"..level, {{0.0, 0.3},{0.2, 0.4},{0.4, 0.2},{0.6, 0},{0.8, 0.0}}}
-    res[3] = {MOD_NAME.."-mutalisk-"..level, {{0.0, 0.3},{0.2, 0.3},{0.4, 0.3},{0.6, 0.2},{0.8, 0.0}}}
-    res[4] = {MOD_NAME.."-guardian-"..level, {{0.0, 0.0},{0.2, 0.0},{0.4, 0.1},{0.6, 0.3},{0.8, 0.0}}}
-    res[5] = {MOD_NAME.."-devourer-"..level, {{0.0, 0.0},{0.2, 0.0},{0.4, 0.1},{0.6, 0.3},{0.8, 0.0}}}
-    res[6] = {MOD_NAME.."-overlord-"..level, {{0.0, 0.0},{0.2, 0.0},{0.4, 0.1},{0.6, 0.2},{0.8, 0.0}}}
-    res[7] = {MOD_NAME.."-defiler-"..level, {{0.0, 0.0},{0.2, 0.0},{0.4, 0.0},{0.6, 0.0},{0.8, 1}}}
+    res[1] = {MOD_NAME..'/zergling/'..level, {{0.0, 0.5},{0.2, 0.3},{0.4, 0.2},{0.6, 0.0},{0.8, 0.0}}}
+    res[2] = {MOD_NAME..'/hydralisk/'..level, {{0.0, 0.4},{0.2, 0.4},{0.4, 0.2},{0.6, 0},{0.8, 0.0}}}
+    res[3] = {MOD_NAME..'/mutalisk/'..level, {{0.0, 0.1},{0.2, 0.3},{0.4, 0.3},{0.6, 0.2},{0.8, 0.0}}}
+    res[4] = {MOD_NAME..'/guardian/'..level, {{0.0, 0.0},{0.2, 0.0},{0.4, 0.1},{0.6, 0.3},{0.8, 0.0}}}
+    res[5] = {MOD_NAME..'/devourer/'..level, {{0.0, 0.0},{0.2, 0.0},{0.4, 0.1},{0.6, 0.3},{0.8, 0.0}}}
+    res[6] = {MOD_NAME..'/overlord/'..level, {{0.0, 0.0},{0.2, 0.0},{0.4, 0.1},{0.6, 0.2},{0.8, 0.0}}}
+    res[7] = {MOD_NAME..'/defiler/'..level, {{0.0, 0.0},{0.2, 0.0},{0.4, 0.0},{0.6, 0.0},{0.8, 1}}}
     return res
 end
 
@@ -68,7 +68,7 @@ function ErmZerg.make_defiler_mound(level)
     data:extend({
         {
             type = "unit-spawner",
-            name = MOD_NAME.."-"..name.."-"..level,
+            name = MOD_NAME..'/'..name..'/'..level,
             icon = "__erm_zerg__/graphics/entity/icons/buildings/advisor.png",
             icon_size = 64,
             flags = {"placeable-player", "placeable-enemy"},

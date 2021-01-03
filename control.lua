@@ -30,10 +30,6 @@ local createZergRace = function()
 
     game.forces['enemy'].set_friend(zerg_force, true)
     game.forces[FORCE_NAME].set_friend(game.forces['enemy'], true)
-
-    if game.surfaces.nauvis.peaceful_mode then
-        game.forces[FORCE_NAME].set_cease_fire(game.forces['player'], true)
-    end
 end
 
 local addRaceSettings = function()
@@ -45,7 +41,8 @@ local addRaceSettings = function()
         version = MOD_VERSION,
         level = 1, -- Race level
         tier = 1, -- Race tier
-        xp_point = 0,
+        evolution_point = 0,
+        evolution_base_point = 0,
         angry_meter = 0, -- Build by killing their force (unit = 1, building = 10)
         send_attack_threshold = 2000, -- When threshold reach, sends attack to the base
         send_attack_threshold_deviation = 0.2,
@@ -59,7 +56,7 @@ local addRaceSettings = function()
         turrets = {
             {'sunker_colony','spore_colony'},
             {},
-            {'nyduspit'},
+            {},
         },
         current_turrets_tier = {},
         command_centers = {
@@ -71,7 +68,7 @@ local addRaceSettings = function()
         support_structures = {
             {'spawning_pool','hydraden','spire', 'chamber'},
             {'greater_spire'},
-            {'ultralisk_cavern','queen_nest','defiler_mound'},
+            {'ultralisk_cavern','queen_nest','defiler_mound','nyduspit'},
         },
         current_support_structures_tier = {},
     }

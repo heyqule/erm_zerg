@@ -41,8 +41,8 @@ local incremental_physical_damage = 45
 
 -- Handles Attack Speed
 local attack_speed_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
-local base_attack_speed = 300
-local incremental_attack_speed = 120
+local base_attack_speed = 600
+local incremental_attack_speed = 300
 
 local attack_range = 20
 
@@ -70,13 +70,13 @@ level = level or 1
 data:extend({
     {
         type = "unit",
-        name = MOD_NAME..'-'..name .. '-' .. level,
+        name = MOD_NAME..'/'..name .. '/' .. level,
         icon = "__erm_zerg__/graphics/entity/icons/units/" .. name .. ".png",
         icon_size = 64,
         flags = { "placeable-enemy", "placeable-player", "placeable-off-grid", "breaths-air" },
         has_belt_immunity = false,
         max_health = ERM_UnitHelper.get_health(hitpoint, hitpoint * max_hitpoint_multiplier, health_multiplier, level),
-        order = "erm-" .. name .. '-' .. level,
+        order = "erm-" .. name .. '/' .. level,
         subgroup = "enemies",
         shooting_cursor_size = 2,
         resistances = {
@@ -118,7 +118,7 @@ data:extend({
                             },
                             {
                                 type = 'damage',
-                                damage = { amount = 1000000, type = "self" }
+                                damage = { amount = 100000, type = "self" }
                             }
                         }
                     }
