@@ -15,7 +15,7 @@ local name = 'ultralisk'
 
 local health_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
 local hitpoint = 400
-local max_hitpoint_multiplier = settings.startup["enemyracemanager-max-hitpoint-multipliers"].value
+local max_hitpoint_multiplier = settings.startup["enemyracemanager-max-hitpoint-multipliers"].value * 1.25
 
 local resistance_mutiplier = settings.startup["enemyracemanager-level-multipliers"].value
 -- Handles acid and poison resistance
@@ -37,7 +37,7 @@ local incremental_cold_resistance = 120
 -- Handles physical damages
 local damage_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
 local base_physical_damage = 25
-local incremental_physical_damage = 100
+local incremental_physical_damage = 125
 
 -- Handles Attack Speed
 local attack_speed_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
@@ -63,16 +63,14 @@ local selection_box = { { -1, -1 }, { 1, 1 } }
 
 function ErmZerg.make_ultralisk(level)
     level = level or 1
-    if DEBUG_MODE then
-        ERM_DebugHelper.print_translate_to_console(MOD_NAME, name, level)
-    end
+
     data:extend({
         {
             type = "unit",
             name = MOD_NAME .. '/' .. name .. '/' .. level,
+            localised_name = { 'entity-name.' .. MOD_NAME .. '/' .. name, level },
             icon = "__erm_zerg__/graphics/entity/icons/units/" .. name .. ".png",
             icon_size = 64,
-
             flags = { "placeable-enemy", "placeable-player", "placeable-off-grid", "breaths-air" },
             has_belt_immunity = true,
             max_health = ERM_UnitHelper.get_health(hitpoint, hitpoint * max_hitpoint_multiplier, health_multiplier, level),
@@ -80,14 +78,14 @@ function ErmZerg.make_ultralisk(level)
             subgroup = "enemies",
             shooting_cursor_size = 2,
             resistances = {
-                { type = "acid", percent = ERM_UnitHelper.get_resistance(base_acid_resistance, incremental_acid_resistance, resistance_mutiplier, level)},
+                { type = "acid", percent = ERM_UnitHelper.get_resistance(base_acid_resistance, incremental_acid_resistance, resistance_mutiplier, level) },
                 { type = "poison", percent = ERM_UnitHelper.get_resistance(base_acid_resistance, incremental_acid_resistance, resistance_mutiplier, level) },
-                { type = "physical", percent = ERM_UnitHelper.get_resistance(base_physical_resistance, incremental_physical_resistance, resistance_mutiplier, level)},
-                { type = "fire", percent = ERM_UnitHelper.get_resistance(base_fire_resistance, incremental_fire_resistance, resistance_mutiplier, level)},
-                { type = "explosion", percent = ERM_UnitHelper.get_resistance(base_fire_resistance, incremental_fire_resistance, resistance_mutiplier, level)},
-                { type = "laser", percent = ERM_UnitHelper.get_resistance(base_electric_resistance, incremental_electric_resistance, resistance_mutiplier, level)},
-                { type = "electric", percent = ERM_UnitHelper.get_resistance(base_electric_resistance, incremental_electric_resistance, resistance_mutiplier, level)},
-                { type = "cold", percent = ERM_UnitHelper.get_resistance(base_cold_resistance, incremental_cold_resistance, resistance_mutiplier, level)}
+                { type = "physical", percent = ERM_UnitHelper.get_resistance(base_physical_resistance, incremental_physical_resistance, resistance_mutiplier, level) },
+                { type = "fire", percent = ERM_UnitHelper.get_resistance(base_fire_resistance, incremental_fire_resistance, resistance_mutiplier, level) },
+                { type = "explosion", percent = ERM_UnitHelper.get_resistance(base_fire_resistance, incremental_fire_resistance, resistance_mutiplier, level) },
+                { type = "laser", percent = ERM_UnitHelper.get_resistance(base_electric_resistance, incremental_electric_resistance, resistance_mutiplier, level) },
+                { type = "electric", percent = ERM_UnitHelper.get_resistance(base_electric_resistance, incremental_electric_resistance, resistance_mutiplier, level) },
+                { type = "cold", percent = ERM_UnitHelper.get_resistance(base_cold_resistance, incremental_cold_resistance, resistance_mutiplier, level) }
             },
             healing_per_tick = ERM_UnitHelper.get_healing(hitpoint, max_hitpoint_multiplier, health_multiplier, level),
             --collision_mask = { "player-layer" },
@@ -107,23 +105,20 @@ function ErmZerg.make_ultralisk(level)
                 cooldown_deviation = 0.1,
                 ammo_type = {
                     category = "biological",
-                    action =
-                    {
+                    action = {
                         type = "area",
                         radius = 3,
-                        force = "enemy",
                         ignore_collision_condition = true,
-                        action_delivery =
-                        {
+                        action_delivery = {
                             type = "instant",
-                            target_effects =
-                            {
+                            target_effects = {
                                 {
                                     type = "damage",
                                     damage = {
                                         amount = ERM_UnitHelper.get_damage(base_physical_damage, incremental_physical_damage, damage_multiplier, level),
                                         type = "physical"
-                                    }
+                                    },
+                                    apply_damage_to_trees = true
                                 }
                             }
                         }

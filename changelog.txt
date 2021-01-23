@@ -1,0 +1,23 @@
+---------------------------------------------------------------------------------------------------
+Version: 1.0.0
+Date: 24. 01. 2021
+  Changes:
+    - Ultralisk damage raise to 25-150.
+    - Ultralisk max health now has 1.25 multiplier.
+    - Added apply_damage_to_trees = true to various units
+    - Death animation for air units.
+    - Increase defense structure attack speed at max level
+  Bugfixes:
+    - set Defiler cloud cyclic = true
+---------------------------------------------------------------------------------------------------
+Version: 0.2.0
+Date: 03. 01. 2021
+  Changes:
+    - Lower max spawn unit for unit spawners
+    - Move nudyspit from turrets to support structure.
+    - Raise spawn cooldown for overlord
+---------------------------------------------------------------------------------------------------
+Version: 0.1.0
+Date: 26. 12. 2020
+  Features:
+    - Add Zerg units and buildings to enemy race manager

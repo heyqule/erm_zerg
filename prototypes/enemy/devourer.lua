@@ -6,6 +6,7 @@
 -- To change this template use File | Settings | File Templates.
 --
 require('__stdlib__/stdlib/utils/defines/time')
+local Sprites = require('__stdlib__/stdlib/data/modules/sprites')
 
 local ERM_UnitHelper = require('__enemyracemanager__/lib/unit_helper')
 local ERM_UnitTint = require('__enemyracemanager__/lib/unit_tint')
@@ -64,17 +65,15 @@ local selection_box = { { -0.75, -1.25 }, { 0.75, 1.25 } }
 
 function ErmZerg.make_devourer(level)
     level = level or 1
-    if DEBUG_MODE then
-        ERM_DebugHelper.print_translate_to_console(MOD_NAME, name, level)
-    end
+
 
     data:extend({
         {
             type = "unit",
             name = MOD_NAME .. '/' .. name .. '/' .. level,
+            localised_name = { 'entity-name.' .. MOD_NAME .. '/' .. name, level },
             icon = "__erm_zerg__/graphics/entity/icons/units/" .. name .. ".png",
             icon_size = 64,
-
             flags = { "placeable-enemy", "placeable-player", "placeable-off-grid", "breaths-air", 'not-flammable' },
             has_belt_immunity = true,
             max_health = ERM_UnitHelper.get_health(hitpoint, hitpoint * max_hitpoint_multiplier, health_multiplier, level),
@@ -110,18 +109,15 @@ function ErmZerg.make_devourer(level)
                 warmup = 12,
                 ammo_type = {
                     category = "biological",
-                    action =
-                    {
+                    action = {
                         type = "direct",
-                        action_delivery =
-                        {
+                        action_delivery = {
                             type = "stream",
                             stream = name .. "-stream" .. level,
                         }
                     }
                 },
-                cyclic_sound =
-                {
+                cyclic_sound = {
                     begin_sound = ZergSound.devourer_attack(0.75),
                 },
                 animation = {
@@ -189,9 +185,24 @@ function ErmZerg.make_devourer(level)
                     }
                 }
             },
-            dying_explosion = "blood-explosion-small",
+            dying_explosion = name .. "-air-death",
             dying_sound = ZergSound.enemy_death(name, 0.75),
             corpse = name .. '-corpse'
+        },
+        {
+            type = "explosion",
+            name = name .. "-air-death",
+            flags = { "not-on-map" },
+            animations = {
+                filename = "__erm_zerg__/graphics/entity/units/" .. name .. "/" .. name .. "-death.png",
+                width = 140,
+                height = 140,
+                frame_count = 9,
+                direction_count = 1,
+                axially_symmetrical = false,
+                scale = unit_scale,
+                animation_speed = 0.5
+            }
         },
         {
             type = "corpse",
@@ -203,21 +214,10 @@ function ErmZerg.make_devourer(level)
             selection_box = selection_box,
             selectable_in_game = false,
             dying_speed = 0.04,
-            time_before_removed = defines.time.second * 5,
+            time_before_removed = defines.time.second,
             subgroup = "corpses",
             order = "x" .. name .. level,
-            final_render_layer = "lower-object-above-shadow",
-            animation = {
-                filename = "__erm_zerg__/graphics/entity/units/" .. name .. "/" .. name .. "-death.png",
-                width = 140,
-                height = 140,
-                frame_count = 9,
-                direction_count = 1,
-                axially_symmetrical = false,
-                scale = unit_scale * 1.5,
-                animation_speed = 0.1
-            },
-            final_render_layer = "lower-object-above-shadow"
+            animation = Sprites.empty_pictures(),
         },
         {
             type = "stream",
@@ -229,15 +229,12 @@ function ErmZerg.make_devourer(level)
             particle_horizontal_speed = 0.2 * 0.75 * 1.5 * 1.5,
             particle_horizontal_speed_deviation = 0,
             render_layer = 'projectile',
-            initial_action =
-            {
+            initial_action = {
                 {
                     type = "direct",
-                    action_delivery =
-                    {
+                    action_delivery = {
                         type = "instant",
-                        target_effects =
-                        {
+                        target_effects = {
                             {
                                 type = "create-fire",
                                 entity_name = name .. "-fire-" .. level,
@@ -252,8 +249,7 @@ function ErmZerg.make_devourer(level)
                     }
                 },
             },
-            particle =
-            {
+            particle = {
                 filename = "__erm_zerg__/graphics/entity/projectiles/" .. name .. "_puke.png",
                 width = 80,
                 height = 80,
@@ -267,6 +263,7 @@ function ErmZerg.make_devourer(level)
         {
             type = "fire",
             name = name .. "-fire-" .. level,
+            localised_name = { 'entity-name.purple-fire' },
             flags = { "not-on-map" },
             damage_per_tick = { amount = (ERM_UnitHelper.get_damage(base_acid_damage, incremental_acid_damage, damage_multiplier, level) / defines.time.second), type = "acid" },
             maximum_damage_multiplier = 3,
@@ -282,8 +279,7 @@ function ErmZerg.make_devourer(level)
             initial_flame_count = 1,
             burnt_patch_lifetime = 0,
             render_layer = 'projectile',
-            pictures =
-            {
+            pictures = {
                 {
                     filename = "__erm_zerg__/graphics/entity/projectiles/" .. name .. "_puke_hit.png",
                     priority = "extra-high",

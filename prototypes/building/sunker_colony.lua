@@ -10,7 +10,7 @@ local ERM_UnitTint = require('__enemyracemanager__/lib/unit_tint')
 local ERM_DebugHelper = require('__enemyracemanager__/lib/debug_helper')
 local ZergSound = require('__erm_zerg__/prototypes/sound')
 
-local enemy_autoplace = require ("__enemyracemanager__/lib/enemy-autoplace-utils")
+local enemy_autoplace = require("__enemyracemanager__/lib/enemy-autoplace-utils")
 local name = 'sunker_colony'
 
 -- Hitpoints
@@ -35,19 +35,19 @@ local incremental_electric_resistance = 80
 local base_cold_resistance = 15
 local incremental_cold_resistance = 65
 
-local collision_box = {{-2, -2}, {2, 2}}
-local map_generator_bounding_box = {{-3, -3}, {3, 3}}
-local selection_box = {{-2, -2}, {2, 2}}
+local collision_box = { { -2, -2 }, { 2, 2 } }
+local map_generator_bounding_box = { { -3, -3 }, { 3, 3 } }
+local selection_box = { { -2, -2 }, { 2, 2 } }
 
 -- Handles damages
 local damage_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
-local base_physical_damage = 2
-local incremental_physical_damage = 73
+local base_physical_damage = 5
+local incremental_physical_damage = 70
 
 -- Handles Attack Speed
 local attack_speed_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
 local base_attack_speed = 300
-local incremental_attack_speed = 180
+local incremental_attack_speed = 240
 
 local attack_range = 20
 
@@ -70,7 +70,7 @@ local folded_animation = function()
     }
 end
 
-local attack_animation = function ()
+local attack_animation = function()
     return {
         layers = {
             {
@@ -86,16 +86,14 @@ local attack_animation = function ()
     }
 end
 
-
 function ErmZerg.make_sunker_colony(level)
     level = level or 1
-    if DEBUG_MODE then
-        ERM_DebugHelper.print_translate_to_console(MOD_NAME, name, level)
-    end
+
     data:extend({
         {
             type = "turret",
-            name = MOD_NAME..'/'..name..'/'..level,
+            name = MOD_NAME .. '/' .. name .. '/' .. level,
+            localised_name = { 'entity-name.' .. MOD_NAME .. '/' .. name, level },
             icon = "__erm_zerg__/graphics/entity/icons/buildings/advisor.png",
             icon_size = 64,
             flags = { "placeable-player", "placeable-enemy", "placeable-off-grid", "breaths-air" },
@@ -132,7 +130,7 @@ function ErmZerg.make_sunker_colony(level)
             integration = {
                 layers = {
                     {
-                        filename = "__erm_zerg__/graphics/entity/buildings/"..name.."/"..name..".png",
+                        filename = "__erm_zerg__/graphics/entity/buildings/" .. name .. "/" .. name .. ".png",
                         variation_count = 1,
                         width = 128,
                         height = 128,
@@ -141,14 +139,14 @@ function ErmZerg.make_sunker_colony(level)
                         scale = unit_scale
                     },
                     {
-                        filename = "__erm_zerg__/graphics/entity/buildings/"..name.."/"..name..".png",
+                        filename = "__erm_zerg__/graphics/entity/buildings/" .. name .. "/" .. name .. ".png",
                         variation_count = 1,
                         width = 128,
                         height = 128,
                         frame_count = 1,
                         line_length = 1,
                         draw_as_shadow = true,
-                        shift = {0.5, 0.1},
+                        shift = { 0.5, 0.1 },
                         scale = unit_scale
                     }
                 }
@@ -172,10 +170,9 @@ function ErmZerg.make_sunker_colony(level)
                         type = "direct",
                         action_delivery = {
                             type = "instant",
-                            target_effects =
-                            {
+                            target_effects = {
                                 {
-                                    type="create-explosion",
+                                    type = "create-explosion",
                                     entity_name = 'colony-explosion'
                                 },
                                 {

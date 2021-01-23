@@ -9,19 +9,18 @@ data:extend({
     {
         type = "corpse",
         name = "zerg-small-base-corpse",
-        flags = {"placeable-neutral", "placeable-off-grid", "not-on-map"},
+        flags = { "placeable-neutral", "placeable-off-grid", "not-on-map" },
         icon = "__erm_zerg__/graphics/entity/icons/buildings/advisor.png",
         icon_size = 64,
-        collision_box = {{-2, -2}, {2, 2}},
-        selection_box = {{-2, -2}, {2, 2}},
+        collision_box = { { -2, -2 }, { 2, 2 } },
+        selection_box = { { -2, -2 }, { 2, 2 } },
         selectable_in_game = false,
         dying_speed = 0.04,
         time_before_removed = defines.time.minute * settings.startup["enemyracemanager-enemy-corpse-time"].value,
-        subgroup="corpses",
+        subgroup = "corpses",
         order = "c[corpse]-c[small-zerg-base-corpse]",
         final_render_layer = "remnants",
-        animation =
-        {
+        animation = {
             {
                 filename = "__erm_zerg__/graphics/entity/buildings/death/zerg_small_rubble.png",
                 variation_count = 1,
@@ -37,19 +36,18 @@ data:extend({
     {
         type = "corpse",
         name = "zerg-large-base-corpse",
-        flags = {"placeable-neutral", "placeable-off-grid", "not-on-map"},
+        flags = { "placeable-neutral", "placeable-off-grid", "not-on-map" },
         icon = "__erm_zerg__/graphics/entity/icons/buildings/advisor.png",
         icon_size = 64,
-        collision_box = {{-2, -2}, {2, 2}},
-        selection_box = {{-2, -2}, {2, 2}},
+        collision_box = { { -2, -2 }, { 2, 2 } },
+        selection_box = { { -2, -2 }, { 2, 2 } },
         selectable_in_game = false,
         dying_speed = 0.04,
         time_before_removed = defines.time.minute * settings.startup["enemyracemanager-enemy-corpse-time"].value,
-        subgroup="corpses",
+        subgroup = "corpses",
         order = "c[corpse]-c[large-zerg-base-corpse]",
         final_render_layer = "remnants",
-        animation =
-        {
+        animation = {
             {
                 filename = "__erm_zerg__/graphics/entity/buildings/death/zerg_large_rubble.png",
                 width = 128,
@@ -68,7 +66,7 @@ data:extend({
         icon = "__erm_zerg__/graphics/entity/icons/buildings/advisor.png",
         icon_size = 64,
         subgroup = 'explosions',
-        flags = {"not-on-map", "hidden"},
+        flags = { "not-on-map", "hidden" },
         order = "zerg-explosions",
         animations = {
             filename = "__erm_zerg__/graphics/entity/buildings/death/zerg_building_blood.png",

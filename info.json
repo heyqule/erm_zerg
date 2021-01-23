@@ -1,11 +1,13 @@
-
 {
   "name": "erm_zerg",
-  "version": "0.2.0",
-  "date": "2021-01-02",
-  "title": "Zerg Units",
+  "version": "1.0.0",
+  "date": "2021-01-24",
+  "title": "ERM - Zerg Units",
   "author": "heyqule",
   "description": "Add zerg to enemy units",
   "factorio_version": "1.1",
-  "dependencies": ["base >= 1.1.0", "enemyracemanager >= 0.2.0"]
+  "dependencies": [
+    "base >= 1.1.0",
+    "enemyracemanager >= 0.3.0"
+  ]
 }

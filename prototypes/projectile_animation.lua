@@ -10,10 +10,9 @@ function ProjectileAnimation.create_lurker_spike()
     return {
         type = "explosion",
         name = "lurker-explosion",
-        flags = {"not-on-map"},
+        flags = { "not-on-map" },
         render_layer = 'projectile',
-        animations =
-        {
+        animations = {
             {
                 filename = "__erm_zerg__/graphics/entity/projectiles/lurker_spike.png",
                 priority = "extra-high",
@@ -32,10 +31,9 @@ function ProjectileAnimation.create_colony_spike()
     return {
         type = "explosion",
         name = "colony-explosion",
-        flags = {"not-on-map"},
+        flags = { "not-on-map" },
         render_layer = 'projectile',
-        animations =
-        {
+        animations = {
             layers = {
                 {
                     filename = "__erm_zerg__/graphics/entity/projectiles/colony_spike.png",
@@ -56,7 +54,7 @@ function ProjectileAnimation.create_colony_spike()
                     animation_speed = 0.2,
                     scale = 2,
                     draw_as_shadow = true,
-                    shift = {0.15, 0.1},
+                    shift = { 0.15, 0.1 },
                     run_mode = "forward-then-backward",
                 }
             }
@@ -66,44 +64,39 @@ end
 
 function ProjectileAnimation.create_mutalisk_ball()
     return {
-            type = "projectile",
-            name = "mutalisk-projectile",
-            flags = {"not-on-map"},
-            acceleration = 0.005,
-            action =
-            {
-                type = "direct",
-                action_delivery =
-                {
-                    type = "instant",
-                    target_effects =
+        type = "projectile",
+        name = "mutalisk-projectile",
+        flags = { "not-on-map" },
+        acceleration = 0.005,
+        action = {
+            type = "direct",
+            action_delivery = {
+                type = "instant",
+                target_effects = {
                     {
-                        {
-                            type = "create-entity",
-                            entity_name = "mutalisk-explosion-small"
-                        }
+                        type = "create-entity",
+                        entity_name = "mutalisk-explosion-small"
                     }
                 }
-            },
-            animation =
-            {
-                filename = "__erm_zerg__/graphics/entity/projectiles/spores_1.png",
-                frame_count = 10,
-                width = 36,
-                height = 36,
-                priority = "high",
-                run_mode = 'forward-then-backward'
             }
+        },
+        animation = {
+            filename = "__erm_zerg__/graphics/entity/projectiles/spores_1.png",
+            frame_count = 10,
+            width = 36,
+            height = 36,
+            priority = "high",
+            run_mode = 'forward-then-backward'
         }
+    }
 end
 
 function ProjectileAnimation.create_mutalisk_hit_effect()
     return {
         type = "explosion",
         name = "mutalisk-explosion-small",
-        flags = {"not-on-map"},
-        animations =
-        {
+        flags = { "not-on-map" },
+        animations = {
             {
                 filename = "__erm_zerg__/graphics/entity/projectiles/spores_2.png",
                 priority = "extra-high",
@@ -111,26 +104,23 @@ function ProjectileAnimation.create_mutalisk_hit_effect()
                 height = 24,
                 frame_count = 4,
                 animation_speed = 0.2,
-                scale=1.5
+                scale = 1.5
             }
         }
     }
 end
 
 function ProjectileAnimation.create_hydralisk_projectile()
-    return     {
+    return {
         type = "projectile",
         name = "hydralisk-projectile",
-        flags = {"not-on-map"},
+        flags = { "not-on-map" },
         acceleration = 0.05,
-        action =
-        {
+        action = {
             type = "direct",
-            action_delivery =
-            {
+            action_delivery = {
                 type = "instant",
-                target_effects =
-                {
+                target_effects = {
                     {
                         type = "create-entity",
                         entity_name = "hydralisk-explosion-small"
@@ -138,8 +128,7 @@ function ProjectileAnimation.create_hydralisk_projectile()
                 }
             }
         },
-        animation =
-        {
+        animation = {
             filename = "__erm_zerg__/graphics/entity/projectiles/hydra_pr.png",
             frame_count = 1,
             width = 21,
@@ -154,9 +143,8 @@ function ProjectileAnimation.create_hydralisk_hit()
     return {
         type = "explosion",
         name = "hydralisk-explosion-small",
-        flags = {"not-on-map"},
-        animations =
-        {
+        flags = { "not-on-map" },
+        animations = {
             {
                 filename = "__erm_zerg__/graphics/entity/projectiles/hydra_acid.png",
                 priority = "extra-high",
@@ -174,9 +162,8 @@ function ProjectileAnimation.create_hydralisk_hit()
     return {
         type = "explosion",
         name = "hydralisk-explosion-small",
-        flags = {"not-on-map"},
-        animations =
-        {
+        flags = { "not-on-map" },
+        animations = {
             {
                 filename = "__erm_zerg__/graphics/entity/projectiles/hydra_acid.png",
                 priority = "extra-high",
@@ -196,8 +183,7 @@ function ProjectileAnimation.create_defiler_cloud()
         type = "explosion",
         name = "defiler-cloud-explosion",
         flags = { "not-on-map" },
-        animations =
-        {
+        animations = {
             {
                 filename = "__erm_zerg__/graphics/entity/projectiles/defiler_blood.png",
                 priority = "extra-high",

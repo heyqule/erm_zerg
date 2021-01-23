@@ -64,30 +64,29 @@ local selection_box = { { -1.0, -1.0 }, { 1.0, 1.0 } }
 
 function ErmZerg.make_lurker(level)
     level = level or 1
-    if DEBUG_MODE then
-        ERM_DebugHelper.print_translate_to_console(MOD_NAME, name, level)
-    end
+
     data:extend({
         {
             type = "unit",
-            name = MOD_NAME..'/'..name .. '/' .. level,
+            name = MOD_NAME .. '/' .. name .. '/' .. level,
+            localised_name = { 'entity-name.' .. MOD_NAME .. '/' .. name, level },
             icon = "__erm_zerg__/graphics/entity/icons/units/" .. name .. ".png",
             icon_size = 64,
-            flags = { "placeable-enemy", "placeable-player", "placeable-off-grid", "breaths-air"},
+            flags = { "placeable-enemy", "placeable-player", "placeable-off-grid", "breaths-air" },
             has_belt_immunity = false,
             max_health = ERM_UnitHelper.get_health(hitpoint, hitpoint * max_hitpoint_multiplier, health_multiplier, level),
             order = "erm-" .. name .. '/' .. level,
             subgroup = "enemies",
             shooting_cursor_size = 2,
             resistances = {
-                { type = "acid", percent = ERM_UnitHelper.get_resistance(base_acid_resistance, incremental_acid_resistance, resistance_mutiplier, level)},
+                { type = "acid", percent = ERM_UnitHelper.get_resistance(base_acid_resistance, incremental_acid_resistance, resistance_mutiplier, level) },
                 { type = "poison", percent = ERM_UnitHelper.get_resistance(base_acid_resistance, incremental_acid_resistance, resistance_mutiplier, level) },
-                { type = "physical", percent = ERM_UnitHelper.get_resistance(base_physical_resistance, incremental_physical_resistance, resistance_mutiplier, level)},
-                { type = "fire", percent = ERM_UnitHelper.get_resistance(base_fire_resistance, incremental_fire_resistance, resistance_mutiplier, level)},
-                { type = "explosion", percent = ERM_UnitHelper.get_resistance(base_fire_resistance, incremental_fire_resistance, resistance_mutiplier, level)},
-                { type = "laser", percent = ERM_UnitHelper.get_resistance(base_electric_resistance, incremental_electric_resistance, resistance_mutiplier, level)},
-                { type = "electric", percent = ERM_UnitHelper.get_resistance(base_electric_resistance, incremental_electric_resistance, resistance_mutiplier, level)},
-                { type = "cold", percent = ERM_UnitHelper.get_resistance(base_cold_resistance, incremental_cold_resistance, resistance_mutiplier, level)}
+                { type = "physical", percent = ERM_UnitHelper.get_resistance(base_physical_resistance, incremental_physical_resistance, resistance_mutiplier, level) },
+                { type = "fire", percent = ERM_UnitHelper.get_resistance(base_fire_resistance, incremental_fire_resistance, resistance_mutiplier, level) },
+                { type = "explosion", percent = ERM_UnitHelper.get_resistance(base_fire_resistance, incremental_fire_resistance, resistance_mutiplier, level) },
+                { type = "laser", percent = ERM_UnitHelper.get_resistance(base_electric_resistance, incremental_electric_resistance, resistance_mutiplier, level) },
+                { type = "electric", percent = ERM_UnitHelper.get_resistance(base_electric_resistance, incremental_electric_resistance, resistance_mutiplier, level) },
+                { type = "cold", percent = ERM_UnitHelper.get_resistance(base_cold_resistance, incremental_cold_resistance, resistance_mutiplier, level) }
             },
             healing_per_tick = ERM_UnitHelper.get_healing(hitpoint, max_hitpoint_multiplier, health_multiplier, level),
             --collision_mask = { "player-layer" },
@@ -112,19 +111,18 @@ function ErmZerg.make_lurker(level)
                     action = {
                         type = "area",
                         radius = 3,
-                        force = "enemy",
                         ignore_collision_condition = true,
                         action_delivery = {
                             type = "instant",
-                            target_effects =
-                            {
+                            target_effects = {
                                 {
-                                    type="create-explosion",
+                                    type = "create-explosion",
                                     entity_name = 'lurker-explosion'
                                 },
                                 {
                                     type = "damage",
-                                    damage = {amount = ERM_UnitHelper.get_damage(base_physical_damage, incremental_physical_damage, damage_multiplier, level), type = "physical"}
+                                    damage = { amount = ERM_UnitHelper.get_damage(base_physical_damage, incremental_physical_damage, damage_multiplier, level), type = "physical" },
+                                    apply_damage_to_trees = true
                                 },
                             }
                         }
