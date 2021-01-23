@@ -8,7 +8,8 @@
 
 local Game = require('__stdlib__/stdlib/game')
 
-ErmConfig =  require('__enemyracemanager__/lib/global_config')
+ErmConfig = require('__enemyracemanager__/lib/global_config')
+local ForceHelper = require('__enemyracemanager__/lib/helper/force_helper')
 
 local Event = require('__stdlib__/stdlib/event/event')
 local String = require('__stdlib__/stdlib/utils/string')
@@ -28,12 +29,11 @@ local createZergRace = function()
     zerg_force.disable_research()
     zerg_force.friendly_fire = false;
 
-    game.forces['enemy'].set_friend(zerg_force, true)
-    game.forces[FORCE_NAME].set_friend(game.forces['enemy'], true)
+    ForceHelper.set_friends(game, FORCE_NAME)
 end
 
 local addRaceSettings = function()
-    if remote.call('enemy_race_manager','get_race', MOD_NAME) then
+    if remote.call('enemy_race_manager', 'get_race', MOD_NAME) then
         return
     end
     local race_settings = {
@@ -48,27 +48,27 @@ local addRaceSettings = function()
         send_attack_threshold_deviation = 0.2,
         next_attack_threshold = 0, -- Used by system to calculate next move
         units = {
-            {'zergling','hydralisk','mutalisk'},
-            {'overlord','guardian','devourer','drone'},
-            {'ultralisk','queen','defiler'},
+            { 'zergling', 'hydralisk', 'mutalisk' },
+            { 'overlord', 'guardian', 'devourer', 'drone' },
+            { 'ultralisk', 'queen', 'defiler' },
         },
         current_units_tier = {},
         turrets = {
-            {'sunker_colony','spore_colony'},
+            { 'sunker_colony', 'spore_colony' },
             {},
             {},
         },
         current_turrets_tier = {},
         command_centers = {
-            {'hatchery'},
-            {'lair'},
-            {'hive'}
+            { 'hatchery' },
+            { 'lair' },
+            { 'hive' }
         },
         current_command_centers_tier = {},
         support_structures = {
-            {'spawning_pool','hydraden','spire', 'chamber'},
-            {'greater_spire'},
-            {'ultralisk_cavern','queen_nest','defiler_mound','nyduspit'},
+            { 'spawning_pool', 'hydraden', 'spire', 'chamber' },
+            { 'greater_spire' },
+            { 'ultralisk_cavern', 'queen_nest', 'defiler_mound', 'nyduspit' },
         },
         current_support_structures_tier = {},
     }
@@ -78,7 +78,7 @@ local addRaceSettings = function()
     race_settings.current_command_centers_tier = race_settings.command_centers[1]
     race_settings.current_support_structures_tier = race_settings.support_structures[1]
 
-    remote.call('enemy_race_manager','register_race', race_settings)
+    remote.call('enemy_race_manager', 'register_race', race_settings)
 end
 
 Event.on_init(function(event)
@@ -93,8 +93,7 @@ Event.on_configuration_changed(function(event)
     createZergRace()
 end)
 
-
-Event.register(defines.events.on_script_trigger_effect, function (event)
+Event.register(defines.events.on_script_trigger_effect, function(event)
     if not event.source_entity then
         return
     end

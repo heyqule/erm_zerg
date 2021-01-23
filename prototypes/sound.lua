@@ -18,8 +18,7 @@ function ZergSound.meele_attack(volume)
     return
     {
         audible_distance_modifier = 0.5,
-        variations =
-        {
+        variations = {
             {
                 filename = "__erm_zerg__/sound/enemies/zergling/attack.ogg",
                 volume = volume
@@ -36,8 +35,7 @@ function ZergSound.mutalisk_attack(volume)
     return
     {
         audible_distance_modifier = 0.5,
-        variations =
-        {
+        variations = {
             {
                 filename = "__erm_zerg__/sound/enemies/mutalisk/attack.ogg",
                 volume = volume
@@ -50,8 +48,7 @@ function ZergSound.guardian_attack(volume)
     return
     {
         audible_distance_modifier = 0.5,
-        variations =
-        {
+        variations = {
             {
                 filename = "__erm_zerg__/sound/enemies/guardian/attack.ogg",
                 volume = volume
@@ -61,25 +58,23 @@ function ZergSound.guardian_attack(volume)
 end
 
 function ZergSound.hydralisk_attack(volume)
-return
-{
-    audible_distance_modifier = 0.5,
-    variations =
+    return
     {
-        {
-            filename = "__erm_zerg__/sound/enemies/hydralisk/attack.ogg",
-            volume = volume
+        audible_distance_modifier = 0.5,
+        variations = {
+            {
+                filename = "__erm_zerg__/sound/enemies/hydralisk/attack.ogg",
+                volume = volume
+            }
         }
     }
-}
 end
 
 function ZergSound.devourer_attack(volume)
     return
     {
         audible_distance_modifier = 0.5,
-        variations =
-        {
+        variations = {
             {
                 filename = "__erm_zerg__/sound/enemies/devourer/attack.ogg",
                 volume = volume
@@ -93,9 +88,8 @@ function ZergSound.building_working_sound(name, volume)
     {
         audible_distance_modifier = 1,
         max_sounds_per_type = 3,
-        sound =
-        {
-            filename = "__erm_zerg__/sound/buildings/"..name..".ogg",
+        sound = {
+            filename = "__erm_zerg__/sound/buildings/" .. name .. ".ogg",
             volume = volume
         },
         probability = 1 / (15 * 60)
@@ -154,8 +148,7 @@ function ZergSound.lurker_attack(volume)
     return
     {
         audible_distance_modifier = 0.5,
-        variations =
-        {
+        variations = {
             {
                 filename = "__erm_zerg__/sound/enemies/lurker/attack-1.ogg",
                 volume = volume
@@ -240,7 +233,6 @@ function ZergSound.infested_attack(volume)
     }
 end
 
-
 function ZergSound.infested_death(volume)
     return {
         audible_distance_modifier = 0.5,
@@ -261,8 +253,7 @@ function ZergSound.defiler_attack(volume)
     return
     {
         audible_distance_modifier = 0.5,
-        variations =
-        {
+        variations = {
             {
                 filename = "__erm_zerg__/sound/enemies/defiler/attack.ogg",
                 volume = volume
@@ -275,8 +266,7 @@ function ZergSound.defiler_deat(volume)
     return
     {
         audible_distance_modifier = 0.5,
-        variations =
-        {
+        variations = {
             {
                 filename = "__erm_zerg__/sound/enemies/hydralisk/attack.ogg",
                 volume = volume

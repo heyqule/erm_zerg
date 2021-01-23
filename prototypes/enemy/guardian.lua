@@ -6,6 +6,7 @@
 -- To change this template use File | Settings | File Templates.
 --
 require('__stdlib__/stdlib/utils/defines/time')
+local Sprites = require('__stdlib__/stdlib/data/modules/sprites')
 
 local ERM_UnitHelper = require('__enemyracemanager__/lib/unit_helper')
 local ERM_UnitTint = require('__enemyracemanager__/lib/unit_tint')
@@ -60,34 +61,33 @@ local distraction_cooldown = 20
 local unit_scale = 1.5
 
 local collision_box = { { -0.25, -0.25 }, { 0.25, 0.25 } }
-local selection_box = {{-1.0, -1.0}, {1.0, 1.0}}
+local selection_box = { { -1.0, -1.0 }, { 1.0, 1.0 } }
 
 function ErmZerg.make_guardian(level)
     level = level or 1
-    if DEBUG_MODE then
-        ERM_DebugHelper.print_translate_to_console(MOD_NAME, name, level)
-    end
+
     data:extend({
         {
             type = "unit",
-            name = MOD_NAME..'/'..name .. '/' .. level,
-            icon = "__erm_zerg__/graphics/entity/icons/units/"..name..".png",
+            name = MOD_NAME .. '/' .. name .. '/' .. level,
+            localised_name = { 'entity-name.' .. MOD_NAME .. '/' .. name, level },
+            icon = "__erm_zerg__/graphics/entity/icons/units/" .. name .. ".png",
             icon_size = 64,
-            flags = {"placeable-enemy", "placeable-player", "placeable-off-grid", "breaths-air", 'not-flammable'},
+            flags = { "placeable-enemy", "placeable-player", "placeable-off-grid", "breaths-air", 'not-flammable' },
             has_belt_immunity = true,
             max_health = ERM_UnitHelper.get_health(hitpoint, hitpoint * max_hitpoint_multiplier, health_multiplier, level),
-            order = "erm-"..name..'/'..level,
+            order = "erm-" .. name .. '/' .. level,
             subgroup = "enemies",
             shooting_cursor_size = 2,
             resistances = {
-                { type = "acid", percent = ERM_UnitHelper.get_resistance(base_acid_resistance, incremental_acid_resistance, resistance_mutiplier, level)},
+                { type = "acid", percent = ERM_UnitHelper.get_resistance(base_acid_resistance, incremental_acid_resistance, resistance_mutiplier, level) },
                 { type = "poison", percent = ERM_UnitHelper.get_resistance(base_acid_resistance, incremental_acid_resistance, resistance_mutiplier, level) },
-                { type = "physical", percent = ERM_UnitHelper.get_resistance(base_physical_resistance, incremental_physical_resistance, resistance_mutiplier, level)},
-                { type = "fire", percent = ERM_UnitHelper.get_resistance(base_fire_resistance, incremental_fire_resistance, resistance_mutiplier, level)},
-                { type = "explosion", percent = ERM_UnitHelper.get_resistance(base_fire_resistance, incremental_fire_resistance, resistance_mutiplier, level)},
-                { type = "laser", percent = ERM_UnitHelper.get_resistance(base_electric_resistance, incremental_electric_resistance, resistance_mutiplier, level)},
-                { type = "electric", percent = ERM_UnitHelper.get_resistance(base_electric_resistance, incremental_electric_resistance, resistance_mutiplier, level)},
-                { type = "cold", percent = ERM_UnitHelper.get_resistance(base_cold_resistance, incremental_cold_resistance, resistance_mutiplier, level)}
+                { type = "physical", percent = ERM_UnitHelper.get_resistance(base_physical_resistance, incremental_physical_resistance, resistance_mutiplier, level) },
+                { type = "fire", percent = ERM_UnitHelper.get_resistance(base_fire_resistance, incremental_fire_resistance, resistance_mutiplier, level) },
+                { type = "explosion", percent = ERM_UnitHelper.get_resistance(base_fire_resistance, incremental_fire_resistance, resistance_mutiplier, level) },
+                { type = "laser", percent = ERM_UnitHelper.get_resistance(base_electric_resistance, incremental_electric_resistance, resistance_mutiplier, level) },
+                { type = "electric", percent = ERM_UnitHelper.get_resistance(base_electric_resistance, incremental_electric_resistance, resistance_mutiplier, level) },
+                { type = "cold", percent = ERM_UnitHelper.get_resistance(base_cold_resistance, incremental_cold_resistance, resistance_mutiplier, level) }
             },
             healing_per_tick = ERM_UnitHelper.get_healing(hitpoint, max_hitpoint_multiplier, health_multiplier, level),
             collision_mask = {},
@@ -113,16 +113,23 @@ function ErmZerg.make_guardian(level)
                         type = "direct",
                         action_delivery = {
                             type = "projectile",
-                            projectile = name.."-projectile"..level,
-                            starting_speed = 0.1
+                            projectile = name .. "-projectile",
+                            starting_speed = 0.1,
+                            target_effects = {
+                                {
+                                    type = "damage",
+                                    damage = { amount = ERM_UnitHelper.get_damage(base_acid_damage, incremental_acid_damage, damage_multiplier, level), type = "acid" },
+                                    apply_damage_to_trees = true
+                                },
+                            }
                         }
                     }
                 },
                 sound = ZergSound.guardian_attack(0.75),
                 animation = {
-                    layers={
+                    layers = {
                         {
-                            filename = "__erm_zerg__/graphics/entity/units/"..name.."/"..name.."-run.png",
+                            filename = "__erm_zerg__/graphics/entity/units/" .. name .. "/" .. name .. "-run.png",
                             width = 96,
                             height = 96,
                             frame_count = 6,
@@ -132,7 +139,7 @@ function ErmZerg.make_guardian(level)
                             animation_speed = 0.6,
                         },
                         {
-                            filename = "__erm_zerg__/graphics/entity/units/"..name.."/"..name.."-run-mask.png",
+                            filename = "__erm_zerg__/graphics/entity/units/" .. name .. "/" .. name .. "-run-mask.png",
                             width = 96,
                             height = 96,
                             frame_count = 6,
@@ -142,7 +149,7 @@ function ErmZerg.make_guardian(level)
                             tint = ERM_UnitTint.tint_shadow(),
                             animation_speed = 0.6,
                             draw_as_shadow = true,
-                            shift = {4, 0}
+                            shift = { 4, 0 }
                         }
                     }
                 }
@@ -152,9 +159,9 @@ function ErmZerg.make_guardian(level)
             final_render_layer = "air-object",
             distance_per_frame = 0.5,
             run_animation = {
-                layers={
+                layers = {
                     {
-                        filename = "__erm_zerg__/graphics/entity/units/"..name.."/"..name.."-run.png",
+                        filename = "__erm_zerg__/graphics/entity/units/" .. name .. "/" .. name .. "-run.png",
                         width = 96,
                         height = 96,
                         frame_count = 7,
@@ -164,7 +171,7 @@ function ErmZerg.make_guardian(level)
                         animation_speed = 0.6
                     },
                     {
-                        filename = "__erm_zerg__/graphics/entity/units/"..name.."/"..name.."-run-mask.png",
+                        filename = "__erm_zerg__/graphics/entity/units/" .. name .. "/" .. name .. "-run-mask.png",
                         width = 96,
                         height = 96,
                         frame_count = 7,
@@ -172,67 +179,63 @@ function ErmZerg.make_guardian(level)
                         direction_count = 16,
                         scale = unit_scale,
                         tint = ERM_UnitTint.tint_shadow(),
-                        shift = {4, 0},
+                        shift = { 4, 0 },
                         animation_speed = 0.6,
                         draw_as_shadow = true
                     }
                 }
             },
-            dying_explosion = "blood-explosion-small",
+            dying_explosion = name .. "-air-death",
             dying_sound = ZergSound.enemy_death(name, 0.75),
-            corpse = name..'-corpse'
+            corpse = name .. '-corpse'
         },
         {
             type = "corpse",
-            name = name..'-corpse',
+            name = name .. '-corpse',
             icon = "__erm_zerg__/graphics/entity/icons/units/" .. name .. ".png",
             icon_size = 64,
             flags = { "placeable-off-grid", "building-direction-8-way", "not-on-map" },
             selection_box = selection_box,
             selectable_in_game = false,
             dying_speed = 0.04,
-            time_before_removed = defines.time.second * 5,
+            time_before_removed = defines.time.second,
             subgroup = "corpses",
             order = "x" .. name .. level,
-            final_render_layer = "lower-object-above-shadow",
-            animation = {
-                filename = "__erm_zerg__/graphics/entity/units/"..name.."/"..name.."-death.png",
+            animation = Sprites.empty_pictures(),
+        },
+        {
+            type = "explosion",
+            name = name .. "-air-death",
+            flags = { "not-on-map" },
+            animations = {
+                filename = "__erm_zerg__/graphics/entity/units/" .. name .. "/" .. name .. "-death.png",
                 width = 140,
                 height = 140,
                 frame_count = 9,
                 direction_count = 1,
                 axially_symmetrical = false,
-                scale = 1.25,
-                animation_speed=0.2
-            },
-            final_render_layer = "lower-object-above-shadow"
+                scale = unit_scale,
+                animation_speed = 0.5
+            }
         },
         {
             type = "projectile",
-            name = name.."-projectile"..level,
-            flags = {"not-on-map"},
+            name = name .. "-projectile",
+            flags = { "not-on-map" },
             acceleration = 0.01,
-            action =
-            {
+            action = {
                 type = "direct",
-                action_delivery =
-                {
+                action_delivery = {
                     type = "instant",
-                    target_effects =
-                    {
+                    target_effects = {
                         {
                             type = "create-entity",
-                            entity_name = name.."-explosion-small"
-                        },
-                        {
-                            type = "damage",
-                            damage = {amount = ERM_UnitHelper.get_damage(base_acid_damage, incremental_acid_damage, damage_multiplier, level), type = "acid"}
+                            entity_name = name .. "-explosion-small"
                         }
                     }
                 }
             },
-            animation =
-            {
+            animation = {
                 filename = "__erm_zerg__/graphics/entity/projectiles/spores_2.png",
                 priority = "extra-high",
                 width = 24,
@@ -244,10 +247,9 @@ function ErmZerg.make_guardian(level)
         },
         {
             type = "explosion",
-            name = name.."-explosion-small",
-            flags = {"not-on-map"},
-            animations =
-            {
+            name = name .. "-explosion-small",
+            flags = { "not-on-map" },
+            animations = {
                 {
                     filename = "__erm_zerg__/graphics/entity/projectiles/spores_2.png",
                     priority = "extra-high",

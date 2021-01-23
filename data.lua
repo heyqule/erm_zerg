@@ -35,18 +35,18 @@ require "prototypes.building.defiler_mound"
 require "prototypes.building.ultralisk_cavern"
 require "prototypes.building.nyduspit"
 
-data:extend({ZergProjectileAnimation.create_lurker_spike()})
-data:extend({ZergProjectileAnimation.create_colony_spike()})
-data:extend({ZergProjectileAnimation.create_mutalisk_ball()})
-data:extend({ZergProjectileAnimation.create_mutalisk_hit_effect()})
-data:extend({ZergProjectileAnimation.create_hydralisk_projectile()})
-data:extend({ZergProjectileAnimation.create_hydralisk_hit()})
-data:extend({ZergProjectileAnimation.create_defiler_cloud()})
-data:extend({ZergProjectileAnimation.create_queen_cloud()})
+data:extend({ ZergProjectileAnimation.create_lurker_spike() })
+data:extend({ ZergProjectileAnimation.create_colony_spike() })
+data:extend({ ZergProjectileAnimation.create_mutalisk_ball() })
+data:extend({ ZergProjectileAnimation.create_mutalisk_hit_effect() })
+data:extend({ ZergProjectileAnimation.create_hydralisk_projectile() })
+data:extend({ ZergProjectileAnimation.create_hydralisk_hit() })
+data:extend({ ZergProjectileAnimation.create_defiler_cloud() })
+data:extend({ ZergProjectileAnimation.create_queen_cloud() })
 
 local level = ErmConfig.get_max_level(settings)
 
-for i=1,level do
+for i = 1, level do
     ErmZerg.make_zergling(i)
     ErmZerg.make_hydralisk(i)
     ErmZerg.make_mutalisk(i)

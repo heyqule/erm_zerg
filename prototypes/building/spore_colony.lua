@@ -10,8 +10,7 @@ local ERM_UnitTint = require('__enemyracemanager__/lib/unit_tint')
 local ERM_DebugHelper = require('__enemyracemanager__/lib/debug_helper')
 local ZergSound = require('__erm_zerg__/prototypes/sound')
 
-
-local enemy_autoplace = require ("__enemyracemanager__/lib/enemy-autoplace-utils")
+local enemy_autoplace = require("__enemyracemanager__/lib/enemy-autoplace-utils")
 local name = 'spore_colony'
 
 -- Hitpoints
@@ -36,14 +35,14 @@ local incremental_electric_resistance = 80
 local base_cold_resistance = 15
 local incremental_cold_resistance = 65
 
-local collision_box = {{-2, -2}, {2, 2}}
-local map_generator_bounding_box = {{-3, -3}, {3, 3}}
-local selection_box = {{-2, -2}, {2, 2}}
+local collision_box = { { -2, -2 }, { 2, 2 } }
+local map_generator_bounding_box = { { -3, -3 }, { 3, 3 } }
+local selection_box = { { -2, -2 }, { 2, 2 } }
 
 -- Handles damages
 local damage_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
-local base_acid_damage = 2
-local incremental_acid_damage = 20
+local base_acid_damage = 5
+local incremental_acid_damage = 25
 
 -- Handles Attack Speed
 local attack_speed_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
@@ -71,16 +70,14 @@ local folded_animation = function()
     }
 end
 
-
 function ErmZerg.make_spore_colony(level)
     level = level or 1
-    if DEBUG_MODE then
-        ERM_DebugHelper.print_translate_to_console(MOD_NAME, name, level)
-    end
+
     data:extend({
         {
             type = "turret",
-            name = MOD_NAME..'/'..name..'/'..level,
+            name = MOD_NAME .. '/' .. name .. '/' .. level,
+            localised_name = { 'entity-name.' .. MOD_NAME .. '/' .. name, level },
             icon = "__erm_zerg__/graphics/entity/icons/buildings/advisor.png",
             icon_size = 64,
             flags = { "placeable-player", "placeable-enemy", "placeable-off-grid", "breaths-air" },
@@ -114,7 +111,7 @@ function ErmZerg.make_spore_colony(level)
             integration = {
                 layers = {
                     {
-                        filename = "__erm_zerg__/graphics/entity/buildings/"..name.."/"..name..".png",
+                        filename = "__erm_zerg__/graphics/entity/buildings/" .. name .. "/" .. name .. ".png",
                         variation_count = 1,
                         width = 128,
                         height = 128,
@@ -123,14 +120,14 @@ function ErmZerg.make_spore_colony(level)
                         scale = unit_scale
                     },
                     {
-                        filename = "__erm_zerg__/graphics/entity/buildings/"..name.."/"..name..".png",
+                        filename = "__erm_zerg__/graphics/entity/buildings/" .. name .. "/" .. name .. ".png",
                         variation_count = 1,
                         width = 128,
                         height = 128,
                         frame_count = 1,
                         line_length = 1,
                         draw_as_shadow = true,
-                        shift = {0.5, 0.1},
+                        shift = { 0.5, 0.1 },
                         scale = unit_scale
                     },
                 }
@@ -150,17 +147,14 @@ function ErmZerg.make_spore_colony(level)
                 use_shooter_direction = true,
                 lead_target_for_projectile_speed = 0.2 * 0.75 * 1.5 * 1.5,
                 sound = ZergSound.sunker_attack(1),
-                ammo_type =
-                {
+                ammo_type = {
                     category = "biological",
-                    action =
-                    {
+                    action = {
                         type = "direct",
-                        action_delivery =
-                        {
+                        action_delivery = {
                             type = "stream",
                             stream = "acid-stream-worm-behemoth",
-                            source_offset = {0.15, -0.5}
+                            source_offset = { 0.15, -0.5 }
                         }
                     }
                 }
