@@ -40,6 +40,7 @@ Tier 2 Units (Max Resistance 90)
 * Devourer
     - Health 250 * 1.25
     - range damage 25-85
+    - slow on hit
 * Drone (resist 85)
     - Health 40 * 2
     - Kill itself to spawns spore colony or nyduspit

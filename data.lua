@@ -43,6 +43,7 @@ data:extend({ ZergProjectileAnimation.create_hydralisk_projectile() })
 data:extend({ ZergProjectileAnimation.create_hydralisk_hit() })
 data:extend({ ZergProjectileAnimation.create_defiler_cloud() })
 data:extend({ ZergProjectileAnimation.create_queen_cloud() })
+data:extend({ ZergProjectileAnimation.create_slow_ticker() })
 
 local level = ErmConfig.get_max_level(settings)
 
