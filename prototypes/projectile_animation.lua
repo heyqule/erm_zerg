@@ -4,6 +4,8 @@
 --- DateTime: 12/22/2020 6:40 PM
 ---
 
+local Sprites = require('__stdlib__/stdlib/data/modules/sprites')
+
 local ProjectileAnimation = {}
 
 function ProjectileAnimation.create_lurker_spike()
@@ -214,6 +216,19 @@ function ProjectileAnimation.create_queen_cloud()
                 scale = 2
             }
         }
+    }
+end
+
+function ProjectileAnimation.create_slow_ticker()
+    return
+    {
+        type = "sticker",
+        name = "zerg-slowdown-sticker",
+        flags = {},
+        animation = Sprites.empty_pictures(),
+        duration_in_ticks = 5 * 60,
+        target_movement_modifier = 0.75,
+        vehicle_speed_modifier = 0.75,
     }
 end
 

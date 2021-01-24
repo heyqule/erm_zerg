@@ -106,7 +106,6 @@ function ErmZerg.make_devourer(level)
                 range = attack_range,
                 cooldown = ERM_UnitHelper.get_attack_speed(base_attack_speed, incremental_attack_speed, attack_speed_multiplier, level),
                 cooldown_deviation = 0.1,
-                warmup = 12,
                 ammo_type = {
                     category = "biological",
                     action = {
@@ -244,7 +243,11 @@ function ErmZerg.make_devourer(level)
                             {
                                 type = "play-sound",
                                 sound = ZergSound.devourer_hit(0.75)
-                            }
+                            },
+                            {
+                                type = "create-sticker",
+                                sticker = "zerg-slowdown-sticker"
+                            },
                         }
                     }
                 },

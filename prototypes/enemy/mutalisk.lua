@@ -104,7 +104,6 @@ function ErmZerg.make_mutalisk(level)
                 range = attack_range,
                 cooldown = ERM_UnitHelper.get_attack_speed(base_attack_speed, incremental_attack_speed, attack_speed_multiplier, level),
                 cooldown_deviation = 0.1,
-                warmup = 6,
                 ammo_type = {
                     category = "biological",
                     target_type = "direction",

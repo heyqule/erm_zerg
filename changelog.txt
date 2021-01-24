@@ -7,6 +7,7 @@ Date: 24. 01. 2021
     - Added apply_damage_to_trees = true to various units
     - Death animation for air units.
     - Increase defense structure attack speed at max level
+    - Added slow attack to devourer
   Bugfixes:
     - set Defiler cloud cyclic = true
 ---------------------------------------------------------------------------------------------------
