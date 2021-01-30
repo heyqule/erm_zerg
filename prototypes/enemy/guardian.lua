@@ -27,8 +27,8 @@ local incremental_acid_resistance = 65
 local base_physical_resistance = 0
 local incremental_physical_resistance = 90
 -- Handles fire and explosive resistance
-local base_fire_resistance = 15
-local incremental_fire_resistance = 75
+local base_fire_resistance = 10
+local incremental_fire_resistance = 80
 -- Handles laser and electric resistance
 local base_electric_resistance = 0
 local incremental_electric_resistance = 90

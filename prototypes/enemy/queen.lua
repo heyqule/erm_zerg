@@ -21,19 +21,19 @@ local max_hitpoint_multiplier = settings.startup["enemyracemanager-max-hitpoint-
 local resistance_mutiplier = settings.startup["enemyracemanager-level-multipliers"].value
 -- Handles acid and poison resistance
 local base_acid_resistance = 25
-local incremental_acid_resistance = 70
+local incremental_acid_resistance = 65
 -- Handles physical resistance
 local base_physical_resistance = 0
-local incremental_physical_resistance = 95
+local incremental_physical_resistance = 90
 -- Handles fire and explosive resistance
 local base_fire_resistance = 10
-local incremental_fire_resistance = 85
+local incremental_fire_resistance = 80
 -- Handles laser and electric resistance
 local base_electric_resistance = 0
-local incremental_electric_resistance = 95
+local incremental_electric_resistance = 90
 -- Handles cold resistance
 local base_cold_resistance = 25
-local incremental_cold_resistance = 70
+local incremental_cold_resistance = 65
 
 -- Handles physical damages
 local damage_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
@@ -105,7 +105,7 @@ function ErmZerg.make_queen(level)
                 range = attack_range,
                 cooldown = ERM_UnitHelper.get_attack_speed(base_attack_speed, incremental_attack_speed, attack_speed_multiplier, level) - 30,
                 cooldown_deviation = 0.1,
-                warmup = 30,
+                warmup = 6,
                 ammo_type = {
                     category = "biological",
                     target_type = "direction",

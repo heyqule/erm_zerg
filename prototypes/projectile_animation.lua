@@ -219,6 +219,26 @@ function ProjectileAnimation.create_queen_cloud()
     }
 end
 
+function ProjectileAnimation.create_devourer_cloud()
+    return
+    {
+        type = "explosion",
+        name = "devourer-cloud-explosion",
+        flags = { "not-on-map" },
+        animations = {
+            {
+                filename = "__erm_zerg__/graphics/entity/projectiles/devourer_puke_hit.png",
+                priority = "extra-high",
+                width = 56,
+                height = 56,
+                frame_count = 16,
+                animation_speed = 0.2,
+                scale = 1.5
+            }
+        }
+    }
+end
+
 function ProjectileAnimation.create_slow_ticker()
     return
     {
