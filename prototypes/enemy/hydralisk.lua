@@ -23,16 +23,16 @@ local base_acid_resistance = 25
 local incremental_acid_resistance = 100
 -- Handles physical resistance
 local base_physical_resistance = 0
-local incremental_physical_resistance = 85
+local incremental_physical_resistance = 90
 -- Handles fire and explosive resistance
 local base_fire_resistance = 10
-local incremental_fire_resistance = 75
+local incremental_fire_resistance = 80
 -- Handles laser and electric resistance
 local base_electric_resistance = 0
-local incremental_electric_resistance = 85
+local incremental_electric_resistance = 90
 -- Handles cold resistance
 local base_cold_resistance = 25
-local incremental_cold_resistance = 60
+local incremental_cold_resistance = 70
 
 -- Handles acid damages
 local damage_multiplier = settings.startup["enemyracemanager-level-multipliers"].value

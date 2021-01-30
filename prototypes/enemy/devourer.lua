@@ -22,24 +22,24 @@ local max_hitpoint_multiplier = settings.startup["enemyracemanager-max-hitpoint-
 local resistance_mutiplier = settings.startup["enemyracemanager-level-multipliers"].value
 -- Handles acid and poison resistance
 local base_acid_resistance = 25
-local incremental_acid_resistance = 65
+local incremental_acid_resistance = 70
 -- Handles physical resistance
 local base_physical_resistance = 0
-local incremental_physical_resistance = 90
+local incremental_physical_resistance = 95
 -- Handles fire and explosive resistance
 local base_fire_resistance = 15
-local incremental_fire_resistance = 75
+local incremental_fire_resistance = 80
 -- Handles laser and electric resistance
 local base_electric_resistance = 0
-local incremental_electric_resistance = 90
+local incremental_electric_resistance = 95
 -- Handles cold resistance
 local base_cold_resistance = 25
-local incremental_cold_resistance = 65
+local incremental_cold_resistance = 70
 
 -- Handles damages
 local damage_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
-local base_acid_damage = 25
-local incremental_acid_damage = 60
+local base_acid_damage = 25 / 4
+local incremental_acid_damage = 60 / 4
 
 -- Handles Attack Speed
 local attack_speed_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
@@ -174,7 +174,6 @@ function ErmZerg.make_devourer(level)
                         frame_count = 5,
                         axially_symmetrical = false,
                         direction_count = 16,
-
                         scale = unit_scale,
                         tint = ERM_UnitTint.tint_shadow(),
                         shift = { 4, 0 },
@@ -235,18 +234,17 @@ function ErmZerg.make_devourer(level)
                         type = "instant",
                         target_effects = {
                             {
-                                type = "create-fire",
-                                entity_name = name .. "-fire-" .. level,
-                                tile_collision_mask = { "water-tile" },
-                                show_in_tooltip = true
+                                type = "create-smoke",
+                                show_in_tooltip = true,
+                                entity_name = name .. "-devourer-cloud-" .. level
+                            },
+                            {
+                                type = "create-explosion",
+                                entity_name = "devourer-cloud-explosion"
                             },
                             {
                                 type = "play-sound",
                                 sound = ZergSound.devourer_hit(0.75)
-                            },
-                            {
-                                type = "create-sticker",
-                                sticker = "zerg-slowdown-sticker"
                             },
                         }
                     }
@@ -264,35 +262,56 @@ function ErmZerg.make_devourer(level)
             }
         },
         {
-            type = "fire",
-            name = name .. "-fire-" .. level,
-            localised_name = { 'entity-name.purple-fire' },
+            name = name .. "-devourer-cloud-" .. level,
+            localised_name = {'entity-name.blood-cloud'},
+            type = "smoke-with-trigger",
             flags = { "not-on-map" },
-            damage_per_tick = { amount = (ERM_UnitHelper.get_damage(base_acid_damage, incremental_acid_damage, damage_multiplier, level) / defines.time.second), type = "acid" },
-            maximum_damage_multiplier = 3,
-            damage_multiplier_increase_per_added_fuel = 1,
-            damage_multiplier_decrease_per_tick = 1 / defines.time.second,
-            limit_overlapping_particles = true,
-            maximum_spread_count = 0,
-            spread_delay = 0,
-            spread_delay_deviation = 0,
-            emissions_per_second = 0,
-            initial_lifetime = 60,
-            maximum_lifetime = 60,
-            initial_flame_count = 1,
-            burnt_patch_lifetime = 0,
-            render_layer = 'projectile',
-            pictures = {
-                {
-                    filename = "__erm_zerg__/graphics/entity/projectiles/" .. name .. "_puke_hit.png",
-                    priority = "extra-high",
-                    width = 56,
-                    height = 56,
-                    frame_count = 16,
-                    animation_speed = 0.2,
-                    scale = 1.5
+            show_when_smoke_off = true,
+            particle_count = 1,
+            --particle_spread = { 3.6 * 1.05, 3.6 * 0.6 * 1.05 },
+            --particle_distance_scale_factor = 0.5,
+            --particle_scale_factor = { 1, 0.707 },
+            --wave_speed = { 1/80, 1/60 },
+            --wave_distance = { 0.3, 0.2 },
+            --spread_duration_variation = 20,
+            --particle_duration_variation = 60 * 3,
+            render_layer = "explosion",
+
+            affected_by_wind = false,
+            duration = 60,
+            cyclic = true,
+            --spread_duration = 20,
+
+            animation = Sprites.empty_picture(),
+            action = {
+                type = "direct",
+                action_delivery = {
+                    type = "instant",
+                    target_effects = {
+                        type = "nested-result",
+                        action = {
+                            type = "area",
+                            radius = 1,
+                            ignore_collision_condition = true,
+                            action_delivery = {
+                                type = "instant",
+                                target_effects = {
+                                    {
+                                        type = "damage",
+                                        damage = { amount = ERM_UnitHelper.get_damage(base_acid_damage, incremental_acid_damage, damage_multiplier, level), type = "acid" },
+                                        apply_damage_to_trees = true
+                                    },
+                                    {
+                                        type = "create-sticker",
+                                        sticker = "zerg-slowdown-sticker"
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             },
-        }
+            action_cooldown = 15
+        },
     })
 end

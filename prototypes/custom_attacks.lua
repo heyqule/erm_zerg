@@ -26,7 +26,7 @@ local get_drone_buildable_turrets = function()
     local unit_name = {
         { 'spore_colony' },
         { 'spore_colony' },
-        { 'spore_colony', 'nydus' },
+        { 'spore_colony', 'nyduspit' },
     }
     return get_unit(unit_name)
 end

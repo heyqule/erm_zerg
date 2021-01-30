@@ -1,6 +1,6 @@
 ---------------------------------------------------------------------------------------------------
 Version: 1.0.0
-Date: 24. 01. 2021
+Date: 29. 01. 2021
   Changes:
     - Ultralisk damage raise to 25-150.
     - Ultralisk max health now has 1.25 multiplier.
@@ -8,8 +8,10 @@ Date: 24. 01. 2021
     - Death animation for air units.
     - Increase defense structure attack speed at max level
     - Added slow attack to devourer
+    - Unit resistance balance, close range has higher resistance than long range.
   Bugfixes:
-    - set Defiler cloud cyclic = true
+    - Set Defiler cloud cyclic = true
+    - Fix drone attacks
 ---------------------------------------------------------------------------------------------------
 Version: 0.2.0
 Date: 03. 01. 2021
