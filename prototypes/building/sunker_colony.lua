@@ -188,6 +188,6 @@ function ErmZerg.make_sunker_colony(level)
                     },
                 },
             },
-        }
+        },
     })
 end

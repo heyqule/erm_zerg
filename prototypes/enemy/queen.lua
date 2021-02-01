@@ -10,6 +10,7 @@ local Sprites = require('__stdlib__/stdlib/data/modules/sprites')
 local ERM_UnitHelper = require('__enemyracemanager__/lib/unit_helper')
 local ERM_UnitTint = require('__enemyracemanager__/lib/unit_tint')
 local ERM_DebugHelper = require('__enemyracemanager__/lib/debug_helper')
+local ERM_Config = require('__enemyracemanager__/lib/global_config')
 local ZergSound = require('__erm_zerg__/prototypes/sound')
 local ZergProjectileAnimation = require('__erm_zerg__/prototypes/projectile_animation')
 local name = 'queen'
@@ -47,7 +48,7 @@ local attack_speed_multiplier = settings.startup["enemyracemanager-level-multipl
 local base_attack_speed = 600
 local incremental_attack_speed = 180
 
-local attack_range = 20
+local attack_range = ERM_Config.get_max_attack_range(settings)
 
 local movement_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
 local base_movement_speed = 0.125
@@ -56,7 +57,7 @@ local incremental_movement_speed = 0.055
 -- Misc settings
 local vision_distance = 30
 
-local pollution_to_join_attack = 250
+local pollution_to_join_attack = 300
 local distraction_cooldown = 20
 
 -- Animation Settings

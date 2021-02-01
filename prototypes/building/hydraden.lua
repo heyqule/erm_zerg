@@ -46,8 +46,8 @@ local max_count_of_owned_units = 5
 local max_friends_around_to_spawn = 3
 local spawn_table = function(level)
     local res = {}
-    res[1] = { MOD_NAME .. '/hydralisk/' .. level, { { 0.0, 1 }, { 0.2, 1 }, { 0.4, 0.8 }, { 0.6, 0.7 }, { 0.8, 0.6 } } }
-    res[2] = { MOD_NAME .. '/lurker/' .. level, { { 0.0, 0 }, { 0.2, 0 }, { 0.4, 0.2 }, { 0.6, 0.3 }, { 0.8, 0.4 } } }
+    res[1] = { MOD_NAME .. '/hydralisk/' .. level, { { 0.0, 1 }, { 0.2, 1 }, { 0.4, 0.95 }, { 0.6, 0.8 }, { 0.8, 0.65 }, {1.0, 0.6} } }
+    res[2] = { MOD_NAME .. '/lurker/' .. level, { { 0.0, 0 }, { 0.2, 0 }, { 0.4, 0.05 }, { 0.6, 0.2 }, { 0.8, 0.35 }, {1.0, 0.4} } }
     return res
 end
 

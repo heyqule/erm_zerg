@@ -1,6 +1,29 @@
 ---------------------------------------------------------------------------------------------------
+Version: 1.1.0
+Date: 31. 01. 2021
+
+  Features:
+    - Extra long unit's max range can be config via startup setting
+
+  Changes:
+    - Moved Guardian to tier 3 spawn
+    - Lower spawn rate of extra long range and AOE units
+    - Drone: Lower attack range, lower build time and raise HP.
+    - Drone spawned colonies has lower range and lower HP
+    - Base defence colonies has longer range
+    - Reduced Defiler damage from 50-100 to 40-80
+    - Changed Ultralisk damage from 25-150 to 50-150
+    - Reduced Infested damage from 50-150 to 50-100
+    - Reduced lurker from 25-75 to 25-60
+    - base spore colony now has 30 range.
+    - short range spore colony now has 16 range.
+    - sunker colony now has 20 range
+
+
+---------------------------------------------------------------------------------------------------
 Version: 1.0.0
 Date: 29. 01. 2021
+
   Changes:
     - Ultralisk damage raise to 25-150.
     - Ultralisk max health now has 1.25 multiplier.
@@ -12,13 +35,16 @@ Date: 29. 01. 2021
   Bugfixes:
     - Set Defiler cloud cyclic = true
     - Fix drone attacks
+
 ---------------------------------------------------------------------------------------------------
 Version: 0.2.0
 Date: 03. 01. 2021
+
   Changes:
     - Lower max spawn unit for unit spawners
     - Move nudyspit from turrets to support structure.
     - Raise spawn cooldown for overlord
+
 ---------------------------------------------------------------------------------------------------
 Version: 0.1.0
 Date: 26. 12. 2020

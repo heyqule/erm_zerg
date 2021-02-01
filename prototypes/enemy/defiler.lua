@@ -11,6 +11,7 @@ local Sprites = require('__stdlib__/stdlib/data/modules/sprites')
 local ERM_UnitHelper = require('__enemyracemanager__/lib/unit_helper')
 local ERM_UnitTint = require('__enemyracemanager__/lib/unit_tint')
 local ERM_DebugHelper = require('__enemyracemanager__/lib/debug_helper')
+local ERM_Config = require('__enemyracemanager__/lib/global_config')
 local ZergSound = require('__erm_zerg__/prototypes/sound')
 local ZergProjectileAnimation = require('__erm_zerg__/prototypes/projectile_animation')
 
@@ -39,15 +40,15 @@ local incremental_cold_resistance = 65
 
 -- Handles physical damages
 local damage_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
-local base_acid_damage = 50 / 4 / 2
-local incremental_acid_damage = 50 / 4 / 2
+local base_acid_damage = 40 / 4 / 2
+local incremental_acid_damage = 40 / 4 / 2
 
 -- Handles Attack Speed
 local attack_speed_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
 local base_attack_speed = 600
 local incremental_attack_speed = 180
 
-local attack_range = 20
+local attack_range = ERM_Config.get_max_attack_range(settings)
 
 local movement_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
 local base_movement_speed = 0.125
