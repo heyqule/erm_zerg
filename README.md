@@ -34,11 +34,11 @@ Tier 2 Units
     - Resist: 95
 * Lurker
     - Health 125 * 1.5
-    - AOE range damage 20-75
+    - AOE range damage 20-60
     - Resist: 90
 * Infested
     - Health 60 * 2
-    - AOE range damage 50-150
+    - AOE range damage 50-100
     - Resist: 95
 * Guardian
     - Health 150 * 1.5
@@ -50,7 +50,7 @@ Tier 2 Units
     - slow on hit
     - Resist: 95
 * Drone
-    - Health 40 * 2
+    - Health 40 * 4
     - Kill itself to spawns spore colony or nyduspit
     - Resist: 90
 
@@ -61,11 +61,11 @@ Tier 3 Units
     - Resist: 90
 * Defiler
     - Health 80 * 2
-    - AOE range damage 50-100
+    - AOE range damage 50-80
     - Resist: 90
 * Ultralisk
     - Health 400 * 1.25
-    - AOE melee damage 25-150
+    - AOE melee damage 50-150
     - Resist: 95
 
 Technical Note

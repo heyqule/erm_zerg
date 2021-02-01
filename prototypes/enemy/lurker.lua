@@ -39,7 +39,7 @@ local incremental_cold_resistance = 65
 -- Handles acid damages
 local damage_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
 local base_physical_damage = 20
-local incremental_physical_damage = 55
+local incremental_physical_damage = 40
 
 -- Handles Attack Speed
 local attack_speed_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
@@ -110,7 +110,7 @@ function ErmZerg.make_lurker(level)
                     target_type = "direction",
                     action = {
                         type = "area",
-                        radius = 3,
+                        radius = 2,
                         ignore_collision_condition = true,
                         action_delivery = {
                             type = "instant",

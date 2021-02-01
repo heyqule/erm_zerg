@@ -49,8 +49,8 @@ local addRaceSettings = function()
         next_attack_threshold = 0, -- Used by system to calculate next move
         units = {
             { 'zergling', 'hydralisk', 'mutalisk' },
-            { 'overlord', 'guardian', 'devourer', 'drone' },
-            { 'ultralisk', 'queen', 'defiler' },
+            { 'overlord', 'devourer', 'drone' },
+            { 'guardian','ultralisk', 'queen', 'defiler' },
         },
         current_units_tier = {},
         turrets = {

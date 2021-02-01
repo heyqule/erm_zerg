@@ -37,7 +37,7 @@ local incremental_cold_resistance = 70
 -- Handles explosion damages
 local damage_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
 local base_explosion_damage = 50
-local incremental_explosion_damage = 100
+local incremental_explosion_damage = 50
 
 -- Handles Attack Speed
 local attack_speed_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
@@ -53,7 +53,7 @@ local incremental_movement_speed = 0.055
 -- Misc settings
 local vision_distance = 30
 
-local pollution_to_join_attack = 100
+local pollution_to_join_attack = 500
 local distraction_cooldown = 20
 
 -- Animation Settings

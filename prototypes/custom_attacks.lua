@@ -24,9 +24,9 @@ end
 
 local get_drone_buildable_turrets = function()
     local unit_name = {
-        { 'spore_colony' },
-        { 'spore_colony' },
-        { 'spore_colony', 'nyduspit' },
+        { 'spore_colony_shortrange' },
+        { 'spore_colony_shortrange' },
+        { 'spore_colony_shortrange', 'nyduspit' },
     }
     return get_unit(unit_name)
 end
@@ -67,7 +67,7 @@ function CustomAttacks.process_drone(event)
     local unit_name = MOD_NAME .. '/' .. get_drone_buildable_turrets() .. '/' .. level
 
     if not surface.can_place_entity({ name = unit_name, position = position }) then
-        position = surface.find_non_colliding_position(unit_name, event.source_position, 10, 2, true)
+        position = surface.find_non_colliding_position(unit_name, event.source_position, 5, 2, true)
     end
 
     if position then
