@@ -1,4 +1,16 @@
 ---------------------------------------------------------------------------------------------------
+Version: 1.2.0
+Date: 02. 02. 2021
+
+  Changes:
+    - Changed lurker range to use max range setting
+    - Adjusted flying units vision to 35, ground unit to 30
+    - Add zergling to tier 2 overlord drop
+
+  Bugfixes:
+    - Fixed nyduspit spawn rates
+
+---------------------------------------------------------------------------------------------------
 Version: 1.1.0
 Date: 31. 01. 2021
 
@@ -18,7 +30,6 @@ Date: 31. 01. 2021
     - base spore colony now has 30 range.
     - short range spore colony now has 16 range.
     - sunker colony now has 20 range
-
 
 ---------------------------------------------------------------------------------------------------
 Version: 1.0.0
