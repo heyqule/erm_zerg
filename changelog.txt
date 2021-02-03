@@ -3,12 +3,11 @@ Version: 1.2.0
 Date: 02. 02. 2021
 
   Changes:
-    - Changed lurker range to use max range setting
     - Adjusted flying units vision to 35, ground unit to 30
     - Add zergling to tier 2 overlord drop
-
-  Bugfixes:
-    - Fixed nyduspit spawn rates
+    - Move lurker spawn rate to tier 3
+    - Reduce lurker attack range from max to 12
+    - Change nyduspit spawn rates
 
 ---------------------------------------------------------------------------------------------------
 Version: 1.1.0
