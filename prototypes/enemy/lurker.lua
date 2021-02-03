@@ -47,7 +47,7 @@ local attack_speed_multiplier = settings.startup["enemyracemanager-level-multipl
 local base_attack_speed = 200
 local incremental_attack_speed = 90
 
-local attack_range = ERM_Config.get_max_attack_range(settings)
+local attack_range = 12
 
 local movement_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
 local base_movement_speed = 0.15
