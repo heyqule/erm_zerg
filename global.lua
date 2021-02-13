@@ -15,6 +15,7 @@ DEBUG_MODE = false
 -- Attack Types for on_script_trigger_effect
 OVERLORD_ATTACK = 'overlord_attack'
 DRONE_ATTACK = 'drone_attack'
+INFESTED_ATTACK = 'infested_attack'
 
 
 

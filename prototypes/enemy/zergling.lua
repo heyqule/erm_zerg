@@ -25,8 +25,8 @@ local incremental_acid_resistance = 70
 local base_physical_resistance = 0
 local incremental_physical_resistance = 95
 -- Handles fire and explosive resistance
-local base_fire_resistance = 10
-local incremental_fire_resistance = 85
+local base_fire_resistance = 15
+local incremental_fire_resistance = 80
 -- Handles laser and electric resistance
 local base_electric_resistance = 0
 local incremental_electric_resistance = 95
@@ -75,7 +75,7 @@ function ErmZerg.make_zergling(level)
             flags = { "placeable-enemy", "placeable-player", "placeable-off-grid", "breaths-air" },
             has_belt_immunity = false,
             max_health = ERM_UnitHelper.get_health(hitpoint, hitpoint * max_hitpoint_multiplier, health_multiplier, level),
-            order = "erm-" .. name .. '/' .. level,
+            order = MOD_NAME .. '/'  .. name .. '/' .. level,
             subgroup = "enemies",
             shooting_cursor_size = 2,
             resistances = {
@@ -175,7 +175,7 @@ function ErmZerg.make_zergling(level)
             selection_box = selection_box,
             selectable_in_game = false,
             dying_speed = 0.04,
-            time_before_removed = defines.time.minute * settings.startup["enemyracemanager-enemy-corpse-time"].value,
+
             subgroup = "corpses",
             order = "x" .. name .. level,
             final_render_layer = "lower-object-above-shadow",

@@ -24,10 +24,10 @@ local base_acid_resistance = 25
 local incremental_acid_resistance = 55
 -- Handles physical resistance
 local base_physical_resistance = 0
-local incremental_physical_resistance = 80
+local incremental_physical_resistance = 85
 -- Handles fire and explosive resistance
 local base_fire_resistance = 0
-local incremental_fire_resistance = 80
+local incremental_fire_resistance = 90
 -- Handles laser and electric resistance
 local base_electric_resistance = 0
 local incremental_electric_resistance = 80
@@ -71,10 +71,10 @@ function ErmZerg.make_defiler_mound(level)
             icon_size = 64,
             flags = { "placeable-player", "placeable-enemy" },
             max_health = ERM_UnitHelper.get_health(hitpoint, hitpoint * max_hitpoint_multiplier, health_multiplier, level),
-            order = MOD_NAME .. "-z-hydra",
+            order = MOD_NAME .. '/' .. name,
             subgroup = "enemies",
-            working_sound = ZergSound.building_working_sound(name, 1),
-            dying_sound = ZergSound.building_dying_sound(1),
+            working_sound = ZergSound.building_working_sound(name, 0.75),
+            dying_sound = ZergSound.building_dying_sound(0.75),
             resistances = {
                 { type = "acid", percent = ERM_UnitHelper.get_resistance(base_acid_resistance, incremental_acid_resistance, resistance_mutiplier, level) },
                 { type = "poison", percent = ERM_UnitHelper.get_resistance(base_acid_resistance, incremental_acid_resistance, resistance_mutiplier, level) },
@@ -85,7 +85,7 @@ function ErmZerg.make_defiler_mound(level)
                 { type = "electric", percent = ERM_UnitHelper.get_resistance(base_electric_resistance, incremental_electric_resistance, resistance_mutiplier, level) },
                 { type = "cold", percent = ERM_UnitHelper.get_resistance(base_cold_resistance, incremental_cold_resistance, resistance_mutiplier, level) }
             },
-            healing_per_tick = ERM_UnitHelper.get_healing(hitpoint, max_hitpoint_multiplier, health_multiplier, level),
+            healing_per_tick = ERM_UnitHelper.get_building_healing(hitpoint, max_hitpoint_multiplier, health_multiplier, level),
             collision_box = collision_box,
             map_generator_bounding_box = map_generator_bounding_box,
             selection_box = selection_box,

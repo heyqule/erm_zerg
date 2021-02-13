@@ -1,14 +1,35 @@
 ---------------------------------------------------------------------------------------------------
+Version: 1.3.0
+Date: 02. 13. 2021
+
+  Changes:
+    - Infested damage changed from 50-100 to 30-100
+    - zerging and hydralisk have more chances to drop from overlord
+    - Add zergling and ultralisk to tier 3 overlord drop
+    - Infested terran now spawns from hive and nyduspit as tier 3 unit.
+    - Tweak spawn rates, reduced amount of flying units in early game.
+    - All unit physical resistance max out at 95
+    - Melee range unit elemental resistance max out at 95
+    - Range unit elemental resistance max out at 90
+    - Building fire/explosion resist bump to 90, physical resist to 85
+    - Tweaked spawn rate
+
+  Bugfixes:
+    - Fix existing enemies are wiped when the level difficulty setting changed from higher to lower for an existing save.
+    - Fix overlord selection box
+    - Fix infested not self-destruct on attacking certain units.
+
+---------------------------------------------------------------------------------------------------
 Version: 1.2.0
 Date: 02. 02. 2021
 
   Changes:
+    - Changed lurker range to use max range setting
     - Adjusted flying units vision to 35, ground unit to 30
     - Add zergling to tier 2 overlord drop
     - Move lurker spawn rate to tier 3
     - Reduce lurker attack range from max to 12
     - Change nyduspit spawn rates
-    - lower devourer range from 12 to 9
 
 ---------------------------------------------------------------------------------------------------
 Version: 1.1.0

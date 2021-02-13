@@ -68,12 +68,13 @@ data:extend({
         subgroup = 'explosions',
         flags = { "not-on-map", "hidden" },
         order = "zerg-explosions",
+        render_layer = "explosion",
         animations = {
             filename = "__erm_zerg__/graphics/entity/buildings/death/zerg_building_blood.png",
             width = 200,
             height = 200,
             frame_count = 12,
-            animation_speed = 0.18,
+            animation_speed = 0.25,
             direction_count = 1,
             scale = 2
         }

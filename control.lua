@@ -19,15 +19,15 @@ require('__erm_zerg__/global')
 -- Constants
 
 
-local createZergRace = function()
-    local zerg_force = game.forces[FORCE_NAME]
-    if not zerg_force then
-        zerg_force = game.create_force(FORCE_NAME)
+local createRace = function()
+    local force = game.forces[FORCE_NAME]
+    if not force then
+        force = game.create_force(FORCE_NAME)
     end
 
-    zerg_force.ai_controllable = true;
-    zerg_force.disable_research()
-    zerg_force.friendly_fire = false;
+    force.ai_controllable = true;
+    force.disable_research()
+    force.friendly_fire = false;
 
     ForceHelper.set_friends(game, FORCE_NAME)
 end
@@ -43,7 +43,7 @@ local addRaceSettings = function()
         tier = 1, -- Race tier
         evolution_point = 0,
         evolution_base_point = 0,
-        angry_meter = 0, -- Build by killing their force (unit = 1, building = 10)
+        angry_meter = 0, -- Build by killing their force (Spawner = 20, turrets = 10)
         send_attack_threshold = 2000, -- When threshold reach, sends attack to the base
         send_attack_threshold_deviation = 0.2,
         next_attack_threshold = 0, -- Used by system to calculate next move
@@ -82,7 +82,7 @@ local addRaceSettings = function()
 end
 
 Event.on_init(function(event)
-    createZergRace()
+    createRace()
     addRaceSettings()
 end)
 
@@ -90,7 +90,7 @@ Event.on_load(function(event)
 end)
 
 Event.on_configuration_changed(function(event)
-    createZergRace()
+    createRace()
 end)
 
 Event.register(defines.events.on_script_trigger_effect, function(event)
@@ -102,6 +102,8 @@ Event.register(defines.events.on_script_trigger_effect, function(event)
         CustomAttacks.process_overlord(event)
     elseif event.effect_id == DRONE_ATTACK then
         CustomAttacks.process_drone(event)
+    elseif event.effect_id == INFESTED_ATTACK then
+        CustomAttacks.process_infested(event)
     end
 end)
 

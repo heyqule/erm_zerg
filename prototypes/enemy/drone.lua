@@ -23,7 +23,7 @@ local base_acid_resistance = 25
 local incremental_acid_resistance = 65
 -- Handles physical resistance
 local base_physical_resistance = 0
-local incremental_physical_resistance = 90
+local incremental_physical_resistance = 95
 -- Handles fire and explosive resistance
 local base_fire_resistance = 10
 local incremental_fire_resistance = 80
@@ -75,7 +75,7 @@ function ErmZerg.make_drone(level)
             flags = { "placeable-enemy", "placeable-player", "placeable-off-grid", "breaths-air" },
             has_belt_immunity = false,
             max_health = ERM_UnitHelper.get_health(hitpoint, hitpoint * max_hitpoint_multiplier, health_multiplier, level),
-            order = "erm-" .. name .. '/' .. level,
+            order = MOD_NAME .. '/'  .. name .. '/' .. level,
             subgroup = "enemies",
             shooting_cursor_size = 2,
             resistances = {
@@ -110,6 +110,7 @@ function ErmZerg.make_drone(level)
                         type = "direct",
                         action_delivery = {
                             type = 'instant',
+                            -- See
                             source_effects = {
                                 {
                                     type = "script",

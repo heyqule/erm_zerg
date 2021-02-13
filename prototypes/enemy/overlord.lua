@@ -21,19 +21,19 @@ local max_hitpoint_multiplier = settings.startup["enemyracemanager-max-hitpoint-
 
 local resistance_mutiplier = settings.startup["enemyracemanager-level-multipliers"].value
 -- Handles acid and poison resistance
-local base_acid_resistance = 25
+local base_acid_resistance = 20
 local incremental_acid_resistance = 70
 -- Handles physical resistance
 local base_physical_resistance = 0
 local incremental_physical_resistance = 95
 -- Handles fire and explosive resistance
-local base_fire_resistance = 15
-local incremental_fire_resistance = 75
+local base_fire_resistance = 10
+local incremental_fire_resistance = 80
 -- Handles laser and electric resistance
 local base_electric_resistance = 0
-local incremental_electric_resistance = 95
+local incremental_electric_resistance = 90
 -- Handles cold resistance
-local base_cold_resistance = 25
+local base_cold_resistance = 20
 local incremental_cold_resistance = 70
 
 -- Handles damages
@@ -60,7 +60,7 @@ local distraction_cooldown = 20
 -- Animation Settings
 local unit_scale = 1.5
 local collision_box = { { -0.25, -0.25 }, { 0.25, 0.25 } }
-local selection_box = { { -0.75, -1.25 }, { 0.75, 1.25 } }
+local selection_box = { { -1, -2 }, { 1, 2 } }
 
 function ErmZerg.make_overlord(level)
     level = level or 1
@@ -75,7 +75,7 @@ function ErmZerg.make_overlord(level)
             flags = { "placeable-enemy", "placeable-player", "placeable-off-grid", "breaths-air" },
             has_belt_immunity = true,
             max_health = ERM_UnitHelper.get_health(hitpoint, hitpoint * max_hitpoint_multiplier, health_multiplier, level),
-            order = "erm-" .. name .. '/' .. level,
+            order = MOD_NAME .. '/'  .. name .. '/' .. level,
             subgroup = "enemies",
             shooting_cursor_size = 2,
             resistances = {
