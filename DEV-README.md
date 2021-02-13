@@ -21,7 +21,14 @@ Point of interests:
     * [__enemyracemanager__/lib/remote_api.lua](https://github.com/heyqule/enemy_race_manager/blob/main/lib/remote_api.lua)
 * Event.register(defines.events.on_script_trigger_effect, function(event) end
     * handles custom attacks
- 
+
+#####Unit/Building Name Convention
+```lua
+name = MOD_NAME .. '/' .. name .. '/' .. level,
+localised_name = { 'entity-name.' .. MOD_NAME .. '/' .. name, level },
+```
+* MOD_NAME is defined in global.lua
+* name is the unit name
  
 #####Units:
 Many of the units have unique abilities, please refer to the lua files for reference
