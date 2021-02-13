@@ -24,10 +24,10 @@ local base_acid_resistance = 25
 local incremental_acid_resistance = 55
 -- Handles physical resistance
 local base_physical_resistance = 0
-local incremental_physical_resistance = 80
+local incremental_physical_resistance = 85
 -- Handles fire and explosive resistance
 local base_fire_resistance = 0
-local incremental_fire_resistance = 80
+local incremental_fire_resistance = 90
 -- Handles laser and electric resistance
 local base_electric_resistance = 0
 local incremental_electric_resistance = 80
@@ -98,7 +98,7 @@ function ErmZerg.make_sunker_colony(level)
             icon_size = 64,
             flags = { "placeable-player", "placeable-enemy", "placeable-off-grid", "breaths-air" },
             max_health = ERM_UnitHelper.get_health(hitpoint, hitpoint * max_hitpoint_multiplier, health_multiplier, level),
-            order = "b-c-c",
+            order = MOD_NAME .. '/' .. name,
             subgroup = "enemies",
             resistances = {
                 { type = "acid", percent = ERM_UnitHelper.get_resistance(base_acid_resistance, incremental_acid_resistance, resistance_mutiplier, level) },
@@ -110,7 +110,7 @@ function ErmZerg.make_sunker_colony(level)
                 { type = "electric", percent = ERM_UnitHelper.get_resistance(base_electric_resistance, incremental_electric_resistance, resistance_mutiplier, level) },
                 { type = "cold", percent = ERM_UnitHelper.get_resistance(base_cold_resistance, incremental_cold_resistance, resistance_mutiplier, level) }
             },
-            healing_per_tick = ERM_UnitHelper.get_healing(hitpoint, max_hitpoint_multiplier, health_multiplier, level),
+            healing_per_tick = ERM_UnitHelper.get_building_healing(hitpoint, max_hitpoint_multiplier, health_multiplier, level),
             collision_box = collision_box,
             map_generator_bounding_box = map_generator_bounding_box,
             selection_box = selection_box,
@@ -118,7 +118,7 @@ function ErmZerg.make_sunker_colony(level)
             rotation_speed = 1,
             corpse = "zerg-small-base-corpse",
             dying_explosion = "zerg-building-explosion",
-            dying_sound = ZergSound.building_dying_sound(1),
+            dying_sound = ZergSound.building_dying_sound(0.75),
             call_for_help_radius = 50,
             folded_speed = 0.01,
             folded_speed_secondary = 0.01,
@@ -126,7 +126,7 @@ function ErmZerg.make_sunker_colony(level)
             working_sound = ZergSound.sunker_idle(0.75),
             starting_attack_animation = attack_animation(),
             starting_attack_speed = 0.02,
-            starting_attack_sound = ZergSound.sunker_attack(1),
+            starting_attack_sound = ZergSound.sunker_attack(0.75),
             integration = {
                 layers = {
                     {
@@ -177,7 +177,7 @@ function ErmZerg.make_sunker_colony(level)
                                 },
                                 {
                                     type = "play-sound",
-                                    sound = ZergSound.sunker_hit(0.8),
+                                    sound = ZergSound.sunker_hit(0.75),
                                 },
                                 {
                                     type = "damage",

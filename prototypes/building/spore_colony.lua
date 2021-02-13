@@ -26,10 +26,10 @@ local base_acid_resistance = 25
 local incremental_acid_resistance = 55
 -- Handles physical resistance
 local base_physical_resistance = 0
-local incremental_physical_resistance = 80
+local incremental_physical_resistance = 85
 -- Handles fire and explosive resistance
 local base_fire_resistance = 0
-local incremental_fire_resistance = 80
+local incremental_fire_resistance = 90
 -- Handles laser and electric resistance
 local base_electric_resistance = 0
 local incremental_electric_resistance = 80
@@ -52,7 +52,7 @@ local base_attack_speed = 180
 local incremental_attack_speed = 120
 
 local attack_range = 30
-local attack_shortrange = 16
+local attack_shortrange = ERM_Config.get_max_attack_range(settings)
 
 -- Animation Settings
 local unit_scale = 1.5
@@ -85,7 +85,7 @@ function ErmZerg.make_spore_colony(level)
             icon_size = 64,
             flags = { "placeable-player", "placeable-enemy", "placeable-off-grid", "breaths-air" },
             max_health = ERM_UnitHelper.get_health(hitpoint, hitpoint * max_hitpoint_multiplier, health_multiplier, level),
-            order = "b-c-c",
+            order = MOD_NAME .. '/' .. name,
             subgroup = "enemies",
             resistances = {
                 { type = "acid", percent = ERM_UnitHelper.get_resistance(base_acid_resistance, incremental_acid_resistance, resistance_mutiplier, level) },
@@ -97,7 +97,7 @@ function ErmZerg.make_spore_colony(level)
                 { type = "electric", percent = ERM_UnitHelper.get_resistance(base_electric_resistance, incremental_electric_resistance, resistance_mutiplier, level) },
                 { type = "cold", percent = ERM_UnitHelper.get_resistance(base_cold_resistance, incremental_cold_resistance, resistance_mutiplier, level) }
             },
-            healing_per_tick = ERM_UnitHelper.get_healing(hitpoint, max_hitpoint_multiplier, health_multiplier, level),
+            healing_per_tick = ERM_UnitHelper.get_building_healing(hitpoint, max_hitpoint_multiplier, health_multiplier, level),
             collision_box = collision_box,
             map_generator_bounding_box = map_generator_bounding_box,
             selection_box = selection_box,
@@ -105,12 +105,12 @@ function ErmZerg.make_spore_colony(level)
             rotation_speed = 1,
             corpse = "zerg-small-base-corpse",
             dying_explosion = "zerg-building-explosion",
-            dying_sound = ZergSound.building_dying_sound(1),
+            dying_sound = ZergSound.building_dying_sound(0.75),
             call_for_help_radius = 50,
             folded_speed = 0.01,
             folded_speed_secondary = 0.024,
             folded_animation = folded_animation(),
-            working_sound = ZergSound.spore_idle(1),
+            working_sound = ZergSound.spore_idle(0.75),
             integration = {
                 layers = {
                     {
@@ -135,7 +135,7 @@ function ErmZerg.make_spore_colony(level)
                     },
                 }
             },
-            --autoplace = enemy_autoplace.enemy_worm_autoplace(0, FORCE_NAME),
+            autoplace = enemy_autoplace.enemy_worm_autoplace(0, FORCE_NAME),
             attack_from_start_frame = true,
             prepare_range = attack_range,
             allow_turning_when_starting_attack = true,
@@ -149,7 +149,7 @@ function ErmZerg.make_spore_colony(level)
                 warmup = 12,
                 use_shooter_direction = true,
                 lead_target_for_projectile_speed = 0.2 * 0.75 * 1.5 * 1.5,
-                sound = ZergSound.sunker_attack(1),
+                sound = ZergSound.sunker_attack(0.75),
                 ammo_type = {
                     category = "biological",
                     action = {
@@ -183,7 +183,7 @@ function ErmZerg.make_spore_colony(level)
                 { type = "electric", percent = ERM_UnitHelper.get_resistance(base_electric_resistance, incremental_electric_resistance, resistance_mutiplier, level) },
                 { type = "cold", percent = ERM_UnitHelper.get_resistance(base_cold_resistance, incremental_cold_resistance, resistance_mutiplier, level) }
             },
-            healing_per_tick = ERM_UnitHelper.get_healing(hitpoint, max_hitpoint_multiplier, health_multiplier, level),
+            healing_per_tick = ERM_UnitHelper.get_building_healing(hitpoint, max_hitpoint_multiplier, health_multiplier, level) / 2,
             collision_box = collision_box,
             map_generator_bounding_box = map_generator_bounding_box,
             selection_box = selection_box,
@@ -191,12 +191,12 @@ function ErmZerg.make_spore_colony(level)
             rotation_speed = 1,
             corpse = "zerg-small-base-corpse",
             dying_explosion = "zerg-building-explosion",
-            dying_sound = ZergSound.building_dying_sound(1),
+            dying_sound = ZergSound.building_dying_sound(0.75),
             call_for_help_radius = 50,
             folded_speed = 0.01,
             folded_speed_secondary = 0.024,
             folded_animation = folded_animation(),
-            working_sound = ZergSound.spore_idle(1),
+            working_sound = ZergSound.spore_idle(0.75),
             integration = {
                 layers = {
                     {
@@ -221,7 +221,7 @@ function ErmZerg.make_spore_colony(level)
                     },
                 }
             },
-            autoplace = enemy_autoplace.enemy_worm_autoplace(0, FORCE_NAME),
+            --autoplace = enemy_autoplace.enemy_worm_autoplace(0, FORCE_NAME),
             attack_from_start_frame = true,
             prepare_range = attack_range,
             allow_turning_when_starting_attack = true,
@@ -235,7 +235,7 @@ function ErmZerg.make_spore_colony(level)
                 warmup = 12,
                 use_shooter_direction = true,
                 lead_target_for_projectile_speed = 0.2 * 0.75 * 1.5 * 1.5,
-                sound = ZergSound.sunker_attack(1),
+                sound = ZergSound.sunker_attack(0.75),
                 ammo_type = {
                     category = "biological",
                     action = {

@@ -24,10 +24,10 @@ local base_acid_resistance = 25
 local incremental_acid_resistance = 55
 -- Handles physical resistance
 local base_physical_resistance = 0
-local incremental_physical_resistance = 80
+local incremental_physical_resistance = 85
 -- Handles fire and explosive resistance
 local base_fire_resistance = 0
-local incremental_fire_resistance = 80
+local incremental_fire_resistance = 90
 -- Handles laser and electric resistance
 local base_electric_resistance = 0
 local incremental_electric_resistance = 80
@@ -39,20 +39,20 @@ local incremental_cold_resistance = 65
 local unit_scale = 2
 
 local pollution_absorption_absolute = 20
-local spawning_cooldown = { 1800, 900 }
+local spawning_cooldown = { 1200, 900 }
 local spawning_radius = 10
 local max_count_of_owned_units = 3
 local max_friends_around_to_spawn = 2
 local spawn_table = function(level)
     local res = {}
-    res[1] = { MOD_NAME .. '/zergling/' .. level, { { 0.0, 0.5 }, { 0.2, 0.4 }, { 0.4, 0.3 }, { 0.6, 0.3 }, { 0.8, 0.3 }, { 1.0, 0.0 }  } }
-    res[2] = { MOD_NAME .. '/hydralisk/' .. level, { { 0.0, 0.4 }, { 0.2, 0.4 }, { 0.4, 0.4 }, { 0.6, 0.3 }, { 0.8, 0.2 }, { 1.0, 0.0 } } }
-    res[3] = { MOD_NAME .. '/lurker/' .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.0 }, { 0.8, 0.0 }, { 1.0, 0.1 } } }
-    res[4] = { MOD_NAME .. '/mutalisk/' .. level, { { 0.0, 0.1 }, { 0.2, 0.2 }, { 0.4, 0.3 }, { 0.6, 0.3 }, { 0.8, 0.25 }, { 1.0, 0.1 } } }
+    res[1] = { MOD_NAME .. '/zergling/' .. level, { { 0.0, 0.7 }, { 0.2, 0.7 }, { 0.4, 0.6 }, { 0.6, 0.3 }, { 0.8, 0.3 }, { 1.0, 0.0 }  } }
+    res[2] = { MOD_NAME .. '/hydralisk/' .. level, { { 0.0, 0.2 }, { 0.2, 0.2 }, { 0.4, 0.3 }, { 0.6, 0.3 }, { 0.8, 0.2 }, { 1.0, 0.0 } } }
+    res[3] = { MOD_NAME .. '/mutalisk/' .. level, { { 0.0, 0.1 }, { 0.2, 0.1 }, { 0.4, 0.1 }, { 0.6, 0.3 }, { 0.8, 0.25 }, { 1.0, 0.1 } } }
+    res[4] = { MOD_NAME .. '/lurker/' .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.0 }, { 0.8, 0.0 }, { 1.0, 0.0 } } }
     res[5] = { MOD_NAME .. '/guardian/' .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.0 }, { 0.8, 0.0 }, { 1.0, 0.1 } } }
     res[6] = { MOD_NAME .. '/devourer/' .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.0 }, { 0.8, 0.1 }, { 1.0, 0.1 } } }
     res[7] = { MOD_NAME .. '/overlord/' .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.1 }, { 0.8, 0.1 }, { 1.0, 0.1 } } }
-    res[8] = { MOD_NAME .. '/queen/' .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.0 }, { 0.8, 0 }, { 1.8, 0.5 } } }
+    res[8] = { MOD_NAME .. '/queen/' .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.0 }, { 0.8, 0 }, { 1.8, 0.6 } } }
     return res
 end
 
@@ -72,10 +72,10 @@ function ErmZerg.make_queen_nest(level)
             icon_size = 64,
             flags = { "placeable-player", "placeable-enemy" },
             max_health = ERM_UnitHelper.get_health(hitpoint, hitpoint * max_hitpoint_multiplier, health_multiplier, level),
-            order = MOD_NAME .. "-z-hydra",
+            order = MOD_NAME .. '/' .. name,
             subgroup = "enemies",
-            working_sound = ZergSound.building_working_sound(name, 1),
-            dying_sound = ZergSound.building_dying_sound(1),
+            working_sound = ZergSound.building_working_sound(name, 0.75),
+            dying_sound = ZergSound.building_dying_sound(0.75),
             resistances = {
                 { type = "acid", percent = ERM_UnitHelper.get_resistance(base_acid_resistance, incremental_acid_resistance, resistance_mutiplier, level) },
                 { type = "poison", percent = ERM_UnitHelper.get_resistance(base_acid_resistance, incremental_acid_resistance, resistance_mutiplier, level) },
@@ -86,7 +86,7 @@ function ErmZerg.make_queen_nest(level)
                 { type = "electric", percent = ERM_UnitHelper.get_resistance(base_electric_resistance, incremental_electric_resistance, resistance_mutiplier, level) },
                 { type = "cold", percent = ERM_UnitHelper.get_resistance(base_cold_resistance, incremental_cold_resistance, resistance_mutiplier, level) }
             },
-            healing_per_tick = ERM_UnitHelper.get_healing(hitpoint, max_hitpoint_multiplier, health_multiplier, level),
+            healing_per_tick = ERM_UnitHelper.get_building_healing(hitpoint, max_hitpoint_multiplier, health_multiplier, level),
             collision_box = collision_box,
             map_generator_bounding_box = map_generator_bounding_box,
             selection_box = selection_box,

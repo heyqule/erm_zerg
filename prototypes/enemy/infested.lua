@@ -19,8 +19,8 @@ local max_hitpoint_multiplier = settings.startup["enemyracemanager-max-hitpoint-
 
 local resistance_mutiplier = settings.startup["enemyracemanager-level-multipliers"].value
 -- Handles acid and poison resistance
-local base_acid_resistance = 25
-local incremental_acid_resistance = 70
+local base_acid_resistance = 20
+local incremental_acid_resistance = 75
 -- Handles physical resistance
 local base_physical_resistance = 0
 local incremental_physical_resistance = 95
@@ -31,18 +31,18 @@ local incremental_fire_resistance = 85
 local base_electric_resistance = 0
 local incremental_electric_resistance = 95
 -- Handles cold resistance
-local base_cold_resistance = 25
-local incremental_cold_resistance = 70
+local base_cold_resistance = 20
+local incremental_cold_resistance = 75
 
 -- Handles explosion damages
 local damage_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
-local base_explosion_damage = 50
-local incremental_explosion_damage = 50
+local base_explosion_damage = 30
+local incremental_explosion_damage = 70
 
 -- Handles Attack Speed
 local attack_speed_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
-local base_attack_speed = 45
-local incremental_attack_speed = 30
+local base_attack_speed = 600
+local incremental_attack_speed = 0
 
 local attack_range = 1
 
@@ -74,7 +74,7 @@ function ErmZerg.make_infested(level)
             flags = { "placeable-enemy", "placeable-player", "placeable-off-grid", "breaths-air" },
             has_belt_immunity = false,
             max_health = ERM_UnitHelper.get_health(hitpoint, hitpoint * max_hitpoint_multiplier, health_multiplier, level),
-            order = "erm-" .. name .. '/' .. level,
+            order = MOD_NAME .. '/'  .. name .. '/' .. level,
             subgroup = "enemies",
             shooting_cursor_size = 2,
             resistances = {
@@ -107,16 +107,15 @@ function ErmZerg.make_infested(level)
                     category = "biological",
                     target_type = "direction",
                     action = {
-                        type = "area",
-                        radius = 3,
-                        ignore_collision_condition = true,
+                        type = "direct",
                         action_delivery = {
                             type = "instant",
-                            source_effects = {
+                            source_effects =
+                            {
                                 {
-                                    type = "damage",
-                                    damage = { amount = 1000000, type = 'self' }
-                                },
+                                    type = "script",
+                                    effect_id = INFESTED_ATTACK,
+                                }
                             },
                             target_effects = {
                                 {
@@ -124,9 +123,22 @@ function ErmZerg.make_infested(level)
                                     entity_name = 'medium-explosion'
                                 },
                                 {
-                                    type = "damage",
-                                    damage = { amount = ERM_UnitHelper.get_damage(base_explosion_damage, incremental_explosion_damage, damage_multiplier, level), type = "explosion" },
-                                    apply_damage_to_trees = true
+                                    type = "nested-result",
+                                    action = {
+                                        type = "area",
+                                        radius = 3,
+                                        ignore_collision_condition = true,
+                                        action_delivery = {
+                                            type = "instant",
+                                            target_effects = {
+                                                {
+                                                    type = "damage",
+                                                    damage = { amount = ERM_UnitHelper.get_damage(base_explosion_damage, incremental_explosion_damage, damage_multiplier, level), type = "explosion" },
+                                                    apply_damage_to_trees = true
+                                                },
+                                            }
+                                        }
+                                    }
                                 },
                             }
                         }
@@ -191,7 +203,7 @@ function ErmZerg.make_infested(level)
                 }
             },
             dying_explosion = "blood-explosion-small",
-            dying_sound = ZergSound.infested_death(1),
+            dying_sound = ZergSound.infested_death(0.75),
             corpse = name .. '-corpse'
         },
         {

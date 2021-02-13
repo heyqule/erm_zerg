@@ -6,7 +6,7 @@ This mod is created as an example race for [Enemy Race Manager](https://github.c
 All graphic and sound assets in this mod are properties of Blizzard Entertainment Inc
 
 # Requirement
-* Enemy Race Manager >= 0.3
+* Enemy Race Manager >= 0.4
 * Factorio Standard Library >= 1.4.6
 * Factorio Base >= 1.1
 
@@ -38,7 +38,7 @@ Tier 2 Units
     - Resist: 90
 * Infested
     - Health 60 * 2
-    - AOE range damage 50-100
+    - AOE range damage 30-100
     - Resist: 95
 * Guardian
     - Health 150 * 1.5

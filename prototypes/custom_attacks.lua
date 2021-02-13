@@ -16,8 +16,8 @@ end
 local get_overlord_droppable_unit = function()
     local unit_name = {
         { 'zergling', 'hydralisk' },
-        { 'zergling', 'hydralisk', 'lurker' },
-        { 'hydralisk', 'lurker', 'infested' },
+        { 'zergling', 'zergling', 'hydralisk', 'hydralisk', 'lurker' },
+        { 'zergling', 'zergling', 'hydralisk', 'hydralisk', 'lurker', 'infested', 'ultralisk' },
     }
     return get_unit(unit_name)
 end
@@ -72,8 +72,12 @@ function CustomAttacks.process_drone(event)
 
     if position then
         surface.create_entity({ name = unit_name, position = position, force = event.source_entity.force })
-        event.source_entity.damage(1000000, 'neutral', 'self')
+        event.source_entity.damage(100000, 'neutral', 'self')
     end
+end
+
+function CustomAttacks.process_infested(event)
+    event.source_entity.damage(100000, 'neutral', 'self')
 end
 
 return CustomAttacks
