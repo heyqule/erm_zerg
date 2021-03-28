@@ -69,7 +69,7 @@ function ErmZerg.make_defiler_mound(level)
             localised_name = { 'entity-name.' .. MOD_NAME .. '/' .. name, level },
             icon = "__erm_zerg__/graphics/entity/icons/buildings/advisor.png",
             icon_size = 64,
-            flags = { "placeable-player", "placeable-enemy" },
+            flags = { "placeable-player", "placeable-enemy", "breaths-air" },
             max_health = ERM_UnitHelper.get_health(hitpoint, hitpoint * max_hitpoint_multiplier, health_multiplier, level),
             order = MOD_NAME .. '/' .. name,
             subgroup = "enemies",

@@ -52,7 +52,7 @@ local base_attack_speed = 180
 local incremental_attack_speed = 120
 
 local attack_range = 30
-local attack_shortrange = ERM_Config.get_max_attack_range(settings)
+local attack_shortrange = ERM_Config.get_max_attack_range()
 
 -- Animation Settings
 local unit_scale = 1.5
