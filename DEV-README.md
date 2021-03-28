@@ -2,25 +2,29 @@
 --------------------
 This readme should be able give you a quick start to creating you new race.
 
+##### global.lua
+
+defines mod constants. Please see that file for additional requirements.
+
 ##### setting-update.lua
 add your race to setting's dropdowns
 
 ##### data.lua
 Use this file to add unit/spawner to the game
 
-#### control.lua
+##### control.lua
 Use this file to hook up the race data and control any custom attack.
 
 Point of interests:
 
 * the race specific file includes
-  * change / remove them
+    * change / remove them
 * addRaceSettings()
-  * change the unit and spawner tiers
-  * angry meter (Use as a future feature)
-  * [__enemyracemanager__/lib/remote_api.lua](https://github.com/heyqule/enemy_race_manager/blob/main/lib/remote_api.lua)
+    * change the unit and spawner tiers
+    * angry meter (Use as a future feature)
+    * [__enemyracemanager__/lib/remote_api.lua](https://github.com/heyqule/enemy_race_manager/blob/main/lib/remote_api.lua)
 * Event.register(defines.events.on_script_trigger_effect, function(event) end
-  * handles custom attacks
+    * handles custom attacks
 
 #####Units:
 Many of the units have unique abilities, please refer to the lua files for reference
@@ -32,9 +36,9 @@ Many of the units have unique abilities, please refer to the lua files for refer
 * Max range attack: [Guardian](https://github.com/heyqule/erm_zerg/blob/main/prototypes/enemy/guardian.lua)
 * Slow attack: [Devourer](https://github.com/heyqule/erm_zerg/blob/main/prototypes/enemy/devourer.lua)
 * AOE healing: [Queen](https://github.com/heyqule/erm_zerg/blob/main/prototypes/enemy/queen.lua)
-* Range AOE:
-  * [Defiler](https://github.com/heyqule/erm_zerg/blob/main/prototypes/enemy/defiler.lua)
-  * [Lurker](https://github.com/heyqule/erm_zerg/blob/main/prototypes/enemy/lurker.lua)
+* Range AOE: 
+    * [Defiler](https://github.com/heyqule/erm_zerg/blob/main/prototypes/enemy/defiler.lua)
+    * [Lurker](https://github.com/heyqule/erm_zerg/blob/main/prototypes/enemy/lurker.lua)
 
 These units' attacks are handled via on_script_trigger_effect events
 * Self destruction unit: [Infested](https://github.com/heyqule/erm_zerg/blob/main/prototypes/enemy/infested.lua)
@@ -60,11 +64,11 @@ localised_name = { 'entity-name.' .. MOD_NAME .. '/' .. name, level },
 ```
 * MOD_NAME is defined in global.lua
 * name is the unit name
-
+   
 #####Unit Spawners:
 Please see [prototype/building/hive.lua](https://github.com/heyqule/erm_zerg/blob/main/prototypes/building/hive.lua) for details.
 
 ##### Turrets:
 It feels more balance to have both splitter acid and direct attack for base defense.
-* Spitter Acid attack: [prototype/building/spore_colony.lua](https://github.com/heyqule/erm_zerg/blob/main/prototypes/building/spore_colony.lua)
+* Spitter Acid attack: [prototype/building/spore_colony.lua](https://github.com/heyqule/erm_zerg/blob/main/prototypes/building/spore_colony.lua) 
 * Direct Attack: [prototype/building/sunker_colony.lua](https://github.com/heyqule/erm_zerg/blob/main/prototypes/building/sunker_colony.lua)
