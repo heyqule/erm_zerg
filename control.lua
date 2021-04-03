@@ -8,7 +8,7 @@
 
 local Game = require('__stdlib__/stdlib/game')
 
-ErmConfig = require('__enemyracemanager__/lib/global_config')
+local ErmConfig = require('__enemyracemanager__/lib/global_config')
 local ForceHelper = require('__enemyracemanager__/lib/helper/force_helper')
 
 local Event = require('__stdlib__/stdlib/event/event')
@@ -91,6 +91,10 @@ end)
 
 Event.on_configuration_changed(function(event)
     createRace()
+
+    -- Mod Compatibility Upgrade for race settings
+    Event.dispatch({
+        name = Event.get_event_name(ErmConfig.RACE_SETTING_UPDATE), affected_race = MOD_NAME })
 end)
 
 Event.register(defines.events.on_script_trigger_effect, function(event)

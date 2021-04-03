@@ -5,7 +5,9 @@
 ---
 
 -- Globals within the mod
+-- Must be same as the name in info.json and it must be start with erm_ prefix.
 MOD_NAME = 'erm_zerg'
+-- Must be prefix with "enemy_"
 FORCE_NAME = 'enemy_erm_zerg'
 MOD_VERSION = 100
 

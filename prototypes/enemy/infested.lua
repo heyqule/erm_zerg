@@ -29,10 +29,10 @@ local base_fire_resistance = 10
 local incremental_fire_resistance = 85
 -- Handles laser and electric resistance
 local base_electric_resistance = 0
-local incremental_electric_resistance = 95
+local incremental_electric_resistance = 90
 -- Handles cold resistance
-local base_cold_resistance = 20
-local incremental_cold_resistance = 75
+local base_cold_resistance = 0
+local incremental_cold_resistance = 90
 
 -- Handles explosion damages
 local damage_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
@@ -53,7 +53,7 @@ local incremental_movement_speed = 0.055
 -- Misc settings
 local vision_distance = 30
 
-local pollution_to_join_attack = 500
+local pollution_to_join_attack = 250
 local distraction_cooldown = 20
 
 -- Animation Settings
