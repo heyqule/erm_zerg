@@ -26,23 +26,23 @@ local incremental_acid_resistance = 55
 local base_physical_resistance = 0
 local incremental_physical_resistance = 85
 -- Handles fire and explosive resistance
-local base_fire_resistance = 0
-local incremental_fire_resistance = 90
+local base_fire_resistance = 10
+local incremental_fire_resistance = 70
 -- Handles laser and electric resistance
 local base_electric_resistance = 0
-local incremental_electric_resistance = 80
+local incremental_electric_resistance = 75
 -- Handles cold resistance
-local base_cold_resistance = 15
-local incremental_cold_resistance = 65
+local base_cold_resistance = 0
+local incremental_cold_resistance = 75
 
 -- Animation Settings
 local unit_scale = 2
 
-local pollution_absorption_absolute = 20
-local spawning_cooldown = { 900, 600 }
+local pollution_absorption_absolute = 100
+local spawning_cooldown = { 900, 450 }
 local spawning_radius = 10
 local max_count_of_owned_units = 3
-local max_friends_around_to_spawn = 2
+local max_friends_around_to_spawn = 3
 local spawn_table = function(level)
     local res = {}
     res[1] = { MOD_NAME .. '/zergling/' .. level, { { 0.0, 0.5 }, { 0.2, 0.4 }, { 0.4, 0.3 }, { 0.6, 0.3 }, { 0.8, 0.3 }, { 1.0, 0.1 }  } }
@@ -69,7 +69,7 @@ function ErmZerg.make_defiler_mound(level)
             localised_name = { 'entity-name.' .. MOD_NAME .. '/' .. name, level },
             icon = "__erm_zerg__/graphics/entity/icons/buildings/advisor.png",
             icon_size = 64,
-            flags = { "placeable-player", "placeable-enemy" },
+            flags = { "placeable-player", "placeable-enemy", "breaths-air" },
             max_health = ERM_UnitHelper.get_health(hitpoint, hitpoint * max_hitpoint_multiplier, health_multiplier, level),
             order = MOD_NAME .. '/' .. name,
             subgroup = "enemies",

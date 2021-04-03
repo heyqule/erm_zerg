@@ -18,7 +18,7 @@ local name = 'lurker'
 
 local health_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
 local hitpoint = 125
-local max_hitpoint_multiplier = settings.startup["enemyracemanager-max-hitpoint-multipliers"].value * 1.5
+local max_hitpoint_multiplier = settings.startup["enemyracemanager-max-hitpoint-multipliers"].value * 2.25
 
 local resistance_mutiplier = settings.startup["enemyracemanager-level-multipliers"].value
 -- Handles acid and poison resistance
@@ -32,15 +32,15 @@ local base_fire_resistance = 10
 local incremental_fire_resistance = 80
 -- Handles laser and electric resistance
 local base_electric_resistance = 0
-local incremental_electric_resistance = 90
+local incremental_electric_resistance = 85
 -- Handles cold resistance
-local base_cold_resistance = 25
-local incremental_cold_resistance = 65
+local base_cold_resistance = 0
+local incremental_cold_resistance = 85
 
 -- Handles acid damages
 local damage_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
 local base_physical_damage = 20
-local incremental_physical_damage = 40
+local incremental_physical_damage = 80
 
 -- Handles Attack Speed
 local attack_speed_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
@@ -55,7 +55,7 @@ local incremental_movement_speed = 0.075
 
 -- Misc settings
 local vision_distance = 30
-local pollution_to_join_attack = 75
+local pollution_to_join_attack = 150
 local distraction_cooldown = 20
 
 -- Animation Settings
@@ -110,9 +110,8 @@ function ErmZerg.make_lurker(level)
                     category = "biological",
                     target_type = "direction",
                     action = {
-                        type = "area",
-                        radius = 2,
-                        ignore_collision_condition = true,
+                        type = "direct",
+                        --ignore_collision_condition = true, --Ground only
                         action_delivery = {
                             type = "instant",
                             target_effects = {

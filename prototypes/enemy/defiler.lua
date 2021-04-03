@@ -33,10 +33,10 @@ local base_fire_resistance = 10
 local incremental_fire_resistance = 80
 -- Handles laser and electric resistance
 local base_electric_resistance = 0
-local incremental_electric_resistance = 90
+local incremental_electric_resistance = 85
 -- Handles cold resistance
-local base_cold_resistance = 20
-local incremental_cold_resistance = 70
+local base_cold_resistance = 0
+local incremental_cold_resistance = 85
 
 -- Handles damages
 local damage_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
@@ -48,7 +48,7 @@ local attack_speed_multiplier = settings.startup["enemyracemanager-level-multipl
 local base_attack_speed = 600
 local incremental_attack_speed = 180
 
-local attack_range = ERM_Config.get_max_attack_range(settings)
+local attack_range = ERM_Config.get_max_attack_range()
 
 local movement_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
 local base_movement_speed = 0.125
@@ -57,7 +57,7 @@ local incremental_movement_speed = 0.055
 -- Misc settings
 local vision_distance = 30
 
-local pollution_to_join_attack = 350
+local pollution_to_join_attack = 400
 local distraction_cooldown = 20
 
 -- Animation Settings
