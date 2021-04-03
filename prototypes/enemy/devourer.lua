@@ -17,7 +17,7 @@ local name = 'devourer'
 -- Hitpoints
 local health_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
 local hitpoint = 250
-local max_hitpoint_multiplier = settings.startup["enemyracemanager-max-hitpoint-multipliers"].value * 1.25
+local max_hitpoint_multiplier = settings.startup["enemyracemanager-max-hitpoint-multipliers"].value * 1.5
 
 local resistance_mutiplier = settings.startup["enemyracemanager-level-multipliers"].value
 -- Handles acid and poison resistance
@@ -31,9 +31,9 @@ local base_fire_resistance = 10
 local incremental_fire_resistance = 80
 -- Handles laser and electric resistance
 local base_electric_resistance = 0
-local incremental_electric_resistance = 90
+local incremental_electric_resistance = 85
 -- Handles cold resistance
-local base_cold_resistance = 20
+local base_cold_resistance = 15
 local incremental_cold_resistance = 70
 
 -- Handles damages

@@ -6,16 +6,18 @@ This mod is created as an example race for [Enemy Race Manager](https://github.c
 All graphic and sound assets in this mod are properties of Blizzard Entertainment Inc
 
 # Requirement
-* Enemy Race Manager >= 0.4
+* Enemy Race Manager >= 0.7
 * Factorio Standard Library >= 1.4.6
 * Factorio Base >= 1.1
 
 # Features
 All unit has same base health point as original SC, Some units have unique health multiplier to balance bullet damage.
 
+Weak to electric, laser and cold (-5%)
+
 Tier 1 Units
 * Zergling
-    - Health 35 * 2.5
+    - Health 35 * 3
     - melee damage 5-50
     - Resist: 95
 * Hydralisk
@@ -23,7 +25,7 @@ Tier 1 Units
     - range damage 10-60
     - Resist: 90
 * Mutalisk
-    - Health 120 * 1.5
+    - Health 120 * 1.75
     - range damage 10-60
     - Resist: 95
 
@@ -33,7 +35,7 @@ Tier 2 Units
     - Drops ling / hydra / infested
     - Resist: 95
 * Lurker
-    - Health 125 * 1.5
+    - Health 125 * 2.25
     - AOE range damage 20-60
     - Resist: 90
 * Infested
@@ -41,11 +43,11 @@ Tier 2 Units
     - AOE range damage 30-100
     - Resist: 95
 * Guardian
-    - Health 150 * 1.5
+    - Health 150 * 1.75
     - range damage 20-70
     - Resist: 90
 * Devourer
-    - Health 250 * 1.25
+    - Health 250 * 1.5
     - range damage 25-85
     - slow on hit
     - Resist: 95
@@ -64,6 +66,9 @@ Tier 3 Units
     - AOE range damage 50-80
     - Resist: 90
 * Ultralisk
-    - Health 400 * 1.25
+    - Health 400 * 1.5
     - AOE melee damage 50-150
     - Resist: 95
+
+Physical resistance: 95
+All other resistance: 85-90

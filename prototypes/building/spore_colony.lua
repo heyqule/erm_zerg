@@ -28,14 +28,14 @@ local incremental_acid_resistance = 55
 local base_physical_resistance = 0
 local incremental_physical_resistance = 85
 -- Handles fire and explosive resistance
-local base_fire_resistance = 0
-local incremental_fire_resistance = 90
+local base_fire_resistance = 10
+local incremental_fire_resistance = 70
 -- Handles laser and electric resistance
 local base_electric_resistance = 0
-local incremental_electric_resistance = 80
+local incremental_electric_resistance = 75
 -- Handles cold resistance
-local base_cold_resistance = 15
-local incremental_cold_resistance = 65
+local base_cold_resistance = 0
+local incremental_cold_resistance = 75
 
 local collision_box = { { -2, -2 }, { 2, 2 } }
 local map_generator_bounding_box = { { -3, -3 }, { 3, 3 } }

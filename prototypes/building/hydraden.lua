@@ -27,23 +27,23 @@ local incremental_acid_resistance = 55
 local base_physical_resistance = 0
 local incremental_physical_resistance = 85
 -- Handles fire and explosive resistance
-local base_fire_resistance = 0
-local incremental_fire_resistance = 90
+local base_fire_resistance = 10
+local incremental_fire_resistance = 70
 -- Handles laser and electric resistance
 local base_electric_resistance = 0
-local incremental_electric_resistance = 80
+local incremental_electric_resistance = 75
 -- Handles cold resistance
-local base_cold_resistance = 15
-local incremental_cold_resistance = 65
+local base_cold_resistance = 0
+local incremental_cold_resistance = 75
 
 -- Animation Settings
 local unit_scale = 2
 
-local pollution_absorption_absolute = 20
+local pollution_absorption_absolute = 50
 local spawning_cooldown = { 600, 300 }
 local spawning_radius = 10
 local max_count_of_owned_units = 5
-local max_friends_around_to_spawn = 3
+local max_friends_around_to_spawn = 5
 local spawn_table = function(level)
     local res = {}
     res[1] = { MOD_NAME .. '/hydralisk/' .. level, { { 0.0, 1 }, { 0.2, 1 }, { 0.4, 1 }, { 0.6, 1 }, { 0.8, 1 }, {1.0, 0.7} } }

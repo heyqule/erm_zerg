@@ -72,12 +72,13 @@ function CustomAttacks.process_drone(event)
 
     if position then
         surface.create_entity({ name = unit_name, position = position, force = event.source_entity.force })
-        event.source_entity.damage(100000, 'neutral', 'self')
     end
+
+    event.source_entity.die('neutral')
 end
 
 function CustomAttacks.process_infested(event)
-    event.source_entity.damage(100000, 'neutral', 'self')
+    event.source_entity.die('neutral')
 end
 
 return CustomAttacks
