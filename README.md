@@ -1,7 +1,9 @@
 # ERM_Zerg
 Add Zergs to factorio as biters.
 
-This mod is created as an example race for [Enemy Race Manager](https://github.com/heyqule/enemy_race_manager)
+This mod is created as an educational demo for [Enemy Race Manager](https://mods.factorio.com/mod/enemyracemanager)
+
+![Zerg](https://mods-data.factorio.com/assets/515e5390e5d7d8ad2135fb9e6604a995566204ee.png "Zerg")
 
 All graphic and sound assets in this mod are properties of Blizzard Entertainment Inc
 
@@ -11,64 +13,65 @@ All graphic and sound assets in this mod are properties of Blizzard Entertainmen
 * Factorio Base >= 1.1
 
 # Features
-All unit has same base health point as original SC, Some units have unique health multiplier to balance bullet damage.
+All unit has same base health point as original Starcraft, Some units have unique health multiplier to balance bullet damage.
 
 Weak to electric, laser and cold (-5%)
 
-Tier 1 Units
-* Zergling
-    - Health 35 * 3
+#### Tier 1 Units
+
+######  Zergling
+    - Health 35 - 1085
     - melee damage 5-50
-    - Resist: 95
-* Hydralisk
-    - Health 80 * 2
-    - range damage 10-60
-    - Resist: 90
-* Mutalisk
-    - Health 120 * 1.75
-    - range damage 10-60
-    - Resist: 95
 
-Tier 2 Units
-* Overlord
-    - Health 200 * 1.5
+###### Hydralisk
+    - Health 80 - 1680
+    - range damage 10-60
+
+###### Mutalisk
+    - Health 120 - 2220
+    - range damage 10-60
+
+#### Tier 2 Units
+
+###### Overlord
+    - Health 200 - 3200
     - Drops ling / hydra / infested
-    - Resist: 95
-* Lurker
-    - Health 125 * 2.25
-    - AOE range damage 20-60
-    - Resist: 90
-* Infested
-    - Health 60 * 2
-    - AOE range damage 30-100
-    - Resist: 95
-* Guardian
-    - Health 150 * 1.75
-    - range damage 20-70
-    - Resist: 90
-* Devourer
-    - Health 250 * 1.5
-    - range damage 25-85
-    - slow on hit
-    - Resist: 95
-* Drone
-    - Health 40 * 4
-    - Kill itself to spawns spore colony or nyduspit
-    - Resist: 90
 
-Tier 3 Units
-* Queen
-    - Health 120 * 2
-    - AOE healer 100-500 / AOE range damage 25-50
-    - Resist: 90
-* Defiler
-    - Health 80 * 2
-    - AOE range damage 50-80
-    - Resist: 90
-* Ultralisk
-    - Health 400 * 1.5
-    - AOE melee damage 50-150
-    - Resist: 95
+###### Lurker
+    - Health 125 - 2937
+    - AOE range damage 20-100
+
+###### Infested
+    - Health 60 - 1260
+    - AEO damage: 30 - 100
+
+###### Guardian
+    - Health 150 - 2275
+    - range damage 20 - 70
+
+###### Devourer
+    - Health 250 - 4000
+    - range damage 25 - 85
+    - slow on hit
+
+###### Drone
+    - Health 40 - 1640
+    - Kill itself to spawns spore colony or nyduspit
+
+#### Tier 3 Units
+
+###### Queen
+    - Health 120 - 1920
+    - AOE healer 50-250 / AOE range damage 12-24
+
+###### Defiler
+    - Health 80 - 1680
+    - AOE range damage 20 - 40
+
+###### Ultralisk
+    - Health 400 - 6400
+    - AOE melee damage 50 - 150
 
 Physical resistance: 95
-All other resistance: 85-90
+Weak elemental resistance: 85
+Elemental resistance: 90
