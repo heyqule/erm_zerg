@@ -8,7 +8,7 @@ This mod is created as an educational demo for [Enemy Race Manager](https://mods
 All graphic and sound assets in this mod are properties of Blizzard Entertainment Inc
 
 # Requirement
-* Enemy Race Manager >= 0.7
+* Enemy Race Manager >= 1.1
 * Factorio Standard Library >= 1.4.6
 * Factorio Base >= 1.1
 
