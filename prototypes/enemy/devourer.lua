@@ -91,7 +91,7 @@ function ErmZerg.make_devourer(level)
                 { type = "cold", percent = ERM_UnitHelper.get_resistance(base_cold_resistance, incremental_cold_resistance, resistance_mutiplier, level) }
             },
             healing_per_tick = ERM_UnitHelper.get_healing(hitpoint, max_hitpoint_multiplier, health_multiplier, level),
-            collision_mask = {},
+            collision_mask = { 'layer-33' },
             collision_box = collision_box,
             selection_box = selection_box,
             sticker_box = selection_box,
