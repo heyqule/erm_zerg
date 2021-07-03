@@ -11,6 +11,7 @@ local Sprites = require('__stdlib__/stdlib/data/modules/sprites')
 local ERM_UnitHelper = require('__enemyracemanager__/lib/unit_helper')
 local ERM_UnitTint = require('__enemyracemanager__/lib/unit_tint')
 local ERM_DebugHelper = require('__enemyracemanager__/lib/debug_helper')
+local ERMDataHelper = require('__enemyracemanager__/lib/helper/data_helper')
 local ZergSound = require('__erm_zerg__/prototypes/sound')
 local name = 'mutalisk'
 
@@ -89,7 +90,7 @@ function ErmZerg.make_mutalisk(level)
                 { type = "cold", percent = ERM_UnitHelper.get_resistance(base_cold_resistance, incremental_cold_resistance, resistance_mutiplier, level) }
             },
             healing_per_tick = ERM_UnitHelper.get_healing(hitpoint, max_hitpoint_multiplier, health_multiplier, level),
-            collision_mask = { 'layer-33' },
+            collision_mask = ERMDataHelper.getFlyingCollisionMask(),
             collision_box = collision_box,
             selection_box = selection_box,
             sticker_box = selection_box,
