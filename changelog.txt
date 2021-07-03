@@ -1,4 +1,12 @@
 ---------------------------------------------------------------------------------------------------
+Version: 1.6.0
+Date: 07. 03. 2021
+
+  Changes:
+    - Air unit now use "flying-layer", instead of hardcoded layer-33.  This enhance collision layer compatibility with Space Exploration
+    - ** ERM base mods also need to update
+
+---------------------------------------------------------------------------------------------------
 Version: 1.5.1
 Date: 07. 01. 2021
 
