@@ -134,7 +134,7 @@ function ErmZerg.make_devourer(level)
                             run_mode = 'forward-then-backward'
                         },
                         {
-                            filename = "__erm_zerg__/graphics/entity/units/" .. name .. "/" .. name .. "-run-mask.png",
+                            filename = "__erm_zerg__/graphics/entity/units/" .. name .. "/" .. name .. "-run.png",
                             width = 96,
                             height = 96,
                             frame_count = 5,
@@ -169,7 +169,7 @@ function ErmZerg.make_devourer(level)
                         run_mode = 'forward-then-backward'
                     },
                     {
-                        filename = "__erm_zerg__/graphics/entity/units/" .. name .. "/" .. name .. "-run-mask.png",
+                        filename = "__erm_zerg__/graphics/entity/units/" .. name .. "/" .. name .. "-run.png",
                         width = 96,
                         height = 96,
                         frame_count = 5,

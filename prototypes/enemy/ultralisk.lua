@@ -138,7 +138,7 @@ function ErmZerg.make_ultralisk(level)
                             animation_speed = 0.25
                         },
                         {
-                            filename = "__erm_zerg__/graphics/entity/units/" .. name .. "/" .. name .. "-attack-mask.png",
+                            filename = "__erm_zerg__/graphics/entity/units/" .. name .. "/" .. name .. "-attack.png",
                             width = 128,
                             height = 128,
                             frame_count = 5,
@@ -148,7 +148,8 @@ function ErmZerg.make_ultralisk(level)
                             scale = unit_scale,
                             tint = ERM_UnitTint.tint_shadow(),
                             draw_as_shadow = true,
-                            animation_speed = 0.25
+                            animation_speed = 0.25,
+                            shift = {0.3, 0}
                         }
                     }
                 }
@@ -167,17 +168,17 @@ function ErmZerg.make_ultralisk(level)
                         animation_speed = 0.3,
                     },
                     {
-                        filename = "__erm_zerg__/graphics/entity/units/" .. name .. "/" .. name .. "-run-mask.png",
+                        filename = "__erm_zerg__/graphics/entity/units/" .. name .. "/" .. name .. "-run.png",
                         width = 128,
                         height = 128,
                         frame_count = 5,
                         axially_symmetrical = false,
                         direction_count = 16,
-
                         scale = unit_scale,
                         tint = ERM_UnitTint.tint_shadow(),
                         draw_as_shadow = true,
                         animation_speed = 0.3,
+                        shift = {0.3, 0}
                     }
                 }
             },

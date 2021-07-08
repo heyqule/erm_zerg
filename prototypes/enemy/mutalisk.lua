@@ -138,7 +138,7 @@ function ErmZerg.make_mutalisk(level)
                             run_mode = 'forward-then-backward'
                         },
                         {
-                            filename = "__erm_zerg__/graphics/entity/units/" .. name .. "/" .. name .. "-run-mask.png",
+                            filename = "__erm_zerg__/graphics/entity/units/" .. name .. "/" .. name .. "-run.png",
                             width = 128,
                             height = 128,
                             frame_count = 3,
@@ -172,7 +172,7 @@ function ErmZerg.make_mutalisk(level)
                         run_mode = 'forward-then-backward'
                     },
                     {
-                        filename = "__erm_zerg__/graphics/entity/units/" .. name .. "/" .. name .. "-run-mask.png",
+                        filename = "__erm_zerg__/graphics/entity/units/" .. name .. "/" .. name .. "-run.png",
                         width = 128,
                         height = 128,
                         frame_count = 3,

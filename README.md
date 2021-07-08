@@ -39,7 +39,7 @@ Weak to electric, laser and cold (-5%)
 
 ###### Lurker
     - Health 125 - 2937
-    - AOE range damage 20-100
+    - range damage 20-100
 
 ###### Infested
     - Health 60 - 1260

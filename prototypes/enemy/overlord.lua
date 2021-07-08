@@ -135,7 +135,7 @@ function ErmZerg.make_overlord(level)
                             animation_speed = 0.6,
                         },
                         {
-                            filename = "__erm_zerg__/graphics/entity/units/" .. name .. "/" .. name .. "-run-mask.png",
+                            filename = "__erm_zerg__/graphics/entity/units/" .. name .. "/" .. name .. "-run.png",
                             width = 84,
                             height = 84,
                             frame_count = 4,
@@ -169,7 +169,7 @@ function ErmZerg.make_overlord(level)
                         animation_speed = 0.6
                     },
                     {
-                        filename = "__erm_zerg__/graphics/entity/units/" .. name .. "/" .. name .. "-run-mask.png",
+                        filename = "__erm_zerg__/graphics/entity/units/" .. name .. "/" .. name .. "-run.png",
                         width = 84,
                         height = 84,
                         frame_count = 4,

@@ -1,4 +1,15 @@
 ---------------------------------------------------------------------------------------------------
+Version: 1.7.0
+Date: 07. 16. 2021
+
+  Changes:
+    - Adjustment on pollution_absorption_absolute. All support building now absorbs 50 unit.
+
+  Graphics:
+    - Fix some unit shadows
+    - Removed original shadow masks to shrink file size
+
+---------------------------------------------------------------------------------------------------
 Version: 1.6.0
 Date: 07. 03. 2021
 
