@@ -141,7 +141,7 @@ function ErmZerg.make_guardian(level)
                             animation_speed = 0.6,
                         },
                         {
-                            filename = "__erm_zerg__/graphics/entity/units/" .. name .. "/" .. name .. "-run-mask.png",
+                            filename = "__erm_zerg__/graphics/entity/units/" .. name .. "/" .. name .. "-run.png",
                             width = 96,
                             height = 96,
                             frame_count = 6,
@@ -173,7 +173,7 @@ function ErmZerg.make_guardian(level)
                         animation_speed = 0.6
                     },
                     {
-                        filename = "__erm_zerg__/graphics/entity/units/" .. name .. "/" .. name .. "-run-mask.png",
+                        filename = "__erm_zerg__/graphics/entity/units/" .. name .. "/" .. name .. "-run.png",
                         width = 96,
                         height = 96,
                         frame_count = 7,

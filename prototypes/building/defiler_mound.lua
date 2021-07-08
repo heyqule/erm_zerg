@@ -38,7 +38,7 @@ local incremental_cold_resistance = 75
 -- Animation Settings
 local unit_scale = 2
 
-local pollution_absorption_absolute = 100
+local pollution_absorption_absolute = 50
 local spawning_cooldown = { 900, 450 }
 local spawning_radius = 10
 local max_count_of_owned_units = 3

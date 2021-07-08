@@ -118,17 +118,17 @@ function ErmZerg.make_zergling(level)
                             animation_speed = 0.6
                         },
                         {
-                            filename = "__erm_zerg__/graphics/entity/units/" .. name .. "/" .. name .. "-attack-mask.png",
+                            filename = "__erm_zerg__/graphics/entity/units/" .. name .. "/" .. name .. "-attack.png",
                             width = 128,
                             height = 128,
                             frame_count = 5,
                             axially_symmetrical = false,
                             direction_count = 16,
-
                             scale = unit_scale,
                             draw_as_shadow = true,
                             tint = ERM_UnitTint.tint_shadow(),
-                            animation_speed = 0.6
+                            animation_speed = 0.6,
+                            shift = {0.2, 0}
                         }
                     }
                 }
@@ -148,17 +148,17 @@ function ErmZerg.make_zergling(level)
                         animation_speed = 1,
                     },
                     {
-                        filename = "__erm_zerg__/graphics/entity/units/" .. name .. "/" .. name .. "-run-mask.png",
+                        filename = "__erm_zerg__/graphics/entity/units/" .. name .. "/" .. name .. "-run.png",
                         width = 128,
                         height = 128,
                         frame_count = 5,
                         axially_symmetrical = false,
                         direction_count = 16,
-
                         scale = unit_scale,
                         tint = ERM_UnitTint.tint_shadow(),
                         draw_as_shadow = true,
                         animation_speed = 1,
+                        shift = {0.2, 0}
                     }
                 }
             },
