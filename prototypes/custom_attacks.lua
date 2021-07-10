@@ -8,27 +8,33 @@ local String = require('__stdlib__/stdlib/utils/string')
 local Math = require('__stdlib__/stdlib/utils/math')
 local Table = require('__stdlib__/stdlib/utils/table')
 
+local ForceHelper = require('__enemyracemanager__/lib/helper/force_helper')
+
+
+local current_tier
 local get_unit = function(unit_name)
-    local current_tier = remote.call('enemy_race_manager', 'get_race_tier', MOD_NAME)
+    if current_tier == nil then
+        current_tier = remote.call('enemy_race_manager', 'get_race_tier', MOD_NAME)
+    end        
     return unit_name[current_tier][Math.random(#unit_name[current_tier])]
 end
 
+local droppable_unit_name = {
+    { 'zergling', 'hydralisk' },
+    { 'zergling', 'zergling', 'hydralisk', 'hydralisk', 'lurker' },
+    { 'zergling', 'zergling', 'hydralisk', 'hydralisk', 'lurker', 'infested', 'ultralisk' },
+}
 local get_overlord_droppable_unit = function()
-    local unit_name = {
-        { 'zergling', 'hydralisk' },
-        { 'zergling', 'zergling', 'hydralisk', 'hydralisk', 'lurker' },
-        { 'zergling', 'zergling', 'hydralisk', 'hydralisk', 'lurker', 'infested', 'ultralisk' },
-    }
-    return get_unit(unit_name)
+    return get_unit(droppable_unit_name)
 end
 
+local turret_name = {
+    { 'spore_colony_shortrange' },
+    { 'spore_colony_shortrange' },
+    { 'spore_colony_shortrange', 'nyduspit' },
+}
 local get_drone_buildable_turrets = function()
-    local unit_name = {
-        { 'spore_colony_shortrange' },
-        { 'spore_colony_shortrange' },
-        { 'spore_colony_shortrange', 'nyduspit' },
-    }
-    return get_unit(unit_name)
+    return get_unit(turret_name)
 end
 
 local CustomAttacks = {}
@@ -42,7 +48,7 @@ local CustomAttacks = {}
 --https://lua-api.factorio.com/latest/LuaSurface.html#LuaSurface.create_entity
 function CustomAttacks.process_overlord(event)
     local surface = game.surfaces[event.surface_index]
-    local nameToken = String.split(event.source_entity.name, '/')
+    local nameToken = ForceHelper.getNameToken(event.source_entity.name)
     local level = nameToken[3]
     local position = event.source_position
     position.x = position.x + 2
@@ -60,7 +66,7 @@ end
 
 function CustomAttacks.process_drone(event)
     local surface = game.surfaces[event.surface_index]
-    local nameToken = String.split(event.source_entity.name, '/')
+    local nameToken = ForceHelper.getNameToken(event.source_entity.name)
     local level = nameToken[3]
     local position = event.source_position
 
