@@ -103,6 +103,16 @@ function ErmZerg.make_lair(level)
             animations = {
                 layers = {
                     {
+                        filename = "__erm_zerg__/graphics/entity/buildings/" .. name .. "/" .. name .. "_filler.png",
+                        width = 192,
+                        height = 160,
+                        frame_count = 5,
+                        animation_speed = 0.18,
+                        direction_count = 1,
+                        run_mode = "forward-then-backward",
+                        scale = unit_scale
+                    },
+                    {
                         filename = "__erm_zerg__/graphics/entity/buildings/" .. name .. "/" .. name .. ".png",
                         width = 192,
                         height = 160,
@@ -117,7 +127,7 @@ function ErmZerg.make_lair(level)
             integration = {
                 layers = {
                     {
-                        filename = "__erm_zerg__/graphics/entity/buildings/" .. name .. "/" .. name .. ".png",
+                        filename = "__erm_zerg__/graphics/entity/buildings/" .. name .. "/" .. name .. "_filler.png",
                         variation_count = 1,
                         width = 192,
                         height = 160,
@@ -132,8 +142,28 @@ function ErmZerg.make_lair(level)
                         height = 160,
                         frame_count = 1,
                         line_length = 1,
+                        scale = unit_scale
+                    },
+                    {
+                        filename = "__erm_zerg__/graphics/entity/buildings/" .. name .. "/" .. name .. "_filler.png",
+                        variation_count = 1,
+                        width = 192,
+                        height = 160,
+                        frame_count = 1,
+                        line_length = 1,
                         draw_as_shadow = true,
-                        shift = { 0.5, 0.1 },
+                        shift = { 0.25, 0.1 },
+                        scale = unit_scale
+                    },
+                    {
+                        filename = "__erm_zerg__/graphics/entity/buildings/" .. name .. "/" .. name .. ".png",
+                        variation_count = 1,
+                        width = 192,
+                        height = 160,
+                        frame_count = 1,
+                        line_length = 1,
+                        draw_as_shadow = true,
+                        shift = { 0.25, 0.1 },
                         scale = unit_scale
                     },
                 }
