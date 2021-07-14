@@ -127,7 +127,7 @@ function ErmZerg.make_greater_spire(level)
                         frame_count = 1,
                         line_length = 1,
                         draw_as_shadow = true,
-                        shift = { 0.5, 0.1 },
+                        shift = { 0.25, 0.1 },
                         scale = unit_scale
                     },
                 }
