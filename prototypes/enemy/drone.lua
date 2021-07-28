@@ -47,7 +47,7 @@ local incremental_attack_speed = 240
 local attack_range = 12
 
 local movement_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
-local base_movement_speed = 0.15
+local base_movement_speed = 0.125
 local incremental_movement_speed = 0.05
 
 -- Misc settings
