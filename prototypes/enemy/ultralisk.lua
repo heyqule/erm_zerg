@@ -108,6 +108,7 @@ function ErmZerg.make_ultralisk(level)
                     action = {
                         type = "area",
                         radius = 3,
+                        force = 'not-same',
                         ignore_collision_condition = true,
                         action_delivery = {
                             type = "instant",

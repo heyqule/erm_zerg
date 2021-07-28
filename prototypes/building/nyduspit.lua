@@ -48,8 +48,8 @@ local spawn_table = function(level)
     local res = {}
     --Tire 1
     res[1] = { MOD_NAME .. '/zergling/' .. level, { { 0.0, 0.7 }, { 0.2, 0.7 }, { 0.4, 0.6 }, { 0.6, 0.3 }, { 0.8, 0.25 }, { 1.0, 0.1 } } }
-    res[2] = { MOD_NAME .. '/hydralisk/' .. level, { { 0.0, 0.2 }, { 0.2, 0.2 }, { 0.4, 0.3 }, { 0.6, 0.25 }, { 0.8, 0.25 }, { 1.0, 0.1 } } }
-    res[3] = { MOD_NAME .. '/mutalisk/' .. level, { { 0.0, 0.1 }, { 0.2, 0.1 }, { 0.4, 0.1 }, { 0.6, 0.2 }, { 0.8, 0.15 }, { 1.0, 0.1 } } }
+    res[2] = { MOD_NAME .. '/hydralisk/' .. level, { { 0.0, 0.3 }, { 0.2, 0.3 }, { 0.4, 0.3 }, { 0.6, 0.25 }, { 0.8, 0.25 }, { 1.0, 0.1 } } }
+    res[3] = { MOD_NAME .. '/mutalisk/' .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.1 }, { 0.6, 0.2 }, { 0.8, 0.15 }, { 1.0, 0.1 } } }
     --Tire 2
     res[4] = { MOD_NAME .. '/lurker/' .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.0}, { 0.8, 0.0 }, { 1.0, 0.1 } } }
     res[5] = { MOD_NAME .. '/guardian/' .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.0 }, { 0.8, 0.0 }, { 1.0, 0.1 } } }
@@ -64,7 +64,7 @@ local spawn_table = function(level)
 end
 
 local collision_box = { { -2.25, -2.25 }, { 2.25, 2.25 } }
-local map_generator_bounding_box = { { -3, -3 }, { 3, 3 } }
+local map_generator_bounding_box = { { -3.25, -3.25 }, { 3.25, 3.25 } }
 local selection_box = { { -2.25, -2.25 }, { 2.25, 2.25 } }
 
 function ErmZerg.make_nyduspit(level)

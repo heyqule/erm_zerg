@@ -51,7 +51,7 @@ local spawn_table = function(level)
 end
 
 local collision_box = { { -3.25, -3 }, { 3.25, 2.75 } }
-local map_generator_bounding_box = { { -4, -4 }, { 4, 4 } }
+local map_generator_bounding_box = { { -4.25, -4 }, { 4.25, 3.75 } }
 local selection_box = { { -3.25, -3 }, { 3.25, 2.75 } }
 
 function ErmZerg.make_spawning_pool(level)

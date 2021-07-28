@@ -50,8 +50,8 @@ local incremental_attack_speed = 75
 local attack_range = 6
 
 local movement_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
-local base_movement_speed = 0.25
-local incremental_movement_speed = 0.1
+local base_movement_speed = 0.2
+local incremental_movement_speed = 0.15
 
 -- Misc Settings
 local vision_distance = 35
@@ -77,7 +77,7 @@ function ErmZerg.make_mutalisk(level)
             has_belt_immunity = true,
             max_health = ERM_UnitHelper.get_health(hitpoint, hitpoint * max_hitpoint_multiplier, health_multiplier, level),
             order = MOD_NAME .. '/'  .. name .. '/' .. level,
-            subgroup = "enemies",
+            subgroup = "flying-enemies",
             shooting_cursor_size = 2,
             resistances = {
                 { type = "acid", percent = ERM_UnitHelper.get_resistance(base_acid_resistance, incremental_acid_resistance, resistance_mutiplier, level) },

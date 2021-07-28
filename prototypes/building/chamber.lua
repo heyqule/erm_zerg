@@ -46,14 +46,14 @@ local max_count_of_owned_units = 5
 local max_friends_around_to_spawn = 5
 local spawn_table = function(level)
     local res = {}
-    res[1] = { MOD_NAME .. '/zergling/' .. level, { { 0.0, 0.4 }, { 1, 0.4 } } }
-    res[2] = { MOD_NAME .. '/hydralisk/' .. level, { { 0.0, 0.4 }, { 1, 0.4 } } }
-    res[3] = { MOD_NAME .. '/mutalisk/' .. level, { { 0.0, 0.2 }, { 1, 0.2 } } }
+    res[1] = { MOD_NAME .. '/zergling/' .. level, { { 0.0, 0.5 }, { 0.2, 0.5 }, { 1, 0.4 } } }
+    res[2] = { MOD_NAME .. '/hydralisk/' .. level, { { 0.0, 0.5 }, { 0.2, 0.5 }, { 1, 0.4 } } }
+    res[3] = { MOD_NAME .. '/mutalisk/' .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 1, 0.2 } } }
     return res
 end
 
 local collision_box = { { -3, -3.5 }, { 3.25, 2.75 } }
-local map_generator_bounding_box = { { -4, -4 }, { 4, 4 } }
+local map_generator_bounding_box = { { -4, -4.5 }, { 4.25, 3.75 } }
 local selection_box = { { -3, -3.5 }, { 3.25, 2.75 } }
 
 function ErmZerg.make_chamber(level)

@@ -50,8 +50,8 @@ local incremental_attack_speed = 120
 local attack_range = 9
 
 local movement_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
-local base_movement_speed = 0.225
-local incremental_movement_speed = 0.05
+local base_movement_speed = 0.2
+local incremental_movement_speed = 0.1
 
 -- Misc Settings
 local vision_distance = 35
@@ -79,7 +79,7 @@ function ErmZerg.make_devourer(level)
             has_belt_immunity = true,
             max_health = ERM_UnitHelper.get_health(hitpoint, hitpoint * max_hitpoint_multiplier, health_multiplier, level),
             order = MOD_NAME .. '/'  .. name .. '/' .. level,
-            subgroup = "enemies",
+            subgroup = "flying-enemies",
             shooting_cursor_size = 2,
             resistances = {
                 { type = "acid", percent = ERM_UnitHelper.get_resistance(base_acid_resistance, incremental_acid_resistance, resistance_mutiplier, level) },
@@ -292,6 +292,7 @@ function ErmZerg.make_devourer(level)
                         type = "nested-result",
                         action = {
                             type = "area",
+                            force = 'not-same',
                             radius = 1,
                             ignore_collision_condition = true,
                             action_delivery = {
