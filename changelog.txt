@@ -1,4 +1,16 @@
 ---------------------------------------------------------------------------------------------------
+Version: 1.9.0
+Date: 2021-07-30
+
+  Changes:
+    - Add compatibility for attack meter
+    - Change map bounding box on building, 1 tile for all side
+    - Moved mutalisk to tier 2. It starts to spawn at evolution 0.2, instead of 0.0
+    - added lurker to tier 2 in race setting. It was never there. O.o
+    - Movement Speed change
+    - change AOE's force = "not-same"
+
+---------------------------------------------------------------------------------------------------
 Version: 1.8.0
 Date: 2021-07-11
 

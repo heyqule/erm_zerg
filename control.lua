@@ -9,7 +9,8 @@
 local Game = require('__stdlib__/stdlib/game')
 
 local ErmConfig = require('__enemyracemanager__/lib/global_config')
-local ForceHelper = require('__enemyracemanager__/lib/helper/force_helper')
+local ErmForceHelper = require('__enemyracemanager__/lib/helper/force_helper')
+local ErmRaceSettingsHelper = require('__enemyracemanager__/lib/helper/race_settings_helper')
 
 local Event = require('__stdlib__/stdlib/event/event')
 local String = require('__stdlib__/stdlib/utils/string')
@@ -29,7 +30,7 @@ local createRace = function()
     force.disable_research()
     force.friendly_fire = false;
 
-    ForceHelper.set_friends(game, FORCE_NAME)
+    ErmForceHelper.set_friends(game, FORCE_NAME)
 end
 
 local addRaceSettings = function()
@@ -43,13 +44,11 @@ local addRaceSettings = function()
         tier = 1, -- Race tier
         evolution_point = 0,
         evolution_base_point = 0,
-        attack_meter = 0, -- Build by killing their force (Spawner = 20, turrets = 10)
-        send_attack_threshold = 2000, -- When threshold reach, sends attack to the base
-        send_attack_threshold_deviation = 0.2,
+        attack_meter = 0, -- Build by killing their force (Spawner = 50, turrets = 10, unit = 1)
         next_attack_threshold = 0, -- Used by system to calculate next move
         units = {
-            { 'zergling', 'hydralisk', 'mutalisk' },
-            { 'overlord', 'devourer', 'drone' },
+            { 'zergling', 'hydralisk' },
+            { 'overlord', 'devourer', 'drone', 'mutalisk', 'lurker' },
             { 'guardian','ultralisk', 'queen', 'defiler' },
         },
         current_units_tier = {},
@@ -71,6 +70,12 @@ local addRaceSettings = function()
             { 'ultralisk_cavern', 'queen_nest', 'defiler_mound', 'nyduspit' },
         },
         current_support_structures_tier = {},
+        flying_units = {
+            {'mutalisk'}, -- Fast unit that uses in rapid target attack group
+            {'devourer'},
+            {'guardian','queen'}
+        },
+        dropship = 'overlord'
     }
 
     race_settings.current_units_tier = race_settings.units[1]
@@ -98,7 +103,9 @@ Event.on_configuration_changed(function(event)
 end)
 
 Event.register(defines.events.on_script_trigger_effect, function(event)
-    if not event.source_entity then
+    if not event.source_entity or
+            String.find(event.source_entity.name, MOD_NAME, 1, true) == nil
+    then
         return
     end
 
@@ -108,6 +115,37 @@ Event.register(defines.events.on_script_trigger_effect, function(event)
         CustomAttacks.process_drone(event)
     elseif event.effect_id == INFESTED_ATTACK then
         CustomAttacks.process_infested(event)
+    end
+end)
+
+---
+--- Modify Race Settings for existing game
+---
+Event.register(Event.generate_event_name(ErmConfig.RACE_SETTING_UPDATE), function(event)
+    local race_setting = remote.call('enemy_race_manager', 'get_race', MOD_NAME)
+    if (event.affected_race == MOD_NAME) and race_setting then
+        if race_setting.version < MOD_VERSION then
+            if race_setting.version < 101 then
+                race_setting.angry_meter = nil
+                race_setting.send_attack_threshold = nil
+                race_setting.send_attack_threshold_deviation = nil
+                race_setting.attack_meter = 0
+
+                ErmRaceSettingsHelper.remove_unit_from_tier(race_setting, 1, 'mutalisk')
+                ErmRaceSettingsHelper.add_unit_to_tier(race_setting, 2, 'mutalisk')
+                ErmRaceSettingsHelper.add_unit_to_tier(race_setting, 2, 'lurker')
+
+                race_setting.flying_units = {
+                    {'mutalisk'}, -- Fast unit that uses in rapid target attack group
+                    {'devourer'}, -- Overlap Tier to increase spawn rate
+                    {'guardian','queen'}
+                }
+                race_setting.dropship = 'overlord'
+            end
+
+            race_setting.version = MOD_VERSION
+        end
+        remote.call('enemy_race_manager', 'update_race_setting', race_setting)
     end
 end)
 

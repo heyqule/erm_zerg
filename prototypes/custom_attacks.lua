@@ -9,15 +9,7 @@ local Math = require('__stdlib__/stdlib/utils/math')
 local Table = require('__stdlib__/stdlib/utils/table')
 
 local ForceHelper = require('__enemyracemanager__/lib/helper/force_helper')
-
-
-local current_tier
-local get_unit = function(unit_name)
-    if current_tier == nil then
-        current_tier = remote.call('enemy_race_manager', 'get_race_tier', MOD_NAME)
-    end        
-    return unit_name[current_tier][Math.random(#unit_name[current_tier])]
-end
+local CustomAttackHelper = require('__enemyracemanager__/lib/helper/custom_attack_helper')
 
 local droppable_unit_name = {
     { 'zergling', 'hydralisk' },
@@ -25,61 +17,26 @@ local droppable_unit_name = {
     { 'zergling', 'zergling', 'hydralisk', 'hydralisk', 'lurker', 'infested', 'ultralisk' },
 }
 local get_overlord_droppable_unit = function()
-    return get_unit(droppable_unit_name)
+    return CustomAttackHelper.get_unit(droppable_unit_name, MOD_NAME)
 end
 
-local turret_name = {
+local drone_building_name = {
     { 'spore_colony_shortrange' },
     { 'spore_colony_shortrange' },
     { 'spore_colony_shortrange', 'nyduspit' },
 }
 local get_drone_buildable_turrets = function()
-    return get_unit(turret_name)
+    return CustomAttackHelper.get_unit(drone_building_name, MOD_NAME)
 end
 
 local CustomAttacks = {}
 
---effect_id :: string: The effect_id specified in the trigger effect.
---surface_index :: uint: The surface the effect happened on.
---source_position :: Position (optional)
---source_entity :: LuaEntity (optional)
---target_position :: Position (optional)
---target_entity :: LuaEntity (optional)
---https://lua-api.factorio.com/latest/LuaSurface.html#LuaSurface.create_entity
 function CustomAttacks.process_overlord(event)
-    local surface = game.surfaces[event.surface_index]
-    local nameToken = ForceHelper.getNameToken(event.source_entity.name)
-    local level = nameToken[3]
-    local position = event.source_position
-    position.x = position.x + 2
-
-    local unit_name = MOD_NAME .. '/' .. get_overlord_droppable_unit() .. '/' .. level
-
-    if not surface.can_place_entity({ name = unit_name, position = position }) then
-        position = surface.find_non_colliding_position(unit_name, event.source_position, 10, 2, true)
-    end
-
-    if position then
-        surface.create_entity({ name = unit_name, position = position, force = event.source_entity.force })
-    end
+    CustomAttackHelper.drop_unit(event, MOD_NAME, get_overlord_droppable_unit())
 end
 
 function CustomAttacks.process_drone(event)
-    local surface = game.surfaces[event.surface_index]
-    local nameToken = ForceHelper.getNameToken(event.source_entity.name)
-    local level = nameToken[3]
-    local position = event.source_position
-
-    local unit_name = MOD_NAME .. '/' .. get_drone_buildable_turrets() .. '/' .. level
-
-    if not surface.can_place_entity({ name = unit_name, position = position }) then
-        position = surface.find_non_colliding_position(unit_name, event.source_position, 5, 2, true)
-    end
-
-    if position then
-        surface.create_entity({ name = unit_name, position = position, force = event.source_entity.force })
-    end
-
+    CustomAttackHelper.drop_unit(event, MOD_NAME, get_drone_buildable_turrets())
     event.source_entity.die('neutral')
 end
 

@@ -52,7 +52,7 @@ local attack_range = ERM_Config.get_max_attack_range()
 
 local movement_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
 local base_movement_speed = 0.125
-local incremental_movement_speed = 0.055
+local incremental_movement_speed = 0.075
 
 -- Misc settings
 local vision_distance = 30
@@ -247,6 +247,7 @@ function ErmZerg.make_defiler(level)
                         action = {
                             type = "area",
                             radius = 5,
+                            force = 'not-same',
                             ignore_collision_condition = true,
                             action_delivery = {
                                 type = "instant",

@@ -54,8 +54,8 @@ local spawn_table = function(level)
     local res = {}
     --Tire 1
     res[1] = { MOD_NAME .. '/zergling/' .. level, { { 0.0, 0.7 }, { 0.2, 0.7 }, { 0.4, 0.6 }, { 0.6, 0.3 }, { 0.8, 0.1 }, {1.0, 0.0} } }
-    res[2] = { MOD_NAME .. '/hydralisk/' .. level, { { 0.0, 0.2 }, { 0.2, 0.2 }, { 0.4, 0.3 }, { 0.6, 0.2 }, { 0.8, 0.1 }, {1.0, 0.0} } }
-    res[3] = { MOD_NAME .. '/mutalisk/' .. level, { { 0.0, 0.1 }, { 0.2, 0.1 }, { 0.4, 0.1 }, { 0.6, 0.1 }, { 0.8, 0.15 }, {1.0, 0.0} } }
+    res[2] = { MOD_NAME .. '/hydralisk/' .. level, { { 0.0, 0.3 }, { 0.2, 0.3 }, { 0.4, 0.3 }, { 0.6, 0.2 }, { 0.8, 0.1 }, {1.0, 0.0} } }
+    res[3] = { MOD_NAME .. '/mutalisk/' .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.1 }, { 0.6, 0.1 }, { 0.8, 0.15 }, {1.0, 0.0} } }
     --Tire 2
     res[4] = { MOD_NAME .. '/lurker/' .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.0 }, { 0.8, 0.0 }, {1.0, 0.05} } }
     res[5] = { MOD_NAME .. '/guardian/' .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.0 }, { 0.8, 0.0 }, {1.0, 0.05} } }
@@ -72,7 +72,7 @@ end
 
 local collision_box = { { -3.5, -4.25 }, { 3.25, 3 } }
 -- Map generator bounding box should always at least 1 unit wider than collision_box. This prevent units from getting stuck.
-local map_generator_bounding_box = { { -4, -4.5 }, { 4, 4 } }
+local map_generator_bounding_box = { { -4.5, -5.25 }, { 4.25, 4 } }
 local selection_box = { { -3.5, -4.25 }, { 3.25, 3 } }
 
 function ErmZerg.make_hive(level)

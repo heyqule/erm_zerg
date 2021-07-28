@@ -9,7 +9,7 @@
 MOD_NAME = 'erm_zerg'
 -- Must be prefix with "enemy_"
 FORCE_NAME = 'enemy_erm_zerg'
-MOD_VERSION = 100
+MOD_VERSION = 101
 
 DEBUG_MODE = false
 

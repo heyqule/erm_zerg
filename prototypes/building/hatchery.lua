@@ -50,8 +50,8 @@ local spawn_table = function(level)
     -- Tier 2 - 0.4 - 0.8
     -- Tier 3 - 0.8+
     res[1] = { MOD_NAME .. '/zergling/' .. level, { { 0.0, 0.7 }, { 0.2, 0.7 }, { 0.4, 0.6 }, { 0.6, 0.3 }, { 0.8, 0.2 } } }
-    res[2] = { MOD_NAME .. '/hydralisk/' .. level, { { 0.0, 0.2 }, { 0.2, 0.2 }, { 0.4, 0.3 }, { 0.6, 0.3 }, { 0.8, 0.3 } } }
-    res[3] = { MOD_NAME .. '/mutalisk/' .. level, { { 0.0, 0.1 }, { 0.2, 0.1 }, { 0.4, 0.1 }, { 0.6, 0.2 }, { 0.8, 0.2 } } }
+    res[2] = { MOD_NAME .. '/hydralisk/' .. level, { { 0.0, 0.3 }, { 0.2, 0.3 }, { 0.4, 0.3 }, { 0.6, 0.3 }, { 0.8, 0.3 } } }
+    res[3] = { MOD_NAME .. '/mutalisk/' .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.1 }, { 0.6, 0.2 }, { 0.8, 0.2 } } }
 
     res[4] = { MOD_NAME .. '/overlord/' .. level, { { 0.0, 0 }, { 0.2, 0 }, { 0.4, 0 }, { 0.6, 0.1 }, { 0.8, 0.1 } } }
     res[5] = { MOD_NAME .. '/drone/' .. level, { { 0.0, 0 }, { 0.2, 0 }, { 0.4, 0 }, { 0.6, 0.1 }, { 0.8, 0.2 } } }
@@ -59,7 +59,7 @@ local spawn_table = function(level)
 end
 
 local collision_box = { { -3, -3.5 }, { 3.2, 3 } }
-local map_generator_bounding_box = { { -4, -4 }, { 4, 4 } }
+local map_generator_bounding_box = { { -4, -4.5 }, { 4.2, 4 } }
 local selection_box = { { -3, -3.5 }, { 3.2, 3 } }
 
 function ErmZerg.make_hatchery(level)

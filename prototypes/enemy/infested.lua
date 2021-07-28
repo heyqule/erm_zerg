@@ -126,6 +126,7 @@ function ErmZerg.make_infested(level)
                                     type = "nested-result",
                                     action = {
                                         type = "area",
+                                        force = 'not-same',
                                         radius = 3,
                                         ignore_collision_condition = true,
                                         action_delivery = {
