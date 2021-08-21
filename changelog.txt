@@ -1,4 +1,19 @@
 ---------------------------------------------------------------------------------------------------
+Version: 1.10.0
+Date: 2021-09-03
+
+  Changes:
+    - Replaced queen healing to zerg's slow-down effect
+    - Lurker now attacks with 2 AOE radius, max damage changed from 100 - 75
+    - Mutalisk attack speed range changed from 2.5s - 1.25s to 2s - 1s
+    - Ultralisk now deal 1 attack per second on max level from 1 attack every 0.75 second.
+    - Defiler changed from 40 - 80 to 20 - 80
+    - Guardian max damage changed from 70 to 100, 1 attack per second.
+    - Fix render layer for corpses
+    - bump zergling health
+    - bump infested health
+
+---------------------------------------------------------------------------------------------------
 Version: 1.9.1
 Date: 2021-08-02
 

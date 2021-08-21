@@ -131,7 +131,7 @@ function ErmZerg.make_spore_colony(level)
             icon = "__erm_zerg__/graphics/entity/icons/buildings/advisor.png",
             icon_size = 64,
             flags = { "placeable-player", "placeable-enemy", "placeable-off-grid", "breaths-air" },
-            max_health = ERM_UnitHelper.get_health(hitpoint, hitpoint * max_hitpoint_multiplier, health_multiplier, level),
+            max_health = ERM_UnitHelper.get_building_health(hitpoint, hitpoint * max_hitpoint_multiplier, health_multiplier, level),
             order = MOD_NAME .. '/' .. name,
             subgroup = "enemies",
             resistances = {
@@ -194,7 +194,7 @@ function ErmZerg.make_spore_colony(level)
             icon = "__erm_zerg__/graphics/entity/icons/buildings/advisor.png",
             icon_size = 64,
             flags = { "placeable-player", "placeable-enemy", "placeable-off-grid", "breaths-air" },
-            max_health = ERM_UnitHelper.get_health(hitpoint, hitpoint * max_hitpoint_multiplier, health_multiplier, level) / 2,
+            max_health = ERM_UnitHelper.get_building_health(hitpoint, hitpoint * max_hitpoint_multiplier, health_multiplier, level) / 2,
             order = "b-c-c",
             subgroup = "enemies",
             resistances = {
