@@ -15,7 +15,7 @@ local name = 'ultralisk'
 
 local health_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
 local hitpoint = 400
-local max_hitpoint_multiplier = settings.startup["enemyracemanager-max-hitpoint-multipliers"].value * 1.5
+local max_hitpoint_multiplier = settings.startup["enemyracemanager-max-hitpoint-multipliers"].value * 2
 
 local resistance_mutiplier = settings.startup["enemyracemanager-level-multipliers"].value
 -- Handles acid and poison resistance
@@ -41,8 +41,8 @@ local incremental_physical_damage = 100
 
 -- Handles Attack Speed
 local attack_speed_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
-local base_attack_speed = 90
-local incremental_attack_speed = 45
+local base_attack_speed = 120
+local incremental_attack_speed = 60
 
 local attack_range = 1
 
@@ -200,7 +200,7 @@ function ErmZerg.make_ultralisk(level)
             time_before_removed = defines.time.minute * settings.startup["enemyracemanager-enemy-corpse-time"].value,
             subgroup = "corpses",
             order = "x" .. name .. level,
-            final_render_layer = "lower-object-above-shadow",
+            final_render_layer = "corpse",
             animation = {
                 filename = "__erm_zerg__/graphics/entity/units/" .. name .. "/" .. name .. "-death.png",
                 width = 128,

@@ -37,17 +37,17 @@ Weak to electric, laser and cold (-5%)
     - Health 200 - 3200
     - Drops ling / hydra / infested
 
-###### Lurker
+###### Lurker AOE 2
     - Health 125 - 2937
-    - range damage 20-100
+    - range damage 20 - 75
 
-###### Infested
+###### Infested AOE 3
     - Health 60 - 1260
     - AEO damage: 30 - 100
 
 ###### Guardian
     - Health 150 - 2275
-    - range damage 20 - 70
+    - range damage 20 - 100
 
 ###### Devourer
     - Health 250 - 4000
@@ -60,15 +60,16 @@ Weak to electric, laser and cold (-5%)
 
 #### Tier 3 Units
 
-###### Queen
+###### Queen AOE 5
     - Health 120 - 1920
-    - AOE healer 50-250 / AOE range damage 12-24
+    - range damage 25 - 50
+    - Slow targets
 
-###### Defiler
+###### Defiler AOE 5
     - Health 80 - 1680
-    - AOE range damage 20 - 40
+    - range damage 20 - 80
 
-###### Ultralisk
+###### Ultralisk AOE 3
     - Health 400 - 6400
     - AOE melee damage 50 - 150
 

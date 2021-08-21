@@ -15,7 +15,7 @@ local name = 'hydralisk'
 
 local health_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
 local hitpoint = 80
-local max_hitpoint_multiplier = settings.startup["enemyracemanager-max-hitpoint-multipliers"].value * 2
+local max_hitpoint_multiplier = settings.startup["enemyracemanager-max-hitpoint-multipliers"].value * 2.5
 
 local resistance_mutiplier = settings.startup["enemyracemanager-level-multipliers"].value
 -- Handles acid and poison resistance
@@ -207,7 +207,7 @@ function ErmZerg.make_hydralisk(level)
             time_before_removed = defines.time.minute * settings.startup["enemyracemanager-enemy-corpse-time"].value,
             subgroup = "corpses",
             order = "x" .. name .. level,
-            final_render_layer = "lower-object-above-shadow",
+            final_render_layer = "corpse",
             animation = {
                 filename = "__erm_zerg__/graphics/entity/units/" .. name .. "/" .. name .. "-death.png",
                 width = 128,

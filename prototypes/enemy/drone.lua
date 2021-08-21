@@ -194,7 +194,7 @@ function ErmZerg.make_drone(level)
             time_before_removed = defines.time.minute * settings.startup["enemyracemanager-enemy-corpse-time"].value,
             subgroup = "corpses",
             order = "x" .. name .. level,
-            final_render_layer = "lower-object-above-shadow",
+            final_render_layer = "corpse",
             animation = {
                 filename = "__erm_zerg__/graphics/entity/units/" .. name .. "/" .. name .. "-death.png",
                 width = 128,

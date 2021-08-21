@@ -18,7 +18,7 @@ local name = 'lurker'
 
 local health_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
 local hitpoint = 125
-local max_hitpoint_multiplier = settings.startup["enemyracemanager-max-hitpoint-multipliers"].value * 2.25
+local max_hitpoint_multiplier = settings.startup["enemyracemanager-max-hitpoint-multipliers"].value * 2.5
 
 local resistance_mutiplier = settings.startup["enemyracemanager-level-multipliers"].value
 -- Handles acid and poison resistance
@@ -40,11 +40,11 @@ local incremental_cold_resistance = 85
 -- Handles acid damages
 local damage_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
 local base_physical_damage = 20
-local incremental_physical_damage = 80
+local incremental_physical_damage = 55
 
 -- Handles Attack Speed
 local attack_speed_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
-local base_attack_speed = 200
+local base_attack_speed = 210
 local incremental_attack_speed = 90
 
 local attack_range = 12
@@ -111,19 +111,32 @@ function ErmZerg.make_lurker(level)
                     target_type = "direction",
                     action = {
                         type = "direct",
-                        --ignore_collision_condition = true, --Ground only
                         action_delivery = {
                             type = "instant",
                             target_effects = {
                                 {
-                                    type = "create-explosion",
-                                    entity_name = 'lurker-explosion'
-                                },
-                                {
-                                    type = "damage",
-                                    damage = { amount = ERM_UnitHelper.get_damage(base_physical_damage, incremental_physical_damage, damage_multiplier, level), type = "physical" },
-                                    apply_damage_to_trees = true
-                                },
+                                    type = "nested-result",
+                                    action = {
+                                        type = "area",
+                                        force = 'not-same',
+                                        radius = 2,
+                                        ignore_collision_condition = true,
+                                        action_delivery = {
+                                            type = "instant",
+                                            target_effects = {
+                                                {
+                                                    type = "create-explosion",
+                                                    entity_name = 'lurker-explosion'
+                                                },
+                                                {
+                                                    type = "damage",
+                                                    damage = { amount = ERM_UnitHelper.get_damage(base_physical_damage, incremental_physical_damage, damage_multiplier, level), type = "physical" },
+                                                    apply_damage_to_trees = true
+                                                },
+                                            }
+                                        }
+                                    }
+                                }
                             }
                         }
                     },
@@ -204,7 +217,7 @@ function ErmZerg.make_lurker(level)
             time_before_removed = defines.time.minute * settings.startup["enemyracemanager-enemy-corpse-time"].value,
             subgroup = "corpses",
             order = "x" .. name .. level,
-            final_render_layer = "lower-object-above-shadow",
+            final_render_layer = "corpse",
             animation = {
                 filename = "__erm_zerg__/graphics/entity/units/" .. name .. "/" .. name .. "-death.png",
                 width = 128,

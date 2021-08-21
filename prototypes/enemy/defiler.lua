@@ -40,13 +40,13 @@ local incremental_cold_resistance = 85
 
 -- Handles damages
 local damage_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
-local base_acid_damage = 40 / 4 / 2
-local incremental_acid_damage = 40 / 4 / 2
+local base_acid_damage = 20 / 4 / 2
+local incremental_acid_damage = 60 / 4 / 2
 
 -- Handles Attack Speed
 local attack_speed_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
 local base_attack_speed = 600
-local incremental_attack_speed = 180
+local incremental_attack_speed = 300
 
 local attack_range = ERM_Config.get_max_attack_range()
 
@@ -204,7 +204,7 @@ function ErmZerg.make_defiler(level)
             time_before_removed = defines.time.minute * settings.startup["enemyracemanager-enemy-corpse-time"].value,
             subgroup = "corpses",
             order = "x" .. name .. level,
-            final_render_layer = "lower-object-above-shadow",
+            final_render_layer = "corpse",
             animation = {
                 filename = "__erm_zerg__/graphics/entity/units/" .. name .. "/" .. name .. "-death.png",
                 width = 80,

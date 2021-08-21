@@ -39,8 +39,6 @@ local incremental_cold_resistance = 85
 
 -- Handles physical damages
 local damage_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
-local base_heal_damage = 100 / 4 / 2
-local incremental_heal_damage = 400 / 4 / 2
 local base_acid_damage = 25 / 4 / 2
 local incremental_acid_damage = 25 / 4 / 2
 
@@ -257,29 +255,18 @@ function ErmZerg.make_queen(level)
                                 type = "area",
                                 force = 'not-same',
                                 radius = 5,
-                                force = 'ally',
                                 ignore_collision_condition = true,
                                 action_delivery = {
                                     type = "instant",
                                     target_effects = {
-                                        type = "damage",
-                                        damage = { amount = -1 * ERM_UnitHelper.get_damage(base_heal_damage, incremental_heal_damage, damage_multiplier, level), type = "healing" }
-                                    }
-                                }
-                            }
-                        },
-                        {
-                            type = "nested-result",
-                            action = {
-                                type = "area",
-                                force = 'not-same',
-                                radius = 5,
-                                ignore_collision_condition = true,
-                                action_delivery = {
-                                    type = "instant",
-                                    target_effects = {
-                                        type = "damage",
-                                        damage = { amount = ERM_UnitHelper.get_damage(base_acid_damage, incremental_acid_damage, damage_multiplier, level), type = "acid" }
+                                        {
+                                          type = "damage",
+                                          damage = { amount = ERM_UnitHelper.get_damage(base_acid_damage, incremental_acid_damage, damage_multiplier, level), type = "acid" }
+                                        },
+                                        {
+                                            type = "create-sticker",
+                                            sticker = "zerg-slowdown-sticker"
+                                        }
                                     }
                                 }
                             }
