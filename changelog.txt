@@ -11,6 +11,7 @@ Date: 2021-09-03
     - Guardian +33% damage, 1 attack per second.
     - bump zergling health
     - bump infested health
+    - Add infested to tier 3 unit in race_setting
 
   Graphics:
     - Fix render layer for corpses
