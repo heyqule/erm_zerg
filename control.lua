@@ -49,7 +49,7 @@ local addRaceSettings = function()
         units = {
             { 'zergling', 'hydralisk' },
             { 'overlord', 'devourer', 'drone', 'mutalisk', 'lurker' },
-            { 'guardian','ultralisk', 'queen', 'defiler' },
+            { 'guardian', 'ultralisk', 'queen', 'infested', 'defiler' },
         },
         current_units_tier = {},
         turrets = {
@@ -141,6 +141,10 @@ Event.register(Event.generate_event_name(ErmConfig.RACE_SETTING_UPDATE), functio
                     {'guardian','queen'}
                 }
                 race_setting.dropship = 'overlord'
+            end
+
+            if race_setting.version < 102 then
+                ErmRaceSettingsHelper.add_unit_to_tier(race_setting, 3, 'infested')
             end
 
             race_setting.version = MOD_VERSION
