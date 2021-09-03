@@ -3,17 +3,23 @@ Add Zergs to factorio as biters.
 
 This mod is created as an educational demo for [Enemy Race Manager](https://mods.factorio.com/mod/enemyracemanager)
 
-![Zerg](https://mods-data.factorio.com/assets/515e5390e5d7d8ad2135fb9e6604a995566204ee.png "Zerg")
+Discord:  [https://discord.gg/BwWXygyEyQ](https://discord.gg/BwWXygyEyQ)
 
-All graphic and sound assets in this mod are properties of Blizzard Entertainment Inc
+
+#####Licenses
+Lua code files are licensed under MIT.
+
+However, Starcraft graphic and sound assets are properties of Blizzard Entertainment Inc.  They are used for educational purposes. The original game is now free to play.
+
+![Zerg](https://mods-data.factorio.com/assets/d5713783b19c4ba3ca97ab578182e61c72ec11a0.png "Zerg")
 
 # Requirement
-* Enemy Race Manager >= 1.7
+* Enemy Race Manager >= 1.3
 * Factorio Standard Library >= 1.4.6
 * Factorio Base >= 1.1
 
 # Features
-All units have same base health point as original Starcraft, Some units have unique health multiplier to balance bullet damage.
+All unit has same base health point as original Starcraft, Some units have unique health multiplier to balance bullet damage.
 
 Weak to electric, laser and cold (-5%)
 
