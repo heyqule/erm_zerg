@@ -13,7 +13,7 @@ All graphic and sound assets in this mod are properties of Blizzard Entertainmen
 * Factorio Base >= 1.1
 
 # Features
-All unit has same base health point as original Starcraft, Some units have unique health multiplier to balance bullet damage.
+All units have same base health point as original Starcraft, Some units have unique health multiplier to balance bullet damage.
 
 Weak to electric, laser and cold (-5%)
 
