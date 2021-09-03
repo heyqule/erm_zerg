@@ -44,7 +44,7 @@ local incremental_cold_resistance = 85
 
 -- Handles Attack Speed
 local attack_speed_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
-local base_attack_speed = 600
+local base_attack_speed = 900
 local incremental_attack_speed = 300
 
 local attack_range = 3
