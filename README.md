@@ -20,57 +20,57 @@ Weak to electric, laser and cold (-5%)
 #### Tier 1 Units
 
 ######  Zergling
-    - Health 35 - 1085
+    - Health 35 - 1785
     - melee damage 5-50
 
 ###### Hydralisk
-    - Health 80 - 1680
+    - Health 80 - 2580
     - range damage 10-60
 
 ###### Mutalisk
-    - Health 120 - 2220
+    - Health 120 - 2745
     - range damage 10-60
 
 #### Tier 2 Units
 
 ###### Overlord
-    - Health 200 - 3200
+    - Health 200 - 3950
     - Drops ling / hydra / infested
 
 ###### Lurker AOE 2
-    - Health 125 - 2937
+    - Health 125 - 4031
     - range damage 20 - 75
 
 ###### Infested AOE 3
-    - Health 60 - 1260
+    - Health 60 - 2310
     - AEO damage: 30 - 100
 
 ###### Guardian
-    - Health 150 - 2275
+    - Health 150 - 3431
     - range damage 20 - 100
 
 ###### Devourer
-    - Health 250 - 4000
+    - Health 250 - 4937
     - range damage 25 - 85
     - slow on hit
 
 ###### Drone
-    - Health 40 - 1640
+    - Health 40 - 2040
     - Kill itself to spawns spore colony or nyduspit
 
 #### Tier 3 Units
 
 ###### Queen AOE 5
-    - Health 120 - 1920
+    - Health 120 - 2370
     - range damage 25 - 50
     - Slow targets
 
 ###### Defiler AOE 5
-    - Health 80 - 1680
+    - Health 80 - 2080
     - range damage 20 - 80
 
 ###### Ultralisk AOE 3
-    - Health 400 - 6400
+    - Health 400 - 10400
     - AOE melee damage 50 - 150
 
 Physical resistance: 95
