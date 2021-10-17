@@ -1,4 +1,12 @@
 ---------------------------------------------------------------------------------------------------
+Version: 1.11.0
+Date: ???
+
+  Changes:
+    - reduce drone spawns, adjusted other units spawn
+    - adjusted max_count_of_owned_units to be max_friends_around_to_spawn+2
+
+---------------------------------------------------------------------------------------------------
 Version: 1.10.0
 Date: 2021-09-03
 

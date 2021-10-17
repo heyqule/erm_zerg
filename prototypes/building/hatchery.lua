@@ -42,19 +42,19 @@ local unit_scale = 2
 local pollution_absorption_absolute = 150
 local spawning_cooldown = { 600, 180 }
 local spawning_radius = 10
-local max_count_of_owned_units = 5
+local max_count_of_owned_units = 7
 local max_friends_around_to_spawn = 5
 local spawn_table = function(level)
     local res = {}
     -- Tier 1 - 0.0 - 0.4
     -- Tier 2 - 0.4 - 0.8
     -- Tier 3 - 0.8+
-    res[1] = { MOD_NAME .. '/zergling/' .. level, { { 0.0, 0.7 }, { 0.2, 0.7 }, { 0.4, 0.6 }, { 0.6, 0.3 }, { 0.8, 0.2 } } }
+    res[1] = { MOD_NAME .. '/zergling/' .. level, { { 0.0, 0.7 }, { 0.2, 0.7 }, { 0.4, 0.6 }, { 0.6, 0.3 }, { 0.8, 0.25 } } }
     res[2] = { MOD_NAME .. '/hydralisk/' .. level, { { 0.0, 0.3 }, { 0.2, 0.3 }, { 0.4, 0.3 }, { 0.6, 0.3 }, { 0.8, 0.3 } } }
-    res[3] = { MOD_NAME .. '/mutalisk/' .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.1 }, { 0.6, 0.2 }, { 0.8, 0.2 } } }
+    res[3] = { MOD_NAME .. '/mutalisk/' .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.1 }, { 0.6, 0.2 }, { 0.8, 0.25 } } }
 
     res[4] = { MOD_NAME .. '/overlord/' .. level, { { 0.0, 0 }, { 0.2, 0 }, { 0.4, 0 }, { 0.6, 0.1 }, { 0.8, 0.1 } } }
-    res[5] = { MOD_NAME .. '/drone/' .. level, { { 0.0, 0 }, { 0.2, 0 }, { 0.4, 0 }, { 0.6, 0.1 }, { 0.8, 0.2 } } }
+    res[5] = { MOD_NAME .. '/drone/' .. level, { { 0.0, 0 }, { 0.2, 0 }, { 0.4, 0 }, { 0.6, 0.1 }, { 0.8, 0.1 } } }
     return res
 end
 
