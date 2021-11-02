@@ -8,8 +8,8 @@
 require('__stdlib__/stdlib/utils/defines/time')
 local Sprites = require('__stdlib__/stdlib/data/modules/sprites')
 
-local ERM_UnitHelper = require('__enemyracemanager__/lib/unit_helper')
-local ERM_UnitTint = require('__enemyracemanager__/lib/unit_tint')
+local ERM_UnitHelper = require('__enemyracemanager__/lib/rig/unit_helper')
+local ERM_UnitTint = require('__enemyracemanager__/lib/rig/unit_tint')
 local ERM_DebugHelper = require('__enemyracemanager__/lib/debug_helper')
 local ERM_Config = require('__enemyracemanager__/lib/global_config')
 local ZergSound = require('__erm_zerg__/prototypes/sound')
