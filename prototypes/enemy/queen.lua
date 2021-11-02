@@ -7,11 +7,11 @@
 --
 require('__stdlib__/stdlib/utils/defines/time')
 local Sprites = require('__stdlib__/stdlib/data/modules/sprites')
-local ERM_UnitHelper = require('__enemyracemanager__/lib/unit_helper')
-local ERM_UnitTint = require('__enemyracemanager__/lib/unit_tint')
+local ERM_UnitHelper = require('__enemyracemanager__/lib/rig/unit_helper')
+local ERM_UnitTint = require('__enemyracemanager__/lib/rig/unit_tint')
 local ERM_DebugHelper = require('__enemyracemanager__/lib/debug_helper')
 local ERM_Config = require('__enemyracemanager__/lib/global_config')
-local ERMDataHelper = require('__enemyracemanager__/lib/helper/data_helper')
+local ERMDataHelper = require('__enemyracemanager__/lib/rig/data_helper')
 local ZergSound = require('__erm_zerg__/prototypes/sound')
 local ZergProjectileAnimation = require('__erm_zerg__/prototypes/projectile_animation')
 local name = 'queen'
@@ -266,7 +266,7 @@ function ErmZerg.make_queen(level)
                                         },
                                         {
                                             type = "create-sticker",
-                                            sticker = "zerg-slowdown-sticker"
+                                            sticker = "5-075-slowdown-sticker"
                                         }
                                     }
                                 }
