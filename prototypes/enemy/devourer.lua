@@ -39,8 +39,8 @@ local incremental_cold_resistance = 70
 
 -- Handles damages
 local damage_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
-local base_acid_damage = 25 / 4
-local incremental_acid_damage = 60 / 4
+local base_acid_damage = 10
+local incremental_acid_damage = 30
 
 -- Handles Attack Speed
 local attack_speed_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
@@ -114,7 +114,7 @@ function ErmZerg.make_devourer(level)
                         type = "direct",
                         action_delivery = {
                             type = "stream",
-                            stream = name .. "-stream" .. level,
+                            stream = name .. "-stream-" .. level,
                         }
                     }
                 },
@@ -221,7 +221,7 @@ function ErmZerg.make_devourer(level)
         },
         {
             type = "stream",
-            name = name .. "-stream" .. level,
+            name = name .. "-stream-" .. level,
             flags = { "not-on-map" },
             particle_spawn_interval = 1,
             particle_spawn_timeout = 6,
@@ -238,7 +238,7 @@ function ErmZerg.make_devourer(level)
                             {
                                 type = "create-smoke",
                                 show_in_tooltip = true,
-                                entity_name = name .. "-devourer-cloud-" .. level
+                                entity_name = name .. "-cloud-" .. level
                             },
                             {
                                 type = "create-explosion",
@@ -264,7 +264,7 @@ function ErmZerg.make_devourer(level)
             }
         },
         {
-            name = name .. "-devourer-cloud-" .. level,
+            name = "devourer-cloud-" .. level,
             localised_name = {'entity-name.blood-cloud'},
             type = "smoke-with-trigger",
             flags = { "not-on-map" },
@@ -306,7 +306,8 @@ function ErmZerg.make_devourer(level)
                                     },
                                     {
                                         type = "create-sticker",
-                                        sticker = "5-075-slowdown-sticker"
+                                        sticker = "5-050-slowdown-sticker",
+                                        show_in_tooltip = true,
                                     }
                                 }
                             }
@@ -314,7 +315,7 @@ function ErmZerg.make_devourer(level)
                     }
                 }
             },
-            action_cooldown = 15
+            action_cooldown = 20
         },
     })
 end

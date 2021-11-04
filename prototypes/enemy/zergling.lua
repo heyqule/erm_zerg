@@ -36,8 +36,8 @@ local incremental_cold_resistance = 90
 
 -- Handles physical damages
 local damage_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
-local base_physical_damage = 5
-local incremental_physical_damage = 45
+local base_physical_damage = 1
+local incremental_physical_damage = 4
 
 -- Handles Attack Speed
 local attack_speed_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
@@ -103,7 +103,8 @@ function ErmZerg.make_zergling(level)
                 range = attack_range,
                 cooldown = ERM_UnitHelper.get_attack_speed(base_attack_speed, incremental_attack_speed, attack_speed_multiplier, level),
                 cooldown_deviation = 0.1,
-                ammo_type = make_unit_melee_ammo_type(ERM_UnitHelper.get_damage(base_physical_damage, incremental_physical_damage, damage_multiplier, level)),
+                damage_modifier = ERM_UnitHelper.get_damage(base_physical_damage, incremental_physical_damage, damage_multiplier, level),
+                ammo_type = make_unit_melee_ammo_type(10),
                 sound = ZergSound.meele_attack(0.75),
                 animation = {
                     layers = {
