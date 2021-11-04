@@ -13,7 +13,6 @@ local ERM_DebugHelper = require('__enemyracemanager__/lib/debug_helper')
 local ERM_Config = require('__enemyracemanager__/lib/global_config')
 local ERMDataHelper = require('__enemyracemanager__/lib/rig/data_helper')
 local ZergSound = require('__erm_zerg__/prototypes/sound')
-local ZergProjectileAnimation = require('__erm_zerg__/prototypes/projectile_animation')
 local name = 'queen'
 
 local health_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
@@ -39,8 +38,8 @@ local incremental_cold_resistance = 85
 
 -- Handles physical damages
 local damage_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
-local base_acid_damage = 25 / 4 / 2
-local incremental_acid_damage = 25 / 4 / 2
+local base_acid_damage = 5
+local incremental_acid_damage = 15
 
 -- Handles Attack Speed
 local attack_speed_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
@@ -118,7 +117,7 @@ function ErmZerg.make_queen(level)
                                 {
                                     type = "create-smoke",
                                     show_in_tooltip = true,
-                                    entity_name = name .. "-healing-cloud-" .. level
+                                    entity_name = name .. "-acid-cloud-" .. level
                                 },
                                 {
                                     type = "create-explosion",
@@ -223,7 +222,7 @@ function ErmZerg.make_queen(level)
             }
         },
         {
-            name = name .. "-healing-cloud-" .. level,
+            name = name .. "-acid-cloud-" .. level,
             localised_name = {'entity-name.healing-cloud'},
             type = "smoke-with-trigger",
             flags = { "not-on-map" },
@@ -266,7 +265,8 @@ function ErmZerg.make_queen(level)
                                         },
                                         {
                                             type = "create-sticker",
-                                            sticker = "5-075-slowdown-sticker"
+                                            sticker = "5-075-slowdown-sticker",
+                                            show_in_tooltip = true,
                                         }
                                     }
                                 }

@@ -27,15 +27,15 @@ Weak to electric, laser and cold (-5%)
 
 ######  Zergling
     - Health 35 - 1785
-    - melee damage 5-50
+    - melee damage 10-50
 
 ###### Hydralisk
     - Health 80 - 2580
-    - range damage 10-60
+    - range damage 10 - 80
 
 ###### Mutalisk
     - Health 120 - 2745
-    - range damage 10-60
+    - range damage 20 - 100
 
 #### Tier 2 Units
 
@@ -45,19 +45,19 @@ Weak to electric, laser and cold (-5%)
 
 ###### Lurker AOE 2
     - Health 125 - 4031
-    - range damage 20 - 75
+    - range damage 20 - 80
 
 ###### Infested AOE 3
     - Health 60 - 2310
-    - AEO damage: 30 - 100
+    - AEO damage: 30 - 120
 
 ###### Guardian
     - Health 150 - 3431
-    - range damage 20 - 100
+    - range damage 40-160
 
 ###### Devourer
     - Health 250 - 4937
-    - range damage 25 - 85
+    - range damage 30 - 120
     - slow on hit
 
 ###### Drone
@@ -68,12 +68,12 @@ Weak to electric, laser and cold (-5%)
 
 ###### Queen AOE 5
     - Health 120 - 2370
-    - range damage 25 - 50
+    - range damage 40 - 160 over 2 seconds
     - Slow targets
 
 ###### Defiler AOE 5
     - Health 80 - 2080
-    - range damage 20 - 80
+    - range damage 80 - 240 over 2 seconds
 
 ###### Ultralisk AOE 3
     - Health 400 - 10400

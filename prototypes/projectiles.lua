@@ -6,10 +6,103 @@
 
 local Sprites = require('__stdlib__/stdlib/data/modules/sprites')
 
-local ProjectileAnimation = {}
-
-function ProjectileAnimation.create_lurker_spike()
-    return {
+data:extend({
+    --- Projectiles
+    {
+        type = "projectile",
+        name = "mutalisk-projectile",
+        flags = { "not-on-map" },
+        acceleration = 0.005,
+        action = {
+            type = "direct",
+            action_delivery = {
+                type = "instant",
+                target_effects = {
+                    {
+                        type = "create-entity",
+                        entity_name = "mutalisk-explosion-small"
+                    },
+                    {
+                        type = "damage",
+                        damage = { amount = 20, type = "acid" }
+                    }
+                }
+            }
+        },
+        animation = {
+            filename = "__erm_zerg__/graphics/entity/projectiles/spores_1.png",
+            frame_count = 10,
+            width = 36,
+            height = 36,
+            priority = "high",
+            run_mode = 'forward-then-backward'
+        }
+    },
+    {
+        type = "projectile",
+        name = "hydralisk-projectile",
+        flags = { "not-on-map" },
+        acceleration = 0.05,
+        action = {
+            type = "direct",
+            action_delivery = {
+                type = "instant",
+                target_effects = {
+                    {
+                        type = "create-entity",
+                        entity_name = "hydralisk-explosion-small"
+                    },
+                    {
+                        type = "damage",
+                        damage = { amount = 10, type = "acid" },
+                        apply_damage_to_trees = true
+                    }
+                }
+            }
+        },
+        animation = {
+            filename = "__erm_zerg__/graphics/entity/projectiles/hydra_pr.png",
+            frame_count = 1,
+            width = 21,
+            height = 49,
+            priority = "high",
+            animation_speed = 0.2
+        }
+    },
+    {
+        type = "projectile",
+        name = "guardian-projectile",
+        flags = { "not-on-map" },
+        acceleration = 0.01,
+        action = {
+            type = "direct",
+            action_delivery = {
+                type = "instant",
+                target_effects = {
+                    {
+                        type = "create-entity",
+                        entity_name = "mutalisk-explosion-small"
+                    },
+                    {
+                        type = "damage",
+                        damage = { amount = 40, type = "acid" },
+                        apply_damage_to_trees = true
+                    },
+                }
+            }
+        },
+        animation = {
+            filename = "__erm_zerg__/graphics/entity/projectiles/spores_2.png",
+            priority = "extra-high",
+            width = 24,
+            height = 24,
+            frame_count = 4,
+            animation_speed = 0.2,
+            scale = 2
+        }
+    },
+    --- Explosions
+    {
         type = "explosion",
         name = "lurker-explosion",
         flags = { "not-on-map" },
@@ -26,11 +119,8 @@ function ProjectileAnimation.create_lurker_spike()
                 run_mode = "forward-then-backward",
             }
         }
-    }
-end
-
-function ProjectileAnimation.create_colony_spike()
-    return {
+    },
+    {
         type = "explosion",
         name = "colony-explosion",
         flags = { "not-on-map" },
@@ -61,40 +151,8 @@ function ProjectileAnimation.create_colony_spike()
                 }
             }
         }
-    }
-end
-
-function ProjectileAnimation.create_mutalisk_ball()
-    return {
-        type = "projectile",
-        name = "mutalisk-projectile",
-        flags = { "not-on-map" },
-        acceleration = 0.005,
-        action = {
-            type = "direct",
-            action_delivery = {
-                type = "instant",
-                target_effects = {
-                    {
-                        type = "create-entity",
-                        entity_name = "mutalisk-explosion-small"
-                    }
-                }
-            }
-        },
-        animation = {
-            filename = "__erm_zerg__/graphics/entity/projectiles/spores_1.png",
-            frame_count = 10,
-            width = 36,
-            height = 36,
-            priority = "high",
-            run_mode = 'forward-then-backward'
-        }
-    }
-end
-
-function ProjectileAnimation.create_mutalisk_hit_effect()
-    return {
+    },
+    {
         type = "explosion",
         name = "mutalisk-explosion-small",
         flags = { "not-on-map" },
@@ -109,40 +167,8 @@ function ProjectileAnimation.create_mutalisk_hit_effect()
                 scale = 1.5
             }
         }
-    }
-end
-
-function ProjectileAnimation.create_hydralisk_projectile()
-    return {
-        type = "projectile",
-        name = "hydralisk-projectile",
-        flags = { "not-on-map" },
-        acceleration = 0.05,
-        action = {
-            type = "direct",
-            action_delivery = {
-                type = "instant",
-                target_effects = {
-                    {
-                        type = "create-entity",
-                        entity_name = "hydralisk-explosion-small"
-                    }
-                }
-            }
-        },
-        animation = {
-            filename = "__erm_zerg__/graphics/entity/projectiles/hydra_pr.png",
-            frame_count = 1,
-            width = 21,
-            height = 49,
-            priority = "high",
-            animation_speed = 0.2
-        }
-    }
-end
-
-function ProjectileAnimation.create_hydralisk_hit()
-    return {
+    },
+    {
         type = "explosion",
         name = "hydralisk-explosion-small",
         flags = { "not-on-map" },
@@ -157,30 +183,7 @@ function ProjectileAnimation.create_hydralisk_hit()
                 animation_speed = 0.2
             }
         }
-    }
-end
-
-function ProjectileAnimation.create_hydralisk_hit()
-    return {
-        type = "explosion",
-        name = "hydralisk-explosion-small",
-        flags = { "not-on-map" },
-        animations = {
-            {
-                filename = "__erm_zerg__/graphics/entity/projectiles/hydra_acid.png",
-                priority = "extra-high",
-                width = 31,
-                height = 32,
-                line_length = 8,
-                frame_count = 8,
-                animation_speed = 0.2
-            }
-        }
-    }
-end
-
-function ProjectileAnimation.create_defiler_cloud()
-    return
+    },
     {
         type = "explosion",
         name = "defiler-cloud-explosion",
@@ -196,11 +199,7 @@ function ProjectileAnimation.create_defiler_cloud()
                 scale = 2
             }
         }
-    }
-end
-
-function ProjectileAnimation.create_queen_cloud()
-    return
+    },
     {
         type = "explosion",
         name = "queen-cloud-explosion",
@@ -216,11 +215,7 @@ function ProjectileAnimation.create_queen_cloud()
                 scale = 2
             }
         }
-    }
-end
-
-function ProjectileAnimation.create_devourer_cloud()
-    return
+    },
     {
         type = "explosion",
         name = "devourer-cloud-explosion",
@@ -236,11 +231,9 @@ function ProjectileAnimation.create_devourer_cloud()
                 scale = 1.5
             }
         }
-    }
-end
-
-function ProjectileAnimation.create_slow_ticker()
-    return
+    },
+    --- Death Explosion
+    --- Stickers
     {
         type = "sticker",
         name = "5-075-slowdown-sticker",
@@ -249,7 +242,14 @@ function ProjectileAnimation.create_slow_ticker()
         duration_in_ticks = 5 * 60,
         target_movement_modifier = 0.75,
         vehicle_speed_modifier = 0.75,
+    },
+    {
+        type = "sticker",
+        name = "5-050-slowdown-sticker",
+        flags = {},
+        animation = Sprites.empty_pictures(),
+        duration_in_ticks = 5 * 60,
+        target_movement_modifier = 0.50,
+        vehicle_speed_modifier = 0.50,
     }
-end
-
-return ProjectileAnimation
+})

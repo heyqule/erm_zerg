@@ -39,8 +39,8 @@ local incremental_cold_resistance = 85
 
 -- Handles acid damages
 local damage_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
-local base_physical_damage = 20
-local incremental_physical_damage = 55
+local base_physical_damage = 1
+local incremental_physical_damage = 3
 
 -- Handles Attack Speed
 local attack_speed_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
@@ -107,6 +107,7 @@ function ErmZerg.make_lurker(level)
                 cooldown = ERM_UnitHelper.get_attack_speed(base_attack_speed, incremental_attack_speed, attack_speed_multiplier, level),
                 cooldown_deviation = 0.1,
                 warmup = 30,
+                damage_modifier = ERM_UnitHelper.get_damage(base_physical_damage, incremental_physical_damage, damage_multiplier, level),
                 ammo_type = {
                     category = "biological",
                     target_type = "direction",
@@ -131,7 +132,7 @@ function ErmZerg.make_lurker(level)
                                                 },
                                                 {
                                                     type = "damage",
-                                                    damage = { amount = ERM_UnitHelper.get_damage(base_physical_damage, incremental_physical_damage, damage_multiplier, level), type = "physical" },
+                                                    damage = { amount = 20, type = "physical" },
                                                     apply_damage_to_trees = true
                                                 },
                                             }

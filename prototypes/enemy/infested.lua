@@ -36,8 +36,8 @@ local incremental_cold_resistance = 90
 
 -- Handles explosion damages
 local damage_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
-local base_explosion_damage = 30
-local incremental_explosion_damage = 70
+local base_explosion_damage = 1
+local incremental_explosion_damage = 3
 
 -- Handles Attack Speed
 local attack_speed_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
@@ -103,6 +103,7 @@ function ErmZerg.make_infested(level)
                 cooldown = ERM_UnitHelper.get_attack_speed(base_attack_speed, incremental_attack_speed, attack_speed_multiplier, level),
                 cooldown_deviation = 0.1,
                 warmup = 12,
+                damage_modifier = ERM_UnitHelper.get_damage(base_explosion_damage, incremental_explosion_damage, damage_multiplier, level),
                 ammo_type = {
                     category = "biological",
                     target_type = "direction",
@@ -134,7 +135,7 @@ function ErmZerg.make_infested(level)
                                             target_effects = {
                                                 {
                                                     type = "damage",
-                                                    damage = { amount = ERM_UnitHelper.get_damage(base_explosion_damage, incremental_explosion_damage, damage_multiplier, level), type = "explosion" },
+                                                    damage = { amount = 30, type = "explosion" },
                                                     apply_damage_to_trees = true
                                                 },
                                             }

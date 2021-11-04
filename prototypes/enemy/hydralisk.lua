@@ -36,8 +36,8 @@ local incremental_cold_resistance = 85
 
 -- Handles acid damages
 local damage_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
-local base_acid_damage = 10
-local incremental_acid_damage = 50
+local base_acid_damage = 1
+local incremental_acid_damage = 7
 
 -- Handles Attack Speed
 local attack_speed_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
@@ -105,6 +105,7 @@ function ErmZerg.make_hydralisk(level)
                 cooldown = ERM_UnitHelper.get_attack_speed(base_attack_speed, incremental_attack_speed, attack_speed_multiplier, level),
                 cooldown_deviation = 0.1,
                 warmup = 12,
+                damage_modifier = ERM_UnitHelper.get_damage(base_acid_damage, incremental_acid_damage, damage_multiplier, level),
                 ammo_type = {
                     category = "biological",
                     target_type = "direction",
@@ -114,13 +115,6 @@ function ErmZerg.make_hydralisk(level)
                             type = "projectile",
                             projectile = 'hydralisk-projectile',
                             starting_speed = 0.3,
-                            target_effects = {
-                                {
-                                    type = "damage",
-                                    damage = { amount = ERM_UnitHelper.get_damage(base_acid_damage, incremental_acid_damage, damage_multiplier, level), type = "acid" },
-                                    apply_damage_to_trees = true
-                                }
-                            }
                         }
                     }
                 },

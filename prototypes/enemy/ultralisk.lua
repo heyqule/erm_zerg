@@ -36,8 +36,8 @@ local incremental_cold_resistance = 90
 
 -- Handles physical damages
 local damage_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
-local base_physical_damage = 50
-local incremental_physical_damage = 100
+local base_physical_damage = 1
+local incremental_physical_damage = 2
 
 -- Handles Attack Speed
 local attack_speed_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
@@ -103,6 +103,7 @@ function ErmZerg.make_ultralisk(level)
                 range = attack_range,
                 cooldown = ERM_UnitHelper.get_attack_speed(base_attack_speed, incremental_attack_speed, attack_speed_multiplier, level),
                 cooldown_deviation = 0.1,
+                damage_modifier = ERM_UnitHelper.get_damage(base_physical_damage, incremental_physical_damage, damage_multiplier, level),
                 ammo_type = {
                     category = "biological",
                     action = {
@@ -116,7 +117,7 @@ function ErmZerg.make_ultralisk(level)
                                 {
                                     type = "damage",
                                     damage = {
-                                        amount = ERM_UnitHelper.get_damage(base_physical_damage, incremental_physical_damage, damage_multiplier, level),
+                                        amount = 50,
                                         type = "physical"
                                     },
                                     apply_damage_to_trees = true

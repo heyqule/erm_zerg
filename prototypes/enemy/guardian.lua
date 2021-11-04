@@ -40,8 +40,8 @@ local incremental_cold_resistance = 85
 
 -- Handles damages
 local damage_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
-local base_acid_damage = 20
-local incremental_acid_damage = 80
+local base_acid_damage = 1
+local incremental_acid_damage = 3
 
 -- Handles Attack Speed
 local attack_speed_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
@@ -109,6 +109,7 @@ function ErmZerg.make_guardian(level)
                 cooldown = ERM_UnitHelper.get_attack_speed(base_attack_speed, incremental_attack_speed, attack_speed_multiplier, level),
                 cooldown_deviation = 0.1,
                 warmup = 12,
+                damage_modifier = ERM_UnitHelper.get_damage(base_acid_damage, incremental_acid_damage, damage_multiplier, level),
                 ammo_type = {
                     category = "biological",
                     target_type = "direction",
@@ -118,13 +119,6 @@ function ErmZerg.make_guardian(level)
                             type = "projectile",
                             projectile = name .. "-projectile",
                             starting_speed = 0.1,
-                            target_effects = {
-                                {
-                                    type = "damage",
-                                    damage = { amount = ERM_UnitHelper.get_damage(base_acid_damage, incremental_acid_damage, damage_multiplier, level), type = "acid" },
-                                    apply_damage_to_trees = true
-                                },
-                            }
                         }
                     }
                 },
@@ -221,48 +215,5 @@ function ErmZerg.make_guardian(level)
                 animation_speed = 0.5
             }
         },
-        {
-            type = "projectile",
-            name = name .. "-projectile",
-            flags = { "not-on-map" },
-            acceleration = 0.01,
-            action = {
-                type = "direct",
-                action_delivery = {
-                    type = "instant",
-                    target_effects = {
-                        {
-                            type = "create-entity",
-                            entity_name = name .. "-explosion-small"
-                        }
-                    }
-                }
-            },
-            animation = {
-                filename = "__erm_zerg__/graphics/entity/projectiles/spores_2.png",
-                priority = "extra-high",
-                width = 24,
-                height = 24,
-                frame_count = 4,
-                animation_speed = 0.2,
-                scale = 2
-            }
-        },
-        {
-            type = "explosion",
-            name = name .. "-explosion-small",
-            flags = { "not-on-map" },
-            animations = {
-                {
-                    filename = "__erm_zerg__/graphics/entity/projectiles/spores_2.png",
-                    priority = "extra-high",
-                    width = 24,
-                    height = 24,
-                    frame_count = 4,
-                    animation_speed = 0.2,
-                    scale = 2
-                }
-            }
-        }
     })
 end

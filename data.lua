@@ -4,7 +4,7 @@ require('__erm_zerg__/global')
 
 local ErmConfig = require('__enemyracemanager__/lib/global_config')
 
-local ZergProjectileAnimation = require('__erm_zerg__/prototypes/projectile_animation')
+require('__erm_zerg__/prototypes/projectiles')
 
 require "prototypes.enemy.zergling"
 require "prototypes.enemy.mutalisk"
@@ -34,18 +34,6 @@ require "prototypes.building.queen_nest"
 require "prototypes.building.defiler_mound"
 require "prototypes.building.ultralisk_cavern"
 require "prototypes.building.nyduspit"
-
--- Create projectiles / explosion animations
-data:extend({ ZergProjectileAnimation.create_lurker_spike() })
-data:extend({ ZergProjectileAnimation.create_colony_spike() })
-data:extend({ ZergProjectileAnimation.create_mutalisk_ball() })
-data:extend({ ZergProjectileAnimation.create_mutalisk_hit_effect() })
-data:extend({ ZergProjectileAnimation.create_hydralisk_projectile() })
-data:extend({ ZergProjectileAnimation.create_hydralisk_hit() })
-data:extend({ ZergProjectileAnimation.create_defiler_cloud() })
-data:extend({ ZergProjectileAnimation.create_queen_cloud() })
-data:extend({ ZergProjectileAnimation.create_devourer_cloud() })
-data:extend({ ZergProjectileAnimation.create_slow_ticker() })
 
 local level = ErmConfig.MAX_LEVELS
 

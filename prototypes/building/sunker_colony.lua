@@ -41,15 +41,15 @@ local selection_box = { { -2, -2 }, { 2, 2 } }
 
 -- Handles damages
 local damage_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
-local base_physical_damage = 5
-local incremental_physical_damage = 70
+local base_physical_damage = 1
+local incremental_physical_damage = 14
 
 -- Handles Attack Speed
 local attack_speed_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
-local base_attack_speed = 300
-local incremental_attack_speed = 240
+local base_attack_speed = 120
+local incremental_attack_speed = 60
 
-local attack_range = 20
+local attack_range = 30
 
 -- Animation Settings
 local unit_scale = 1.5
@@ -183,6 +183,7 @@ function ErmZerg.make_sunker_colony(level)
                 cooldown = ERM_UnitHelper.get_attack_speed(base_attack_speed, incremental_attack_speed, attack_speed_multiplier, level),
                 cooldown_deviation = 0.25,
                 warmup = 12,
+                damage_modifier = ERM_UnitHelper.get_damage(base_physical_damage, incremental_physical_damage, damage_multiplier, level),
                 ammo_type = {
                     category = "biological",
                     target_type = "direction",
@@ -201,7 +202,7 @@ function ErmZerg.make_sunker_colony(level)
                                 },
                                 {
                                     type = "damage",
-                                    damage = { amount = ERM_UnitHelper.get_damage(base_physical_damage, incremental_physical_damage, damage_multiplier, level), type = "physical" }
+                                    damage = { amount = 15, type = "physical" }
                                 },
                             }
                         }

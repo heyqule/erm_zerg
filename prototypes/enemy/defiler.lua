@@ -13,7 +13,6 @@ local ERM_UnitTint = require('__enemyracemanager__/lib/rig/unit_tint')
 local ERM_DebugHelper = require('__enemyracemanager__/lib/debug_helper')
 local ERM_Config = require('__enemyracemanager__/lib/global_config')
 local ZergSound = require('__erm_zerg__/prototypes/sound')
-local ZergProjectileAnimation = require('__erm_zerg__/prototypes/projectile_animation')
 
 local name = 'defiler'
 
@@ -40,8 +39,8 @@ local incremental_cold_resistance = 85
 
 -- Handles damages
 local damage_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
-local base_acid_damage = 20 / 4 / 2
-local incremental_acid_damage = 60 / 4 / 2
+local base_acid_damage = 10
+local incremental_acid_damage = 20
 
 -- Handles Attack Speed
 local attack_speed_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
