@@ -233,23 +233,4 @@ data:extend({
         }
     },
     --- Death Explosion
-    --- Stickers
-    {
-        type = "sticker",
-        name = "5-075-slowdown-sticker",
-        flags = {},
-        animation = Sprites.empty_pictures(),
-        duration_in_ticks = 5 * 60,
-        target_movement_modifier = 0.75,
-        vehicle_speed_modifier = 0.75,
-    },
-    {
-        type = "sticker",
-        name = "5-050-slowdown-sticker",
-        flags = {},
-        animation = Sprites.empty_pictures(),
-        duration_in_ticks = 5 * 60,
-        target_movement_modifier = 0.50,
-        vehicle_speed_modifier = 0.50,
-    }
 })

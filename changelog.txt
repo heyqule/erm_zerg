@@ -9,6 +9,7 @@ Date: ???
     - Up unit_scale on various units
     - Refactor projectiles, move damage calculation to damage_modifier. Some units got minor damage buff.
     - Buff cannon damage and its range from 20 to 30 and its shooting speed at lower level.
+    - Added "not-flammable" tag to ultralisk, all flying units
 
 ---------------------------------------------------------------------------------------------------
 Version: 1.11.0
