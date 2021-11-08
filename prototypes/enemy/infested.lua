@@ -47,13 +47,13 @@ local incremental_attack_speed = 0
 local attack_range = 1
 
 local movement_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
-local base_movement_speed = 0.125
-local incremental_movement_speed = 0.075
+local base_movement_speed = 0.15
+local incremental_movement_speed = 0.1
 
 -- Misc settings
 local vision_distance = 30
 
-local pollution_to_join_attack = 250
+local pollution_to_join_attack = 150
 local distraction_cooldown = 20
 
 -- Animation Settings

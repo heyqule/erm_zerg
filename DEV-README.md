@@ -72,3 +72,68 @@ Please see [prototype/building/hive.lua](https://github.com/heyqule/erm_zerg/blo
 It feels more balance to have both splitter acid and direct attack for base defense.
 * Spitter Acid attack: [prototype/building/spore_colony.lua](https://github.com/heyqule/erm_zerg/blob/main/prototypes/building/spore_colony.lua) 
 * Direct Attack: [prototype/building/sunker_colony.lua](https://github.com/heyqule/erm_zerg/blob/main/prototypes/building/sunker_colony.lua)
+
+##### HP Guideline:
+level 1 are under 500, median none
+level 10 are 1000 - 5000, median 1500-2500
+level 20 are 2500 - 10000, median 3000-4000
+
+##### Damage Guideline:
+level 1: 10 - 50 DPS
+level 10: 30 - 100 DPS
+level 20:  80 - 200 DPS
+
+##### Movement Speed Guideline:
+(level 1 to 20)
+Slow Ground: (21-27) - (37-43)km/s
+```lua
+local base_movement_speed = 0.1
+local incremental_movement_speed = 0.1
+```
+
+Fast Ground: (27-37) - (48-54) km/s
+```lua
+local base_movement_speed = 0.15
+local incremental_movement_speed = 0.1
+```
+
+Normal Flyer: 32 - 59km/s
+```lua
+local base_movement_speed = 0.15
+local incremental_movement_speed = 0.125
+```
+
+Fast Flyer: 43 - 75km/s
+```lua
+local base_movement_speed = 0.2
+local incremental_movement_speed = 0.15
+```
+
+##### Attack Speed Guideline:
+Fastest attack speed for all units is 0.25s / attack.
+Attack range from 3s / attack to 4 attack/s depending on unit design and its level.
+
+##### Attack Range Guideline:
+Meele: 1
+Dropship: 3
+Short Range: 6
+Medium Range: 9
+Long Range: 12
+Max Range: ERM_Config.get_max_attack_range()
+
+min_attack_distance:
+- (unit_range - 2) if unit_range > 4 and < 8
+- (unit_range - 3) if unit_range >= 8 and < 12
+- (unit_range - 4) if unit_range >= 12
+
+
+##### Max Resistance Guideline:
+Max Physical: 95%
+Elemental: 90%
+Weak Elemental: 85%
+
+##### pollution_to_join_attack Guideline:
+Tier 1: 5 - 50
+Tier 2: 50 - 200
+Dropship / Drone: 200
+Tier 3: 100 - 400

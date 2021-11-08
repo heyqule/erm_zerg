@@ -50,13 +50,13 @@ local incremental_attack_speed = 300
 local attack_range = ERM_Config.get_max_attack_range()
 
 local movement_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
-local base_movement_speed = 0.1 --- 0.1 = 21.6KM/h
+local base_movement_speed = 0.125
 local incremental_movement_speed = 0.075
 
 -- Misc settings
 local vision_distance = 30
 
-local pollution_to_join_attack = 400
+local pollution_to_join_attack = 300
 local distraction_cooldown = 20
 
 -- Animation Settings
