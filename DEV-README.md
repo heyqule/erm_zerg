@@ -103,6 +103,8 @@ level 1: 10 - 50 DPS
 level 10: 30 - 100 DPS
 level 20:  80 - 200 DPS
 
+AOE units usually use 50%-75% of above damage
+
 ##### Movement Speed Guideline:
 (level 1 to 20)
 Slow Ground: (21-27) - (37-43)km/s
@@ -131,7 +133,7 @@ local incremental_movement_speed = 0.15
 
 ##### Attack Speed Guideline:
 Fastest attack speed for all units is 0.25s / attack.
-Attack range from 3s / attack to 4 attack/s depending on unit design and its level.
+Attack speed range from 3s / attack to 4 attack/s depending on unit design and its level.
 
 ##### Attack Range Guideline:
 Meele: 1
@@ -152,7 +154,7 @@ Tier 2: 50 - 200
 Dropship / Drone: 200
 Tier 3: 100 - 400
 
-AOE units are in higher range. Tier 3 AOE unit generally take 300-400 range.
+AOE units are in higher range. Tier 3 AOE units generally take 300-400 range.
 
 ##### vision_distance Guideline:
 Ground: 30
