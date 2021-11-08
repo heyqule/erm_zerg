@@ -15,7 +15,7 @@ local name = 'drone'
 
 local health_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
 local hitpoint = 40
-local max_hitpoint_multiplier = settings.startup["enemyracemanager-max-hitpoint-multipliers"].value * 4
+local max_hitpoint_multiplier = settings.startup["enemyracemanager-max-hitpoint-multipliers"].value * 5
 
 local resistance_mutiplier = settings.startup["enemyracemanager-level-multipliers"].value
 -- Handles acid and poison resistance
@@ -53,7 +53,7 @@ local incremental_movement_speed = 0.05
 -- Misc settings
 local vision_distance = 30
 
-local pollution_to_join_attack = 250
+local pollution_to_join_attack = 200
 local distraction_cooldown = 20
 
 -- Animation Settings
