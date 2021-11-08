@@ -1,18 +1,18 @@
-#Developer Read Me
+Developer Read Me
 --------------------
 This readme should be able give you a quick start to creating you new race.
 
-##### global.lua
+#### global.lua
 
 defines mod constants. Please see that file for additional requirements.
 
-##### setting-update.lua
+#### setting-update.lua
 add your race to setting's dropdowns
 
-##### data.lua
+#### data.lua
 Use this file to add unit/spawner to the game
 
-##### control.lua
+#### control.lua
 Use this file to hook up the race data and control any custom attack.
 
 Point of interests:
@@ -26,7 +26,7 @@ Point of interests:
 * Event.register(defines.events.on_script_trigger_effect, function(event) end
     * handles custom attacks
 
-#####Units:
+####Units:
 Many of the units have unique abilities, please refer to the lua files for reference
 
 * Melee: [Zergling](https://github.com/heyqule/erm_zerg/blob/main/prototypes/enemy/zergling.lua)
@@ -57,7 +57,7 @@ local ERM_Config = require('__enemyracemanager__/lib/global_config') -- Get prop
 local ZergSound = require('__erm_zerg__/prototypes/sound') -- All sounds are handled in single lua file.  It's easier to modify.
 ```
 
-#####Unit/Building Name Convention
+####Unit/Building Name Convention
 ```lua
 name = MOD_NAME .. '/' .. name .. '/' .. level,
 localised_name = { 'entity-name.' .. MOD_NAME .. '/' .. name, level },
@@ -65,18 +65,38 @@ localised_name = { 'entity-name.' .. MOD_NAME .. '/' .. name, level },
 * MOD_NAME is defined in global.lua
 * name is the unit name
    
-#####Unit Spawners:
+#### Unit Spawners:
 Please see [prototype/building/hive.lua](https://github.com/heyqule/erm_zerg/blob/main/prototypes/building/hive.lua) for details.
 
-##### Turrets:
+
+
+#### Turrets:
 It feels more balance to have both splitter acid and direct attack for base defense.
 * Spitter Acid attack: [prototype/building/spore_colony.lua](https://github.com/heyqule/erm_zerg/blob/main/prototypes/building/spore_colony.lua) 
 * Direct Attack: [prototype/building/sunker_colony.lua](https://github.com/heyqule/erm_zerg/blob/main/prototypes/building/sunker_colony.lua)
 
 ##### HP Guideline:
+Unit HP:
 level 1 are under 500, median none
 level 10 are 1000 - 5000, median 1500-2500
-level 20 are 2500 - 10000, median 3000-4000
+level 20 are 2500 - 10000, median 3000-5000
+
+Spawner/Turret HP:
+turrets are 4000 - 6000 
+proxy spawners are usually 5000 - 8000 health
+support spawner are 6000 - 12000
+command center 12000+
+
+##### Max Resistance Guideline:
+Unit Resistance:
+Max Physical: 95%
+Elemental: 90%
+Weak Elemental: 85%
+
+Spawner/Turret Resistance:
+Max Physical: 85%
+Elemental: 80%
+Weak Elemental: 75%
 
 ##### Damage Guideline:
 level 1: 10 - 50 DPS
@@ -126,14 +146,14 @@ min_attack_distance:
 - (unit_range - 3) if unit_range >= 8 and < 12
 - (unit_range - 4) if unit_range >= 12
 
-
-##### Max Resistance Guideline:
-Max Physical: 95%
-Elemental: 90%
-Weak Elemental: 85%
-
 ##### pollution_to_join_attack Guideline:
 Tier 1: 5 - 50
 Tier 2: 50 - 200
 Dropship / Drone: 200
 Tier 3: 100 - 400
+
+AOE units are in higher range. Tier 3 AOE unit generally take 300-400 range.
+
+##### vision_distance Guideline:
+Ground: 30
+Air: 35
