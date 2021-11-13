@@ -44,7 +44,7 @@ local incremental_acid_damage = 15
 -- Handles Attack Speed
 local attack_speed_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
 local base_attack_speed = 600
-local incremental_attack_speed = 180
+local incremental_attack_speed = 300
 
 local attack_range = ERM_Config.get_max_attack_range()
 
