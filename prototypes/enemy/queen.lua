@@ -223,7 +223,7 @@ function ErmZerg.make_queen(level)
         },
         {
             name = name .. "-acid-cloud-" .. level,
-            localised_name = {'entity-name.healing-cloud'},
+            localised_name = {'entity-name.acid-cloud'},
             type = "smoke-with-trigger",
             flags = { "not-on-map" },
             show_when_smoke_off = true,
