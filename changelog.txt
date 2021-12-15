@@ -1,4 +1,11 @@
 ---------------------------------------------------------------------------------------------------
+Version: 1.13.0
+Date: ???
+
+  Graphics:
+    - Lower render_layer of air unit from air_object to wires-above.  Projectiles and explosions should render above them.
+
+---------------------------------------------------------------------------------------------------
 Version: 1.12.0
 Date: 2021-11-14
 
