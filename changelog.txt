@@ -2,8 +2,14 @@
 Version: 1.13.0
 Date: ???
 
+  Changes:
+    - Code file license changed from MIT to GNU LGPLv3
+
   Graphics:
     - Lower render_layer of air unit from air_object to wires-above.  Projectiles and explosions should render above them.
+
+  Changes:
+    - Bumped Devourer attack speed
 
 ---------------------------------------------------------------------------------------------------
 Version: 1.12.0
