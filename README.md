@@ -7,7 +7,7 @@ Discord:  [https://discord.gg/BwWXygyEyQ](https://discord.gg/BwWXygyEyQ)
 
 
 #####Licenses
-Lua code files are licensed under MIT.
+Lua code files are licensed under GNU LGPLv3
 
 However, Starcraft graphic and sound assets are properties of Blizzard Entertainment Inc.  They are used for educational purposes. The original game is now free to play.
 
