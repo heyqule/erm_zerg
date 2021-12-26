@@ -1,0 +1,25 @@
+{
+  "entity":
+  [
+    ["erm_zerg/spore_colony_shortrange/1", "erm_zerg/sunker_colony_shortrange/1"],
+    ["erm_zerg/spore_colony_shortrange/2", "erm_zerg/sunker_colony_shortrange/2"],
+    ["erm_zerg/spore_colony_shortrange/3", "erm_zerg/sunker_colony_shortrange/3"],
+    ["erm_zerg/spore_colony_shortrange/4", "erm_zerg/sunker_colony_shortrange/4"],
+    ["erm_zerg/spore_colony_shortrange/5", "erm_zerg/sunker_colony_shortrange/5"],
+    ["erm_zerg/spore_colony_shortrange/6", "erm_zerg/sunker_colony_shortrange/6"],
+    ["erm_zerg/spore_colony_shortrange/7", "erm_zerg/sunker_colony_shortrange/7"],
+    ["erm_zerg/spore_colony_shortrange/8", "erm_zerg/sunker_colony_shortrange/8"],
+    ["erm_zerg/spore_colony_shortrange/9", "erm_zerg/sunker_colony_shortrange/9"],
+    ["erm_zerg/spore_colony_shortrange/10", "erm_zerg/sunker_colony_shortrange/10"],
+    ["erm_zerg/spore_colony_shortrange/11", "erm_zerg/sunker_colony_shortrange/11"],
+    ["erm_zerg/spore_colony_shortrange/12", "erm_zerg/sunker_colony_shortrange/12"],
+    ["erm_zerg/spore_colony_shortrange/13", "erm_zerg/sunker_colony_shortrange/13"],
+    ["erm_zerg/spore_colony_shortrange/14", "erm_zerg/sunker_colony_shortrange/14"],
+    ["erm_zerg/spore_colony_shortrange/15", "erm_zerg/sunker_colony_shortrange/15"],
+    ["erm_zerg/spore_colony_shortrange/16", "erm_zerg/sunker_colony_shortrange/16"],
+    ["erm_zerg/spore_colony_shortrange/17", "erm_zerg/sunker_colony_shortrange/17"],
+    ["erm_zerg/spore_colony_shortrange/18", "erm_zerg/sunker_colony_shortrange/18"],
+    ["erm_zerg/spore_colony_shortrange/19", "erm_zerg/sunker_colony_shortrange/19"],
+    ["erm_zerg/spore_colony_shortrange/20", "erm_zerg/sunker_colony_shortrange/20"]
+  ]
+}
