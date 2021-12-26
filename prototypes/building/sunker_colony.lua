@@ -8,6 +8,7 @@ require('__stdlib__/stdlib/utils/defines/time')
 local ERM_UnitHelper = require('__enemyracemanager__/lib/rig/unit_helper')
 local ERM_UnitTint = require('__enemyracemanager__/lib/rig/unit_tint')
 local ERM_DebugHelper = require('__enemyracemanager__/lib/debug_helper')
+local ERM_Config = require('__enemyracemanager__/lib/global_config')
 local ZergSound = require('__erm_zerg__/prototypes/sound')
 
 local enemy_autoplace = require("__enemyracemanager__/lib/enemy-autoplace-utils")
@@ -50,6 +51,7 @@ local base_attack_speed = 120
 local incremental_attack_speed = 60
 
 local attack_range = 30
+local shortrange_attack_range = ERM_Config.get_max_attack_range()
 
 -- Animation Settings
 local unit_scale = 1.5
@@ -299,7 +301,7 @@ function ErmZerg.make_sunker_colony(level)
                 type = "projectile",
                 ammo_category = 'biological',
                 acceleration = 0,
-                range = attack_range,
+                range = shortrange_attack_range,
                 cooldown = ERM_UnitHelper.get_attack_speed(base_attack_speed, incremental_attack_speed, attack_speed_multiplier, level),
                 cooldown_deviation = 0.25,
                 warmup = 12,
