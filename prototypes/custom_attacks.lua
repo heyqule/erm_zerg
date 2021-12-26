@@ -21,9 +21,9 @@ local get_overlord_droppable_unit = function()
 end
 
 local drone_building_name = {
-    { 'spore_colony_shortrange' },
-    { 'spore_colony_shortrange' },
-    { 'spore_colony_shortrange', 'nyduspit' },
+    { 'sunker_colony_shortrange' },
+    { 'sunker_colony_shortrange' },
+    { 'sunker_colony_shortrange', 'nyduspit' },
 }
 local get_drone_buildable_turrets = function()
     return CustomAttackHelper.get_unit(drone_building_name, MOD_NAME)
