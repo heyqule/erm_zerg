@@ -44,8 +44,8 @@ local pollution_absorption_absolute = 300
 local spawning_cooldown = { 600, 300 }
 local spawning_radius = 10
 
-local max_count_of_owned_units = 7
-local max_friends_around_to_spawn = 5
+local max_count_of_owned_units = 12
+local max_friends_around_to_spawn = 7
 --- Spawn Table
 --- This control how unit spawns based on evolution factor.  It divided into 6 sections by 0.2.
 --- ERM have 3 tiers, Tier 1 - 0.0 - 0.4, Tier 2 - 0.4 - 0.8, Tier 3 - 0.8 - 1.0
