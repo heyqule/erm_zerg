@@ -39,10 +39,10 @@ local incremental_cold_resistance = 75
 local unit_scale = 2
 
 local pollution_absorption_absolute = 50
-local spawning_cooldown = { 900, 450 }
+local spawning_cooldown = { 600, 300 }
 local spawning_radius = 10
-local max_count_of_owned_units = 5
-local max_friends_around_to_spawn = 3
+local max_count_of_owned_units = 12
+local max_friends_around_to_spawn = 7
 local spawn_table = function(level)
     local res = {}
     res[1] = { MOD_NAME .. '/zergling/' .. level, { { 0.0, 0.7 }, { 0.2, 0.7 }, { 0.4, 0.6 }, { 0.6, 0.0 }, { 0.8, 0.0 }, {1.0, 0} } }
