@@ -40,15 +40,15 @@ local incremental_cold_resistance = 75
 local unit_scale = 2
 
 local pollution_absorption_absolute = 50
-local spawning_cooldown = { 600, 300 }
+local spawning_cooldown = { 600, 180 }
 local spawning_radius = 10
-local max_count_of_owned_units = 7
-local max_friends_around_to_spawn = 5
+local max_count_of_owned_units = 12
+local max_friends_around_to_spawn = 7
 local spawn_table = function(level)
     local res = {}
-    res[1] = { MOD_NAME .. '/zergling/' .. level, { { 0.0, 0.5 }, { 0.2, 0.5 }, { 1, 0.4 } } }
+    res[1] = { MOD_NAME .. '/zergling/' .. level, { { 0.0, 0.5 }, { 0.2, 0.5 }, { 1, 0.3 } } }
     res[2] = { MOD_NAME .. '/hydralisk/' .. level, { { 0.0, 0.5 }, { 0.2, 0.5 }, { 1, 0.4 } } }
-    res[3] = { MOD_NAME .. '/mutalisk/' .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 1, 0.2 } } }
+    res[3] = { MOD_NAME .. '/mutalisk/' .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 1, 0.3 } } }
     return res
 end
 
