@@ -106,19 +106,22 @@ Event.on_configuration_changed(function(event)
         name = Event.get_event_name(ErmConfig.RACE_SETTING_UPDATE), affected_race = MOD_NAME })
 end)
 
+local attack_functions = {
+    [OVERLORD_ATTACK] = function(args)
+        CustomAttacks.process_overlord(args)
+    end,
+    [DRONE_ATTACK] = function(args)
+        CustomAttacks.process_drone(args)
+    end,
+    [INFESTED_ATTACK] = function(args)
+        CustomAttacks.process_infested(args)
+    end,
+}
 Event.register(defines.events.on_script_trigger_effect, function(event)
-    if not event.source_entity or
-            String.find(event.source_entity.name, MOD_NAME, 1, true) == nil
+    if  attack_functions[event.effect_id] and
+        CustomAttacks.valid(event, MOD_NAME)
     then
-        return
-    end
-
-    if event.effect_id == OVERLORD_ATTACK then
-        CustomAttacks.process_overlord(event)
-    elseif event.effect_id == DRONE_ATTACK then
-        CustomAttacks.process_drone(event)
-    elseif event.effect_id == INFESTED_ATTACK then
-        CustomAttacks.process_infested(event)
+        attack_functions[event.effect_id](event)
     end
 end)
 
