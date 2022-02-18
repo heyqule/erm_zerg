@@ -38,56 +38,52 @@ local createRace = function()
 end
 
 local addRaceSettings = function()
-    if remote.call('enemy_race_manager', 'get_race', MOD_NAME) then
-        return
+    local race_settings = remote.call('enemy_race_manager', 'get_race', MOD_NAME)
+    if race_settings == nil then
+        race_settings = {}
     end
-    local race_settings = {
-        race = MOD_NAME,
-        version = MOD_VERSION,
-        level = 1, -- Race level
-        tier = 1, -- Race tier
-        evolution_point = 0,
-        evolution_base_point = 0,
-        attack_meter = 0, -- Build by killing their force (Spawner = 50, turrets = 10, unit = 1)
-        next_attack_threshold = 0, -- Used by system to calculate next move
-        units = {
-            { 'zergling', 'hydralisk' },
-            { 'overlord', 'devourer', 'drone', 'mutalisk', 'lurker' },
-            { 'guardian', 'ultralisk', 'queen', 'infested', 'defiler' },
-        },
-        current_units_tier = {},
-        turrets = {
-            { 'sunker_colony', 'spore_colony' },
-            {},
-            {},
-        },
-        current_turrets_tier = {},
-        command_centers = {
-            { 'hatchery' },
-            { 'lair' },
-            { 'hive' }
-        },
-        current_command_centers_tier = {},
-        support_structures = {
-            { 'spawning_pool', 'hydraden', 'spire', 'chamber' },
-            { 'greater_spire' },
-            { 'ultralisk_cavern', 'queen_nest', 'defiler_mound', 'nyduspit' },
-        },
-        current_support_structures_tier = {},
-        flying_units = {
-            {'mutalisk'}, -- Fast unit that uses in rapid target attack group
-            {'devourer'},
-            {'guardian','queen'}
-        },
-        dropship = 'overlord'
-    }
 
-    race_settings.current_units_tier = race_settings.units[1]
-    race_settings.current_turrets_tier = race_settings.turrets[1]
-    race_settings.current_command_centers_tier = race_settings.command_centers[1]
-    race_settings.current_support_structures_tier = race_settings.support_structures[1]
+    race_settings.race =  race_settings.race or MOD_NAME
+    race_settings.version =  race_settings.version or MOD_VERSION
+    race_settings.level =  race_settings.level or 1
+    race_settings.tier =  race_settings.tier or 1
+    race_settings.evolution_point =  race_settings.evolution_point or 0
+    race_settings.evolution_base_point =  race_settings.evolution_base_point or 0
+    race_settings.attack_meter = race_settings.attack_meter or 0
+    race_settings.attack_meter_total = race_settings.attack_meter_total or 0
+    race_settings.next_attack_threshold = race_settings.next_attack_threshold or 0
+
+    race_settings.units = {
+        { 'zergling', 'hydralisk' },
+        { 'overlord', 'devourer', 'drone', 'mutalisk', 'lurker' },
+        { 'guardian', 'ultralisk', 'queen', 'infested', 'defiler' },
+    }
+    race_settings.turrets = {
+        { 'sunker_colony', 'spore_colony' },
+        {},
+        {},
+    }
+    race_settings.command_centers = {
+        { 'hatchery' },
+        { 'lair' },
+        { 'hive' }
+    }
+    race_settings.support_structures = {
+        { 'spawning_pool', 'hydraden', 'spire', 'chamber' },
+        { 'greater_spire' },
+        { 'ultralisk_cavern', 'queen_nest', 'defiler_mound', 'nyduspit' },
+    }
+    race_settings.flying_units = {
+        {'mutalisk'}, -- Fast unit that uses in rapid target attack group
+        {'devourer'},
+        {'guardian','queen'}
+    }
+    race_settings.dropship = 'overlord'
 
     remote.call('enemy_race_manager', 'register_race', race_settings)
+
+    Event.dispatch({
+        name = Event.get_event_name(ErmConfig.RACE_SETTING_UPDATE), affected_race = MOD_NAME })
 end
 
 Event.on_init(function(event)
@@ -100,10 +96,7 @@ end)
 
 Event.on_configuration_changed(function(event)
     createRace()
-
-    -- Mod Compatibility Upgrade for race settings
-    Event.dispatch({
-        name = Event.get_event_name(ErmConfig.RACE_SETTING_UPDATE), affected_race = MOD_NAME })
+    addRaceSettings()
 end)
 
 local attack_functions = {
@@ -122,41 +115,6 @@ Event.register(defines.events.on_script_trigger_effect, function(event)
         CustomAttacks.valid(event, MOD_NAME)
     then
         attack_functions[event.effect_id](event)
-    end
-end)
-
----
---- Modify Race Settings for existing game
----
-Event.register(Event.generate_event_name(ErmConfig.RACE_SETTING_UPDATE), function(event)
-    local race_setting = remote.call('enemy_race_manager', 'get_race', MOD_NAME)
-    if (event.affected_race == MOD_NAME) and race_setting then
-        if race_setting.version < MOD_VERSION then
-            if race_setting.version < 101 then
-                race_setting.angry_meter = nil
-                race_setting.send_attack_threshold = nil
-                race_setting.send_attack_threshold_deviation = nil
-                race_setting.attack_meter = 0
-
-                ErmRaceSettingsHelper.remove_unit_from_tier(race_setting, 1, 'mutalisk')
-                ErmRaceSettingsHelper.add_unit_to_tier(race_setting, 2, 'mutalisk')
-                ErmRaceSettingsHelper.add_unit_to_tier(race_setting, 2, 'lurker')
-
-                race_setting.flying_units = {
-                    {'mutalisk'}, -- Fast unit that uses in rapid target attack group
-                    {'devourer'}, -- Overlap Tier to increase spawn rate
-                    {'guardian','queen'}
-                }
-                race_setting.dropship = 'overlord'
-            end
-
-            if race_setting.version < 102 then
-                ErmRaceSettingsHelper.add_unit_to_tier(race_setting, 3, 'infested')
-            end
-
-            race_setting.version = MOD_VERSION
-        end
-        remote.call('enemy_race_manager', 'update_race_setting', race_setting)
     end
 end)
 

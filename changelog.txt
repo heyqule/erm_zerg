@@ -1,9 +1,10 @@
 ---------------------------------------------------------------------------------------------------
-Version: 1.14.1
+Version: 1.15.0
 Date: ???
 
   Changes:
     - Improved custom attack handling
+    - Improved race data handling
     - RU Translation update. (Thank You! SeptiSe7ven)
 
 
