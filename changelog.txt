@@ -5,6 +5,8 @@ Date: ???
   Changes:
     - Improved custom attack handling
     - Improved race data handling
+    - Changed all call_for_help to 50 tiles.
+    - Tweak spawner time, Tier 2 units takes 1.5x, Tier 3 units takes 2x
     - RU Translation update. (Thank You! SeptiSe7ven)
 
 
