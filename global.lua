@@ -9,15 +9,14 @@
 MOD_NAME = 'erm_zerg'
 -- Must be prefix with "enemy_"
 FORCE_NAME = 'enemy_erm_zerg'
-MOD_VERSION = 102
 
 DEBUG_MODE = false
 
 
 -- Attack Types for on_script_trigger_effect
-OVERLORD_ATTACK = 'overlord_attack'
-DRONE_ATTACK = 'drone_attack'
-INFESTED_ATTACK = 'infested_attack'
+OVERLORD_ATTACK = 'emzrg-old'
+DRONE_ATTACK = 'emzrg-drn'
+INFESTED_ATTACK = 'emzrg-inf'
 
 
 

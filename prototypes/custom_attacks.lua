@@ -31,6 +31,8 @@ end
 
 local CustomAttacks = {}
 
+CustomAttacks.valid = CustomAttackHelper.valid
+
 function CustomAttacks.process_overlord(event)
     CustomAttackHelper.drop_unit(event, MOD_NAME, get_overlord_droppable_unit())
 end
