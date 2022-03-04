@@ -81,6 +81,7 @@ function ErmZerg.make_guardian(level)
             order = MOD_NAME .. '/'  .. name .. '/' .. level,
             subgroup = "erm-flying-enemies",
             shooting_cursor_size = 2,
+            spawning_time_modifier = 2,
             resistances = {
                 { type = "acid", percent = ERM_UnitHelper.get_resistance(base_acid_resistance, incremental_acid_resistance, resistance_mutiplier, level) },
                 { type = "poison", percent = ERM_UnitHelper.get_resistance(base_acid_resistance, incremental_acid_resistance, resistance_mutiplier, level) },
