@@ -16,7 +16,7 @@ However, Starcraft graphic and sound assets are properties of Blizzard Entertain
 ![Zerg](https://mods-data.factorio.com/assets/d5713783b19c4ba3ca97ab578182e61c72ec11a0.png "Zerg")
 
 # Requirement
-* Enemy Race Manager >= 1.3
+* Enemy Race Manager >= 1.15
 * Factorio Standard Library >= 1.4.6
 * Factorio Base >= 1.1
 
@@ -28,58 +28,43 @@ Weak to electric, laser and cold (-5%)
 #### Tier 1 Units
 
 ######  Zergling
-    - Health 35 - 1785
-    - melee damage 10-50
+- Attack: Physical
 
 ###### Hydralisk
-    - Health 80 - 2580
-    - range damage 10 - 80
+- Attack: Acid
 
 ###### Mutalisk
-    - Health 120 - 2745
-    - range damage 20 - 100
+- Attack: Acid
 
 #### Tier 2 Units
 
 ###### Overlord
-    - Health 200 - 3950
-    - Drops ling / hydra / infested
+- Drops units
 
-###### Lurker AOE 2
-    - Health 125 - 4031
-    - range damage 20 - 80
+###### Lurker
+- Attack: Physical (2 radius AOE)
 
 ###### Infested AOE 3
-    - Health 60 - 2310
-    - AEO damage: 30 - 120
+- Attack: Explosion (3 radius AOE)
 
 ###### Guardian
-    - Health 150 - 3431
-    - range damage 40-160
+- Attack: Acid
 
 ###### Devourer
-    - Health 250 - 4937
-    - range damage 30 - 120
-    - slow on hit
+- Attack: Acid (Slow on hit)
 
 ###### Drone
-    - Health 40 - 2040
-    - Kill itself to spawns spore colony or nyduspit
+- Builds spore colony or nyduspit
 
 #### Tier 3 Units
+###### Queen
+- Attack: Acid (5 radius AOE) (Slow on hit)
 
-###### Queen AOE 5
-    - Health 120 - 2370
-    - range damage 40 - 160 over 2 seconds
-    - Slow targets
+###### Defiler
+- Attack: Acid (5 radius AOE)
 
-###### Defiler AOE 5
-    - Health 80 - 2080
-    - range damage 80 - 240 over 2 seconds
-
-###### Ultralisk AOE 3
-    - Health 400 - 10400
-    - AOE melee damage 50 - 150
+###### Ultralisk
+- Attack: Physical (3 radius AOE)
 
 Physical resistance: 95
 Weak elemental resistance: 85
