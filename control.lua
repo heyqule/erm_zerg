@@ -90,10 +90,10 @@ local addRaceSettings = function()
         {{ 'sunker_colony_shortrange','nyduspit'},{2,1}},
     }
     race_settings.featured_groups = {
-        --Unit list, spawn ratio, unit_cost
+        -- Unit list, spawn ratio, unit attack point cost
         {{'zergling','ultralisk'}, {3, 1}, 20},
         {{'hydralisk','lurker'}, {2, 1}, 20},
-        {{'zergling', 'infested', 'ultralisk'}, {3, 4, 1}, 17.5},
+        {{'zergling', 'infested', 'ultralisk'}, {3, 4, 1}, 15},
         {{'zergling','ultralisk','defiler'}, {4, 2, 1}, 22.5},
         {{'zergling', 'hydralisk','lurker', 'ultralisk'}, {2, 1, 1, 1}, 20},
     }
