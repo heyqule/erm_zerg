@@ -1,4 +1,30 @@
 ---------------------------------------------------------------------------------------------------
+Version: 1.16.0
+Date: 2022-06-06
+
+  Features:
+    - Added support for featured squad
+    - Added support for elite squad
+    --- Featured Squad Details ---
+    - Unit list, spawn ratio, unit attack point cost per unit
+    - {{'zergling','ultralisk'}, {3, 1}, 20},
+    - {{'hydralisk','lurker'}, {2, 1}, 20},
+    - {{'zergling', 'infested', 'ultralisk'}, {3, 4, 1}, 15},
+    - {{'zergling','ultralisk','defiler'}, {4, 2, 1}, 22.5},
+    - {{'zergling', 'hydralisk','lurker', 'ultralisk'}, {2, 1, 1, 1}, 20},
+    ------------------------------
+    --- Featured Flying Squad Details ---
+    - {{'mutalisk'}, {1}, 45},
+    - {{'devourer', 'guardian'}, {2, 1}, 50},
+    - {{'mutalisk', 'queen'}, {3, 1}, 75},
+    - {{'mutalisk', 'overlord'}, {2, 1}, 50},
+    -------------------------------------
+
+  Changes:
+    - Dropship unit dropping timer changed from 15-10s to 45-30s
+    - Added max_range to projectiles
+
+---------------------------------------------------------------------------------------------------
 Version: 1.15.0
 Date: 2022-03-04
 

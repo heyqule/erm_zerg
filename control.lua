@@ -50,6 +50,7 @@ local addRaceSettings = function()
     race_settings.evolution_base_point =  race_settings.evolution_base_point or 0
     race_settings.attack_meter = race_settings.attack_meter or 0
     race_settings.attack_meter_total = race_settings.attack_meter_total or 0
+    race_settings.last_attack_meter_total = race_settings.last_attack_meter_total or 0
     race_settings.next_attack_threshold = race_settings.next_attack_threshold or 0
 
     race_settings.units = {
@@ -73,16 +74,39 @@ local addRaceSettings = function()
         { 'ultralisk_cavern', 'queen_nest', 'defiler_mound', 'nyduspit' },
     }
     race_settings.flying_units = {
-        {'mutalisk'}, -- Fast unit that uses in rapid target attack group
+        {'mutalisk'},
         {'devourer'},
         {'guardian','queen'}
     }
     race_settings.dropship = 'overlord'
+    race_settings.droppable_units = {
+        {{ 'zergling', 'hydralisk' },{2,1}},
+        {{ 'zergling', 'hydralisk', 'lurker' },{3,2,1}},
+        {{ 'zergling', 'hydralisk', 'lurker', 'infested', 'ultralisk' },{4,4,1,2,1}},
+    }
+    race_settings.construction_buildings = {
+        {{ 'sunker_colony_shortrange'},{1}},
+        {{ 'sunker_colony_shortrange'},{1}},
+        {{ 'sunker_colony_shortrange','nyduspit'},{2,1}},
+    }
+    race_settings.featured_groups = {
+        -- Unit list, spawn ratio, unit attack point cost
+        {{'zergling','ultralisk'}, {3, 1}, 20},
+        {{'hydralisk','lurker'}, {2, 1}, 20},
+        {{'zergling', 'infested', 'ultralisk'}, {3, 4, 1}, 15},
+        {{'zergling','ultralisk','defiler'}, {4, 2, 1}, 22.5},
+        {{'zergling', 'hydralisk','lurker', 'ultralisk'}, {2, 1, 1, 1}, 20},
+    }
+    race_settings.featured_flying_groups = {
+        {{'mutalisk'}, {1}, 45},
+        {{'devourer', 'guardian'}, {2, 1}, 50},
+        {{'mutalisk', 'queen'}, {3, 1}, 75},
+        {{'mutalisk', 'overlord'}, {2, 1}, 50},
+    }
+
+    ErmRaceSettingsHelper.process_unit_spawn_rate_cache(race_settings)
 
     remote.call('enemy_race_manager', 'register_race', race_settings)
-
-    Event.dispatch({
-        name = Event.get_event_name(ErmConfig.RACE_SETTING_UPDATE), affected_race = MOD_NAME })
 end
 
 Event.on_init(function(event)

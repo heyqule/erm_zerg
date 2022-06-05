@@ -35,9 +35,9 @@ require "prototypes.building.defiler_mound"
 require "prototypes.building.ultralisk_cavern"
 require "prototypes.building.nyduspit"
 
-local level = ErmConfig.MAX_LEVELS
+local max_level = ErmConfig.MAX_LEVELS
 
-for i = 1, level do
+for i = 1, max_level + ErmConfig.MAX_ELITE_LEVELS do
     ErmZerg.make_zergling(i)
     ErmZerg.make_hydralisk(i)
     ErmZerg.make_mutalisk(i)
@@ -50,7 +50,9 @@ for i = 1, level do
     ErmZerg.make_defiler(i)
     ErmZerg.make_queen(i)
     ErmZerg.make_infested(i)
+end
 
+for i = 1, max_level do
     ErmZerg.make_hatchery(i)
     ErmZerg.make_lair(i)
     ErmZerg.make_hive(i)

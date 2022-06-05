@@ -12,6 +12,7 @@ local ERM_UnitHelper = require('__enemyracemanager__/lib/rig/unit_helper')
 local ERM_UnitTint = require('__enemyracemanager__/lib/rig/unit_tint')
 local ERM_DebugHelper = require('__enemyracemanager__/lib/debug_helper')
 local ERMDataHelper = require('__enemyracemanager__/lib/rig/data_helper')
+local ERM_Config = require('__enemyracemanager__/lib/global_config')
 local ZergSound = require('__erm_zerg__/prototypes/sound')
 local name = 'mutalisk'
 
@@ -116,6 +117,7 @@ function ErmZerg.make_mutalisk(level)
                             type = "projectile",
                             projectile = "mutalisk-projectile",
                             starting_speed = 0.3,
+                            max_range = ERM_Config.get_max_projectile_range(),
                         }
                     }
                 },

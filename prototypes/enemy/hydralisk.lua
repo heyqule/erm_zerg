@@ -10,6 +10,7 @@ require('__stdlib__/stdlib/utils/defines/time')
 local ERM_UnitHelper = require('__enemyracemanager__/lib/rig/unit_helper')
 local ERM_UnitTint = require('__enemyracemanager__/lib/rig/unit_tint')
 local ERM_DebugHelper = require('__enemyracemanager__/lib/debug_helper')
+local ERM_Config = require('__enemyracemanager__/lib/global_config')
 local ZergSound = require('__erm_zerg__/prototypes/sound')
 local name = 'hydralisk'
 
@@ -115,6 +116,7 @@ function ErmZerg.make_hydralisk(level)
                             type = "projectile",
                             projectile = 'hydralisk-projectile',
                             starting_speed = 0.3,
+                            max_range = ERM_Config.get_max_projectile_range(),
                         }
                     }
                 },
