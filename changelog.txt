@@ -1,4 +1,15 @@
 ---------------------------------------------------------------------------------------------------
+Version: 1.16.1
+Date: 2022-06-22
+
+  Change:
+    - Added support to set neutral for neutral forces that created from other mods.
+    - changed {'mutalisk', 'queen'} spawn ratio from {3,1} to {8,1}
+    - changed {'mutalisk', 'overlord'} spawn ratio from {2,1} to {5,1}
+    - changed {'zergling','ultralisk','defiler'} spawn ratio from {4,2,1} to {6,3,1}
+    - changed {'zergling', 'hydralisk','lurker', 'ultralisk'} spawn ratio from {2,1,1,1} to {4,2,1,1}
+
+---------------------------------------------------------------------------------------------------
 Version: 1.16.0
 Date: 2022-06-06
 
