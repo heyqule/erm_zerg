@@ -2,7 +2,7 @@
 Version: 1.16.1
 Date: 2022-06-22
 
-  Change:
+  Changes:
     - Added support to set neutral for neutral forces that created from other mods.
     - changed {'mutalisk', 'queen'} spawn ratio from {3,1} to {8,1}
     - changed {'mutalisk', 'overlord'} spawn ratio from {2,1} to {5,1}
