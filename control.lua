@@ -106,6 +106,9 @@ local addRaceSettings = function()
         {{'mutalisk', 'overlord'}, {5, 1}, 50},
     }
 
+    race_settings.boss_building = 'hive'
+    race_settings.boss_tier = race_settings.boss_tier or 1
+
     ErmRaceSettingsHelper.process_unit_spawn_rate_cache(race_settings)
 
     remote.call('enemy_race_manager', 'register_race', race_settings)

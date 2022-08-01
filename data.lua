@@ -25,6 +25,7 @@ require "prototypes.building.spawning_pool"
 require "prototypes.building.hatchery"
 require "prototypes.building.lair"
 require "prototypes.building.hive"
+require "prototypes.building.boss_hive"
 require "prototypes.building.spore_colony"
 require "prototypes.building.sunker_colony"
 require "prototypes.building.chamber"
@@ -50,6 +51,26 @@ for i = 1, max_level + ErmConfig.MAX_ELITE_LEVELS do
     ErmZerg.make_defiler(i)
     ErmZerg.make_queen(i)
     ErmZerg.make_infested(i)
+end
+
+local boss_level = ErmConfig.BOSS_LEVELS
+
+for i = 1, #boss_level do
+    local level = boss_level[i]
+    ErmZerg.make_zergling(level)
+    ErmZerg.make_hydralisk(level)
+    ErmZerg.make_mutalisk(level)
+    ErmZerg.make_ultralisk(level)
+    ErmZerg.make_devourer(level)
+    ErmZerg.make_guardian(level)
+    ErmZerg.make_overlord(level)
+    ErmZerg.make_lurker(level)
+    ErmZerg.make_drone(level)
+    ErmZerg.make_defiler(level)
+    ErmZerg.make_queen(level)
+    ErmZerg.make_infested(level)
+
+    ErmZerg.make_boss_hive(level, ErmConfig.BOSS_BUILDING_HITPOINT[i])
 end
 
 for i = 1, max_level do
