@@ -107,7 +107,10 @@ local addRaceSettings = function()
     }
 
     race_settings.boss_building = 'hive'
+    race_settings.pathing_unit = 'zergling'
+    race_settings.colliding_unit = 'ultralisk'
     race_settings.boss_tier = race_settings.boss_tier or 1
+    race_settings.max_boss_tier = race_settings.max_boss_tier or 1
 
     ErmRaceSettingsHelper.process_unit_spawn_rate_cache(race_settings)
 
