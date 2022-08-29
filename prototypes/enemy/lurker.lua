@@ -216,7 +216,7 @@ function ErmZerg.make_lurker(level)
             dying_speed = 0.04,
             time_before_removed = defines.time.minute * settings.startup["enemyracemanager-enemy-corpse-time"].value,
             subgroup = "corpses",
-            order = "x" .. name .. level,
+            order = MOD_NAME .. "/" .. name .. level,
             final_render_layer = "corpse",
             animation = {
                 filename = "__erm_zerg__/graphics/entity/units/" .. name .. "/" .. name .. "-death.png",

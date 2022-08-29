@@ -119,11 +119,11 @@ function ErmZerg.make_queen(level)
                                 {
                                     type = "create-smoke",
                                     show_in_tooltip = true,
-                                    entity_name = name .. "-acid-cloud-" .. level
+                                    entity_name = MOD_NAME .. "/acid-cloud-" .. level
                                 },
                                 {
                                     type = "create-explosion",
-                                    entity_name = "queen-cloud-explosion"
+                                    entity_name = "acid-cloud-explosion"
                                 }
                             }
                         }
@@ -205,7 +205,7 @@ function ErmZerg.make_queen(level)
             dying_speed = 0.04,
             time_before_removed = defines.time.second,
             subgroup = "corpses",
-            order = "x" .. name .. level,
+            order = MOD_NAME .. "/" .. name .. level,
             animation = Sprites.empty_pictures(),
         },
         {
@@ -224,7 +224,7 @@ function ErmZerg.make_queen(level)
             }
         },
         {
-            name = name .. "-acid-cloud-" .. level,
+            name = MOD_NAME .. "/acid-cloud-" .. level,
             localised_name = {'entity-name.acid-cloud'},
             type = "smoke-with-trigger",
             flags = { "not-on-map" },

@@ -217,7 +217,7 @@ function ErmZerg.make_devourer(level)
             dying_speed = 0.04,
             time_before_removed = defines.time.second,
             subgroup = "corpses",
-            order = "x" .. name .. level,
+            order = MOD_NAME .. "/" .. name .. level,
             animation = Sprites.empty_pictures(),
         },
         {
@@ -239,7 +239,7 @@ function ErmZerg.make_devourer(level)
                             {
                                 type = "create-smoke",
                                 show_in_tooltip = true,
-                                entity_name = name .. "-cloud-" .. level
+                                entity_name = MOD_NAME .. "/devourer-cloud-" .. level
                             },
                             {
                                 type = "create-explosion",
@@ -265,7 +265,7 @@ function ErmZerg.make_devourer(level)
             }
         },
         {
-            name = "devourer-cloud-" .. level,
+            name = MOD_NAME .. "/devourer-cloud-" .. level,
             localised_name = {'entity-name.blood-cloud'},
             type = "smoke-with-trigger",
             flags = { "not-on-map" },

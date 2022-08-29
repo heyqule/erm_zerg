@@ -186,7 +186,7 @@ data:extend({
     },
     {
         type = "explosion",
-        name = "defiler-cloud-explosion",
+        name = "blood-cloud-explosion",
         flags = { "not-on-map" },
         animations = {
             {
@@ -202,7 +202,7 @@ data:extend({
     },
     {
         type = "explosion",
-        name = "queen-cloud-explosion",
+        name = "acid-cloud-explosion",
         flags = { "not-on-map" },
         animations = {
             {

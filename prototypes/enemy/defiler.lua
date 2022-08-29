@@ -122,11 +122,11 @@ function ErmZerg.make_defiler(level)
                                 {
                                     type = "create-smoke",
                                     show_in_tooltip = true,
-                                    entity_name = name .. "-blood-cloud-" .. level
+                                    entity_name = MOD_NAME .. "/blood-cloud-" .. level
                                 },
                                 {
                                     type = "create-explosion",
-                                    entity_name = "defiler-cloud-explosion"
+                                    entity_name = "blood-cloud-explosion"
                                 }
                             }
                         }
@@ -205,7 +205,7 @@ function ErmZerg.make_defiler(level)
             dying_speed = 0.04,
             time_before_removed = defines.time.minute * settings.startup["enemyracemanager-enemy-corpse-time"].value,
             subgroup = "corpses",
-            order = "x" .. name .. level,
+            order = MOD_NAME .. "/" .. name .. level,
             final_render_layer = "corpse",
             animation = {
                 filename = "__erm_zerg__/graphics/entity/units/" .. name .. "/" .. name .. "-death.png",
@@ -219,7 +219,7 @@ function ErmZerg.make_defiler(level)
             },
         },
         {
-            name = name .. "-blood-cloud-" .. level,
+            name = MOD_NAME .. "/blood-cloud-" .. level,
             localised_name = {'entity-name.blood-cloud'},
             type = "smoke-with-trigger",
             flags = { "not-on-map" },

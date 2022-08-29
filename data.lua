@@ -4,7 +4,8 @@ require('__erm_zerg__/global')
 
 local ErmConfig = require('__enemyracemanager__/lib/global_config')
 
-require('__erm_zerg__/prototypes/projectiles')
+require "prototypes/projectiles"
+require "prototypes/boss-projectiles"
 
 require "prototypes.enemy.zergling"
 require "prototypes.enemy.mutalisk"
