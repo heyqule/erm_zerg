@@ -45,7 +45,7 @@ local create_blood_cloud_projectile = function(tier)
 end
 
 --- Basic Attack #2
-local create_poison_cloud_projectile = function(tier)
+local create_acid_cloud_projectile = function(tier)
     return   {
         type = "projectile",
         name = MOD_NAME.."/acid-cloud-projectile-t"..tier,
@@ -58,7 +58,8 @@ local create_poison_cloud_projectile = function(tier)
                 target_effects = {
                     {
                         type = "create-entity",
-                        entity_name = "acid-cloud-explosion",
+                        --entity_name = "acid-cloud-explosion",
+                        entity_name = "erm-aura_v9_v1-1",
                         trigger_created_entity = false
                     },
                     {
@@ -118,7 +119,7 @@ local create_blood_fire_projectile = function(tier)
             }
         },
         animation = {
-            filename = "__erm_zerg__/graphics/entity/projectiles/spores_2.png",
+            filename = "__erm_zerg__/graphics/entity/projectiles/spores_2_red.png",
             priority = "extra-high",
             width = 24,
             height = 24,
@@ -181,7 +182,7 @@ for i = 1, ERMConfig.BOSS_MAX_TIERS do
                 damage = { amount = 200 * i, type = "acid" },
                 apply_damage_to_trees = true
             },  5,60),
-        create_poison_cloud_projectile(i),
+        create_acid_cloud_projectile(i),
         create_damage_cloud('acid-cloud', i,{{
                 type = "damage",
                 --- process 4 ticks per second
