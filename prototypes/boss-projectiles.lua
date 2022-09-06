@@ -58,8 +58,7 @@ local create_acid_cloud_projectile = function(tier)
                 target_effects = {
                     {
                         type = "create-entity",
-                        --entity_name = "acid-cloud-explosion",
-                        entity_name = "erm-aura_v9_v1-1",
+                        entity_name = "acid-cloud-explosion",
                         trigger_created_entity = false
                     },
                     {
