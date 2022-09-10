@@ -129,10 +129,9 @@ local create_blood_fire_projectile = function(tier)
     }
 end
 
-local create_damage_cloud = function (name, tier, target_effects, radius, duration, cooldown, attack_flyer)
+local create_damage_cloud = function (name, tier, target_effects, radius, duration, cooldown)
     radius = radius or 2
     duration = duration or 120
-    attack_flyer = attack_flyer or true
     cooldown = cooldown or 15
     return  {
         name = MOD_NAME.."/"..name.."-t"..tier,
