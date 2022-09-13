@@ -17,6 +17,7 @@ DEBUG_MODE = false
 OVERLORD_ATTACK = 'emzrg-old'
 DRONE_ATTACK = 'emzrg-drn'
 INFESTED_ATTACK = 'emzrg-inf'
+BOSS_SPAWN_ATTACK = 'emzrg-bs1'
 
 ZERG_MAP_COLOR = {r=248, g=140, b=20}
 

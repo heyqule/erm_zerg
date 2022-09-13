@@ -50,7 +50,7 @@ ErmBossAttackRemote.advanced_attacks =
 
 ErmBossAttackRemote.super_attacks =
 {
-    projectile_name = {'blood-explosion'},
+    projectile_name = {'swamp-cloud'},
     projectile_type = {
         ErmBossAttackProcessor.TYPE_PROJECTILE,
     },

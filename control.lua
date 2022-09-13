@@ -140,11 +140,16 @@ local attack_functions = {
     [INFESTED_ATTACK] = function(args)
         CustomAttacks.process_infested(args)
     end,
+    [BOSS_SPAWN_ATTACK] = function(args)
+        CustomAttacks.process_boss_unit(args)
+    end
 }
 Event.register(defines.events.on_script_trigger_effect, function(event)
+    print(serpent.block(event))
     if  attack_functions[event.effect_id] and
         CustomAttacks.valid(event, MOD_NAME)
     then
+        print('attack_functions')
         attack_functions[event.effect_id](event)
     end
 end)
