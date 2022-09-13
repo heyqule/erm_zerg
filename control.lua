@@ -151,8 +151,6 @@ end)
 
 local ErmBossAttack = require('scripts/boss_attacks')
 remote.add_interface("erm_zerg_boss_attacks", {
- get_basic_attack = ErmBossAttack.get_basic_attack,
- get_advanced_attack = ErmBossAttack.get_advanced_attack,
- get_super_attack = ErmBossAttack.get_super_attack,
+    get_attack_data = ErmBossAttack.get_attack_data,
 })
 
