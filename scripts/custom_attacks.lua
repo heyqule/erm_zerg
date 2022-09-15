@@ -24,7 +24,7 @@ function CustomAttacks.process_infested(event)
 end
 
 function CustomAttacks.process_boss_unit(event)
-    CustomAttackHelper.drop_boss_unit(event, MOD_NAME, CustomAttackHelper.get_unit(MOD_NAME, 'droppable_units'), 20)
+    CustomAttackHelper.drop_boss_unit(event, MOD_NAME, CustomAttackHelper.get_unit(MOD_NAME, 'droppable_units'), 40)
 end
 
 return CustomAttacks
