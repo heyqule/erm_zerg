@@ -101,6 +101,7 @@ function ErmZerg.make_ultralisk(level)
             spawning_time_modifier = 2,
             attack_parameters = {
                 type = "projectile",
+                range_mode = "bounding-box-to-bounding-box",
                 ammo_category = 'biological',
                 range = attack_range,
                 cooldown = ERM_UnitHelper.get_attack_speed(base_attack_speed, incremental_attack_speed,  level),

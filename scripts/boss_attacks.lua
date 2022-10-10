@@ -15,17 +15,17 @@ ErmBossAttackRemote.basic_attacks =
         ErmBossAttackProcessor.TYPE_PROJECTILE
     },
     projectile_chance = {25, 25, 100},
-    projectile_count = {1, 1, 1},
+    projectile_count = {1, 1, 10},
     projectile_spread = {1, 1, 2},
-    projectile_use_multiplier = {false, false, true},
+    projectile_use_multiplier = {true, true, true},
     projectile_count_multiplier = {
-        {},
-        {},
-        {1, 1, 1, 2, 3}
+        {1, 1, 1, 1, 2},
+        {1, 1, 1, 1, 2},
+        {1, 2, 2, 3, 3}
     },
     projectile_spread_multiplier = {
-        {},
-        {},
+        {1, 1, 2, 2, 2},
+        {1, 1, 2, 2, 2},
         {1, 1, 1, 1, 1}
     },
 }

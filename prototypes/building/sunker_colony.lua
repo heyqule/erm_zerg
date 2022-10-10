@@ -160,6 +160,7 @@ function ErmZerg.make_sunker_colony(level)
             allow_turning_when_starting_attack = true,
             attack_parameters = {
                 type = "projectile",
+                range_mode = "bounding-box-to-bounding-box",
                 ammo_category = 'biological',
                 acceleration = 0,
                 range = attack_range,
@@ -261,6 +262,7 @@ function ErmZerg.make_sunker_colony(level)
             allow_turning_when_starting_attack = true,
             attack_parameters = {
                 type = "projectile",
+                range_mode = "bounding-box-to-bounding-box",
                 ammo_category = 'biological',
                 acceleration = 0,
                 range = shortrange_attack_range,

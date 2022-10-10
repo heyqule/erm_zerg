@@ -146,6 +146,7 @@ function ErmZerg.make_spore_colony(level)
             allow_turning_when_starting_attack = true,
             attack_parameters = {
                 type = "projectile",
+                range_mode = "bounding-box-to-bounding-box",
                 ammo_category = 'biological',
                 damage_modifier = ERM_UnitHelper.get_damage(base_acid_damage, incremental_acid_damage,  level),
                 range = attack_range,

@@ -105,6 +105,7 @@ function ErmZerg.make_guardian(level)
             ai_settings = biter_ai_settings,
             attack_parameters = {
                 type = "projectile",
+                range_mode = "bounding-box-to-bounding-box",
                 ammo_category = 'biological',
                 range = attack_range,
                 min_attack_distance = attack_range - 4,

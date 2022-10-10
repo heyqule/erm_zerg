@@ -145,11 +145,9 @@ local attack_functions = {
     end
 }
 Event.register(defines.events.on_script_trigger_effect, function(event)
-    print(serpent.block(event))
     if  attack_functions[event.effect_id] and
         CustomAttacks.valid(event, MOD_NAME)
     then
-        print('attack_functions')
         attack_functions[event.effect_id](event)
     end
 end)

@@ -5,6 +5,7 @@
 ---
 
 local CustomAttackHelper = require('__enemyracemanager__/lib/helper/custom_attack_helper')
+local ERMConfig = require('__enemyracemanager__/lib/global_config')
 
 local CustomAttacks = {}
 
@@ -24,7 +25,7 @@ function CustomAttacks.process_infested(event)
 end
 
 function CustomAttacks.process_boss_unit(event)
-    CustomAttackHelper.drop_boss_unit(event, MOD_NAME, CustomAttackHelper.get_unit(MOD_NAME, 'droppable_units'), 40)
+    CustomAttackHelper.drop_boss_unit(event, MOD_NAME, ERMConfig.boss_spawn_size * 8)
 end
 
 return CustomAttacks

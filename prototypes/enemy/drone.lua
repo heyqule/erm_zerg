@@ -102,6 +102,7 @@ function ErmZerg.make_drone(level)
             spawning_time_modifier = 2,
             attack_parameters = {
                 type = "projectile",
+                range_mode = "bounding-box-to-bounding-box",
                 range = attack_range,
                 min_attack_distance = attack_range - 4,
                 cooldown = 10,

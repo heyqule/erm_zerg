@@ -105,6 +105,7 @@ function ErmZerg.make_devourer(level)
             spawning_time_modifier = 1.5,
             attack_parameters = {
                 type = "stream",
+                range_mode = "bounding-box-to-bounding-box",
                 ammo_category = 'biological',
                 range = attack_range,
                 min_attack_distance = attack_range - 3,

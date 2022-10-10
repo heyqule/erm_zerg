@@ -57,7 +57,7 @@ end
 local boss_level = ErmConfig.BOSS_LEVELS
 
 local boss_unit_ai = { destroy_when_commands_fail = true, allow_try_return_to_spawner = false }
-local override_units = {'zergling','hydralisk','mutalisk','devourer','guardian','overlord','lurker','drone','defiler','queen','infested'}
+local override_units = {'zergling','hydralisk','mutalisk','devourer','guardian','overlord','lurker','drone','defiler','queen','infested','ultralisk'}
 
 for i = 1, #boss_level do
     local level = boss_level[i]
@@ -77,7 +77,6 @@ for i = 1, #boss_level do
     ErmZerg.make_boss_hive(level, ErmConfig.BOSS_BUILDING_HITPOINT[i])
 
     for _, unit in pairs(override_units) do
-        print(MOD_NAME..'/'..unit..'/'..level)
         data.raw['unit'][MOD_NAME..'/'..unit..'/'..level]['ai_settings'] = boss_unit_ai
     end
 end
