@@ -66,4 +66,22 @@ ErmBossAttackRemote.super_attacks =
     },
 }
 
+ErmBossAttackRemote.despawn_attacks =
+{
+    projectile_name = {'blood-explosion'},
+    projectile_type = {
+        ErmBossAttackProcessor.TYPE_PROJECTILE,
+    },
+    projectile_chance = {100},
+    projectile_count = {20},
+    projectile_spread = {1},
+    projectile_use_multiplier = {false},
+    projectile_count_multiplier = {
+        {},
+    },
+    projectile_spread_multiplier = {
+        {},
+    },
+}
+
 return ErmBossAttackRemote
