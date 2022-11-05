@@ -20,5 +20,8 @@ INFESTED_ATTACK = 'emzrg-inf'
 BOSS_SPAWN_ATTACK = 'emzrg-bs1'
 
 ZERG_MAP_COLOR = {r=248, g=140, b=20}
+TRIGGER_BOSS_DIES = 'embss-die'
+
+
 
 

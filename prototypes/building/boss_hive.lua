@@ -110,7 +110,7 @@ function ErmZerg.make_boss_hive(level, hitpoint)
             dying_explosion = "zerg-building-explosion",
             dying_trigger_effect = {
                 type = "script",
-                effect_id = 'embss-die',
+                effect_id = TRIGGER_BOSS_DIES,
             },
             max_count_of_owned_units = max_count_of_owned_units,
             max_friends_around_to_spawn = max_friends_around_to_spawn,
