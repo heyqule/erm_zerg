@@ -25,7 +25,7 @@ function CustomAttacks.process_infested(event)
 end
 
 function CustomAttacks.process_boss_unit(event)
-    CustomAttackHelper.drop_boss_unit(event, MOD_NAME, ERMConfig.boss_spawn_size * 8)
+    CustomAttackHelper.drop_boss_units(event, MOD_NAME, ERMConfig.boss_spawn_size * 8)
 end
 
 return CustomAttacks
