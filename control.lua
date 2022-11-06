@@ -141,7 +141,8 @@ local attack_functions = {
         CustomAttacks.process_infested(args)
     end,
     [BOSS_SPAWN_ATTACK] = function(args)
-        CustomAttacks.process_boss_unit(args)
+        print(CustomAttacks)
+        CustomAttacks.process_boss_units(args)
     end
 }
 Event.register(defines.events.on_script_trigger_effect, function(event)

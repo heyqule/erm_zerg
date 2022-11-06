@@ -24,8 +24,14 @@ function CustomAttacks.process_infested(event)
     event.source_entity.die('neutral')
 end
 
-function CustomAttacks.process_boss_unit(event)
-    CustomAttackHelper.drop_boss_units(event, MOD_NAME, ERMConfig.boss_spawn_size * 8)
+function CustomAttacks.process_boss_units(event, batch_size)
+    batch_size = batch_size or 6
+    CustomAttackHelper.drop_boss_units(event, MOD_NAME, ERMConfig.boss_spawn_size * batch_size)
+end
+
+function CustomAttacks.process_batch_units(event, batch_size)
+    batch_size = batch_size or 4
+    CustomAttackHelper.drop_batch_units(event, MOD_NAME, ERMConfig.boss_spawn_size * batch_size)
 end
 
 return CustomAttacks
