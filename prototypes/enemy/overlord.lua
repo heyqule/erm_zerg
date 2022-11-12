@@ -78,6 +78,7 @@ function ErmZerg.make_overlord(level)
             max_health = ERM_UnitHelper.get_health(hitpoint, hitpoint * max_hitpoint_multiplier, health_multiplier, level),
             order = MOD_NAME .. '/'  .. name .. '/' .. level,
             subgroup = "erm-dropship-enemies",
+            map_color = ZERG_MAP_COLOR,
             shooting_cursor_size = 2,
             spawning_time_modifier = 1.5,
             resistances = {

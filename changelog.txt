@@ -1,9 +1,10 @@
 ---------------------------------------------------------------------------------------------------
 Version: 1.17.0
-Date: ????-??-??
+Date: 2022-11-15
 
   Graphics:
-    - Updated graphics. Sprites no longer have unintended holes and black borders
+    - Updated graphics. Sprites no longer have unintended holes and black borders.
+    - Changed map color of the race to orange.
 
 ---------------------------------------------------------------------------------------------------
 Version: 1.16.2
