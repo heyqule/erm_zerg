@@ -2,8 +2,8 @@
 Version: 1.17.0
 Date: ????-??-??
 
-  Graphic
-    - Updated graphics. Sprite no longer have unintended holes and black borders
+  Graphics:
+    - Updated graphics. Sprites no longer have unintended holes and black borders
 
 ---------------------------------------------------------------------------------------------------
 Version: 1.16.2

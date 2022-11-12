@@ -132,32 +132,12 @@ function ErmZerg.make_sunker_colony(level)
             integration = {
                 layers = {
                     {
-                        filename = "__erm_zerg__/graphics/entity/buildings/" .. name .. "/" .. name .. "_filler.png",
-                        variation_count = 1,
-                        width = 128,
-                        height = 128,
-                        frame_count = 1,
-                        line_length = 1,
-                        scale = unit_scale
-                    },
-                    {
                         filename = "__erm_zerg__/graphics/entity/buildings/" .. name .. "/" .. name .. ".png",
                         variation_count = 1,
                         width = 128,
                         height = 128,
                         frame_count = 1,
                         line_length = 1,
-                        scale = unit_scale
-                    },
-                    {
-                        filename = "__erm_zerg__/graphics/entity/buildings/" .. name .. "/" .. name .. "_filler.png",
-                        variation_count = 1,
-                        width = 128,
-                        height = 128,
-                        frame_count = 1,
-                        line_length = 1,
-                        draw_as_shadow = true,
-                        shift = { 0.25, 0.1 },
                         scale = unit_scale
                     },
                     {
@@ -252,32 +232,12 @@ function ErmZerg.make_sunker_colony(level)
             integration = {
                 layers = {
                     {
-                        filename = "__erm_zerg__/graphics/entity/buildings/" .. name .. "/" .. name .. "_filler.png",
-                        variation_count = 1,
-                        width = 128,
-                        height = 128,
-                        frame_count = 1,
-                        line_length = 1,
-                        scale = unit_scale
-                    },
-                    {
                         filename = "__erm_zerg__/graphics/entity/buildings/" .. name .. "/" .. name .. ".png",
                         variation_count = 1,
                         width = 128,
                         height = 128,
                         frame_count = 1,
                         line_length = 1,
-                        scale = unit_scale
-                    },
-                    {
-                        filename = "__erm_zerg__/graphics/entity/buildings/" .. name .. "/" .. name .. "_filler.png",
-                        variation_count = 1,
-                        width = 128,
-                        height = 128,
-                        frame_count = 1,
-                        line_length = 1,
-                        draw_as_shadow = true,
-                        shift = { 0.25, 0.1 },
                         scale = unit_scale
                     },
                     {
