@@ -46,3 +46,4 @@ luac.out
 *.ogg
 sound
 graphics
+graphics-*
