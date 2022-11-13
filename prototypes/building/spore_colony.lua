@@ -111,7 +111,7 @@ function ErmZerg.make_spore_colony(level)
             icon = "__erm_zerg__/graphics/entity/icons/buildings/advisor.png",
             icon_size = 64,
             flags = { "placeable-player", "placeable-enemy",  "breaths-air" },
-            max_health = ERM_UnitHelper.get_building_health(hitpoint, hitpoint * max_hitpoint_multiplier, health_multiplier, level),
+            max_health = ERM_UnitHelper.get_building_health(hitpoint, hitpoint * max_hitpoint_multiplier, health_multiplier, level) * 2,
             order = MOD_NAME .. '/' .. name,
             subgroup = "enemies",
             map_color = ZERG_MAP_COLOR,

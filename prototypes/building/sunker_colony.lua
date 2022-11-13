@@ -99,7 +99,7 @@ function ErmZerg.make_sunker_colony(level)
             icon = "__erm_zerg__/graphics/entity/icons/buildings/advisor.png",
             icon_size = 64,
             flags = { "placeable-player", "placeable-enemy", "breaths-air" },
-            max_health = ERM_UnitHelper.get_building_health(hitpoint, hitpoint * max_hitpoint_multiplier, health_multiplier, level),
+            max_health = ERM_UnitHelper.get_building_health(hitpoint, hitpoint * max_hitpoint_multiplier, health_multiplier, level) * 2,
             order = MOD_NAME .. '/' .. name,
             subgroup = "enemies",
             map_color = ZERG_MAP_COLOR,
@@ -203,6 +203,7 @@ function ErmZerg.make_sunker_colony(level)
             max_health = ERM_UnitHelper.get_building_health(hitpoint, hitpoint * max_hitpoint_multiplier, health_multiplier, level),
             order = MOD_NAME .. '/' .. name,
             subgroup = "enemies",
+            map_color = ZERG_MAP_COLOR,
             resistances = {
                 { type = "acid", percent = ERM_UnitHelper.get_resistance(base_acid_resistance, incremental_acid_resistance, resistance_mutiplier, level) },
                 { type = "poison", percent = ERM_UnitHelper.get_resistance(base_acid_resistance, incremental_acid_resistance, resistance_mutiplier, level) },
@@ -254,7 +255,7 @@ function ErmZerg.make_sunker_colony(level)
                     }
                 }
             },
-            autoplace = enemy_autoplace.enemy_worm_autoplace(0, FORCE_NAME),
+            --autoplace = nil
             attack_from_start_frame = true,
             prepare_range = attack_range,
             allow_turning_when_starting_attack = true,
