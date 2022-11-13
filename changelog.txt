@@ -3,11 +3,11 @@ Version: 1.17.0
 Date: 2022-11-15
 
   Graphics:
-    - Updated graphics. Sprites no longer have unintended holes and black borders.
+    - Updated graphics. Sprites no longer have unintended holes and black borders!!!
     - Changed map color of the race to orange.
 
   Changes:
-    - Normal range sunker and spore colony now have double HP.
+    - Normal range sunker and spore colony now have double HP. Short range unaffected.
 
   Bugfixes:
     - Removed short range sunker colony from autoplace
