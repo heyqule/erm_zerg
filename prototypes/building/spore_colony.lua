@@ -18,7 +18,7 @@ local shortrange_name = 'spore_colony_shortrange'
 -- Hitpoints
 local health_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
 local hitpoint = 400
-local max_hitpoint_multiplier = settings.startup["enemyracemanager-max-hitpoint-multipliers"].value
+local max_hitpoint_multiplier = settings.startup["enemyracemanager-max-hitpoint-multipliers"].value * 2
 
 local resistance_mutiplier = settings.startup["enemyracemanager-level-multipliers"].value
 -- Handles acid and poison resistance
@@ -111,7 +111,7 @@ function ErmZerg.make_spore_colony(level)
             icon = "__erm_zerg__/graphics/entity/icons/buildings/advisor.png",
             icon_size = 64,
             flags = { "placeable-player", "placeable-enemy",  "breaths-air" },
-            max_health = ERM_UnitHelper.get_building_health(hitpoint, hitpoint * max_hitpoint_multiplier, health_multiplier, level) * 2,
+            max_health = ERM_UnitHelper.get_building_health(hitpoint, hitpoint * max_hitpoint_multiplier, health_multiplier, level),
             order = MOD_NAME .. '/' .. name,
             subgroup = "enemies",
             map_color = ZERG_MAP_COLOR,
