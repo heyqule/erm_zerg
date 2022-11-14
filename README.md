@@ -13,7 +13,7 @@ Lua code files are licensed under GNU LGPLv3
 
 However, Starcraft graphic and sound assets are properties of Blizzard Entertainment Inc.  They are used for educational purposes. The original game is now free to play.
 
-![Zerg](https://mods-data.factorio.com/assets/d5713783b19c4ba3ca97ab578182e61c72ec11a0.png "Zerg")
+![Zerg](https://assets-mod.factorio.com/assets/96d53df08a012303301803be3565b302641d9c7d.png "Zerg")
 
 # Requirement
 * Enemy Race Manager >= 1.15
@@ -21,7 +21,7 @@ However, Starcraft graphic and sound assets are properties of Blizzard Entertain
 * Factorio Base >= 1.1
 
 # Features
-All unit has same base health point as original Starcraft, Some units have unique health multiplier to balance bullet damage.
+All units start with same base health point as original Starcraft. They have unique health multiplier to balance bullet damage on higher levels.
 
 Weak to electric, laser and cold (-5%)
 

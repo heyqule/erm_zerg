@@ -7,7 +7,7 @@ Date: 2022-11-15
     - Changed map color of the race to orange.
 
   Changes:
-    - Normal range sunker and spore colony now have double HP. Level 1 and Short range unaffected.
+    - Normal range sunker and spore colony now have double HP. Level 1 and Short range (spawned by drones) are not unaffected.
 
   Bugfixes:
     - Removed short range sunker colony from autoplace
