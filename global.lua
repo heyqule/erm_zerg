@@ -18,6 +18,6 @@ OVERLORD_ATTACK = 'emzrg-old'
 DRONE_ATTACK = 'emzrg-drn'
 INFESTED_ATTACK = 'emzrg-inf'
 
-
+ZERG_MAP_COLOR = {r=248, g=140, b=20}
 
 

@@ -1,4 +1,18 @@
 ---------------------------------------------------------------------------------------------------
+Version: 1.17.0
+Date: 2022-11-15
+
+  Graphics:
+    - Updated graphics. Sprites no longer have unintended holes and black borders!!!
+    - Changed map color of the race to orange.
+
+  Changes:
+    - Normal range sunker and spore colony now have double HP. Level 1 and Short range (spawned by drones) are not unaffected.
+
+  Bugfixes:
+    - Removed short range sunker colony from autoplace
+
+---------------------------------------------------------------------------------------------------
 Version: 1.16.2
 Date: 2022-07-10
 

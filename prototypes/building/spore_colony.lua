@@ -18,7 +18,7 @@ local shortrange_name = 'spore_colony_shortrange'
 -- Hitpoints
 local health_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
 local hitpoint = 400
-local max_hitpoint_multiplier = settings.startup["enemyracemanager-max-hitpoint-multipliers"].value
+local max_hitpoint_multiplier = settings.startup["enemyracemanager-max-hitpoint-multipliers"].value * 2
 
 local resistance_mutiplier = settings.startup["enemyracemanager-level-multipliers"].value
 -- Handles acid and poison resistance
@@ -77,32 +77,12 @@ local integration_animation = function()
     return {
         layers = {
             {
-                filename = "__erm_zerg__/graphics/entity/buildings/" .. name .. "/" .. name .. "_filler.png",
-                variation_count = 1,
-                width = 128,
-                height = 128,
-                frame_count = 1,
-                line_length = 1,
-                scale = unit_scale
-            },
-            {
                 filename = "__erm_zerg__/graphics/entity/buildings/" .. name .. "/" .. name .. ".png",
                 variation_count = 1,
                 width = 128,
                 height = 128,
                 frame_count = 1,
                 line_length = 1,
-                scale = unit_scale
-            },
-            {
-                filename = "__erm_zerg__/graphics/entity/buildings/" .. name .. "/" .. name .. "_filler.png",
-                variation_count = 1,
-                width = 128,
-                height = 128,
-                frame_count = 1,
-                line_length = 1,
-                draw_as_shadow = true,
-                shift = { 0.25, 0.1 },
                 scale = unit_scale
             },
             {
@@ -134,6 +114,7 @@ function ErmZerg.make_spore_colony(level)
             max_health = ERM_UnitHelper.get_building_health(hitpoint, hitpoint * max_hitpoint_multiplier, health_multiplier, level),
             order = MOD_NAME .. '/' .. name,
             subgroup = "enemies",
+            map_color = ZERG_MAP_COLOR,
             resistances = {
                 { type = "acid", percent = ERM_UnitHelper.get_resistance(base_acid_resistance, incremental_acid_resistance, resistance_mutiplier, level) },
                 { type = "poison", percent = ERM_UnitHelper.get_resistance(base_acid_resistance, incremental_acid_resistance, resistance_mutiplier, level) },

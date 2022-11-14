@@ -41,7 +41,9 @@ luac.out
 
 .git
 .idea
+
 *.png
 *.ogg
 sound
 graphics
+graphics-*

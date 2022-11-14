@@ -78,6 +78,7 @@ function ErmZerg.make_lurker(level)
             max_health = ERM_UnitHelper.get_health(hitpoint, hitpoint * max_hitpoint_multiplier, health_multiplier, level),
             order = MOD_NAME .. '/'  .. name .. '/' .. level,
             subgroup = "enemies",
+            map_color = ZERG_MAP_COLOR,
             shooting_cursor_size = 2,
             spawning_time_modifier = 1.5,
             resistances = {
@@ -151,9 +152,7 @@ function ErmZerg.make_lurker(level)
                             filename = "__erm_zerg__/graphics/entity/units/" .. name .. "/" .. name .. "-burrow-combined.png",
                             width = 128,
                             height = 128,
-                            line_length = 9,
                             frame_count = 18,
-                            axially_symmetrical = false,
                             direction_count = 1,
                             scale = unit_scale,
                             animation_speed = 0.5
@@ -162,9 +161,7 @@ function ErmZerg.make_lurker(level)
                             filename = "__erm_zerg__/graphics/entity/units/" .. name .. "/" .. name .. "-burrow-combined.png",
                             width = 128,
                             height = 128,
-                            line_length = 9,
                             frame_count = 18,
-                            axially_symmetrical = false,
                             direction_count = 1,
                             scale = unit_scale,
                             tint = ERM_UnitTint.tint_shadow(),
