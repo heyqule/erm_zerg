@@ -49,7 +49,7 @@ local create_blood_cloud_projectile = function(tier)
             }
         },
         animation = {
-            filename = "__erm_zerg__/graphics/entity/projectiles/spores_2_red.png",
+            filename = "__erm_zerg__/graphics/entity/projectiles/spores_2.png",
             priority = "extra-high",
             width = 24,
             height = 24,
@@ -142,7 +142,7 @@ local create_blood_fire_projectile = function(tier)
             }
         },
         animation = {
-            filename = "__erm_zerg__/graphics/entity/projectiles/spores_2_red.png",
+            filename = "__erm_zerg__/graphics/entity/projectiles/spores_2.png",
             priority = "extra-high",
             width = 24,
             height = 24,
@@ -235,7 +235,7 @@ local create_blood_explosion_projectile = function(tier)
             }
         },
         animation = {
-            filename = "__erm_zerg__/graphics/entity/projectiles/spores_2_red.png",
+            filename = "__erm_zerg__/graphics/entity/projectiles/spores_2.png",
             priority = "extra-high",
             width = 24,
             height = 24,
