@@ -143,6 +143,9 @@ local attack_functions = {
     [BOSS_SPAWN_ATTACK] = function(args)
         print(CustomAttacks)
         CustomAttacks.process_boss_units(args)
+    end,
+    [UNITS_SPAWN_ATTACK] = function(args)
+        CustomAttacks.process_batch_units(args)
     end
 }
 Event.register(defines.events.on_script_trigger_effect, function(event)

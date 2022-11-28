@@ -247,10 +247,10 @@ local create_blood_explosion_projectile = function(tier)
 end
 
 -- Super Attacks
-local create_swamp_cloud_projectile = function(tier)
+local create_swamp_cloud_projectile = function(tier, script_attack)
     return   {
         type = "projectile",
-        name = MOD_NAME.."/swamp-cloud-projectile-t"..tier,
+        name = MOD_NAME.."/swamp-cloud-"..script_attack.."-projectile-t"..tier,
         flags = { "not-on-map" },
         acceleration = 0,
 
@@ -265,7 +265,7 @@ local create_swamp_cloud_projectile = function(tier)
                 target_effects = {
                     {
                         type = "damage",
-                        damage = { amount = get_damage(1000, tier, 0.2), type = "acid" },
+                        damage = { amount = 1000 * (1 + tier * 0.5 - 0.5), type = "acid" },
                     }
                 }
             }
@@ -287,7 +287,7 @@ local create_swamp_cloud_projectile = function(tier)
                     },
                     {
                         type = "script",
-                        effect_id = BOSS_SPAWN_ATTACK,
+                        effect_id = script_attack,
                     }
                 }
             }
@@ -327,7 +327,8 @@ for i = 1, ERMConfig.BOSS_MAX_TIERS do
                                              }}, 5,60),
         create_blood_fire_projectile(i),
         create_blood_explosion_projectile(i),
-        create_swamp_cloud_projectile(i),
+        create_swamp_cloud_projectile(i, BOSS_SPAWN_ATTACK),
+        create_swamp_cloud_projectile(i, UNITS_SPAWN_ATTACK),
         create_damage_cloud('swamp-cloud', i,{{
             type = "damage",
             --- process 4 ticks per second
