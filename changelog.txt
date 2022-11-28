@@ -7,6 +7,7 @@ Date: ????-??-??
 
   Changes:
     - Refactored Level Strength Multiplier.
+    - Reduced spawn rate for drones.
 
 ---------------------------------------------------------------------------------------------------
 Version: 1.17.0
