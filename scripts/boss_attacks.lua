@@ -73,8 +73,8 @@ ErmBossAttackRemote.despawn_attacks =
         ErmBossAttackProcessor.TYPE_PROJECTILE,
     },
     projectile_chance = {100},
-    projectile_count = {5},
-    projectile_spread = {1},
+    projectile_count = {3},
+    projectile_spread = {3},
     projectile_use_multiplier = {false},
     projectile_count_multiplier = {
         {},
