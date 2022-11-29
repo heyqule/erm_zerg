@@ -42,6 +42,9 @@ local incremental_cold_resistance = 85
 local base_acid_damage = 10
 local incremental_acid_damage = 20
 
+local base_healing = 20
+local incremental_healing = 100
+
 -- Handles Attack Speed
 
 local base_attack_speed = 600
@@ -116,22 +119,45 @@ function ErmZerg.make_defiler(level)
                     category = "biological",
                     target_type = "direction",
                     action = {
-                        type = "direct",
-                        action_delivery = {
-                            type = "instant",
-                            target_effects = {
-                                {
-                                    type = "create-smoke",
-                                    show_in_tooltip = true,
-                                    entity_name = MOD_NAME .. "/blood-cloud-" .. level
-                                },
-                                {
-                                    type = "create-explosion",
-                                    entity_name = "blood-cloud-explosion"
+                        {
+                            type = "direct",
+                            ignore_collision_condition = true,
+                            force = 'same',
+                            probability = 0.25,
+                            action_delivery = {
+                                type = "instant",
+                                target_effects = {
+                                    {
+                                        type = "create-smoke",
+                                        show_in_tooltip = true,
+                                        entity_name = MOD_NAME .. "/dark-swarm-" .. level
+                                    },
+                                    {
+                                        type = "create-explosion",
+                                        entity_name = "dark-swarm-explosion"
+                                    }
                                 }
                             }
-                        }
-                    },
+                        },
+                        {
+                            type = "direct",
+                            probability = 0.9,
+                            action_delivery = {
+                                type = "instant",
+                                target_effects = {
+                                    {
+                                        type = "create-smoke",
+                                        show_in_tooltip = true,
+                                        entity_name = MOD_NAME .. "/blood-cloud-" .. level
+                                    },
+                                    {
+                                        type = "create-explosion",
+                                        entity_name = "blood-cloud-explosion"
+                                    }
+                                }
+                            }
+                        },
+                    }
                 },
                 sound = ZergSound.defiler_attack(0.75),
                 animation = {
@@ -265,6 +291,52 @@ function ErmZerg.make_defiler(level)
                 }
             },
             action_cooldown = 15
+        },
+        {
+            name = MOD_NAME .. "/dark-swarm-" .. level,
+            localised_name = {'entity-name.dark-swarm'},
+            type = "smoke-with-trigger",
+            flags = { "not-on-map" },
+            show_when_smoke_off = true,
+            particle_count = 1,
+            --particle_spread = { 3.6 * 1.05, 3.6 * 0.6 * 1.05 },
+            --particle_distance_scale_factor = 0.5,
+            --particle_scale_factor = { 1, 0.707 },
+            --wave_speed = { 1/80, 1/60 },
+            --wave_distance = { 0.3, 0.2 },
+            --spread_duration_variation = 20,
+            --particle_duration_variation = 60 * 3,
+            render_layer = "explosion",
+
+            affected_by_wind = false,
+            duration = 180,
+            cyclic = true,
+            --spread_duration = 20,
+
+            animation = Sprites.empty_picture(),
+            action = {
+                type = "direct",
+                action_delivery = {
+                    type = "instant",
+                    target_effects = {
+                        type = "nested-result",
+                        action = {
+                            type = "area",
+                            radius = 8,
+                            force = 'same',
+                            ignore_collision_condition = true,
+                            action_delivery = {
+                                type = "instant",
+                                target_effects = {
+                                    type = "damage",
+                                    damage = { amount = ERM_UnitHelper.get_damage(base_healing, incremental_healing,  level) * -1, type = "healing" },
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            action_cooldown = 12
         },
     })
 end

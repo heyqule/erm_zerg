@@ -97,7 +97,8 @@ local addRaceSettings = function()
         {{'hydralisk','lurker'}, {2, 1}, 20},
         {{'zergling', 'infested', 'ultralisk'}, {3, 4, 1}, 15},
         {{'zergling','ultralisk','defiler'}, {6, 3, 1}, 22.5},
-        {{'zergling', 'hydralisk','lurker', 'ultralisk'}, {4, 2, 1, 1}, 20},
+        {{'zergling', 'hydralisk', 'lurker', 'ultralisk'}, {4, 2, 1, 1}, 20},
+        {{'zergling', 'hydralisk', 'lurker', 'ultralisk', 'defiler'}, {2, 1, 1, 2, 1}, 20},
     }
     race_settings.featured_flying_groups = {
         {{'mutalisk'}, {1}, 45},
