@@ -38,7 +38,7 @@ ErmBossAttackRemote.advanced_attacks =
     },
     projectile_chance = {100},
     projectile_count = {1},
-    projectile_spread = {1},
+    projectile_spread = {3},
     projectile_use_multiplier = {false},
     projectile_count_multiplier = {
         {},
