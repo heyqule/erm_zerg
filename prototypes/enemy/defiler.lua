@@ -134,14 +134,14 @@ function ErmZerg.make_defiler(level)
                                     },
                                     {
                                         type = "create-explosion",
-                                        entity_name = "dark-swarm-explosion"
+                                        entity_name = "dark-swarm-80-explosion"
                                     }
                                 }
                             }
                         },
                         {
                             type = "direct",
-                            probability = 0.9,
+                            probability = 0.95,
                             action_delivery = {
                                 type = "instant",
                                 target_effects = {
