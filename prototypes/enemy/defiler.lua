@@ -123,6 +123,26 @@ function ErmZerg.make_defiler(level)
                             type = "direct",
                             ignore_collision_condition = true,
                             force = 'same',
+                            probability = 0.10,
+                            action_delivery = {
+                                type = "instant",
+                                source_effects = {
+                                    {
+                                        type = "create-smoke",
+                                        show_in_tooltip = true,
+                                        entity_name = MOD_NAME .. "/dark-swarm-" .. level
+                                    },
+                                    {
+                                        type = "create-explosion",
+                                        entity_name = "dark-swarm-80-explosion"
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            type = "direct",
+                            ignore_collision_condition = true,
+                            force = 'same',
                             probability = 0.25,
                             action_delivery = {
                                 type = "instant",

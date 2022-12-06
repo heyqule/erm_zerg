@@ -5,7 +5,10 @@ Date: ????-??-??
   Features:
     - Boss mode support
     - Defiler can cast dark swarm.  Heals zerg units 600 health / sec for 3 seconds.
-    - Defiler's cast has 25% chance to cast Dark Swamp and 95% chance to cast Plague.
+    - Defiler has 25% chance to cast Dark Swamp and 95% chance to cast Plague on target, 10% chance cast dark swamp on itself.
+
+  Graphics:
+    - Updated queen's snare graphic.
 
   Changes:
     - Refactored Level Strength Multiplier.

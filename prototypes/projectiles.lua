@@ -240,7 +240,7 @@ data:extend({
         flags = { "not-on-map" },
         animations = {
             {
-                filename = "__erm_zerg__/graphics/entity/projectiles/queen_heal.png",
+                filename = "__erm_zerg__/graphics/entity/projectiles/snare.png",
                 priority = "extra-high",
                 width = 128,
                 height = 128,
