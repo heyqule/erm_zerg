@@ -42,8 +42,8 @@ local incremental_cold_resistance = 85
 local base_acid_damage = 10
 local incremental_acid_damage = 20
 
-local base_healing = 50
-local incremental_healing = 100
+local base_healing = 40
+local incremental_healing = 80
 
 -- Handles Attack Speed
 
@@ -123,7 +123,7 @@ function ErmZerg.make_defiler(level)
                             type = "direct",
                             ignore_collision_condition = true,
                             force = 'same',
-                            probability = 0.10,
+                            probability = 0.05,
                             action_delivery = {
                                 type = "instant",
                                 source_effects = {
@@ -143,7 +143,7 @@ function ErmZerg.make_defiler(level)
                             type = "direct",
                             ignore_collision_condition = true,
                             force = 'same',
-                            probability = 0.25,
+                            probability = 0.075,
                             action_delivery = {
                                 type = "instant",
                                 target_effects = {
