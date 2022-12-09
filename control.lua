@@ -107,7 +107,7 @@ local addRaceSettings = function()
         {{'mutalisk', 'overlord'}, {5, 1}, 50},
     }
 
-    race_settings.boss_building = 'hive'
+    race_settings.boss_building = 'overmind'
     race_settings.pathing_unit = 'zergling'
     race_settings.colliding_unit = 'ultralisk'
     race_settings.boss_tier = race_settings.boss_tier or 1

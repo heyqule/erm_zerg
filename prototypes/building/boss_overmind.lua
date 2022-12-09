@@ -14,7 +14,7 @@ local ZergSound = require('__erm_zerg__/prototypes/sound')
 
 -- This is a custom autoplace that accept custom forces. search "autoplace ="
 local enemy_autoplace = require("__enemyracemanager__/lib/enemy-autoplace-utils")
-local name = 'hive'
+local name = 'overmind'
 
 -- Hitpoints
 
@@ -88,7 +88,7 @@ function ErmZerg.make_boss_hive(level, hitpoint)
             max_health = hitpoint,
             order = MOD_NAME .. '/' .. name,
             subgroup = "enemies",
-            working_sound = ZergSound.building_working_sound(name, 0.75),
+            working_sound = ZergSound.building_working_sound('hive', 0.75),
             dying_sound = ZergSound.building_dying_sound(0.75),
             resistances = {
                 { type = "acid", percent = ERM_UnitHelper.get_resistance(base_acid_resistance, incremental_acid_resistance,  level) },
@@ -117,69 +117,27 @@ function ErmZerg.make_boss_hive(level, hitpoint)
             animations = {
                 layers = {
                     {
-                        filename = "__erm_zerg__/graphics/entity/buildings/" .. name .. "/" .. name .. "_filler.png",
-                        width = 192,
-                        height = 224,
-                        frame_count = 5,
-                        animation_speed = 0.18,
+                        filename = "__erm_zerg__/graphics/entity/buildings/" .. name .. "/" .. name .. ".png",
+                        width = 224,
+                        height = 160,
+                        frame_count = 4,
+                        animation_speed = 0.2,
                         direction_count = 1,
                         run_mode = "forward-then-backward",
                         scale = unit_scale
                     },
                     {
                         filename = "__erm_zerg__/graphics/entity/buildings/" .. name .. "/" .. name .. ".png",
-                        width = 192,
-                        height = 224,
-                        frame_count = 5,
-                        animation_speed = 0.18,
+                        width = 224,
+                        height = 160,
+                        frame_count = 4,
+                        animation_speed = 0.2,
                         direction_count = 1,
                         run_mode = "forward-then-backward",
-                        scale = unit_scale
+                        scale = unit_scale,
+                        draw_as_shadow = true,
+                        shift = {0.5, 0}
                     }
-                }
-            },
-            integration = {
-                layers = {
-                    {
-                        filename = "__erm_zerg__/graphics/entity/buildings/" .. name .. "/" .. name .. "_filler.png",
-                        variation_count = 1,
-                        width = 192,
-                        height = 224,
-                        frame_count = 1,
-                        line_length = 1,
-                        scale = unit_scale
-                    },
-                    {
-                        filename = "__erm_zerg__/graphics/entity/buildings/" .. name .. "/" .. name .. ".png",
-                        variation_count = 1,
-                        width = 192,
-                        height = 224,
-                        frame_count = 1,
-                        line_length = 1,
-                        scale = unit_scale
-                    },
-                    {
-                        filename = "__erm_zerg__/graphics/entity/buildings/" .. name .. "/" .. name .. "_filler.png",
-                        variation_count = 1,
-                        width = 192,
-                        height = 224,
-                        frame_count = 1,
-                        line_length = 1,
-                        draw_as_shadow = true,
-                        shift = { 0.25, 0.1 },
-                        scale = unit_scale
-                    },
-                    {
-                        filename = "__erm_zerg__/graphics/entity/buildings/" .. name .. "/" .. name .. ".png",
-                        variation_count = 1,
-                        width = 192,
-                        height = 224,
-                        frame_count = 1,
-                        line_length = 1,
-                        draw_as_shadow = true,
-                        shift = { 0.25, 0.1 },
-                        scale = unit_scale
-                    },
                 }
             },
             result_units = spawn_table(ERM_Config.MAX_LEVELS),

@@ -194,6 +194,47 @@ local create_damage_cloud = function (name, tier, target_effects, radius, durati
     }
 end
 
+local create_healing_cloud = function (name, tier, target_effects, radius, duration, cooldown)
+    radius = radius or 2
+    duration = duration or 120
+    cooldown = cooldown or 15
+    return  {
+        name = MOD_NAME.."/"..name.."-t"..tier,
+        type = "smoke-with-trigger",
+        flags = { "not-on-map" },
+        show_when_smoke_off = true,
+        particle_count = 1,
+        render_layer = "explosion",
+        affected_by_wind = false,
+        duration = duration,
+        cyclic = true,
+
+        animation = Sprites.empty_picture(),
+        action = {
+            type = "direct",
+            ignore_collision_condition = true,
+            force = 'same',
+            action_delivery = {
+                type = "instant",
+                target_effects = {
+                    type = "nested-result",
+                    action = {
+                        type = "area",
+                        force = 'same',
+                        radius = radius,
+                        ignore_collision_condition = true,
+                        action_delivery = {
+                            type = "instant",
+                            target_effects = target_effects
+                        }
+                    }
+                }
+            }
+        },
+        action_cooldown = cooldown
+    }
+end
+
 -- Advanced Attacks
 local create_blood_explosion_projectile = function(tier)
     return   {
@@ -258,27 +299,14 @@ local create_swamp_cloud_projectile = function(tier, script_attack)
         direction_only = true,
         force_condition = "enemy",
         hit_collision_mask =  {"player-layer", "train-layer", ERMDataHelper.getFlyingLayerName()},
-        action = {
-            type = "direct",
-            action_delivery = {
-                type = "instant",
-                target_effects = {
-                    {
-                        type = "damage",
-                        damage = { amount = 1000 * (1 + tier * 0.5 - 0.5), type = "acid" },
-                    }
-                }
-            }
-        },
         final_action = {
             type = "direct",
             action_delivery = {
                 type = "instant",
                 target_effects = {
                     {
-                        type = "create-entity",
-                        entity_name = "erm-circular-effect-cloud-orange-2",
-                        trigger_created_entity = false
+                        type = "create-explosion",
+                        entity_name = "dark-swarm-explosion",
                     },
                     {
                         type = "create-smoke",
@@ -293,7 +321,7 @@ local create_swamp_cloud_projectile = function(tier, script_attack)
             }
         },
         animation =  {
-            filename = "__enemyracemanager_assets__/graphics/explosions/circular_effects/cloud-orange.png",
+            filename = "__enemyracemanager_assets__/graphics/explosions/circular_effects/cloud-greyscale.png",
             width = 320,
             height = 319,
             line_length = 9,
@@ -329,11 +357,11 @@ for i = 1, ERMConfig.BOSS_MAX_TIERS do
         create_blood_explosion_projectile(i),
         create_swamp_cloud_projectile(i, BOSS_SPAWN_ATTACK),
         create_swamp_cloud_projectile(i, UNITS_SPAWN_ATTACK),
-        create_damage_cloud('swamp-cloud', i,{{
+        create_healing_cloud('swamp-cloud', i,{{
             type = "damage",
             --- process 4 ticks per second
-            damage = { amount = get_damage(400, i, 1), type = "acid" },
+            damage = { amount = get_damage(100, i, 1) * -1, type = "healing" },
             apply_damage_to_trees = true
-        }},  10,90),
+        }},  10,300),
     })
 end
