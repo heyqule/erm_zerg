@@ -1,9 +1,9 @@
 ---------------------------------------------------------------------------------------------------
 Version: 1.18.0
-Date: ????-??-??
+Date: 2022-12-12
 
   Major Features:
-    - Boss mode support
+    - Boss mode support, Boss mode support, proof of concept release
 
   Features:
     - Defiler can cast dark swarm.  Heals zerg units 250 - 600 health / sec for 3 seconds.
