@@ -305,7 +305,7 @@ local create_swamp_cloud_projectile = function(tier, script_attack)
                 type = "instant",
                 target_effects = {
                     {
-                        type = "create-explosion",
+                        type = "create-entity",
                         entity_name = "dark-swarm-explosion",
                     },
                     {

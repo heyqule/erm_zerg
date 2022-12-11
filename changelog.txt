@@ -2,8 +2,10 @@
 Version: 1.18.0
 Date: ????-??-??
 
-  Features:
+  Major Features:
     - Boss mode support
+
+  Features:
     - Defiler can cast dark swarm.  Heals zerg units 250 - 600 health / sec for 3 seconds.
     - Defiler has 7.5% chance to cast Dark Swamp and 95% chance to cast Plague on target, 5% chance cast dark swamp on itself.
 
@@ -13,6 +15,7 @@ Date: ????-??-??
   Changes:
     - Refactored Level Strength Multiplier.
     - Reduced spawn rate for drones.
+    - Lurker change spike radius from 2 to 1, damage from (20 - 80) to (20 - 140)
 
 ---------------------------------------------------------------------------------------------------
 Version: 1.17.0

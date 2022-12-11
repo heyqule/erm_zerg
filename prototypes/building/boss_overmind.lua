@@ -136,7 +136,7 @@ function ErmZerg.make_boss_hive(level, hitpoint)
                         run_mode = "forward-then-backward",
                         scale = unit_scale,
                         draw_as_shadow = true,
-                        shift = {0.5, 0}
+                        shift = {0.2, 0}
                     }
                 }
             },

@@ -32,13 +32,14 @@ ErmBossAttackRemote.basic_attacks =
 
 ErmBossAttackRemote.advanced_attacks =
 {
-    projectile_name = {'blood-explosion'},
+    projectile_name = {'swamp-cloud-'..UNITS_SPAWN_ATTACK , 'blood-explosion'},
     projectile_type = {
         ErmBossAttackProcessor.TYPE_PROJECTILE,
+        ErmBossAttackProcessor.TYPE_PROJECTILE,
     },
-    projectile_chance = {100},
-    projectile_count = {1},
-    projectile_spread = {3},
+    projectile_chance = {25, 100},
+    projectile_count = {1, 1},
+    projectile_spread = {1, 3},
     projectile_use_multiplier = {false},
     projectile_count_multiplier = {
         {},

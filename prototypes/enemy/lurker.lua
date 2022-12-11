@@ -40,7 +40,7 @@ local incremental_cold_resistance = 85
 -- Handles acid damages
 
 local base_physical_damage = 1
-local incremental_physical_damage = 3
+local incremental_physical_damage = 6
 
 -- Handles Attack Speed
 
@@ -124,7 +124,7 @@ function ErmZerg.make_lurker(level)
                                     action = {
                                         type = "area",
                                         force = 'not-same',
-                                        radius = 2,
+                                        radius = 1,
                                         ignore_collision_condition = true,
                                         action_delivery = {
                                             type = "instant",
