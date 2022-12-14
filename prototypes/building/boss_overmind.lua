@@ -101,6 +101,7 @@ function ErmZerg.make_boss_hive(level, hitpoint)
                 { type = "cold", percent = ERM_UnitHelper.get_resistance(base_cold_resistance, incremental_cold_resistance,  level) }
             },
             healing_per_tick = 0,
+            map_color = ZERG_MAP_COLOR,
             collision_box = collision_box,
             map_generator_bounding_box = map_generator_bounding_box,
             selection_box = selection_box,

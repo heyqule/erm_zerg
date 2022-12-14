@@ -10,7 +10,7 @@ MOD_NAME = 'erm_zerg'
 -- Must be prefix with "enemy_"
 FORCE_NAME = 'enemy_erm_zerg'
 
-DEBUG_MODE = true
+DEBUG_MODE = false
 
 
 -- Attack Types for on_script_trigger_effect
