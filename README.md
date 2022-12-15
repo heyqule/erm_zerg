@@ -28,43 +28,43 @@ Weak to electric, laser and cold (-5%)
 
 #### Tier 1 Units
 
-######  Zergling
+#####  Zergling
 - Attack: Physical
 
-###### Hydralisk
+##### Hydralisk
 - Attack: Acid
 
-###### Mutalisk
+##### Mutalisk
 - Attack: Acid
 
 #### Tier 2 Units
 
-###### Overlord
+##### Overlord
 - Drops units
 
-###### Lurker
+##### Lurker
 - Attack: Physical (2 radius AOE)
 
-###### Infested AOE 3
+##### Infested
 - Attack: Explosion (3 radius AOE)
 
-###### Guardian
+##### Guardian
 - Attack: Acid
 
-###### Devourer
+##### Devourer
 - Attack: Acid (Slow on hit)
 
-###### Drone
+##### Drone
 - Builds spore colony or nyduspit
 
 #### Tier 3 Units
-###### Queen
+##### Queen
 - Attack: Acid (5 radius AOE) (Slow on hit)
 
-###### Defiler
+##### Defiler
 - Attack: Acid (5 radius AOE), Dark swamp (Heals friendly unit in 8 radius AOE)
 
-###### Ultralisk
+##### Ultralisk
 - Attack: Physical (3 radius AOE)
 
 Physical resistance: 95
