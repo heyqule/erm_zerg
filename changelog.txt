@@ -20,7 +20,7 @@ Date: 2022-12-12
     - Updated queen's snare graphic.
 
   Changes:
-    - Refactored Level Strength Multiplier.
+    - Refactored Level Strength Multiplier for ERM 1.16.
     - Reduced spawn rate for drones.
     - Lurker change spike radius from 2 to 1, damage from (20 - 80) to (20 - 140)
 
