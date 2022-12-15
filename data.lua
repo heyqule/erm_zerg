@@ -4,7 +4,8 @@ require('__erm_zerg__/global')
 
 local ErmConfig = require('__enemyracemanager__/lib/global_config')
 
-require('__erm_zerg__/prototypes/projectiles')
+require "prototypes/projectiles"
+require "prototypes/boss-projectiles"
 
 require "prototypes.enemy.zergling"
 require "prototypes.enemy.mutalisk"
@@ -25,6 +26,7 @@ require "prototypes.building.spawning_pool"
 require "prototypes.building.hatchery"
 require "prototypes.building.lair"
 require "prototypes.building.hive"
+require "prototypes.building.boss_overmind"
 require "prototypes.building.spore_colony"
 require "prototypes.building.sunker_colony"
 require "prototypes.building.chamber"
@@ -50,6 +52,33 @@ for i = 1, max_level + ErmConfig.MAX_ELITE_LEVELS do
     ErmZerg.make_defiler(i)
     ErmZerg.make_queen(i)
     ErmZerg.make_infested(i)
+end
+
+local boss_level = ErmConfig.BOSS_LEVELS
+
+local boss_unit_ai = { destroy_when_commands_fail = true, allow_try_return_to_spawner = false }
+local override_units = {'zergling','hydralisk','mutalisk','devourer','guardian','overlord','lurker','drone','defiler','queen','infested','ultralisk'}
+
+for i = 1, #boss_level do
+    local level = boss_level[i]
+    ErmZerg.make_zergling(level)
+    ErmZerg.make_hydralisk(level)
+    ErmZerg.make_mutalisk(level)
+    ErmZerg.make_ultralisk(level)
+    ErmZerg.make_devourer(level)
+    ErmZerg.make_guardian(level)
+    ErmZerg.make_overlord(level)
+    ErmZerg.make_lurker(level)
+    ErmZerg.make_drone(level)
+    ErmZerg.make_defiler(level)
+    ErmZerg.make_queen(level)
+    ErmZerg.make_infested(level)
+
+    ErmZerg.make_boss_hive(level, ErmConfig.BOSS_BUILDING_HITPOINT[i])
+
+    for _, unit in pairs(override_units) do
+        data.raw['unit'][MOD_NAME..'/'..unit..'/'..level]['ai_settings'] = boss_unit_ai
+    end
 end
 
 for i = 1, max_level do

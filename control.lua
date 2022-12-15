@@ -14,7 +14,7 @@ local ErmRaceSettingsHelper = require('__enemyracemanager__/lib/helper/race_sett
 
 local Event = require('__stdlib__/stdlib/event/event')
 local String = require('__stdlib__/stdlib/utils/string')
-local CustomAttacks = require('__erm_zerg__/prototypes/custom_attacks')
+local CustomAttacks = require('__erm_zerg__/scripts/custom_attacks')
 
 require('__erm_zerg__/global')
 -- Constants
@@ -97,7 +97,8 @@ local addRaceSettings = function()
         {{'hydralisk','lurker'}, {2, 1}, 20},
         {{'zergling', 'infested', 'ultralisk'}, {3, 4, 1}, 15},
         {{'zergling','ultralisk','defiler'}, {6, 3, 1}, 22.5},
-        {{'zergling', 'hydralisk','lurker', 'ultralisk'}, {4, 2, 1, 1}, 20},
+        {{'zergling', 'hydralisk', 'lurker', 'ultralisk'}, {4, 2, 1, 1}, 20},
+        {{'zergling', 'hydralisk', 'lurker', 'ultralisk', 'defiler'}, {2, 1, 1, 2, 1}, 20},
     }
     race_settings.featured_flying_groups = {
         {{'mutalisk'}, {1}, 45},
@@ -105,6 +106,12 @@ local addRaceSettings = function()
         {{'mutalisk', 'queen'}, {8, 1}, 75},
         {{'mutalisk', 'overlord'}, {5, 1}, 50},
     }
+
+    race_settings.boss_building = 'overmind'
+    race_settings.pathing_unit = 'zergling'
+    race_settings.colliding_unit = 'ultralisk'
+    race_settings.boss_tier = race_settings.boss_tier or 1
+    race_settings.boss_kill_count = race_settings.boss_kill_count or 0
 
     ErmRaceSettingsHelper.process_unit_spawn_rate_cache(race_settings)
 
@@ -134,6 +141,13 @@ local attack_functions = {
     [INFESTED_ATTACK] = function(args)
         CustomAttacks.process_infested(args)
     end,
+    [BOSS_SPAWN_ATTACK] = function(args)
+        print(CustomAttacks)
+        CustomAttacks.process_boss_units(args)
+    end,
+    [UNITS_SPAWN_ATTACK] = function(args)
+        CustomAttacks.process_batch_units(args)
+    end
 }
 Event.register(defines.events.on_script_trigger_effect, function(event)
     if  attack_functions[event.effect_id] and
@@ -143,5 +157,8 @@ Event.register(defines.events.on_script_trigger_effect, function(event)
     end
 end)
 
-
+local ErmBossAttack = require('scripts/boss_attacks')
+remote.add_interface("erm_zerg_boss_attacks", {
+    get_attack_data = ErmBossAttack.get_attack_data,
+})
 

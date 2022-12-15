@@ -186,7 +186,7 @@ data:extend({
     },
     {
         type = "explosion",
-        name = "defiler-cloud-explosion",
+        name = "blood-cloud-explosion",
         flags = { "not-on-map" },
         animations = {
             {
@@ -202,11 +202,45 @@ data:extend({
     },
     {
         type = "explosion",
-        name = "queen-cloud-explosion",
+        name = "dark-swarm-80-explosion",
         flags = { "not-on-map" },
         animations = {
             {
-                filename = "__erm_zerg__/graphics/entity/projectiles/queen_heal.png",
+                filename = "__erm_zerg__/graphics/entity/projectiles/darkswarm-80.png",
+                priority = "extra-high",
+                width = 256,
+                height = 256,
+                frame_count = 35,
+                frame_sequence = {1,2,3,4,5,6,7,8,9,10,9,8,7,6,7,8,9,10,9,8,7,6,7,8,9,10,9,8,7,6,5,4,3,2,1}, -- 3 seconds
+                animation_speed = 0.2,
+                scale = 2
+            }
+        }
+    },
+    {
+        type = "explosion",
+        name = "dark-swarm-explosion",
+        flags = { "not-on-map" },
+        animations = {
+            {
+                filename = "__erm_zerg__/graphics/entity/projectiles/darkswarm.png", -- 5 seconds
+                priority = "extra-high",
+                width = 256,
+                height = 256,
+                frame_count = 60,
+                frame_sequence = {1,2,3,4,5,6,7,8,9,10,9,8,7,6,7,8,9,10,9,8,7,6,7,8,9,10,9,8,7,6,7,8,9,10,9,8,7,6,7,8,9,10,9,8,7,6,7,8,9,10,9,8,7,6,5,4,3,2,1},
+                animation_speed = 0.2,
+                scale = 2
+            }
+        }
+    },
+    {
+        type = "explosion",
+        name = "acid-cloud-explosion",
+        flags = { "not-on-map" },
+        animations = {
+            {
+                filename = "__erm_zerg__/graphics/entity/projectiles/snare.png",
                 priority = "extra-high",
                 width = 128,
                 height = 128,
