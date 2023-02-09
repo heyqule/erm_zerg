@@ -40,7 +40,7 @@ local createRace = function()
 end
 
 local addRaceSettings = function()
-    local race_settings = remote.call('enemy_race_manager', 'get_race', MOD_NAME)
+    local race_settings = remote.call('enemyracemanager', 'get_race', MOD_NAME)
     if race_settings == nil then
         race_settings = {}
     end
@@ -115,7 +115,7 @@ local addRaceSettings = function()
 
     ErmRaceSettingsHelper.process_unit_spawn_rate_cache(race_settings)
 
-    remote.call('enemy_race_manager', 'register_race', race_settings)
+    remote.call('enemyracemanager', 'register_race', race_settings)
 end
 
 Event.on_init(function(event)
@@ -161,4 +161,7 @@ local ErmBossAttack = require('scripts/boss_attacks')
 remote.add_interface("erm_zerg_boss_attacks", {
     get_attack_data = ErmBossAttack.get_attack_data,
 })
+
+local RemoteApi = require('scripts/remote')
+remote.add_interface("erm_zerg", RemoteApi)
 
