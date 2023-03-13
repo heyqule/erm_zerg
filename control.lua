@@ -40,7 +40,7 @@ local createRace = function()
 end
 
 local addRaceSettings = function()
-    local race_settings = remote.call('enemy_race_manager', 'get_race', MOD_NAME)
+    local race_settings = remote.call('enemyracemanager', 'get_race', MOD_NAME)
     if race_settings == nil then
         race_settings = {}
     end
@@ -93,9 +93,9 @@ local addRaceSettings = function()
     }
     race_settings.featured_groups = {
         -- Unit list, spawn ratio, unit attack point cost
-        {{'zergling','ultralisk'}, {3, 1}, 20},
-        {{'hydralisk','lurker'}, {2, 1}, 20},
-        {{'zergling', 'infested', 'ultralisk'}, {3, 4, 1}, 15},
+        {{'zergling','ultralisk'}, {3, 2}, 20},
+        {{'hydralisk','lurker', 'ultralisk'}, {2, 1, 1}, 20},
+        {{'zergling', 'infested', 'lurker', 'ultralisk'}, {3, 3, 2, 2}, 15},
         {{'zergling','ultralisk','defiler'}, {6, 3, 1}, 22.5},
         {{'zergling', 'hydralisk', 'lurker', 'ultralisk'}, {4, 2, 1, 1}, 20},
         {{'zergling', 'hydralisk', 'lurker', 'ultralisk', 'defiler'}, {2, 1, 1, 2, 1}, 20},
@@ -103,8 +103,9 @@ local addRaceSettings = function()
     race_settings.featured_flying_groups = {
         {{'mutalisk'}, {1}, 45},
         {{'devourer', 'guardian'}, {2, 1}, 50},
-        {{'mutalisk', 'queen'}, {8, 1}, 75},
-        {{'mutalisk', 'overlord'}, {5, 1}, 50},
+        {{'mutalisk', 'devourer', 'queen' }, {4,2,1}, 75},
+        {{'mutalisk', 'guardian', 'overlord' }, {4,2,1}, 50},
+        {{'mutalisk', 'queen','devourer', 'guardian'}, {4, 1, 2, 2}, 50},
     }
 
     race_settings.boss_building = 'overmind'
@@ -115,7 +116,7 @@ local addRaceSettings = function()
 
     ErmRaceSettingsHelper.process_unit_spawn_rate_cache(race_settings)
 
-    remote.call('enemy_race_manager', 'register_race', race_settings)
+    remote.call('enemyracemanager', 'register_race', race_settings)
 end
 
 Event.on_init(function(event)
@@ -161,4 +162,7 @@ local ErmBossAttack = require('scripts/boss_attacks')
 remote.add_interface("erm_zerg_boss_attacks", {
     get_attack_data = ErmBossAttack.get_attack_data,
 })
+
+local RemoteApi = require('scripts/remote')
+remote.add_interface("erm_zerg", RemoteApi)
 
