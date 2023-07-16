@@ -41,7 +41,7 @@ local incremental_cold_resistance = 85
 -- Handles damages
 
 local base_acid_damage = 1
-local incremental_acid_damage = 4
+local incremental_acid_damage = 5
 
 -- Handles Attack Speed
 

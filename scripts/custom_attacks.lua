@@ -17,11 +17,11 @@ end
 
 function CustomAttacks.process_drone(event)
     CustomAttackHelper.drop_unit(event, MOD_NAME, CustomAttackHelper.get_unit(MOD_NAME, 'construction_buildings'))
-    event.source_entity.die('neutral')
+    event.source_entity.destroy()
 end
 
-function CustomAttacks.process_infested(event)
-    event.source_entity.die('neutral')
+function CustomAttacks.process_self_destruct(event)
+    event.source_entity.destroy()
 end
 
 function CustomAttacks.process_boss_units(event, batch_size)

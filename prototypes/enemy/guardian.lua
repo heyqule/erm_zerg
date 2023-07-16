@@ -137,7 +137,7 @@ function ErmZerg.make_guardian(level)
                             axially_symmetrical = false,
                             direction_count = 16,
                             scale = unit_scale,
-                            animation_speed = 0.6,
+                            animation_speed = 0.5,
                         },
                         {
                             filename = "__erm_zerg__/graphics/entity/units/" .. name .. "/" .. name .. "-run.png",
@@ -148,7 +148,7 @@ function ErmZerg.make_guardian(level)
                             direction_count = 16,
                             scale = unit_scale,
                             tint = ERM_UnitTint.tint_shadow(),
-                            animation_speed = 0.6,
+                            animation_speed = 0.5,
                             draw_as_shadow = true,
                             shift = { 4, 0 }
                         }
@@ -167,7 +167,7 @@ function ErmZerg.make_guardian(level)
                         axially_symmetrical = false,
                         direction_count = 16,
                         scale = unit_scale,
-                        animation_speed = 0.6
+                        animation_speed = 0.5
                     },
                     {
                         filename = "__erm_zerg__/graphics/entity/units/" .. name .. "/" .. name .. "-run.png",
@@ -179,7 +179,7 @@ function ErmZerg.make_guardian(level)
                         scale = unit_scale,
                         tint = ERM_UnitTint.tint_shadow(),
                         shift = { 4, 0 },
-                        animation_speed = 0.6,
+                        animation_speed = 0.5,
                         draw_as_shadow = true
                     }
                 }

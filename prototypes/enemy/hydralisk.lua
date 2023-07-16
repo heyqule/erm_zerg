@@ -38,7 +38,7 @@ local incremental_cold_resistance = 85
 -- Handles acid damages
 
 local base_acid_damage = 1
-local incremental_acid_damage = 7
+local incremental_acid_damage = 9
 
 -- Handles Attack Speed
 
@@ -173,7 +173,7 @@ function ErmZerg.make_hydralisk(level)
                         axially_symmetrical = false,
                         direction_count = 16,
                         scale = unit_scale,
-                        animation_speed = 0.6,
+                        animation_speed = 0.5,
                     },
                     {
                         filename = "__erm_zerg__/graphics/entity/units/" .. name .. "/" .. name .. "-run.png",
@@ -185,12 +185,11 @@ function ErmZerg.make_hydralisk(level)
                         scale = unit_scale,
                         tint = ERM_UnitTint.tint_shadow(),
                         draw_as_shadow = true,
-                        animation_speed = 0.6,
+                        animation_speed = 0.5,
                         shift = {0.2, 0}
                     }
                 }
             },
-            dying_explosion = "blood-explosion-small",
             dying_sound = ZergSound.enemy_death(name, 0.75),
             corpse = name .. '-corpse'
         },

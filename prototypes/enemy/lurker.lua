@@ -185,7 +185,7 @@ function ErmZerg.make_lurker(level)
                         axially_symmetrical = false,
                         direction_count = 16,
                         scale = unit_scale,
-                        animation_speed = 0.6,
+                        animation_speed = 0.5,
                     },
                     {
                         filename = "__erm_zerg__/graphics/entity/units/" .. name .. "/" .. name .. "-run.png",
@@ -197,12 +197,11 @@ function ErmZerg.make_lurker(level)
                         scale = unit_scale,
                         tint = ERM_UnitTint.tint_shadow(),
                         draw_as_shadow = true,
-                        animation_speed = 0.6,
+                        animation_speed = 0.5,
                         shift = {0.2, 0}
                     }
                 }
             },
-            dying_explosion = "blood-explosion-small",
             dying_sound = ZergSound.enemy_death(name, 0.75),
             corpse = name .. '-corpse'
         },

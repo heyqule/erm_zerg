@@ -168,7 +168,7 @@ function ErmZerg.make_devourer(level)
                         axially_symmetrical = false,
                         direction_count = 16,
                         scale = unit_scale,
-                        animation_speed = 0.6,
+                        animation_speed = 0.5,
                         run_mode = 'forward-then-backward'
                     },
                     {
@@ -181,7 +181,7 @@ function ErmZerg.make_devourer(level)
                         scale = unit_scale,
                         tint = ERM_UnitTint.tint_shadow(),
                         shift = { 4, 0 },
-                        animation_speed = 0.6,
+                        animation_speed = 0.5,
                         draw_as_shadow = true,
                         run_mode = 'forward-then-backward'
                     }

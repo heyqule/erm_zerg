@@ -37,7 +37,7 @@ local incremental_cold_resistance = 90
 -- Handles explosion damages
 
 local base_explosion_damage = 1
-local incremental_explosion_damage = 3
+local incremental_explosion_damage = 2
 
 -- Handles Attack Speed
 
@@ -118,14 +118,14 @@ function ErmZerg.make_infested(level)
                             {
                                 {
                                     type = "script",
-                                    effect_id = INFESTED_ATTACK,
-                                }
-                            },
-                            target_effects = {
+                                    effect_id = SELF_DESTRUCT_ATTACK,
+                                },
                                 {
                                     type = "create-explosion",
                                     entity_name = 'medium-explosion'
                                 },
+                            },
+                            target_effects = {
                                 {
                                     type = "nested-result",
                                     action = {
@@ -138,7 +138,7 @@ function ErmZerg.make_infested(level)
                                             target_effects = {
                                                 {
                                                     type = "damage",
-                                                    damage = { amount = 30, type = "explosion" },
+                                                    damage = { amount = 100, type = "explosion" },
                                                     apply_damage_to_trees = true
                                                 },
                                             }
@@ -160,7 +160,7 @@ function ErmZerg.make_infested(level)
                             axially_symmetrical = false,
                             direction_count = 16,
                             scale = unit_scale,
-                            animation_speed = 0.6
+                            animation_speed = 0.5
                         },
                         {
                             filename = "__erm_zerg__/graphics/entity/units/" .. name .. "/" .. name .. "-run.png",
@@ -172,7 +172,7 @@ function ErmZerg.make_infested(level)
                             scale = unit_scale,
                             draw_as_shadow = true,
                             tint = ERM_UnitTint.tint_shadow(),
-                            animation_speed = 0.6,
+                            animation_speed = 0.5,
                             shift = {0.2, 0}
                         }
                     }
@@ -207,7 +207,6 @@ function ErmZerg.make_infested(level)
                     }
                 }
             },
-            dying_explosion = "blood-explosion-small",
             dying_sound = ZergSound.infested_death(0.75),
             corpse = name .. '-corpse'
         },

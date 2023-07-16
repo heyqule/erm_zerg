@@ -11,11 +11,11 @@ local ERM_UnitHelper = require('__enemyracemanager__/lib/rig/unit_helper')
 local ERM_UnitTint = require('__enemyracemanager__/lib/rig/unit_tint')
 local ERM_DebugHelper = require('__enemyracemanager__/lib/debug_helper')
 local ZergSound = require('__erm_zerg__/prototypes/sound')
-local name = 'zergling'
+local name = 'broodling'
 
 
-local hitpoint = 35
-local max_hitpoint_multiplier = settings.startup["enemyracemanager-max-hitpoint-multipliers"].value * 5
+local hitpoint = 30
+local max_hitpoint_multiplier = settings.startup["enemyracemanager-max-hitpoint-multipliers"].value * 4
 
 
 -- Handles acid and poison resistance
@@ -41,7 +41,7 @@ local incremental_physical_damage = 4
 
 -- Handles Attack Speed
 
-local base_attack_speed = 45
+local base_attack_speed = 60
 local incremental_attack_speed = 30
 
 local attack_range = 1
@@ -62,7 +62,7 @@ local unit_scale = 1.3
 local collision_box = { { -0.25, -0.25 }, { 0.25, 0.25 } }
 local selection_box = { { -0.5, -0.5 }, { 0.5, 0.5 } }
 
-function ErmZerg.make_zergling(level)
+function ErmZerg.make_broodling(level)
     level = level or 1
 
     data:extend({
@@ -106,14 +106,14 @@ function ErmZerg.make_zergling(level)
                 cooldown = ERM_UnitHelper.get_attack_speed(base_attack_speed, incremental_attack_speed,  level),
                 cooldown_deviation = 0.1,
                 damage_modifier = ERM_UnitHelper.get_damage(base_physical_damage, incremental_physical_damage,  level),
-                ammo_type = make_unit_melee_ammo_type(10),
-                sound = ZergSound.meele_attack(0.75),
+                ammo_type = make_unit_melee_ammo_type(8),
+                sound = ZergSound.broodling_attack(0.5),
                 animation = {
                     layers = {
                         {
                             filename = "__erm_zerg__/graphics/entity/units/" .. name .. "/" .. name .. "-attack.png",
-                            width = 128,
-                            height = 128,
+                            width = 48,
+                            height = 48,
                             frame_count = 5,
                             axially_symmetrical = false,
                             direction_count = 16,
@@ -122,8 +122,8 @@ function ErmZerg.make_zergling(level)
                         },
                         {
                             filename = "__erm_zerg__/graphics/entity/units/" .. name .. "/" .. name .. "-attack.png",
-                            width = 128,
-                            height = 128,
+                            width = 48,
+                            height = 48,
                             frame_count = 5,
                             axially_symmetrical = false,
                             direction_count = 16,
@@ -142,8 +142,8 @@ function ErmZerg.make_zergling(level)
                 layers = {
                     {
                         filename = "__erm_zerg__/graphics/entity/units/" .. name .. "/" .. name .. "-run.png",
-                        width = 128,
-                        height = 128,
+                        width = 48,
+                        height = 48,
                         frame_count = 5,
                         axially_symmetrical = false,
                         direction_count = 16,
@@ -152,8 +152,8 @@ function ErmZerg.make_zergling(level)
                     },
                     {
                         filename = "__erm_zerg__/graphics/entity/units/" .. name .. "/" .. name .. "-run.png",
-                        width = 128,
-                        height = 128,
+                        width = 48,
+                        height = 48,
                         frame_count = 5,
                         axially_symmetrical = false,
                         direction_count = 16,
@@ -183,9 +183,9 @@ function ErmZerg.make_zergling(level)
             final_render_layer = "corpse",
             animation = {
                 filename = "__erm_zerg__/graphics/entity/units/" .. name .. "/" .. name .. "-death.png",
-                width = 128,
-                height = 128,
-                frame_count = 7,
+                width = 48,
+                height = 48,
+                frame_count = 5,
                 direction_count = 1,
                 axially_symmetrical = false,
                 scale = unit_scale,

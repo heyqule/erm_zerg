@@ -142,7 +142,7 @@ function ErmZerg.make_queen(level)
                             axially_symmetrical = false,
                             direction_count = 16,
                             scale = unit_scale,
-                            animation_speed = 0.6
+                            animation_speed = 0.5
                         },
                         {
                             filename = "__erm_zerg__/graphics/entity/units/" .. name .. "/" .. name .. "-attack.png",
@@ -155,7 +155,7 @@ function ErmZerg.make_queen(level)
                             scale = unit_scale,
                             draw_as_shadow = true,
                             tint = ERM_UnitTint.tint_shadow(),
-                            animation_speed = 0.6,
+                            animation_speed = 0.5,
                             shift = {4, 0}
                         }
                     }

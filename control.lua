@@ -139,8 +139,8 @@ local attack_functions = {
     [DRONE_ATTACK] = function(args)
         CustomAttacks.process_drone(args)
     end,
-    [INFESTED_ATTACK] = function(args)
-        CustomAttacks.process_infested(args)
+    [SELF_DESTRUCT_ATTACK] = function(args)
+        CustomAttacks.process_self_destruct(args)
     end,
     [BOSS_SPAWN_ATTACK] = function(args)
         print(CustomAttacks)

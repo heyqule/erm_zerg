@@ -122,7 +122,7 @@ function ErmZerg.make_boss_hive(level, hitpoint)
                         width = 224,
                         height = 160,
                         frame_count = 4,
-                        animation_speed = 0.2,
+                        animation_speed = 0.15,
                         direction_count = 1,
                         run_mode = "forward-then-backward",
                         scale = unit_scale
@@ -132,7 +132,7 @@ function ErmZerg.make_boss_hive(level, hitpoint)
                         width = 224,
                         height = 160,
                         frame_count = 4,
-                        animation_speed = 0.2,
+                        animation_speed = 0.15,
                         direction_count = 1,
                         run_mode = "forward-then-backward",
                         scale = unit_scale,

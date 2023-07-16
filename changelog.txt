@@ -1,4 +1,29 @@
 ---------------------------------------------------------------------------------------------------
+Version: 1.20.0
+Date: 2023-07-??
+
+  Features:
+    - Working with 5hinzou to integrate the HD graphic pack.
+    - Added Infested Command Centre, Broodlings, and Scourge.
+    - Introducing broodlings-overlord, spawns 2 broodlings, 5-10 seconds cooldown. Spawned unit's time to live 2 minutes.
+    - Introducing scourge-devourer, spawns 2 scourges, 5-10 seconds cooldown. Spawned unit's time to live 2 minutes.
+
+  Changes:
+    - Changed boss despawn attack parameters.
+    - Buffed hydralisk damage @ L20 from 80 to 100.
+    - Buffed mutalisk damage @ L20 from 100 to 120.
+    - Self destruct unit explosion now spawn at source, instead of target
+
+  Graphics:
+    - Removed integration animation for unit-spawners, not applicable and cause unintended affect on HD graphic.
+    - Fixed shadows after integration animation removal.
+    - Changed explosion animation_speed to 0.2 (12fps)
+    - Changed death animation_speed to 0.15 (9fps)
+    - Changed run, attack animation_speed to 0.5 (30fps)
+    - Removed purple dying explosion on some units.
+
+
+---------------------------------------------------------------------------------------------------
 Version: 1.19.0
 Date: 2023-03-12
 

@@ -68,6 +68,17 @@ local folded_animation = function()
                 scale = unit_scale,
                 run_mode = "forward-then-backward",
             },
+            {
+                filename = "__erm_zerg__/graphics/entity/buildings/" .. name .. "/" .. name .. ".png",
+                width = 128,
+                height = 128,
+                frame_count = 3,
+                direction_count = 1,
+                scale = unit_scale,
+                run_mode = "forward-then-backward",
+                draw_as_shadow = true,
+                shift = { 0.25, 0.1 },
+            },
         }
     }
 end
@@ -83,6 +94,17 @@ local attack_animation = function()
                 direction_count = 1,
                 scale = unit_scale,
                 run_mode = "forward-then-backward",
+            },
+            {
+                filename = "__erm_zerg__/graphics/entity/buildings/" .. name .. "/" .. name .. "_attack.png",
+                width = 128,
+                height = 128,
+                frame_count = 11,
+                direction_count = 1,
+                scale = unit_scale,
+                run_mode = "forward-then-backward",
+                draw_as_shadow = true,
+                shift = { 0.25, 0.1 },
             },
         }
     }
@@ -130,30 +152,6 @@ function ErmZerg.make_sunker_colony(level)
             starting_attack_animation = attack_animation(),
             starting_attack_speed = 0.02,
             starting_attack_sound = ZergSound.sunker_attack(0.75),
-            integration = {
-                layers = {
-                    {
-                        filename = "__erm_zerg__/graphics/entity/buildings/" .. name .. "/" .. name .. ".png",
-                        variation_count = 1,
-                        width = 128,
-                        height = 128,
-                        frame_count = 1,
-                        line_length = 1,
-                        scale = unit_scale
-                    },
-                    {
-                        filename = "__erm_zerg__/graphics/entity/buildings/" .. name .. "/" .. name .. ".png",
-                        variation_count = 1,
-                        width = 128,
-                        height = 128,
-                        frame_count = 1,
-                        line_length = 1,
-                        draw_as_shadow = true,
-                        shift = { 0.25, 0.1 },
-                        scale = unit_scale
-                    }
-                }
-            },
             autoplace = enemy_autoplace.enemy_worm_autoplace(0, FORCE_NAME),
             attack_from_start_frame = true,
             prepare_range = attack_range,
@@ -232,30 +230,6 @@ function ErmZerg.make_sunker_colony(level)
             starting_attack_animation = attack_animation(),
             starting_attack_speed = 0.02,
             starting_attack_sound = ZergSound.sunker_attack(0.75),
-            integration = {
-                layers = {
-                    {
-                        filename = "__erm_zerg__/graphics/entity/buildings/" .. name .. "/" .. name .. ".png",
-                        variation_count = 1,
-                        width = 128,
-                        height = 128,
-                        frame_count = 1,
-                        line_length = 1,
-                        scale = unit_scale
-                    },
-                    {
-                        filename = "__erm_zerg__/graphics/entity/buildings/" .. name .. "/" .. name .. ".png",
-                        variation_count = 1,
-                        width = 128,
-                        height = 128,
-                        frame_count = 1,
-                        line_length = 1,
-                        draw_as_shadow = true,
-                        shift = { 0.25, 0.1 },
-                        scale = unit_scale
-                    }
-                }
-            },
             --autoplace = nil
             attack_from_start_frame = true,
             prepare_range = attack_range,

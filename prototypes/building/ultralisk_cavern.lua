@@ -104,35 +104,23 @@ function ErmZerg.make_ultralisk_cavern(level)
                         width = 160,
                         height = 128,
                         frame_count = 3,
-                        animation_speed = 0.18,
+                        animation_speed = 0.15,
                         direction_count = 1,
                         run_mode = "forward-then-backward",
                         scale = unit_scale
-                    }
-                }
-            },
-            integration = {
-                layers = {
-                    {
-                        filename = "__erm_zerg__/graphics/entity/buildings/" .. name .. "/" .. name .. ".png",
-                        variation_count = 1,
-                        width = 160,
-                        height = 128,
-                        frame_count = 1,
-                        line_length = 1,
-                        scale = unit_scale
                     },
                     {
                         filename = "__erm_zerg__/graphics/entity/buildings/" .. name .. "/" .. name .. ".png",
-                        variation_count = 1,
                         width = 160,
                         height = 128,
-                        frame_count = 1,
-                        line_length = 1,
+                        frame_count = 3,
+                        animation_speed = 0.15,
+                        direction_count = 1,
+                        run_mode = "forward-then-backward",
+                        scale = unit_scale,
                         draw_as_shadow = true,
                         shift = { 0.25, 0.1 },
-                        scale = unit_scale
-                    },
+                    }
                 }
             },
             result_units = spawn_table(level),

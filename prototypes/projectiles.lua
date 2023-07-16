@@ -35,7 +35,8 @@ data:extend({
             width = 36,
             height = 36,
             priority = "high",
-            run_mode = 'forward-then-backward'
+            run_mode = 'forward-then-backward',
+            animation_speed = 0.2
         }
     },
     {
@@ -266,5 +267,20 @@ data:extend({
             }
         }
     },
-    --- Death Explosion
+    {
+        type = "explosion",
+        name = "scourge-explosion",
+        flags = { "not-on-map" },
+        animations = {
+            {
+                filename = "__erm_zerg__/graphics/entity/projectiles/scourge_explosion.png",
+                priority = "extra-high",
+                width = 48,
+                height = 48,
+                frame_count = 9,
+                animation_speed = 0.2,
+                scale = 1.3
+            }
+        }
+    }
 })
