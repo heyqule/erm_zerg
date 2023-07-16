@@ -12,6 +12,7 @@ local ERM_UnitHelper = require('__enemyracemanager__/lib/rig/unit_helper')
 local ERM_UnitTint = require('__enemyracemanager__/lib/rig/unit_tint')
 local ERM_DebugHelper = require('__enemyracemanager__/lib/debug_helper')
 local ERMDataHelper = require('__enemyracemanager__/lib/rig/data_helper')
+local ERM_Config = require('__enemyracemanager__/lib/global_config')
 local ZergSound = require('__erm_zerg__/prototypes/sound')
 local name = 'overlord'
 
@@ -44,10 +45,10 @@ local incremental_cold_resistance = 85
 
 -- Handles Attack Speed
 
-local base_attack_speed = 2700
+local base_attack_speed = 1800
 local incremental_attack_speed = 900
 
-local attack_range = 3
+local attack_range = ERM_Config.get_max_attack_range()
 
 
 local base_movement_speed = 0.15
@@ -105,6 +106,7 @@ function ErmZerg.make_overlord(level)
                 type = "projectile",
                 ammo_category = 'biological',
                 range = attack_range,
+                min_attack_distance = attack_range - 4,
                 cooldown = ERM_UnitHelper.get_attack_speed(base_attack_speed, incremental_attack_speed,  level),
                 cooldown_deviation = 0.1,
                 warmup = 12,
@@ -117,7 +119,7 @@ function ErmZerg.make_overlord(level)
                             type = 'instant',
                             source_effects = {
                                 type = "script",
-                                effect_id = OVERLORD_ATTACK,
+                                effect_id = OVERLORD_SPAWN,
                             }
                         }
                     }

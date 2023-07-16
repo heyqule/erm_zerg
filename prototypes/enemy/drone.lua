@@ -42,7 +42,7 @@ local incremental_physical_damage = 45
 -- Handles Attack Speed
 
 local base_attack_speed = 300
-local incremental_attack_speed = 180
+local incremental_attack_speed = 240
 
 local attack_range = 12
 
@@ -118,7 +118,7 @@ function ErmZerg.make_drone(level)
                             source_effects = {
                                 {
                                     type = "script",
-                                    effect_id = DRONE_ATTACK,
+                                    effect_id = DRONE_SPAWN,
                                 }
                             }
                         }

@@ -22,7 +22,7 @@ local name = 'scourge'
 
 
 local hitpoint = 25
-local max_hitpoint_multiplier = settings.startup["enemyracemanager-max-hitpoint-multipliers"].value * 3
+local max_hitpoint_multiplier = settings.startup["enemyracemanager-max-hitpoint-multipliers"].value * 4
 
 
 -- Handles acid and poison resistance
@@ -84,7 +84,7 @@ function ErmZerg.make_scourge(level)
             subgroup = "erm-flying-enemies",
             map_color = ZERG_MAP_COLOR,
             shooting_cursor_size = 2,
-            min_pursue_time = 60 * defines.time.second,
+            min_pursue_time = 120 * defines.time.second,
             resistances = {
                 { type = "acid", percent = ERM_UnitHelper.get_resistance(base_acid_resistance, incremental_acid_resistance,  level) },
                 { type = "poison", percent = ERM_UnitHelper.get_resistance(base_acid_resistance, incremental_acid_resistance,  level) },
@@ -239,8 +239,8 @@ function ErmZerg.make_scourge(level)
             flags = { "not-on-map" },
             animations = {
                 filename = "__erm_zerg__/graphics/entity/units/" .. name .. "/" .. name .. "-death.png",
-                width = 48,
-                height = 48,
+                width = 80,
+                height = 80,
                 frame_count = 9,
                 direction_count = 1,
                 axially_symmetrical = false,

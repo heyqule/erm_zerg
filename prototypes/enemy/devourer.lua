@@ -114,10 +114,23 @@ function ErmZerg.make_devourer(level)
                 ammo_type = {
                     category = "biological",
                     action = {
-                        type = "direct",
-                        action_delivery = {
-                            type = "stream",
-                            stream = name .. "-stream-" .. level,
+                        {
+                            type = "direct",
+                            probability = 0.5,
+                            action_delivery = {
+                                type = 'instant',
+                                source_effects = {
+                                    type = "script",
+                                    effect_id = SCOURGE_SPAWN,
+                                }
+                            }
+                        },
+                        {
+                            type = "direct",
+                            action_delivery = {
+                                type = "stream",
+                                stream = name .. "-stream-" .. level,
+                            }
                         }
                     }
                 },

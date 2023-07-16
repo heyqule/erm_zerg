@@ -37,7 +37,7 @@ local incremental_cold_resistance = 90
 -- Handles explosion damages
 
 local base_explosion_damage = 1
-local incremental_explosion_damage = 2
+local incremental_explosion_damage = 4
 
 -- Handles Attack Speed
 
@@ -53,7 +53,7 @@ local incremental_movement_speed = 0.1
 -- Misc settings
 local vision_distance = 30
 
-local pollution_to_join_attack = 150
+local pollution_to_join_attack = 250
 local distraction_cooldown = 300
 
 -- Animation Settings

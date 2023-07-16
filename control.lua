@@ -70,6 +70,10 @@ local addRaceSettings = function()
         { 'lair' },
         { 'hive' }
     }
+    race_settings.time_to_live_units = {
+        scourge=true,
+        broodling=true
+    }
     race_settings.support_structures = {
         { 'spawning_pool', 'hydraden', 'spire', 'chamber' },
         { 'greater_spire' },
@@ -82,9 +86,9 @@ local addRaceSettings = function()
     }
     race_settings.dropship = 'overlord'
     race_settings.droppable_units = {
-        {{ 'zergling', 'hydralisk' },{2,1}},
-        {{ 'zergling', 'hydralisk', 'lurker' },{3,2,1}},
-        {{ 'zergling', 'hydralisk', 'lurker', 'infested', 'ultralisk' },{4,4,1,2,1}},
+        {{ 'hydralisk' },{1}},
+        {{ 'hydralisk', 'lurker' },{2,1}},
+        {{ 'hydralisk', 'lurker', 'ultralisk' },{2,2,1}},
     }
     race_settings.construction_buildings = {
         {{ 'sunker_colony_shortrange'},{1}},
@@ -95,7 +99,7 @@ local addRaceSettings = function()
         -- Unit list, spawn ratio, unit attack point cost
         {{'zergling','ultralisk'}, {3, 2}, 20},
         {{'hydralisk','lurker', 'ultralisk'}, {2, 1, 1}, 20},
-        {{'zergling', 'infested', 'lurker', 'ultralisk'}, {3, 3, 2, 2}, 15},
+        {{'zergling', 'infested', 'lurker', 'ultralisk'}, {3, 1, 2, 2}, 15},
         {{'zergling','ultralisk','defiler'}, {6, 3, 1}, 22.5},
         {{'zergling', 'hydralisk', 'lurker', 'ultralisk'}, {4, 2, 1, 1}, 20},
         {{'zergling', 'hydralisk', 'lurker', 'ultralisk', 'defiler'}, {2, 1, 1, 2, 1}, 20},
@@ -133,11 +137,17 @@ Event.on_configuration_changed(function(event)
 end)
 
 local attack_functions = {
-    [OVERLORD_ATTACK] = function(args)
+    [OVERLORD_SPAWN] = function(args)
         CustomAttacks.process_overlord(args)
     end,
-    [DRONE_ATTACK] = function(args)
+    [QUEEN_SPAWN] = function(args)
+        CustomAttacks.process_queen(args)
+    end,
+    [DRONE_SPAWN] = function(args)
         CustomAttacks.process_drone(args)
+    end,
+    [SCOURGE_SPAWN] = function(args)
+        CustomAttacks.process_scourge_spawn(args)
     end,
     [SELF_DESTRUCT_ATTACK] = function(args)
         CustomAttacks.process_self_destruct(args)
@@ -156,6 +166,11 @@ Event.register(defines.events.on_script_trigger_effect, function(event)
     then
         attack_functions[event.effect_id](event)
     end
+end)
+
+--- Event.on_nth_tick(1801, function(event)
+Event.on_nth_tick(301, function(event)
+    CustomAttacks.clearTimeToLiveUnits(event)
 end)
 
 local ErmBossAttack = require('scripts/boss_attacks')

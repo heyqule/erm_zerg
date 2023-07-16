@@ -3,17 +3,25 @@ Version: 1.20.0
 Date: 2023-07-??
 
   Features:
-    - Working with 5hinzou to integrate the HD graphic pack.
-    - Added Infested Command Centre, Broodlings, and Scourge.
-    - Introducing broodlings-overlord, spawns 2 broodlings, 5-10 seconds cooldown. Spawned unit's time to live 2 minutes.
-    - Introducing scourge-devourer, spawns 2 scourges, 5-10 seconds cooldown. Spawned unit's time to live 2 minutes.
+    - Working with SHlNZ0U to integrate the HD graphic pack.
+    - Added Infested Command Centre
+    - Added Broodling, spawn from queen. 80 DPS @ L20
+    - Added Scourge, spawn from overlord. 250 damage @ L20
+    - Introducing time to live system, Broodling and Scourge only live for 2 minutes game time.
 
   Changes:
     - Changed boss despawn attack parameters.
     - Buffed hydralisk damage @ L20 from 80 to 100.
     - Buffed mutalisk damage @ L20 from 100 to 120.
-    - Self destruct unit explosion now spawn at source, instead of target
-    - Changed drone build at L20 from 1s to 2s.
+    - Buffed infested terran damage @ L20 from 120 to 500, adjusted its spawn rates and pollution consumption.
+    - Queens have 100% to spawn 2 broodlings, 50% to spawn 3 broodlings, 10% to spawn 5 broodlings at source location, per attack.
+    - Queen's acid attack now lower to 75% to spawn.
+    - Guardian has 33% to spawn a scourge when it attacks.
+    - Devourer has 50% to spawn a scourge when it attacks.
+    - Overlord have 100% to spawn 2 zerglings, 50% to a droppable unit, 50% to spawn 2 scourge.  Spawn time lowered from 45-30s to 30-15s.
+    - Infested Command Center have higher chance to spawn suicidal units as support building.
+    - Changed short range sunker from 14 to 15 range.
+    - Adjusted spawn table for various structures
 
   Graphics:
     - Removed integration animation for unit-spawners, not applicable and cause unintended affect on HD graphic.

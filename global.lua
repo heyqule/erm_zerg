@@ -14,8 +14,10 @@ DEBUG_MODE = false
 
 
 -- Attack Types for on_script_trigger_effect
-OVERLORD_ATTACK = 'emzrg-old'
-DRONE_ATTACK = 'emzrg-drn'
+OVERLORD_SPAWN = 'emzrg-ovl'
+QUEEN_SPAWN = 'emzrg-qun'
+DRONE_SPAWN = 'emzrg-drn'
+SCOURGE_SPAWN = 'emzrg-scg'
 SELF_DESTRUCT_ATTACK = 'emzrg-inf'
 BOSS_SPAWN_ATTACK = 'emzrg-bs1'
 UNITS_SPAWN_ATTACK = 'emzrg-bs2'

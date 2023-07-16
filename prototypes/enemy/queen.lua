@@ -113,18 +113,31 @@ function ErmZerg.make_queen(level)
                     category = "biological",
                     target_type = "direction",
                     action = {
-                        type = "direct",
-                        action_delivery = {
-                            type = "instant",
-                            target_effects = {
-                                {
-                                    type = "create-smoke",
-                                    show_in_tooltip = true,
-                                    entity_name = MOD_NAME .. "/acid-cloud-" .. level
-                                },
-                                {
-                                    type = "create-explosion",
-                                    entity_name = "acid-cloud-explosion"
+                        {
+                            type = "direct",
+                            action_delivery = {
+                                type = "instant",
+                                source_effects = {
+                                    type = "script",
+                                    effect_id = QUEEN_SPAWN,
+                                }
+                            }
+                        },
+                        {
+                            type = "direct",
+                            probability = 0.75,
+                            action_delivery = {
+                                type = "instant",
+                                target_effects = {
+                                    {
+                                        type = "create-smoke",
+                                        show_in_tooltip = true,
+                                        entity_name = MOD_NAME .. "/acid-cloud-" .. level
+                                    },
+                                    {
+                                        type = "create-explosion",
+                                        entity_name = "acid-cloud-explosion"
+                                    }
                                 }
                             }
                         }

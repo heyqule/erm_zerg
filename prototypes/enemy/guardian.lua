@@ -117,12 +117,25 @@ function ErmZerg.make_guardian(level)
                     category = "biological",
                     target_type = "direction",
                     action = {
-                        type = "direct",
-                        action_delivery = {
-                            type = "projectile",
-                            projectile = name .. "-projectile",
-                            starting_speed = 0.1,
-                            max_range = ERM_Config.get_max_projectile_range(2),
+                        {
+                            type = "direct",
+                            action_delivery = {
+                                type = "projectile",
+                                projectile = name .. "-projectile",
+                                starting_speed = 0.1,
+                                max_range = ERM_Config.get_max_projectile_range(2),
+                            }
+                        },
+                        {
+                            type = "direct",
+                            probability = 0.33,
+                            action_delivery = {
+                                type = 'instant',
+                                source_effects = {
+                                    type = "script",
+                                    effect_id = SCOURGE_SPAWN,
+                                }
+                            }
                         }
                     }
                 },

@@ -10,9 +10,30 @@ local ERMConfig = require('__enemyracemanager__/lib/global_config')
 local CustomAttacks = {}
 
 CustomAttacks.valid = CustomAttackHelper.valid
+CustomAttacks.clearTimeToLiveUnits = CustomAttackHelper.clear_time_to_live_units
 
 function CustomAttacks.process_overlord(event)
-    CustomAttackHelper.drop_unit(event, MOD_NAME, CustomAttackHelper.get_unit(MOD_NAME, 'droppable_units'))
+    CustomAttackHelper.drop_unit(event, MOD_NAME, 'zergling', 2)
+    if CustomAttackHelper.can_spawn(50) then
+        CustomAttackHelper.drop_unit(event, MOD_NAME, 'scourge', 2)
+    end
+    if CustomAttackHelper.can_spawn(50) then
+        CustomAttackHelper.drop_unit(event, MOD_NAME, CustomAttackHelper.get_unit(MOD_NAME, 'droppable_units'))
+    end
+end
+
+function CustomAttacks.process_queen(event)
+    CustomAttackHelper.drop_unit(event, MOD_NAME, 'broodling', 2)
+    if CustomAttackHelper.can_spawn(50) then
+        CustomAttackHelper.drop_unit(event, MOD_NAME, 'broodling', 1)
+    end
+    if CustomAttackHelper.can_spawn(10) then
+        CustomAttackHelper.drop_unit(event, MOD_NAME, 'broodling', 2)
+    end
+end
+
+function CustomAttacks.process_scourge_spawn(event)
+    CustomAttackHelper.drop_unit(event, MOD_NAME, 'scourge', 1)
 end
 
 function CustomAttacks.process_drone(event)

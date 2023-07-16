@@ -99,7 +99,7 @@ function ErmZerg.make_broodling(level)
             pollution_to_join_attack = ERM_UnitHelper.get_pollution_attack(pollution_to_join_attack, level),
             distraction_cooldown = distraction_cooldown,
             ai_settings = biter_ai_settings,
-            min_pursue_time = 60 * defines.time.second,
+            min_pursue_time = 120 * defines.time.second,
             attack_parameters = {
                 type = "projectile",
                 range_mode = "bounding-box-to-bounding-box",
