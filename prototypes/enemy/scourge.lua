@@ -84,6 +84,7 @@ function ErmZerg.make_scourge(level)
             subgroup = "erm-flying-enemies",
             map_color = ZERG_MAP_COLOR,
             shooting_cursor_size = 2,
+            min_pursue_time = 60 * defines.time.second,
             resistances = {
                 { type = "acid", percent = ERM_UnitHelper.get_resistance(base_acid_resistance, incremental_acid_resistance,  level) },
                 { type = "poison", percent = ERM_UnitHelper.get_resistance(base_acid_resistance, incremental_acid_resistance,  level) },

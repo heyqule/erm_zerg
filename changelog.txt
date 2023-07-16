@@ -13,6 +13,7 @@ Date: 2023-07-??
     - Buffed hydralisk damage @ L20 from 80 to 100.
     - Buffed mutalisk damage @ L20 from 100 to 120.
     - Self destruct unit explosion now spawn at source, instead of target
+    - Changed drone build at L20 from 1s to 2s.
 
   Graphics:
     - Removed integration animation for unit-spawners, not applicable and cause unintended affect on HD graphic.

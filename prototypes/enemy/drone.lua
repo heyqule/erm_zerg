@@ -42,7 +42,7 @@ local incremental_physical_damage = 45
 -- Handles Attack Speed
 
 local base_attack_speed = 300
-local incremental_attack_speed = 240
+local incremental_attack_speed = 180
 
 local attack_range = 12
 
@@ -128,26 +128,28 @@ function ErmZerg.make_drone(level)
                 animation = {
                     layers = {
                         {
-                            filename = "__erm_zerg__/graphics/entity/units/" .. name .. "/" .. name .. "-run.png",
-                            width = 128,
-                            height = 128,
-                            frame_count = 5,
+                            filename = "__erm_zerg__/graphics/entity/units/" .. name .. "/" .. name .. "-construction.png",
+                            width = 160,
+                            height = 192,
+                            frame_count = 7,
                             axially_symmetrical = false,
-                            direction_count = 16,
+                            direction_count = 1,
                             scale = unit_scale,
-                            animation_speed = 0.5
+                            repeat_count = 12,
+                            animation_speed = 0.2
                         },
                         {
-                            filename = "__erm_zerg__/graphics/entity/units/" .. name .. "/" .. name .. "-run.png",
-                            width = 128,
-                            height = 128,
-                            frame_count = 5,
+                            filename = "__erm_zerg__/graphics/entity/units/" .. name .. "/" .. name .. "-construction.png",
+                            width = 160,
+                            height = 192,
+                            frame_count = 7,
                             axially_symmetrical = false,
-                            direction_count = 16,
+                            direction_count = 1,
                             scale = unit_scale,
                             draw_as_shadow = true,
+                            repeat_count = 12,
                             tint = ERM_UnitTint.tint_shadow(),
-                            animation_speed = 0.5,
+                            animation_speed = 0.2,
                             shift = {0.2, 0}
                         }
                     }
