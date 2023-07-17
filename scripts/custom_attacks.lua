@@ -20,6 +20,10 @@ function CustomAttacks.process_overlord(event)
     if CustomAttackHelper.can_spawn(50) then
         CustomAttackHelper.drop_unit(event, MOD_NAME, CustomAttackHelper.get_unit(MOD_NAME, 'droppable_units'))
     end
+    if CustomAttackHelper.can_spawn(10) then
+        CustomAttackHelper.drop_unit(event, MOD_NAME, 'scourge', 2)
+        CustomAttackHelper.drop_unit(event, MOD_NAME, 'zergling', 2)
+    end
 end
 
 function CustomAttacks.process_queen(event)
@@ -27,7 +31,7 @@ function CustomAttacks.process_queen(event)
     if CustomAttackHelper.can_spawn(50) then
         CustomAttackHelper.drop_unit(event, MOD_NAME, 'broodling', 1)
     end
-    if CustomAttackHelper.can_spawn(10) then
+    if CustomAttackHelper.can_spawn(20) then
         CustomAttackHelper.drop_unit(event, MOD_NAME, 'broodling', 2)
     end
 end

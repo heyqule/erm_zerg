@@ -18,7 +18,8 @@ Date: 2023-07-??
     - Queen's acid attack now lower to 75% to spawn.
     - Guardian has 33% to spawn a scourge when it attacks.
     - Devourer has 50% to spawn a scourge when it attacks.
-    - Overlord have 100% to spawn 2 zerglings, 50% to a droppable unit, 50% to spawn 2 scourge.  Spawn time lowered from 45-30s to 30-15s.
+    - Overlord have 100% to spawn 2 zerglings, 50% to a droppable unit, 50% to spawn 2 scourge, 10% to spawn 2 more scourge and zergling.
+    - Overlord Spawn time lowered from 45-30s to 30-20s.
     - Infested Command Center have higher chance to spawn suicidal units as support building.
     - Changed short range sunker from 14 to 15 range.
     - Adjusted spawn table for various structures
