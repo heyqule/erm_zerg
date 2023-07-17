@@ -13,16 +13,13 @@ CustomAttacks.valid = CustomAttackHelper.valid
 CustomAttacks.clearTimeToLiveUnits = CustomAttackHelper.clear_time_to_live_units
 
 function CustomAttacks.process_overlord(event)
-    CustomAttackHelper.drop_unit(event, MOD_NAME, 'zergling', 2)
+    CustomAttackHelper.drop_unit(event, MOD_NAME, 'broodling', 4)
     if CustomAttackHelper.can_spawn(50) then
         CustomAttackHelper.drop_unit(event, MOD_NAME, 'scourge', 2)
+        CustomAttackHelper.drop_unit(event, MOD_NAME, 'zergling', 2)
     end
     if CustomAttackHelper.can_spawn(50) then
         CustomAttackHelper.drop_unit(event, MOD_NAME, CustomAttackHelper.get_unit(MOD_NAME, 'droppable_units'))
-    end
-    if CustomAttackHelper.can_spawn(10) then
-        CustomAttackHelper.drop_unit(event, MOD_NAME, 'scourge', 2)
-        CustomAttackHelper.drop_unit(event, MOD_NAME, 'zergling', 2)
     end
 end
 
