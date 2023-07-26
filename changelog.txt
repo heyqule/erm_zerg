@@ -4,6 +4,8 @@ Date: 2023-07-??
 
   Features:
     - Worked with Shinzou to integrate the HD graphic pack  and some of  its features.
+    - ERM 1.18 Compatibility Changes
+    - Updated unit for dynamic attack range and dynamic vision distance
     - Added Infested Command Centre, have higher chance to spawn suicidal units.
     - Added Broodling, spawn from queen. 80 DPS @ L20
     - Added Scourge, spawn from overlord. 250 damage @ L20
