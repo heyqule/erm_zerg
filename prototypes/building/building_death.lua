@@ -87,7 +87,6 @@ data:extend({
         order = "zerg-terran-xlarge-explosion",
         animations = {
             filename = "__erm_zerg__/graphics/entity/buildings/infested_cmd/xlarge-explosion.png",
-            priority = "extra-high",
             width = 252,
             height = 200,
             frame_count = 10,

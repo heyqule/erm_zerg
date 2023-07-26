@@ -11,6 +11,7 @@ local ERM_UnitHelper = require('__enemyracemanager__/lib/rig/unit_helper')
 local ERM_UnitTint = require('__enemyracemanager__/lib/rig/unit_tint')
 local ERM_DebugHelper = require('__enemyracemanager__/lib/debug_helper')
 local ZergSound = require('__erm_zerg__/prototypes/sound')
+local ERM_Config = require('__enemyracemanager__/lib/global_config')
 local name = 'drone'
 
 
@@ -44,7 +45,7 @@ local incremental_physical_damage = 45
 local base_attack_speed = 300
 local incremental_attack_speed = 240
 
-local attack_range = 12
+local attack_range = math.ceil(ERM_Config.get_max_attack_range() * 0.75)
 
 
 local base_movement_speed = 0.125

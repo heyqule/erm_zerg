@@ -45,10 +45,10 @@ local incremental_cold_resistance = 85
 
 -- Handles Attack Speed
 
-local base_attack_speed = 1800
-local incremental_attack_speed = 600
+local base_attack_speed = 2700
+local incremental_attack_speed = 900
 
-local attack_range = ERM_Config.get_max_attack_range()
+local attack_range = math.ceil(ERM_Config.get_max_attack_range() * 0.5)
 
 
 local base_movement_speed = 0.15

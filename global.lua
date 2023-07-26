@@ -18,7 +18,7 @@ OVERLORD_SPAWN = 'emzrg-ovl'
 QUEEN_SPAWN = 'emzrg-qun'
 DRONE_SPAWN = 'emzrg-drn'
 SCOURGE_SPAWN = 'emzrg-scg'
-SELF_DESTRUCT_ATTACK = 'emzrg-inf'
+SELF_DESTRUCT_ATTACK = 'emzrg-slf'
 BOSS_SPAWN_ATTACK = 'emzrg-bs1'
 UNITS_SPAWN_ATTACK = 'emzrg-bs2'
 

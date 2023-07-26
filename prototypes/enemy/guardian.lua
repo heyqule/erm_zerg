@@ -128,7 +128,7 @@ function ErmZerg.make_guardian(level)
                         },
                         {
                             type = "direct",
-                            probability = 0.33,
+                            probability = 0.4,
                             action_delivery = {
                                 type = 'instant',
                                 source_effects = {

@@ -116,16 +116,15 @@ function ErmZerg.make_queen(level)
                         {
                             type = "direct",
                             action_delivery = {
-                                type = "instant",
-                                source_effects = {
-                                    type = "script",
-                                    effect_id = QUEEN_SPAWN,
-                                }
+                                type = "projectile",
+                                projectile = 'parasite-projectile',
+                                starting_speed = 0.1,
+                                max_range = ERM_Config.get_max_projectile_range(),
                             }
                         },
                         {
                             type = "direct",
-                            probability = 0.75,
+                            probability = 0.5,
                             action_delivery = {
                                 type = "instant",
                                 target_effects = {

@@ -46,6 +46,7 @@ local addRaceSettings = function()
     end
 
     race_settings.race =  race_settings.race or MOD_NAME
+    race_settings.label = {'gui.label-zerg'}
     race_settings.level =  race_settings.level or 1
     race_settings.tier =  race_settings.tier or 1
     race_settings.evolution_point =  race_settings.evolution_point or 0
@@ -55,6 +56,8 @@ local addRaceSettings = function()
     race_settings.last_attack_meter_total = race_settings.last_attack_meter_total or 0
     race_settings.next_attack_threshold = race_settings.next_attack_threshold or 0
 
+    --- Units here will used for calculating attack point and level evolution
+    --- It should not include timed units and units spawned by other units.
     race_settings.units = {
         { 'zergling', 'hydralisk' },
         { 'overlord', 'devourer', 'drone', 'mutalisk', 'lurker' },
@@ -70,10 +73,6 @@ local addRaceSettings = function()
         { 'lair' },
         { 'hive' }
     }
-    race_settings.time_to_live_units = {
-        scourge=true,
-        broodling=true
-    }
     race_settings.support_structures = {
         { 'spawning_pool', 'hydraden', 'spire', 'chamber' },
         { 'greater_spire' },
@@ -83,6 +82,10 @@ local addRaceSettings = function()
         {'mutalisk'},
         {'devourer'},
         {'guardian','queen'}
+    }
+    race_settings.timed_units = {
+        scourge=true,
+        broodling=true
     }
     race_settings.dropship = 'overlord'
     race_settings.droppable_units = {
@@ -168,8 +171,7 @@ Event.register(defines.events.on_script_trigger_effect, function(event)
     end
 end)
 
---- Event.on_nth_tick(1801, function(event)
-Event.on_nth_tick(301, function(event)
+Event.on_nth_tick(1801, function(event)
     CustomAttacks.clearTimeToLiveUnits(event)
 end)
 

@@ -13,6 +13,7 @@ local ERM_UnitTint = require('__enemyracemanager__/lib/rig/unit_tint')
 local ERM_DebugHelper = require('__enemyracemanager__/lib/debug_helper')
 local ERMDataHelper = require('__enemyracemanager__/lib/rig/data_helper')
 local ZergSound = require('__erm_zerg__/prototypes/sound')
+local ERM_Config = require('__enemyracemanager__/lib/global_config')
 local name = 'devourer'
 
 -- Hitpoints
@@ -47,7 +48,7 @@ local incremental_acid_damage = 30
 local base_attack_speed = 180
 local incremental_attack_speed = 90
 
-local attack_range = 9
+local attack_range = math.ceil(ERM_Config.get_max_attack_range() * 0.75)
 
 
 local base_movement_speed = 0.2
@@ -116,7 +117,7 @@ function ErmZerg.make_devourer(level)
                     action = {
                         {
                             type = "direct",
-                            probability = 0.5,
+                            probability = 0.25,
                             action_delivery = {
                                 type = 'instant',
                                 source_effects = {

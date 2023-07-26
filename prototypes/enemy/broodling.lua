@@ -15,7 +15,7 @@ local name = 'broodling'
 
 
 local hitpoint = 30
-local max_hitpoint_multiplier = settings.startup["enemyracemanager-max-hitpoint-multipliers"].value * 4
+local max_hitpoint_multiplier = settings.startup["enemyracemanager-max-hitpoint-multipliers"].value * 3
 
 
 -- Handles acid and poison resistance
@@ -186,7 +186,7 @@ function ErmZerg.make_broodling(level)
                 filename = "__erm_zerg__/graphics/entity/units/" .. name .. "/" .. name .. "-death.png",
                 width = 48,
                 height = 48,
-                frame_count = 5,
+                frame_count = 1,
                 direction_count = 1,
                 axially_symmetrical = false,
                 scale = unit_scale,

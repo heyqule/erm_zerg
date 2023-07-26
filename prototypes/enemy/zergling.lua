@@ -136,7 +136,10 @@ function ErmZerg.make_zergling(level)
                     }
                 }
             },
-
+            dying_trigger_effect =  {
+                type = "script",
+                effect_id = OVERLORD_SPAWN,
+            },
             distance_per_frame = 0.22,
             run_animation = {
                 layers = {

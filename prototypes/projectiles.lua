@@ -34,9 +34,33 @@ data:extend({
             frame_count = 10,
             width = 36,
             height = 36,
-            priority = "high",
             run_mode = 'forward-then-backward',
-            animation_speed = 0.2
+            animation_speed = 0.5
+        }
+    },
+    {
+        type = "projectile",
+        name = "parasite-projectile",
+        flags = { "not-on-map" },
+        acceleration = 0.005,
+        action = {
+            type = "direct",
+            action_delivery = {
+                type = "instant",
+                target_effects = {
+                    type = "script",
+                    effect_id = QUEEN_SPAWN,
+                }
+            }
+        },
+        animation = {
+            filename = "__erm_zerg__/graphics/entity/projectiles/parasite.png",
+            frame_count = 1,
+            width = 20,
+            height = 20,
+            direction_count = 16,
+            animation_speed = 0.5,
+            scale = 2
         }
     },
     {
@@ -66,8 +90,7 @@ data:extend({
             frame_count = 1,
             width = 21,
             height = 49,
-            priority = "high",
-            animation_speed = 0.2
+            animation_speed = 0.5
         }
     },
     {
@@ -94,11 +117,10 @@ data:extend({
         },
         animation = {
             filename = "__erm_zerg__/graphics/entity/projectiles/spores_2.png",
-            priority = "extra-high",
             width = 24,
             height = 24,
             frame_count = 4,
-            animation_speed = 0.2,
+            animation_speed = 0.5,
             scale = 2
         }
     },
@@ -111,11 +133,10 @@ data:extend({
         animations = {
             {
                 filename = "__erm_zerg__/graphics/entity/projectiles/lurker_spike.png",
-                priority = "extra-high",
                 width = 128,
                 height = 128,
                 frame_count = 6,
-                animation_speed = 0.2,
+                animation_speed = 0.4,
                 scale = 3,
                 run_mode = "forward-then-backward",
             }
@@ -130,21 +151,19 @@ data:extend({
             layers = {
                 {
                     filename = "__erm_zerg__/graphics/entity/projectiles/colony_spike.png",
-                    priority = "extra-high",
                     width = 128,
                     height = 128,
                     frame_count = 6,
-                    animation_speed = 0.2,
+                    animation_speed = 0.4,
                     scale = 2,
                     run_mode = "forward-then-backward",
                 },
                 {
                     filename = "__erm_zerg__/graphics/entity/projectiles/colony_spike.png",
-                    priority = "extra-high",
                     width = 128,
                     height = 128,
                     frame_count = 6,
-                    animation_speed = 0.2,
+                    animation_speed = 0.4,
                     scale = 2,
                     draw_as_shadow = true,
                     shift = { 0.15, 0.1 },
@@ -160,11 +179,10 @@ data:extend({
         animations = {
             {
                 filename = "__erm_zerg__/graphics/entity/projectiles/spores_2.png",
-                priority = "extra-high",
                 width = 24,
                 height = 24,
                 frame_count = 4,
-                animation_speed = 0.2,
+                animation_speed = 0.4,
                 scale = 1.5
             }
         }
@@ -176,12 +194,11 @@ data:extend({
         animations = {
             {
                 filename = "__erm_zerg__/graphics/entity/projectiles/hydra_acid.png",
-                priority = "extra-high",
                 width = 31,
                 height = 32,
                 line_length = 8,
                 frame_count = 8,
-                animation_speed = 0.2
+                animation_speed = 0.4
             }
         }
     },
@@ -192,11 +209,10 @@ data:extend({
         animations = {
             {
                 filename = "__erm_zerg__/graphics/entity/projectiles/defiler_blood.png",
-                priority = "extra-high",
                 width = 128,
                 height = 128,
                 frame_count = 14,
-                animation_speed = 0.2,
+                animation_speed = 0.4,
                 scale = 2
             }
         }
@@ -208,12 +224,11 @@ data:extend({
         animations = {
             {
                 filename = "__erm_zerg__/graphics/entity/projectiles/darkswarm-80.png",
-                priority = "extra-high",
                 width = 256,
                 height = 256,
                 frame_count = 35,
-                frame_sequence = {1,2,3,4,5,6,7,8,9,10,9,8,7,6,7,8,9,10,9,8,7,6,7,8,9,10,9,8,7,6,5,4,3,2,1}, -- 3 seconds
-                animation_speed = 0.2,
+                frame_sequence = {1,2,3,4,5,6,7,8,9,10,9,8,7,6,7,8,9,10,9,8,7,6,7,8,9,10,9,8,7,6,5,4,3,2,1},
+                animation_speed = 0.4,
                 scale = 2
             }
         }
@@ -225,12 +240,11 @@ data:extend({
         animations = {
             {
                 filename = "__erm_zerg__/graphics/entity/projectiles/darkswarm.png", -- 5 seconds
-                priority = "extra-high",
                 width = 256,
                 height = 256,
                 frame_count = 60,
                 frame_sequence = {1,2,3,4,5,6,7,8,9,10,9,8,7,6,7,8,9,10,9,8,7,6,7,8,9,10,9,8,7,6,7,8,9,10,9,8,7,6,7,8,9,10,9,8,7,6,7,8,9,10,9,8,7,6,5,4,3,2,1},
-                animation_speed = 0.2,
+                animation_speed = 0.4,
                 scale = 2
             }
         }
@@ -242,11 +256,10 @@ data:extend({
         animations = {
             {
                 filename = "__erm_zerg__/graphics/entity/projectiles/snare.png",
-                priority = "extra-high",
                 width = 128,
                 height = 128,
                 frame_count = 14,
-                animation_speed = 0.2,
+                animation_speed = 0.4,
                 scale = 2
             }
         }
@@ -258,11 +271,10 @@ data:extend({
         animations = {
             {
                 filename = "__erm_zerg__/graphics/entity/projectiles/devourer_puke_hit.png",
-                priority = "extra-high",
                 width = 56,
                 height = 56,
                 frame_count = 16,
-                animation_speed = 0.2,
+                animation_speed = 0.4,
                 scale = 1.5
             }
         }
@@ -274,11 +286,10 @@ data:extend({
         animations = {
             {
                 filename = "__erm_zerg__/graphics/entity/projectiles/scourge_explosion.png",
-                priority = "extra-high",
                 width = 48,
                 height = 48,
                 frame_count = 9,
-                animation_speed = 0.2,
+                animation_speed = 0.4,
                 scale = 1.3
             }
         }

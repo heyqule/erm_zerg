@@ -3,6 +3,7 @@
 --- Created by heyqule.
 --- DateTime: 2/8/2023 9:02 PM
 ---
+require('util')
 local ErmConfig = require('__enemyracemanager__/lib/global_config')
 
 local RemoteAPI = {}
@@ -35,6 +36,10 @@ function RemoteAPI.milestones_preset_addons()
     }
 
     return preset
+end
+
+function RemoteAPI.print_global()
+    game.write_file('erm_zerg/erm-global.json',game.table_to_json(util.copy(global)))
 end
 
 return RemoteAPI
