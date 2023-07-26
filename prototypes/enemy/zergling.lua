@@ -51,7 +51,7 @@ local base_movement_speed = 0.175
 local incremental_movement_speed = 0.075
 
 -- Misc settings
-local vision_distance = 30
+local vision_distance = ERM_UnitHelper.get_vision_distance(attack_range)
 
 local pollution_to_join_attack = 5
 local distraction_cooldown = 300
@@ -118,7 +118,7 @@ function ErmZerg.make_zergling(level)
                             axially_symmetrical = false,
                             direction_count = 16,
                             scale = unit_scale,
-                            animation_speed = 0.6
+                            animation_speed = 0.5
                         },
                         {
                             filename = "__erm_zerg__/graphics/entity/units/" .. name .. "/" .. name .. "-attack.png",
@@ -130,13 +130,16 @@ function ErmZerg.make_zergling(level)
                             scale = unit_scale,
                             draw_as_shadow = true,
                             tint = ERM_UnitTint.tint_shadow(),
-                            animation_speed = 0.6,
+                            animation_speed = 0.5,
                             shift = {0.2, 0}
                         }
                     }
                 }
             },
-
+            dying_trigger_effect =  {
+                type = "script",
+                effect_id = OVERLORD_SPAWN,
+            },
             distance_per_frame = 0.22,
             run_animation = {
                 layers = {
@@ -165,7 +168,6 @@ function ErmZerg.make_zergling(level)
                     }
                 }
             },
-            dying_explosion = "blood-explosion-small",
             dying_sound = ZergSound.enemy_death(name, 0.75),
             corpse = name .. '-corpse'
         },

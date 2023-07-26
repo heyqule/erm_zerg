@@ -32,6 +32,15 @@ function ZergSound.meele_attack(volume)
     }
 end
 
+function ZergSound.broodling_attack(volume)
+    return
+    {
+
+        filename = "__erm_zerg__/sound/enemies/broodling/attack.ogg",
+        volume = volume
+    }
+end
+
 function ZergSound.mutalisk_attack(volume)
     return
     {
@@ -84,8 +93,15 @@ end
 function ZergSound.building_dying_sound(volume)
     return
     {
-
         filename = "__erm_zerg__/sound/buildings/building_death.ogg",
+        volume = volume
+    }
+end
+
+function ZergSound.cmd_building_dying_sound(volume)
+    return
+    {
+        filename = "__erm_zerg__/sound/buildings/infested_building_death.ogg",
         volume = volume
     }
 end
@@ -232,6 +248,42 @@ function ZergSound.defiler_attack(volume)
 
         filename = "__erm_zerg__/sound/enemies/defiler/attack.ogg",
         volume = volume
+    }
+end
+
+function ZergSound.scourge_attack(volume)
+    return {
+
+        variations = {
+            {
+                filename = "__erm_zerg__/sound/enemies/scourge/attack.ogg",
+                volume = volume
+            },
+            {
+                filename = "__erm_zerg__/sound/enemies/scourge/attack-2.ogg",
+                volume = volume
+            },
+            {
+                filename = "__erm_zerg__/sound/enemies/scourge/attack-3.ogg",
+                volume = volume
+            },
+        }
+    }
+end
+
+function ZergSound.scourge_death(volume)
+    return {
+
+        variations = {
+            {
+                filename = "__erm_zerg__/sound/enemies/scourge/death.ogg",
+                volume = volume
+            },
+            {
+                filename = "__erm_zerg__/sound/enemies/scourge/death-1.ogg",
+                volume = volume
+            }
+        }
     }
 end
 

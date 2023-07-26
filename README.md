@@ -7,11 +7,8 @@ Discord:  [https://discord.gg/BwWXygyEyQ](https://discord.gg/BwWXygyEyQ)
 
 ERM - Features Reel: [https://www.youtube.com/watch?v=phLRReAjxHA](https://www.youtube.com/watch?v=phLRReAjxHA)
 
-##### Changes in 1.18
-- Boss mode, proof of concept release.
-- Defiler can cast dark swarm.  Heals zerg units 250 - 600 health / sec for 3 seconds.
-- Defiler has 7.5% chance to cast Dark Swamp and 95% chance to cast Plague on target, 5% chance cast dark swamp on itself.
-- Reduced drone spawn rate.
+##### Changes in 1.20
+
 
 ##### Licenses
 Lua code files are licensed under GNU LGPLv3

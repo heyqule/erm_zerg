@@ -11,6 +11,7 @@ local ERM_UnitHelper = require('__enemyracemanager__/lib/rig/unit_helper')
 local ERM_UnitTint = require('__enemyracemanager__/lib/rig/unit_tint')
 local ERM_DebugHelper = require('__enemyracemanager__/lib/debug_helper')
 local ZergSound = require('__erm_zerg__/prototypes/sound')
+local ERM_Config = require('__enemyracemanager__/lib/global_config')
 local name = 'drone'
 
 
@@ -44,14 +45,14 @@ local incremental_physical_damage = 45
 local base_attack_speed = 300
 local incremental_attack_speed = 240
 
-local attack_range = 12
+local attack_range = math.ceil(ERM_Config.get_max_attack_range() * 0.75)
 
 
 local base_movement_speed = 0.125
 local incremental_movement_speed = 0.05
 
 -- Misc settings
-local vision_distance = 30
+local vision_distance = ERM_UnitHelper.get_vision_distance(attack_range)
 
 local pollution_to_join_attack = 200
 local distraction_cooldown = 300
@@ -118,7 +119,7 @@ function ErmZerg.make_drone(level)
                             source_effects = {
                                 {
                                     type = "script",
-                                    effect_id = DRONE_ATTACK,
+                                    effect_id = DRONE_SPAWN,
                                 }
                             }
                         }
@@ -128,26 +129,28 @@ function ErmZerg.make_drone(level)
                 animation = {
                     layers = {
                         {
-                            filename = "__erm_zerg__/graphics/entity/units/" .. name .. "/" .. name .. "-run.png",
-                            width = 128,
-                            height = 128,
-                            frame_count = 5,
+                            filename = "__erm_zerg__/graphics/entity/units/" .. name .. "/" .. name .. "-construction.png",
+                            width = 160,
+                            height = 192,
+                            frame_count = 7,
                             axially_symmetrical = false,
-                            direction_count = 16,
+                            direction_count = 1,
                             scale = unit_scale,
-                            animation_speed = 0.6
+                            repeat_count = 12,
+                            animation_speed = 0.2
                         },
                         {
-                            filename = "__erm_zerg__/graphics/entity/units/" .. name .. "/" .. name .. "-run.png",
-                            width = 128,
-                            height = 128,
-                            frame_count = 5,
+                            filename = "__erm_zerg__/graphics/entity/units/" .. name .. "/" .. name .. "-construction.png",
+                            width = 160,
+                            height = 192,
+                            frame_count = 7,
                             axially_symmetrical = false,
-                            direction_count = 16,
+                            direction_count = 1,
                             scale = unit_scale,
                             draw_as_shadow = true,
+                            repeat_count = 12,
                             tint = ERM_UnitTint.tint_shadow(),
-                            animation_speed = 0.6,
+                            animation_speed = 0.2,
                             shift = {0.2, 0}
                         }
                     }
@@ -182,7 +185,6 @@ function ErmZerg.make_drone(level)
                     }
                 }
             },
-            dying_explosion = "blood-explosion-small",
             dying_sound = ZergSound.enemy_death(name, 0.75),
             corpse = name .. '-corpse'
         },

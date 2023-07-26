@@ -12,6 +12,7 @@ local ERM_UnitHelper = require('__enemyracemanager__/lib/rig/unit_helper')
 local ERM_UnitTint = require('__enemyracemanager__/lib/rig/unit_tint')
 local ERM_DebugHelper = require('__enemyracemanager__/lib/debug_helper')
 local ERMDataHelper = require('__enemyracemanager__/lib/rig/data_helper')
+local ERM_Config = require('__enemyracemanager__/lib/global_config')
 local ZergSound = require('__erm_zerg__/prototypes/sound')
 local name = 'overlord'
 
@@ -47,14 +48,14 @@ local incremental_cold_resistance = 85
 local base_attack_speed = 2700
 local incremental_attack_speed = 900
 
-local attack_range = 3
+local attack_range = math.ceil(ERM_Config.get_max_attack_range() * 0.5)
 
 
 local base_movement_speed = 0.15
 local incremental_movement_speed = 0.125
 
 -- Misc Settings
-local vision_distance = 35
+local vision_distance = ERM_UnitHelper.get_vision_distance(attack_range)
 local pollution_to_join_attack = 200
 local distraction_cooldown = 300
 
@@ -105,6 +106,7 @@ function ErmZerg.make_overlord(level)
                 type = "projectile",
                 ammo_category = 'biological',
                 range = attack_range,
+                min_attack_distance = attack_range - 4,
                 cooldown = ERM_UnitHelper.get_attack_speed(base_attack_speed, incremental_attack_speed,  level),
                 cooldown_deviation = 0.1,
                 warmup = 12,
@@ -117,7 +119,7 @@ function ErmZerg.make_overlord(level)
                             type = 'instant',
                             source_effects = {
                                 type = "script",
-                                effect_id = OVERLORD_ATTACK,
+                                effect_id = OVERLORD_SPAWN,
                             }
                         }
                     }
@@ -134,7 +136,7 @@ function ErmZerg.make_overlord(level)
                             direction_count = 16,
                             scale = unit_scale,
                             run_mode = "forward-then-backward",
-                            animation_speed = 0.6,
+                            animation_speed = 0.5,
                         },
                         {
                             filename = "__erm_zerg__/graphics/entity/units/" .. name .. "/" .. name .. "-run.png",
@@ -145,7 +147,7 @@ function ErmZerg.make_overlord(level)
                             direction_count = 16,
                             scale = unit_scale,
                             tint = ERM_UnitTint.tint_shadow(),
-                            animation_speed = 0.6,
+                            animation_speed = 0.5,
                             draw_as_shadow = true,
                             run_mode = "forward-then-backward",
                             shift = { 4, 0 }
@@ -166,7 +168,7 @@ function ErmZerg.make_overlord(level)
                         direction_count = 16,
                         scale = unit_scale,
                         run_mode = "forward-then-backward",
-                        animation_speed = 0.6
+                        animation_speed = 0.5
                     },
                     {
                         filename = "__erm_zerg__/graphics/entity/units/" .. name .. "/" .. name .. "-run.png",
@@ -178,7 +180,7 @@ function ErmZerg.make_overlord(level)
                         scale = unit_scale,
                         tint = ERM_UnitTint.tint_shadow(),
                         shift = { 4, 0 },
-                        animation_speed = 0.6,
+                        animation_speed = 0.5,
                         run_mode = "forward-then-backward",
                         draw_as_shadow = true
                     }

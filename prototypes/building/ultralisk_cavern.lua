@@ -45,14 +45,14 @@ local max_count_of_owned_units = 12
 local max_friends_around_to_spawn = 7
 local spawn_table = function(level)
     local res = {}
-    res[1] = { MOD_NAME .. '/zergling/' .. level, { { 0.0, 0.7 }, { 0.2, 0.7 }, { 0.4, 0.6 }, { 0.6, 0.5 }, { 0.8, 0.2 }, { 1.0, 0.25 }  } }
+    res[1] = { MOD_NAME .. '/zergling/' .. level, { { 0.0, 0.7 }, { 0.2, 0.7 }, { 0.4, 0.6 }, { 0.6, 0.5 }, { 0.8, 0.2 }, { 1.0, 0.2 }  } }
     res[2] = { MOD_NAME .. '/hydralisk/' .. level, { { 0.0, 0.3 }, { 0.2, 0.3 }, { 0.4, 0.3 }, { 0.6, 0.3 }, { 0.8, 0.2 }, { 1.0, 0.2 } } }
     res[3] = { MOD_NAME .. '/lurker/' .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.0 }, { 0.8, 0.1 }, { 1.0, 0.2 } } }
     res[4] = { MOD_NAME .. '/mutalisk/' .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.1 }, { 0.6, 0.1 }, { 0.8, 0.15 }, { 1.0, 0.0 } } }
     res[5] = { MOD_NAME .. '/guardian/' .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.0 }, { 0.8, 0.0 }, { 1.0, 0.0 } } }
     res[6] = { MOD_NAME .. '/devourer/' .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.0 }, { 0.8, 0.1 }, { 1.0, 0.0 } } }
     res[7] = { MOD_NAME .. '/overlord/' .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.1 }, { 0.8, 0.1 }, { 1.0, 0.1 } } }
-    res[8] = { MOD_NAME .. '/ultralisk/' .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.0 }, { 0.8, 0.1 }, { 1.0, 0.25 } } }
+    res[8] = { MOD_NAME .. '/ultralisk/' .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.0 }, { 0.8, 0.1 }, { 1.0, 0.3 } } }
     return res
 end
 
@@ -104,35 +104,23 @@ function ErmZerg.make_ultralisk_cavern(level)
                         width = 160,
                         height = 128,
                         frame_count = 3,
-                        animation_speed = 0.18,
+                        animation_speed = 0.15,
                         direction_count = 1,
                         run_mode = "forward-then-backward",
                         scale = unit_scale
-                    }
-                }
-            },
-            integration = {
-                layers = {
-                    {
-                        filename = "__erm_zerg__/graphics/entity/buildings/" .. name .. "/" .. name .. ".png",
-                        variation_count = 1,
-                        width = 160,
-                        height = 128,
-                        frame_count = 1,
-                        line_length = 1,
-                        scale = unit_scale
                     },
                     {
                         filename = "__erm_zerg__/graphics/entity/buildings/" .. name .. "/" .. name .. ".png",
-                        variation_count = 1,
                         width = 160,
                         height = 128,
-                        frame_count = 1,
-                        line_length = 1,
+                        frame_count = 3,
+                        animation_speed = 0.15,
+                        direction_count = 1,
+                        run_mode = "forward-then-backward",
+                        scale = unit_scale,
                         draw_as_shadow = true,
                         shift = { 0.25, 0.1 },
-                        scale = unit_scale
-                    },
+                    }
                 }
             },
             result_units = spawn_table(level),

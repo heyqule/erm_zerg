@@ -13,6 +13,7 @@ local ERM_UnitTint = require('__enemyracemanager__/lib/rig/unit_tint')
 local ERM_DebugHelper = require('__enemyracemanager__/lib/debug_helper')
 local ERMDataHelper = require('__enemyracemanager__/lib/rig/data_helper')
 local ZergSound = require('__erm_zerg__/prototypes/sound')
+local ERM_Config = require('__enemyracemanager__/lib/global_config')
 local name = 'devourer'
 
 -- Hitpoints
@@ -47,14 +48,14 @@ local incremental_acid_damage = 30
 local base_attack_speed = 180
 local incremental_attack_speed = 90
 
-local attack_range = 9
+local attack_range = math.ceil(ERM_Config.get_max_attack_range() * 0.75)
 
 
 local base_movement_speed = 0.2
 local incremental_movement_speed = 0.15
 
 -- Misc Settings
-local vision_distance = 35
+local vision_distance = ERM_UnitHelper.get_vision_distance(attack_range)
 local pollution_to_join_attack = 150
 local distraction_cooldown = 300
 
@@ -114,10 +115,23 @@ function ErmZerg.make_devourer(level)
                 ammo_type = {
                     category = "biological",
                     action = {
-                        type = "direct",
-                        action_delivery = {
-                            type = "stream",
-                            stream = name .. "-stream-" .. level,
+                        {
+                            type = "direct",
+                            probability = 0.25,
+                            action_delivery = {
+                                type = 'instant',
+                                source_effects = {
+                                    type = "script",
+                                    effect_id = SCOURGE_SPAWN,
+                                }
+                            }
+                        },
+                        {
+                            type = "direct",
+                            action_delivery = {
+                                type = "stream",
+                                stream = name .. "-stream-" .. level,
+                            }
                         }
                     }
                 },
@@ -168,7 +182,7 @@ function ErmZerg.make_devourer(level)
                         axially_symmetrical = false,
                         direction_count = 16,
                         scale = unit_scale,
-                        animation_speed = 0.6,
+                        animation_speed = 0.5,
                         run_mode = 'forward-then-backward'
                     },
                     {
@@ -181,7 +195,7 @@ function ErmZerg.make_devourer(level)
                         scale = unit_scale,
                         tint = ERM_UnitTint.tint_shadow(),
                         shift = { 4, 0 },
-                        animation_speed = 0.6,
+                        animation_speed = 0.5,
                         draw_as_shadow = true,
                         run_mode = 'forward-then-backward'
                     }

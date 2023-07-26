@@ -74,9 +74,54 @@ data:extend({
             width = 200,
             height = 200,
             frame_count = 12,
-            animation_speed = 0.25,
+            animation_speed = 0.15,
             direction_count = 1,
             scale = 2
+        }
+    },
+    {
+        type = "explosion",
+        name = "zerg-terran-building-xlarge-explosion",
+        flags = { "not-on-map" },
+        subgroup = 'explosions',
+        order = "zerg-terran-xlarge-explosion",
+        animations = {
+            filename = "__erm_zerg__/graphics/entity/buildings/infested_cmd/xlarge-explosion.png",
+            width = 252,
+            height = 200,
+            frame_count = 10,
+            animation_speed = 0.25,
+            direction_count = 1,
+            scale = 1.25,
+            draw_as_glow = true,
+            shift = {0, 1}
+        },
+        --light = {intensity = 1, size = 50, color = {r=1.0, g=1.0, b=1.0}},
+    },
+    {
+        type = "corpse",
+        name = "zerg-terran-large-base-corpse",
+        flags = { "placeable-neutral",  "not-on-map" },
+        icon = "__erm_terran__/graphics/entity/icons/advisor.png",
+        icon_size = 64,
+        collision_box = { { -2, -2 }, { 2, 2 } },
+        selection_box = { { -2, -2 }, { 2, 2 } },
+        selectable_in_game = false,
+        dying_speed = 0.04,
+        time_before_removed = defines.time.minute * settings.startup["enemyracemanager-enemy-corpse-time"].value,
+        subgroup = "corpses",
+        order = "c[corpse]-c[zerg-large-terran-base-corpse]",
+        final_render_layer = "remnants",
+        animation = {
+            {
+                filename =  "__erm_zerg__/graphics/entity/buildings/infested_cmd/large-rubble.png",
+                width = 128,
+                height = 128,
+                variation_count = 1,
+                frame_count = 1,
+                direction_count = 1,
+                scale = 1.5,
+            }
         }
     }
 });

@@ -57,7 +57,7 @@ local base_movement_speed = 0.125
 local incremental_movement_speed = 0.075
 
 -- Misc settings
-local vision_distance = 30
+local vision_distance = ERM_UnitHelper.get_vision_distance(attack_range)
 
 local pollution_to_join_attack = 300
 local distraction_cooldown = 300
@@ -190,7 +190,7 @@ function ErmZerg.make_defiler(level)
                             axially_symmetrical = false,
                             direction_count = 16,
                             scale = unit_scale,
-                            animation_speed = 0.6
+                            animation_speed = 0.5
                         },
                         {
                             filename = "__erm_zerg__/graphics/entity/units/" .. name .. "/" .. name .. "-run.png",
@@ -202,7 +202,7 @@ function ErmZerg.make_defiler(level)
                             scale = unit_scale,
                             draw_as_shadow = true,
                             tint = ERM_UnitTint.tint_shadow(),
-                            animation_speed = 0.6,
+                            animation_speed = 0.5,
                             shift = {0.2, 0}
                         }
                     }
@@ -237,7 +237,6 @@ function ErmZerg.make_defiler(level)
                     }
                 }
             },
-            dying_explosion = "blood-explosion-small",
             dying_sound = ZergSound.enemy_death(name, 0.75),
             corpse = name .. '-corpse'
         },

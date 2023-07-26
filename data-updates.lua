@@ -3,6 +3,7 @@
 --- Created by heyqule.
 --- DateTime: 2/5/2023 2:24 PM
 ---
+require('__stdlib__/stdlib/utils/defines/time')
 local noise = require("noise")
 local String = require('__stdlib__/stdlib/utils/string')
 local AutoplaceHelper = require('__enemyracemanager__/lib/helper/autoplace_helper')
@@ -55,3 +56,10 @@ if ErmConfig.mapgen_is_mixed() then
         end
     end
 end
+
+
+local scourge = data.raw['unit']['erm_zerg/scourge/20']
+scourge['time_to_live'] = 5 * defines.time.minute
+local broodling = data.raw['unit']['erm_zerg/broodling/20']
+broodling['time_to_live'] = 5 * defines.time.minute
+

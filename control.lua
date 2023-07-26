@@ -46,6 +46,7 @@ local addRaceSettings = function()
     end
 
     race_settings.race =  race_settings.race or MOD_NAME
+    race_settings.label = {'gui.label-zerg'}
     race_settings.level =  race_settings.level or 1
     race_settings.tier =  race_settings.tier or 1
     race_settings.evolution_point =  race_settings.evolution_point or 0
@@ -55,6 +56,8 @@ local addRaceSettings = function()
     race_settings.last_attack_meter_total = race_settings.last_attack_meter_total or 0
     race_settings.next_attack_threshold = race_settings.next_attack_threshold or 0
 
+    --- Units here will used for calculating attack point and level evolution
+    --- It should not include timed units and units spawned by other units.
     race_settings.units = {
         { 'zergling', 'hydralisk' },
         { 'overlord', 'devourer', 'drone', 'mutalisk', 'lurker' },
@@ -80,11 +83,15 @@ local addRaceSettings = function()
         {'devourer'},
         {'guardian','queen'}
     }
+    race_settings.timed_units = {
+        scourge=true,
+        broodling=true
+    }
     race_settings.dropship = 'overlord'
     race_settings.droppable_units = {
-        {{ 'zergling', 'hydralisk' },{2,1}},
-        {{ 'zergling', 'hydralisk', 'lurker' },{3,2,1}},
-        {{ 'zergling', 'hydralisk', 'lurker', 'infested', 'ultralisk' },{4,4,1,2,1}},
+        {{ 'hydralisk' },{1}},
+        {{ 'hydralisk', 'lurker' },{2,1}},
+        {{ 'hydralisk', 'lurker', 'ultralisk' },{2,2,1}},
     }
     race_settings.construction_buildings = {
         {{ 'sunker_colony_shortrange'},{1}},
@@ -95,7 +102,7 @@ local addRaceSettings = function()
         -- Unit list, spawn ratio, unit attack point cost
         {{'zergling','ultralisk'}, {3, 2}, 20},
         {{'hydralisk','lurker', 'ultralisk'}, {2, 1, 1}, 20},
-        {{'zergling', 'infested', 'lurker', 'ultralisk'}, {3, 3, 2, 2}, 15},
+        {{'zergling', 'infested', 'lurker', 'ultralisk'}, {3, 1, 2, 2}, 15},
         {{'zergling','ultralisk','defiler'}, {6, 3, 1}, 22.5},
         {{'zergling', 'hydralisk', 'lurker', 'ultralisk'}, {4, 2, 1, 1}, 20},
         {{'zergling', 'hydralisk', 'lurker', 'ultralisk', 'defiler'}, {2, 1, 1, 2, 1}, 20},
@@ -133,14 +140,20 @@ Event.on_configuration_changed(function(event)
 end)
 
 local attack_functions = {
-    [OVERLORD_ATTACK] = function(args)
+    [OVERLORD_SPAWN] = function(args)
         CustomAttacks.process_overlord(args)
     end,
-    [DRONE_ATTACK] = function(args)
+    [QUEEN_SPAWN] = function(args)
+        CustomAttacks.process_queen(args)
+    end,
+    [DRONE_SPAWN] = function(args)
         CustomAttacks.process_drone(args)
     end,
-    [INFESTED_ATTACK] = function(args)
-        CustomAttacks.process_infested(args)
+    [SCOURGE_SPAWN] = function(args)
+        CustomAttacks.process_scourge_spawn(args)
+    end,
+    [SELF_DESTRUCT_ATTACK] = function(args)
+        CustomAttacks.process_self_destruct(args)
     end,
     [BOSS_SPAWN_ATTACK] = function(args)
         print(CustomAttacks)
@@ -156,6 +169,10 @@ Event.register(defines.events.on_script_trigger_effect, function(event)
     then
         attack_functions[event.effect_id](event)
     end
+end)
+
+Event.on_nth_tick(1801, function(event)
+    CustomAttacks.clearTimeToLiveUnits(event)
 end)
 
 local ErmBossAttack = require('scripts/boss_attacks')

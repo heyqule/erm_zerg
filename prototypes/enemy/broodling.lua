@@ -11,22 +11,22 @@ local ERM_UnitHelper = require('__enemyracemanager__/lib/rig/unit_helper')
 local ERM_UnitTint = require('__enemyracemanager__/lib/rig/unit_tint')
 local ERM_DebugHelper = require('__enemyracemanager__/lib/debug_helper')
 local ZergSound = require('__erm_zerg__/prototypes/sound')
-local name = 'infested'
+local name = 'broodling'
 
 
-local hitpoint = 60
+local hitpoint = 30
 local max_hitpoint_multiplier = settings.startup["enemyracemanager-max-hitpoint-multipliers"].value * 3
 
 
 -- Handles acid and poison resistance
-local base_acid_resistance = 20
-local incremental_acid_resistance = 75
+local base_acid_resistance = 25
+local incremental_acid_resistance = 70
 -- Handles physical resistance
 local base_physical_resistance = 0
 local incremental_physical_resistance = 95
 -- Handles fire and explosive resistance
-local base_fire_resistance = 10
-local incremental_fire_resistance = 85
+local base_fire_resistance = 15
+local incremental_fire_resistance = 80
 -- Handles laser and electric resistance
 local base_electric_resistance = 0
 local incremental_electric_resistance = 90
@@ -34,34 +34,35 @@ local incremental_electric_resistance = 90
 local base_cold_resistance = 0
 local incremental_cold_resistance = 90
 
--- Handles explosion damages
+-- Handles physical damages
 
-local base_explosion_damage = 1
-local incremental_explosion_damage = 4
+local base_physical_damage = 1
+local incremental_physical_damage = 4
 
 -- Handles Attack Speed
 
-local base_attack_speed = 600
-local incremental_attack_speed = 0
+local base_attack_speed = 60
+local incremental_attack_speed = 30
 
 local attack_range = 1
 
 
-local base_movement_speed = 0.15
-local incremental_movement_speed = 0.1
+local base_movement_speed = 0.175
+local incremental_movement_speed = 0.075
 
 -- Misc settings
 local vision_distance = ERM_UnitHelper.get_vision_distance(attack_range)
 
-local pollution_to_join_attack = 250
+local pollution_to_join_attack = 5
 local distraction_cooldown = 300
 
 -- Animation Settings
 local unit_scale = 1.3
+
 local collision_box = { { -0.25, -0.25 }, { 0.25, 0.25 } }
 local selection_box = { { -0.5, -0.5 }, { 0.5, 0.5 } }
 
-function ErmZerg.make_infested(level)
+function ErmZerg.make_broodling(level)
     level = level or 1
 
     data:extend({
@@ -98,64 +99,22 @@ function ErmZerg.make_infested(level)
             pollution_to_join_attack = ERM_UnitHelper.get_pollution_attack(pollution_to_join_attack, level),
             distraction_cooldown = distraction_cooldown,
             ai_settings = biter_ai_settings,
-            spawning_time_modifier = 1.5,
+            min_pursue_time = 120 * defines.time.second,
             attack_parameters = {
                 type = "projectile",
                 range_mode = "bounding-box-to-bounding-box",
                 range = attack_range,
                 cooldown = ERM_UnitHelper.get_attack_speed(base_attack_speed, incremental_attack_speed,  level),
                 cooldown_deviation = 0.1,
-                warmup = 12,
-                damage_modifier = ERM_UnitHelper.get_damage(base_explosion_damage, incremental_explosion_damage,  level),
-                ammo_type = {
-                    category = "biological",
-                    target_type = "direction",
-                    action = {
-                        type = "direct",
-                        action_delivery = {
-                            type = "instant",
-                            source_effects =
-                            {
-                                {
-                                    type = "script",
-                                    effect_id = SELF_DESTRUCT_ATTACK,
-                                },
-                                {
-                                    type = "create-explosion",
-                                    entity_name = 'medium-explosion'
-                                },
-                            },
-                            target_effects = {
-                                {
-                                    type = "nested-result",
-                                    action = {
-                                        type = "area",
-                                        force = 'not-same',
-                                        radius = 3,
-                                        ignore_collision_condition = true,
-                                        action_delivery = {
-                                            type = "instant",
-                                            target_effects = {
-                                                {
-                                                    type = "damage",
-                                                    damage = { amount = 100, type = "explosion" },
-                                                    apply_damage_to_trees = true
-                                                },
-                                            }
-                                        }
-                                    }
-                                },
-                            }
-                        }
-                    },
-                },
-                sound = ZergSound.infested_attack(0.75),
+                damage_modifier = ERM_UnitHelper.get_damage(base_physical_damage, incremental_physical_damage,  level),
+                ammo_type = make_unit_melee_ammo_type(8),
+                sound = ZergSound.broodling_attack(0.5),
                 animation = {
                     layers = {
                         {
-                            filename = "__erm_zerg__/graphics/entity/units/" .. name .. "/" .. name .. "-run.png",
-                            width = 64,
-                            height = 64,
+                            filename = "__erm_zerg__/graphics/entity/units/" .. name .. "/" .. name .. "-attack.png",
+                            width = 48,
+                            height = 48,
                             frame_count = 5,
                             axially_symmetrical = false,
                             direction_count = 16,
@@ -163,9 +122,9 @@ function ErmZerg.make_infested(level)
                             animation_speed = 0.5
                         },
                         {
-                            filename = "__erm_zerg__/graphics/entity/units/" .. name .. "/" .. name .. "-run.png",
-                            width = 64,
-                            height = 64,
+                            filename = "__erm_zerg__/graphics/entity/units/" .. name .. "/" .. name .. "-attack.png",
+                            width = 48,
+                            height = 48,
                             frame_count = 5,
                             axially_symmetrical = false,
                             direction_count = 16,
@@ -184,8 +143,8 @@ function ErmZerg.make_infested(level)
                 layers = {
                     {
                         filename = "__erm_zerg__/graphics/entity/units/" .. name .. "/" .. name .. "-run.png",
-                        width = 64,
-                        height = 64,
+                        width = 48,
+                        height = 48,
                         frame_count = 5,
                         axially_symmetrical = false,
                         direction_count = 16,
@@ -194,8 +153,8 @@ function ErmZerg.make_infested(level)
                     },
                     {
                         filename = "__erm_zerg__/graphics/entity/units/" .. name .. "/" .. name .. "-run.png",
-                        width = 64,
-                        height = 64,
+                        width = 48,
+                        height = 48,
                         frame_count = 5,
                         axially_symmetrical = false,
                         direction_count = 16,
@@ -207,7 +166,7 @@ function ErmZerg.make_infested(level)
                     }
                 }
             },
-            dying_sound = ZergSound.infested_death(0.75),
+            dying_sound = ZergSound.enemy_death(name, 0.75),
             corpse = name .. '-corpse'
         },
         {
@@ -219,15 +178,15 @@ function ErmZerg.make_infested(level)
             selection_box = selection_box,
             selectable_in_game = false,
             dying_speed = 0.04,
-            time_before_removed = defines.time.minute * settings.startup["enemyracemanager-enemy-corpse-time"].value,
+
             subgroup = "corpses",
             order = MOD_NAME .. "/" .. name .. level,
             final_render_layer = "corpse",
             animation = {
                 filename = "__erm_zerg__/graphics/entity/units/" .. name .. "/" .. name .. "-death.png",
-                width = 64,
-                height = 64,
-                frame_count = 7,
+                width = 48,
+                height = 48,
+                frame_count = 1,
                 direction_count = 1,
                 axially_symmetrical = false,
                 scale = unit_scale,

@@ -11,8 +11,8 @@ local ERMDataHelper = require('__enemyracemanager__/lib/rig/data_helper')
 local boss_difficulty = settings.startup['enemyracemanager-boss-difficulty'].value
 local damage_multiplier = {
     [BOSS_NORMAL] = 1,
-    [BOSS_HARD] = 1.5,
-    [BOSS_GODLIKE] = 2
+    [BOSS_HARD] = 1.2,
+    [BOSS_GODLIKE] = 1.5
 }
 
 local get_damage = function(init_dmg, tier ,multiplier)
@@ -50,11 +50,10 @@ local create_blood_cloud_projectile = function(tier)
         },
         animation = {
             filename = "__erm_zerg__/graphics/entity/projectiles/spores_2.png",
-            priority = "extra-high",
             width = 24,
             height = 24,
             frame_count = 4,
-            animation_speed = 0.2,
+            animation_speed = 0.5,
             scale = 2
         }
     }
@@ -91,11 +90,10 @@ local create_acid_cloud_projectile = function(tier)
         },
         animation = {
             filename = "__erm_zerg__/graphics/entity/projectiles/spores_2.png",
-            priority = "extra-high",
             width = 24,
             height = 24,
             frame_count = 4,
-            animation_speed = 0.2,
+            animation_speed = 0.5,
             scale = 2
         }
     }
@@ -143,11 +141,10 @@ local create_blood_fire_projectile = function(tier)
         },
         animation = {
             filename = "__erm_zerg__/graphics/entity/projectiles/spores_2.png",
-            priority = "extra-high",
             width = 24,
             height = 24,
             frame_count = 4,
-            animation_speed = 0.2,
+            animation_speed = 0.5,
             scale = 2
         }
     }
@@ -277,11 +274,10 @@ local create_blood_explosion_projectile = function(tier)
         },
         animation = {
             filename = "__erm_zerg__/graphics/entity/projectiles/spores_2.png",
-            priority = "extra-high",
             width = 24,
             height = 24,
             frame_count = 4,
-            animation_speed = 0.2,
+            animation_speed = 0.5,
             scale = 2
         }
     }

@@ -68,37 +68,23 @@ local folded_animation = function()
                 frame_count = 4,
                 direction_count = 1,
                 scale = unit_scale,
+            },
+            {
+                filename = "__erm_zerg__/graphics/entity/buildings/" .. name .. "/" .. name .. ".png",
+                run_mode = "forward",
+                width = 128,
+                height = 128,
+                frame_count = 4,
+                direction_count = 1,
+                scale = unit_scale,
+                draw_as_shadow = true,
+                shift = { 0.25, 0.1 },
             }
         }
     }
 end
 
-local integration_animation = function()
-    return {
-        layers = {
-            {
-                filename = "__erm_zerg__/graphics/entity/buildings/" .. name .. "/" .. name .. ".png",
-                variation_count = 1,
-                width = 128,
-                height = 128,
-                frame_count = 1,
-                line_length = 1,
-                scale = unit_scale
-            },
-            {
-                filename = "__erm_zerg__/graphics/entity/buildings/" .. name .. "/" .. name .. ".png",
-                variation_count = 1,
-                width = 128,
-                height = 128,
-                frame_count = 1,
-                line_length = 1,
-                draw_as_shadow = true,
-                shift = { 0.25, 0.1 },
-                scale = unit_scale
-            },
-        }
-    }
-end
+
 
 function ErmZerg.make_spore_colony(level)
     level = level or 1
@@ -139,7 +125,6 @@ function ErmZerg.make_spore_colony(level)
             folded_speed_secondary = 0.024,
             folded_animation = folded_animation(),
             working_sound = ZergSound.spore_idle(0.75),
-            integration = integration_animation(),
             autoplace = enemy_autoplace.enemy_worm_autoplace(0, FORCE_NAME),
             attack_from_start_frame = true,
             prepare_range = attack_range,

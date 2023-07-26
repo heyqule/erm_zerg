@@ -55,7 +55,7 @@ local base_movement_speed = 0.15
 local incremental_movement_speed = 0.125
 
 -- Misc Settings
-local vision_distance = 35
+local vision_distance = ERM_UnitHelper.get_vision_distance(attack_range)
 local pollution_to_join_attack = 150
 local distraction_cooldown = 300
 
@@ -117,12 +117,25 @@ function ErmZerg.make_guardian(level)
                     category = "biological",
                     target_type = "direction",
                     action = {
-                        type = "direct",
-                        action_delivery = {
-                            type = "projectile",
-                            projectile = name .. "-projectile",
-                            starting_speed = 0.1,
-                            max_range = ERM_Config.get_max_projectile_range(2),
+                        {
+                            type = "direct",
+                            action_delivery = {
+                                type = "projectile",
+                                projectile = name .. "-projectile",
+                                starting_speed = 0.1,
+                                max_range = ERM_Config.get_max_projectile_range(2),
+                            }
+                        },
+                        {
+                            type = "direct",
+                            probability = 0.4,
+                            action_delivery = {
+                                type = 'instant',
+                                source_effects = {
+                                    type = "script",
+                                    effect_id = SCOURGE_SPAWN,
+                                }
+                            }
                         }
                     }
                 },
@@ -137,7 +150,7 @@ function ErmZerg.make_guardian(level)
                             axially_symmetrical = false,
                             direction_count = 16,
                             scale = unit_scale,
-                            animation_speed = 0.6,
+                            animation_speed = 0.5,
                         },
                         {
                             filename = "__erm_zerg__/graphics/entity/units/" .. name .. "/" .. name .. "-run.png",
@@ -148,7 +161,7 @@ function ErmZerg.make_guardian(level)
                             direction_count = 16,
                             scale = unit_scale,
                             tint = ERM_UnitTint.tint_shadow(),
-                            animation_speed = 0.6,
+                            animation_speed = 0.5,
                             draw_as_shadow = true,
                             shift = { 4, 0 }
                         }
@@ -167,7 +180,7 @@ function ErmZerg.make_guardian(level)
                         axially_symmetrical = false,
                         direction_count = 16,
                         scale = unit_scale,
-                        animation_speed = 0.6
+                        animation_speed = 0.5
                     },
                     {
                         filename = "__erm_zerg__/graphics/entity/units/" .. name .. "/" .. name .. "-run.png",
@@ -179,7 +192,7 @@ function ErmZerg.make_guardian(level)
                         scale = unit_scale,
                         tint = ERM_UnitTint.tint_shadow(),
                         shift = { 4, 0 },
-                        animation_speed = 0.6,
+                        animation_speed = 0.5,
                         draw_as_shadow = true
                     }
                 }

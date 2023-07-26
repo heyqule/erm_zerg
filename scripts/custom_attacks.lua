@@ -10,18 +10,42 @@ local ERMConfig = require('__enemyracemanager__/lib/global_config')
 local CustomAttacks = {}
 
 CustomAttacks.valid = CustomAttackHelper.valid
+CustomAttacks.clearTimeToLiveUnits = CustomAttackHelper.clear_time_to_live_units
 
 function CustomAttacks.process_overlord(event)
-    CustomAttackHelper.drop_unit(event, MOD_NAME, CustomAttackHelper.get_unit(MOD_NAME, 'droppable_units'))
+    local race_settings = CustomAttackHelper.get_race_settings(MOD_NAME)
+    CustomAttackHelper.drop_unit(event, MOD_NAME, 'broodling', 3)
+    if CustomAttackHelper.can_spawn(80) then
+        CustomAttackHelper.drop_unit(event, MOD_NAME, CustomAttackHelper.get_unit(MOD_NAME, 'droppable_units'))
+    end
+    if race_settings.tier == 3 and CustomAttackHelper.can_spawn(10) then
+        CustomAttackHelper.drop_unit(event, MOD_NAME, 'scourge', 2)
+        CustomAttackHelper.drop_unit(event, MOD_NAME, 'zergling', 2)
+    end
+end
+
+function CustomAttacks.process_queen(event)
+    local race_settings = CustomAttackHelper.get_race_settings(MOD_NAME)
+    CustomAttackHelper.drop_unit_at_target(event, MOD_NAME, 'broodling', 2)
+    if CustomAttackHelper.can_spawn(33) then
+        CustomAttackHelper.drop_unit_at_target(event, MOD_NAME, 'broodling', 1)
+    end
+    if race_settings.tier == 3 and CustomAttackHelper.can_spawn(10) then
+        CustomAttackHelper.drop_unit_at_target(event, MOD_NAME, 'broodling', 2)
+    end
+end
+
+function CustomAttacks.process_scourge_spawn(event)
+    CustomAttackHelper.drop_unit(event, MOD_NAME, 'scourge', 1)
 end
 
 function CustomAttacks.process_drone(event)
     CustomAttackHelper.drop_unit(event, MOD_NAME, CustomAttackHelper.get_unit(MOD_NAME, 'construction_buildings'))
-    event.source_entity.die('neutral')
+    event.source_entity.destroy()
 end
 
-function CustomAttacks.process_infested(event)
-    event.source_entity.die('neutral')
+function CustomAttacks.process_self_destruct(event)
+    event.source_entity.destroy()
 end
 
 function CustomAttacks.process_boss_units(event, batch_size)

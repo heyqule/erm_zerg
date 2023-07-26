@@ -19,6 +19,8 @@ require "prototypes.enemy.drone"
 require "prototypes.enemy.defiler"
 require "prototypes.enemy.queen"
 require "prototypes.enemy.infested"
+require "prototypes.enemy.broodling"
+require "prototypes.enemy.scourge"
 
 require "prototypes.building.building_death"
 require "prototypes.building.hydraden"
@@ -36,6 +38,7 @@ require "prototypes.building.queen_nest"
 require "prototypes.building.defiler_mound"
 require "prototypes.building.ultralisk_cavern"
 require "prototypes.building.nyduspit"
+require "prototypes.building.infested_cmd"
 
 local max_level = ErmConfig.MAX_LEVELS
 
@@ -52,6 +55,8 @@ for i = 1, max_level + ErmConfig.MAX_ELITE_LEVELS do
     ErmZerg.make_defiler(i)
     ErmZerg.make_queen(i)
     ErmZerg.make_infested(i)
+    ErmZerg.make_broodling(i)
+    ErmZerg.make_scourge(i)
 end
 
 local boss_level = ErmConfig.BOSS_LEVELS
@@ -73,6 +78,8 @@ for i = 1, #boss_level do
     ErmZerg.make_defiler(level)
     ErmZerg.make_queen(level)
     ErmZerg.make_infested(level)
+    ErmZerg.make_broodling(level)
+    ErmZerg.make_scourge(level)
 
     ErmZerg.make_boss_hive(level, ErmConfig.BOSS_BUILDING_HITPOINT[i])
 
@@ -96,6 +103,7 @@ for i = 1, max_level do
     ErmZerg.make_nyduspit(i)
     ErmZerg.make_spore_colony(i)
     ErmZerg.make_sunker_colony(i)
+    ErmZerg.make_infested_cmd(i)
 end
 
 

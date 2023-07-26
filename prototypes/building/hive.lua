@@ -44,8 +44,8 @@ local pollution_absorption_absolute = 300
 local spawning_cooldown = { 600, 300 }
 local spawning_radius = 10
 
-local max_count_of_owned_units = 12
-local max_friends_around_to_spawn = 7
+local max_count_of_owned_units = 16
+local max_friends_around_to_spawn = 10
 --- Spawn Table
 --- This control how unit spawns based on evolution factor.  It divided into 6 sections by 0.2.
 --- ERM have 3 tiers, Tier 1 - 0.0 - 0.4, Tier 2 - 0.4 - 0.8, Tier 3 - 0.8 - 1.0
@@ -119,35 +119,23 @@ function ErmZerg.make_hive(level)
                         width = 192,
                         height = 224,
                         frame_count = 5,
-                        animation_speed = 0.18,
+                        animation_speed = 0.15,
                         direction_count = 1,
                         run_mode = "forward-then-backward",
                         scale = unit_scale
-                    }
-                }
-            },
-            integration = {
-                layers = {
-                    {
-                        filename = "__erm_zerg__/graphics/entity/buildings/" .. name .. "/" .. name .. ".png",
-                        variation_count = 1,
-                        width = 192,
-                        height = 224,
-                        frame_count = 1,
-                        line_length = 1,
-                        scale = unit_scale
                     },
                     {
                         filename = "__erm_zerg__/graphics/entity/buildings/" .. name .. "/" .. name .. ".png",
-                        variation_count = 1,
                         width = 192,
                         height = 224,
-                        frame_count = 1,
-                        line_length = 1,
+                        frame_count = 5,
+                        animation_speed = 0.15,
+                        direction_count = 1,
+                        run_mode = "forward-then-backward",
                         draw_as_shadow = true,
                         shift = { 0.25, 0.1 },
                         scale = unit_scale
-                    },
+                    }
                 }
             },
             result_units = spawn_table(level),
