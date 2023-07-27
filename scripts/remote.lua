@@ -42,4 +42,8 @@ function RemoteAPI.print_global()
     game.write_file('erm_zerg/erm-global.json',game.table_to_json(util.copy(global)))
 end
 
+function RemoteAPI.register_new_enemy_race()
+    return true
+end
+
 return RemoteAPI

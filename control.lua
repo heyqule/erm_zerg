@@ -19,7 +19,9 @@ local CustomAttacks = require('__erm_zerg__/scripts/custom_attacks')
 require('__erm_zerg__/global')
 -- Constants
 
-
+---
+--- Enemy Force initialization.
+---
 local createRace = function()
     local force = game.forces[FORCE_NAME]
     if not force then
@@ -39,6 +41,9 @@ local createRace = function()
     ErmForceHelper.set_neutral_force(game, FORCE_NAME)
 end
 
+---
+--- Enemy race setting registration.
+---
 local addRaceSettings = function()
     local race_settings = remote.call('enemyracemanager', 'get_race', MOD_NAME)
     if race_settings == nil then
@@ -175,11 +180,23 @@ Event.on_nth_tick(1801, function(event)
     CustomAttacks.clearTimeToLiveUnits(event)
 end)
 
+
+---
+--- Register required remote interfaces
+---
 local ErmBossAttack = require('scripts/boss_attacks')
+---
+--- Register boss attacks
+--- Interface Name: {race_name}_boss_attacks
+---
 remote.add_interface("erm_zerg_boss_attacks", {
     get_attack_data = ErmBossAttack.get_attack_data,
 })
 
+---
+--- Register the mod as new enemy mods and its additional settings
+--- Interface Name: {race_name}
+---
 local RemoteApi = require('scripts/remote')
 remote.add_interface("erm_zerg", RemoteApi)
 
