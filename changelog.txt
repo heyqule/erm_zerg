@@ -35,10 +35,6 @@ Date: 2023-07-??
     - Changed run, attack animation_speed to 0.5 (30fps)
     - Removed purple dying explosion on some units.
 
-  Modding:
-    - Added a new remote interface function to register new race. "register_new_enemy_race"
-    - Please see script/remote.lua in erm_zerg for example.
-
 
 ---------------------------------------------------------------------------------------------------
 Version: 1.19.0
