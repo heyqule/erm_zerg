@@ -102,7 +102,7 @@ data:extend({
         type = "corpse",
         name = "zerg-terran-large-base-corpse",
         flags = { "placeable-neutral",  "not-on-map" },
-        icon = "__erm_terran__/graphics/entity/icons/advisor.png",
+        icon = "__erm_zerg__/graphics/entity/icons/advisor.png",
         icon_size = 64,
         collision_box = { { -2, -2 }, { 2, 2 } },
         selection_box = { { -2, -2 }, { 2, 2 } },
