@@ -161,7 +161,6 @@ local attack_functions = {
         CustomAttacks.process_self_destruct(args)
     end,
     [BOSS_SPAWN_ATTACK] = function(args)
-        print(CustomAttacks)
         CustomAttacks.process_boss_units(args)
     end,
     [UNITS_SPAWN_ATTACK] = function(args)
