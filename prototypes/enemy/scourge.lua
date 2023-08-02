@@ -82,7 +82,7 @@ function ErmZerg.make_scourge(level)
             max_health = ERM_UnitHelper.get_health(hitpoint, hitpoint * max_hitpoint_multiplier,  level),
             order = MOD_NAME .. '/'  .. name .. '/' .. level,
             subgroup = "erm-flying-enemies",
-            map_color = ZERG_MAP_COLOR,
+            map_color = ERM_UnitHelper.format_map_color(settings.startup['erm_zerg-map-color'].value),
             shooting_cursor_size = 2,
             min_pursue_time = 120 * defines.time.second,
             resistances = {

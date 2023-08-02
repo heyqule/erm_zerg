@@ -72,7 +72,7 @@ function ErmZerg.make_greater_spire(level)
             max_health = ERM_UnitHelper.get_building_health(hitpoint, hitpoint * max_hitpoint_multiplier,  level),
             order = MOD_NAME .. '/' .. name,
             subgroup = "enemies",
-            map_color = ZERG_MAP_COLOR,
+            map_color = ERM_UnitHelper.format_map_color(settings.startup['erm_zerg-map-color'].value),
             working_sound = ZergSound.building_working_sound(name, 0.75),
             dying_sound = ZergSound.building_dying_sound(0.75),
             resistances = {

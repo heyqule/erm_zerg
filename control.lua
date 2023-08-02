@@ -105,19 +105,19 @@ local addRaceSettings = function()
     }
     race_settings.featured_groups = {
         -- Unit list, spawn ratio, unit attack point cost
-        {{'zergling','ultralisk'}, {3, 2}, 20},
-        {{'hydralisk','lurker', 'ultralisk'}, {2, 1, 1}, 20},
-        {{'zergling', 'infested', 'lurker', 'ultralisk'}, {3, 1, 2, 2}, 15},
-        {{'zergling','ultralisk','defiler'}, {6, 3, 1}, 22.5},
-        {{'zergling', 'hydralisk', 'lurker', 'ultralisk'}, {4, 2, 1, 1}, 20},
-        {{'zergling', 'hydralisk', 'lurker', 'ultralisk', 'defiler'}, {2, 1, 1, 2, 1}, 20},
+        {{'zergling','ultralisk'}, {4, 2}, 25},
+        {{'hydralisk','lurker', 'ultralisk'}, {4, 2, 1}, 30},
+        {{'zergling', 'infested', 'lurker', 'ultralisk'}, {4, 1, 2, 2}, 25},
+        {{'zergling','ultralisk','defiler'}, {6, 3, 1}, 30},
+        {{'zergling', 'hydralisk', 'lurker', 'ultralisk'}, {4, 2, 1, 1}, 25},
+        {{'zergling', 'hydralisk', 'lurker', 'ultralisk', 'defiler'}, {3, 2, 1, 2, 1}, 20},
     }
     race_settings.featured_flying_groups = {
-        {{'mutalisk'}, {1}, 45},
-        {{'devourer', 'guardian'}, {2, 1}, 50},
-        {{'mutalisk', 'devourer', 'queen' }, {4,2,1}, 75},
-        {{'mutalisk', 'guardian', 'overlord' }, {4,2,1}, 50},
-        {{'mutalisk', 'queen','devourer', 'guardian'}, {4, 1, 2, 2}, 50},
+        {{'mutalisk'}, {1}, 50},
+        {{'devourer', 'guardian'}, {2, 1}, 75},
+        {{'mutalisk', 'devourer', 'queen' }, {4,2,1}, 90},
+        {{'mutalisk', 'guardian', 'overlord' }, {4,2,1}, 80},
+        {{'mutalisk', 'queen','devourer', 'guardian'}, {4, 1, 2, 2}, 75},
     }
 
     race_settings.boss_building = 'overmind'
@@ -125,6 +125,10 @@ local addRaceSettings = function()
     race_settings.colliding_unit = 'ultralisk'
     race_settings.boss_tier = race_settings.boss_tier or 1
     race_settings.boss_kill_count = race_settings.boss_kill_count or 0
+
+    if game.active_mods['Krastorio2'] then
+        race_settings.enable_k2_creep = settings.startup['erm_zerg-k2-creep'].value
+    end
 
     ErmRaceSettingsHelper.process_unit_spawn_rate_cache(race_settings)
 

@@ -45,7 +45,7 @@ local incremental_cold_resistance = 85
 
 -- Handles Attack Speed
 
-local base_attack_speed = 2700
+local base_attack_speed = 3600
 local incremental_attack_speed = 900
 
 local attack_range = math.ceil(ERM_Config.get_max_attack_range() * 0.5)
@@ -79,7 +79,7 @@ function ErmZerg.make_overlord(level)
             max_health = ERM_UnitHelper.get_health(hitpoint, hitpoint * max_hitpoint_multiplier,  level),
             order = MOD_NAME .. '/'  .. name .. '/' .. level,
             subgroup = "erm-dropship-enemies",
-            map_color = ZERG_MAP_COLOR,
+            map_color = ERM_UnitHelper.format_map_color(settings.startup['erm_zerg-map-color'].value),
             shooting_cursor_size = 2,
             spawning_time_modifier = 1.5,
             resistances = {

@@ -78,7 +78,7 @@ function ErmZerg.make_lurker(level)
             max_health = ERM_UnitHelper.get_health(hitpoint, hitpoint * max_hitpoint_multiplier,  level),
             order = MOD_NAME .. '/'  .. name .. '/' .. level,
             subgroup = "enemies",
-            map_color = ZERG_MAP_COLOR,
+            map_color = ERM_UnitHelper.format_map_color(settings.startup['erm_zerg-map-color'].value),
             shooting_cursor_size = 2,
             spawning_time_modifier = 1.5,
             resistances = {
