@@ -9,8 +9,8 @@ data.erm_enemy_races = data.erm_enemy_races or {}
 table.insert(data.erm_enemy_races, {
     name=MOD_NAME,
     force=FORCE_NAME,
-    moisture=2, -- 1 = Wet and 2 = Dry
-    aux=1, -- -- 1 = red desert, 2 = sand
+    moisture=1, -- 1 = Dry and 2 = Wet
+    aux=2, -- -- 1 = red desert, 2 = sand
     elevation=1, --1,2,3 (1 low elevation, 2. medium, 3 high elavation)
     temperature=3, --1,2,3 (1 cold, 2. normal, 3 hot)
 })
