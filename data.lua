@@ -107,6 +107,3 @@ for i = 1, max_level do
 end
 
 
-
-
-

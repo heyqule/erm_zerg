@@ -56,10 +56,3 @@ if ErmConfig.mapgen_is_mixed() then
         end
     end
 end
-
-
-local scourge = data.raw['unit']['erm_zerg/scourge/20']
-scourge['time_to_live'] = 5 * defines.time.minute
-local broodling = data.raw['unit']['erm_zerg/broodling/20']
-broodling['time_to_live'] = 5 * defines.time.minute
-
