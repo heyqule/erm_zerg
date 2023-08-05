@@ -8,6 +8,9 @@ local ErmConfig = require('__enemyracemanager__/lib/global_config')
 
 local RemoteAPI = {}
 
+---
+--- Register new milestones
+---
 function RemoteAPI.milestones_preset_addons()
     local boss_level = ErmConfig.BOSS_LEVELS
     local preset = {
@@ -38,10 +41,16 @@ function RemoteAPI.milestones_preset_addons()
     return preset
 end
 
+---
+--- Print global for debug purpose when you run remote.call('enemyracemanager_debug', 'print_global')"
+---
 function RemoteAPI.print_global()
     game.write_file('erm_zerg/erm-global.json',game.table_to_json(util.copy(global)))
 end
 
+---
+--- This is REQUIRED to register ERM mods for control stage.
+---
 function RemoteAPI.register_new_enemy_race()
     return true
 end

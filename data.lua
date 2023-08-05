@@ -4,7 +4,16 @@ require('__erm_zerg__/global')
 
 local ErmConfig = require('__enemyracemanager__/lib/global_config')
 
--- This set of data is used for set up default autoplace calculation.
+---
+--- This is REQUIRED to register the mod as an ERM race mod.
+--- There are further data processing in data-updates and data-final-fixes.
+---
+data.erm_registered_race = data.erm_registered_race or {}
+data.erm_registered_race[MOD_NAME] = true
+---
+--- This set up specification for default autospawn.  This is used as reference.  The data will be balanced in
+--- __enemyracemanager__/prototype/extend-default-autoplace.lua
+---
 data.erm_spawn_specs = data.erm_spawn_specs or {}
 table.insert(data.erm_spawn_specs, {
     mod_name=MOD_NAME,
@@ -51,6 +60,9 @@ require "prototypes.building.ultralisk_cavern"
 require "prototypes.building.nyduspit"
 require "prototypes.building.infested_cmd"
 
+---
+--- Register unit from 1 to up to 25
+---
 local max_level = ErmConfig.MAX_LEVELS
 
 for i = 1, max_level + ErmConfig.MAX_ELITE_LEVELS do
@@ -70,10 +82,14 @@ for i = 1, max_level + ErmConfig.MAX_ELITE_LEVELS do
     ErmZerg.make_scourge(i)
 end
 
+---
+--- Register unit with boss levels.
+--- Replace its AI with boss AI
+---
 local boss_level = ErmConfig.BOSS_LEVELS
 
 local boss_unit_ai = { destroy_when_commands_fail = true, allow_try_return_to_spawner = false }
-local override_units = {'zergling','hydralisk','mutalisk','devourer','guardian','overlord','lurker','drone','defiler','queen','infested','ultralisk'}
+local override_units_ai = {'zergling','hydralisk','mutalisk','devourer','guardian','overlord','lurker','drone','defiler','queen','infested','ultralisk','broodling','scourge'}
 
 for i = 1, #boss_level do
     local level = boss_level[i]
@@ -94,11 +110,14 @@ for i = 1, #boss_level do
 
     ErmZerg.make_boss_hive(level, ErmConfig.BOSS_BUILDING_HITPOINT[i])
 
-    for _, unit in pairs(override_units) do
+    for _, unit in pairs(override_units_ai) do
         data.raw['unit'][MOD_NAME..'/'..unit..'/'..level]['ai_settings'] = boss_unit_ai
     end
 end
 
+---
+--- Register spawner/turret with max_level
+---
 for i = 1, max_level do
     ErmZerg.make_hatchery(i)
     ErmZerg.make_lair(i)
