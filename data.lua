@@ -50,7 +50,7 @@ require "prototypes.building.lair"
 require "prototypes.building.hive"
 require "prototypes.building.boss_overmind"
 require "prototypes.building.spore_colony"
-require "prototypes.building.sunker_colony"
+require "prototypes.building.sunken_colony"
 require "prototypes.building.chamber"
 require "prototypes.building.spire"
 require "prototypes.building.greater_spire"
@@ -132,7 +132,7 @@ for i = 1, max_level do
     ErmZerg.make_ultralisk_cavern(i)
     ErmZerg.make_nyduspit(i)
     ErmZerg.make_spore_colony(i)
-    ErmZerg.make_sunker_colony(i)
+    ErmZerg.make_sunken_colony(i)
     ErmZerg.make_infested_cmd(i)
 end
 

@@ -162,12 +162,12 @@ function ZergSound.lurker_attack(volume)
     }
 end
 
-function ZergSound.sunker_idle(volume)
+function ZergSound.sunken_idle(volume)
     return {
 
         sound = {
             {
-                filename = "__erm_zerg__/sound/buildings/sunker_colony.ogg",
+                filename = "__erm_zerg__/sound/buildings/sunken_colony.ogg",
                 volume = volume
             },
         },
@@ -176,18 +176,18 @@ function ZergSound.sunker_idle(volume)
     }
 end
 
-function ZergSound.sunker_attack(volume)
+function ZergSound.sunken_attack(volume)
     return {
 
-        filename = "__erm_zerg__/sound/buildings/sunker_attack.ogg",
+        filename = "__erm_zerg__/sound/buildings/sunken_colony_attack.ogg",
         volume = volume
     }
 end
 
-function ZergSound.sunker_hit(volume)
+function ZergSound.sunken_hit(volume)
     return {
 
-        filename = "__erm_zerg__/sound/buildings/sunker_hit.ogg",
+        filename = "__erm_zerg__/sound/buildings/sunken_colony_hit.ogg",
         volume = volume
     }
 end

@@ -140,7 +140,7 @@ function ErmZerg.make_spore_colony(level)
                 warmup = 12,
                 use_shooter_direction = true,
                 lead_target_for_projectile_speed = 0.2 * 0.75 * 1.5 * 1.5,
-                sound = ZergSound.sunker_attack(0.75),
+                sound = ZergSound.sunken_attack(0.75),
                 ammo_type = {
                     category = "biological",
                     action = {

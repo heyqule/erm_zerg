@@ -69,7 +69,7 @@ local addRaceSettings = function()
         { 'guardian', 'ultralisk', 'queen', 'infested', 'defiler' },
     }
     race_settings.turrets = {
-        { 'sunker_colony', 'spore_colony' },
+        { 'sunken_colony', 'spore_colony' },
         {},
         {},
     }
@@ -99,9 +99,9 @@ local addRaceSettings = function()
         {{ 'hydralisk', 'lurker', 'ultralisk' },{2,2,1}},
     }
     race_settings.construction_buildings = {
-        {{ 'sunker_colony_shortrange'},{1}},
-        {{ 'sunker_colony_shortrange'},{1}},
-        {{ 'sunker_colony_shortrange','nyduspit'},{2,1}},
+        {{ 'sunken_colony_shortrange'},{1}},
+        {{ 'sunken_colony_shortrange'},{1}},
+        {{ 'sunken_colony_shortrange','nyduspit'},{2,1}},
     }
     race_settings.featured_groups = {
         -- Unit list, spawn ratio, unit attack point cost

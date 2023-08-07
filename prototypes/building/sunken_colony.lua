@@ -12,8 +12,8 @@ local ERM_Config = require('__enemyracemanager__/lib/global_config')
 local ZergSound = require('__erm_zerg__/prototypes/sound')
 
 local enemy_autoplace = require("__enemyracemanager__/lib/enemy-autoplace-utils")
-local name = 'sunker_colony'
-local short_range_name = 'sunker_colony_shortrange'
+local name = 'sunken_colony'
+local short_range_name = 'sunken_colony_shortrange'
 -- Hitpoints
 
 local hitpoint = 400
@@ -110,7 +110,7 @@ local attack_animation = function()
     }
 end
 
-function ErmZerg.make_sunker_colony(level)
+function ErmZerg.make_sunken_colony(level)
     level = level or 1
 
     data:extend({
@@ -148,10 +148,10 @@ function ErmZerg.make_sunker_colony(level)
             folded_speed = 0.01,
             folded_speed_secondary = 0.01,
             folded_animation = folded_animation(),
-            working_sound = ZergSound.sunker_idle(0.75),
+            working_sound = ZergSound.sunken_idle(0.75),
             starting_attack_animation = attack_animation(),
             starting_attack_speed = 0.02,
-            starting_attack_sound = ZergSound.sunker_attack(0.75),
+            starting_attack_sound = ZergSound.sunken_attack(0.75),
             autoplace = enemy_autoplace.enemy_worm_autoplace(0, FORCE_NAME),
             attack_from_start_frame = true,
             prepare_range = attack_range,
@@ -180,7 +180,7 @@ function ErmZerg.make_sunker_colony(level)
                                 },
                                 {
                                     type = "play-sound",
-                                    sound = ZergSound.sunker_hit(0.75),
+                                    sound = ZergSound.sunken_hit(0.75),
                                 },
                                 {
                                     type = "damage",
@@ -226,10 +226,10 @@ function ErmZerg.make_sunker_colony(level)
             folded_speed = 0.01,
             folded_speed_secondary = 0.01,
             folded_animation = folded_animation(),
-            working_sound = ZergSound.sunker_idle(0.75),
+            working_sound = ZergSound.sunken_idle(0.75),
             starting_attack_animation = attack_animation(),
             starting_attack_speed = 0.02,
-            starting_attack_sound = ZergSound.sunker_attack(0.75),
+            starting_attack_sound = ZergSound.sunken_attack(0.75),
             --autoplace = nil
             attack_from_start_frame = true,
             prepare_range = attack_range,
@@ -258,7 +258,7 @@ function ErmZerg.make_sunker_colony(level)
                                 },
                                 {
                                     type = "play-sound",
-                                    sound = ZergSound.sunker_hit(0.75),
+                                    sound = ZergSound.sunken_hit(0.75),
                                 },
                                 {
                                     type = "damage",
