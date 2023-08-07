@@ -25,21 +25,37 @@ end
 if mods['erm_zerg_hd'] then
     data:extend {
         {
-            type = "color-setting",
-            name = "erm_zerg-team-color",
-            description = "erm_zerg-team-color",
+            type = "bool-setting",
+            name = "erm_zerg-team_color_enable",
+            description = "erm_zerg-team_color_enable",
             setting_type = "startup",
-            default_value = ZERG_TEAM_COLOR,
+            default_value = true,
             order = "erm_zerg-110",
         },
         {
-            type = "int-setting",
-            name = "erm_zerg-team-blend-mode",
-            description = "erm_zerg-team-blend-mode",
+            type = "color-setting",
+            name = "erm_zerg-team_color",
+            description = "erm_zerg-team_color",
             setting_type = "startup",
-            default_value = 3,
+            default_value = ZERG_TEAM_COLOR,
             order = "erm_zerg-111",
+        },
+        {
+            type = "int-setting",
+            name = "erm_zerg-team_blend_mode",
+            description = "erm_zerg-team_blend_mode",
+            setting_type = "startup",
+            default_value = 4,
+            order = "erm_zerg-112",
             allowed_values = { 1,2,3,4,5,6 },
+        },
+        {
+            type = "bool-setting",
+            name = "erm_zerg-team_color_preserve_gloss",
+            description = "erm_zerg-team_color_preserve_gloss",
+            setting_type = "startup",
+            default_value = false,
+            order = "erm_zerg-113",
         },
     }
 end
