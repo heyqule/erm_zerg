@@ -134,7 +134,7 @@ function ErmZerg.make_defiler(level)
                                     },
                                     {
                                         type = "create-explosion",
-                                        entity_name = "dark-swarm-80-explosion"
+                                        entity_name = MOD_NAME..'/dark-swarm-80-explosion'
                                     }
                                 }
                             }
@@ -154,7 +154,7 @@ function ErmZerg.make_defiler(level)
                                     },
                                     {
                                         type = "create-explosion",
-                                        entity_name = "dark-swarm-80-explosion"
+                                        entity_name = MOD_NAME..'/dark-swarm-80-explosion'
                                     }
                                 }
                             }
@@ -172,7 +172,7 @@ function ErmZerg.make_defiler(level)
                                     },
                                     {
                                         type = "create-explosion",
-                                        entity_name = "blood-cloud-explosion"
+                                        entity_name = MOD_NAME.."/blood-cloud-explosion"
                                     }
                                 }
                             }
@@ -238,11 +238,11 @@ function ErmZerg.make_defiler(level)
                 }
             },
             dying_sound = ZergSound.enemy_death(name, 0.75),
-            corpse = name .. '-corpse'
+            corpse = MOD_NAME .. "/" .. name .. '-corpse'
         },
         {
             type = "corpse",
-            name = name .. '-corpse',
+            name = MOD_NAME .. "/" .. name .. '-corpse',
             icon = "__erm_zerg__/graphics/entity/icons/units/" .. name .. ".png",
             icon_size = 64,
             flags = { "placeable-off-grid", "building-direction-8-way", "not-on-map" },

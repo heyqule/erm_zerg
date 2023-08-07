@@ -131,7 +131,7 @@ function ErmZerg.make_lurker(level)
                                             target_effects = {
                                                 {
                                                     type = "create-explosion",
-                                                    entity_name = 'lurker-explosion'
+                                                    entity_name = MOD_NAME..'/lurker-explosion'
                                                 },
                                                 {
                                                     type = "damage",
@@ -203,11 +203,11 @@ function ErmZerg.make_lurker(level)
                 }
             },
             dying_sound = ZergSound.enemy_death(name, 0.75),
-            corpse = name .. '-corpse'
+            corpse = MOD_NAME .. "/" .. name .. '-corpse'
         },
         {
             type = "corpse",
-            name = name .. '-corpse',
+            name = MOD_NAME .. "/" .. name .. '-corpse',
             icon = "__erm_zerg__/graphics/entity/icons/units/" .. name .. ".png",
             icon_size = 64,
             flags = { "placeable-off-grid", "building-direction-8-way", "not-on-map" },

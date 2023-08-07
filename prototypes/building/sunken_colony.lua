@@ -141,8 +141,8 @@ function ErmZerg.make_sunken_colony(level)
             selection_box = selection_box,
             shooting_cursor_size = 4,
             rotation_speed = 1,
-            corpse = "zerg-small-base-corpse",
-            dying_explosion = "zerg-building-explosion",
+            corpse = MOD_NAME.."/small-base-corpse",
+            dying_explosion = MOD_NAME.."/large-base-corpse",
             dying_sound = ZergSound.building_dying_sound(0.75),
             call_for_help_radius = 50,
             folded_speed = 0.01,
@@ -176,7 +176,7 @@ function ErmZerg.make_sunken_colony(level)
                             target_effects = {
                                 {
                                     type = "create-explosion",
-                                    entity_name = 'colony-explosion'
+                                    entity_name = MOD_NAME..'/colony-explosion'
                                 },
                                 {
                                     type = "play-sound",
@@ -219,8 +219,8 @@ function ErmZerg.make_sunken_colony(level)
             selection_box = selection_box,
             shooting_cursor_size = 4,
             rotation_speed = 1,
-            corpse = "zerg-small-base-corpse",
-            dying_explosion = "zerg-building-explosion",
+            corpse = MOD_NAME.."/small-base-corpse",
+            dying_explosion = MOD_NAME.."/large-base-corpse",
             dying_sound = ZergSound.building_dying_sound(0.75),
             call_for_help_radius = 50,
             folded_speed = 0.01,
@@ -254,7 +254,7 @@ function ErmZerg.make_sunken_colony(level)
                             target_effects = {
                                 {
                                     type = "create-explosion",
-                                    entity_name = 'colony-explosion'
+                                    entity_name = MOD_NAME..'/colony-explosion'
                                 },
                                 {
                                     type = "play-sound",

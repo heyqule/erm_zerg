@@ -10,7 +10,7 @@ data:extend({
     --- Projectiles
     {
         type = "projectile",
-        name = "mutalisk-projectile",
+        name = MOD_NAME.."/mutalisk-projectile",
         flags = { "not-on-map" },
         acceleration = 0.005,
         action = {
@@ -20,7 +20,7 @@ data:extend({
                 target_effects = {
                     {
                         type = "create-entity",
-                        entity_name = "mutalisk-explosion-small"
+                        entity_name = MOD_NAME.."/mutalisk-explosion-small"
                     },
                     {
                         type = "damage",
@@ -40,7 +40,7 @@ data:extend({
     },
     {
         type = "projectile",
-        name = "parasite-projectile",
+        name = MOD_NAME.."/parasite-projectile",
         flags = { "not-on-map" },
         acceleration = 0.005,
         action = {
@@ -65,7 +65,7 @@ data:extend({
     },
     {
         type = "projectile",
-        name = "hydralisk-projectile",
+        name = MOD_NAME.."/hydralisk-projectile",
         flags = { "not-on-map" },
         acceleration = 0.05,
         action = {
@@ -75,7 +75,7 @@ data:extend({
                 target_effects = {
                     {
                         type = "create-entity",
-                        entity_name = "hydralisk-explosion-small"
+                        entity_name = MOD_NAME.."/hydralisk-explosion-small"
                     },
                     {
                         type = "damage",
@@ -95,7 +95,7 @@ data:extend({
     },
     {
         type = "projectile",
-        name = "guardian-projectile",
+        name = MOD_NAME.."/guardian-projectile",
         flags = { "not-on-map" },
         acceleration = 0.01,
         action = {
@@ -105,7 +105,7 @@ data:extend({
                 target_effects = {
                     {
                         type = "create-entity",
-                        entity_name = "mutalisk-explosion-small"
+                        entity_name = MOD_NAME.."/mutalisk-explosion-small"
                     },
                     {
                         type = "damage",
@@ -127,7 +127,7 @@ data:extend({
     --- Explosions
     {
         type = "explosion",
-        name = "lurker-explosion",
+        name = MOD_NAME.."/lurker-explosion",
         flags = { "not-on-map" },
         render_layer = 'projectile',
         animations = {
@@ -144,7 +144,7 @@ data:extend({
     },
     {
         type = "explosion",
-        name = "colony-explosion",
+        name = MOD_NAME.."/colony-explosion",
         flags = { "not-on-map" },
         render_layer = 'projectile',
         animations = {
@@ -174,7 +174,7 @@ data:extend({
     },
     {
         type = "explosion",
-        name = "mutalisk-explosion-small",
+        name = MOD_NAME.."/mutalisk-explosion-small",
         flags = { "not-on-map" },
         animations = {
             {
@@ -189,7 +189,7 @@ data:extend({
     },
     {
         type = "explosion",
-        name = "hydralisk-explosion-small",
+        name = MOD_NAME.."/hydralisk-explosion-small",
         flags = { "not-on-map" },
         animations = {
             {
@@ -204,7 +204,7 @@ data:extend({
     },
     {
         type = "explosion",
-        name = "blood-cloud-explosion",
+        name = MOD_NAME.."/blood-cloud-explosion",
         flags = { "not-on-map" },
         animations = {
             {
@@ -219,7 +219,7 @@ data:extend({
     },
     {
         type = "explosion",
-        name = "dark-swarm-80-explosion",
+        name = MOD_NAME.."/dark-swarm-80-explosion",
         flags = { "not-on-map" },
         animations = {
             {
@@ -235,7 +235,7 @@ data:extend({
     },
     {
         type = "explosion",
-        name = "dark-swarm-explosion",
+        name = MOD_NAME.."/dark-swarm-explosion",
         flags = { "not-on-map" },
         animations = {
             {
@@ -251,7 +251,7 @@ data:extend({
     },
     {
         type = "explosion",
-        name = "acid-cloud-explosion",
+        name = MOD_NAME.."/acid-cloud-explosion",
         flags = { "not-on-map" },
         animations = {
             {
@@ -266,7 +266,7 @@ data:extend({
     },
     {
         type = "explosion",
-        name = "devourer-cloud-explosion",
+        name = MOD_NAME.."/devourer-cloud-explosion",
         flags = { "not-on-map" },
         animations = {
             {
@@ -281,7 +281,7 @@ data:extend({
     },
     {
         type = "explosion",
-        name = "scourge-explosion",
+        name = MOD_NAME.."/scourge-explosion",
         flags = { "not-on-map" },
         animations = {
             {

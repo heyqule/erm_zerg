@@ -130,7 +130,7 @@ function ErmZerg.make_devourer(level)
                             type = "direct",
                             action_delivery = {
                                 type = "stream",
-                                stream = name .. "-stream-" .. level,
+                                stream = MOD_NAME .. "/" .. name .. "-stream-" .. level,
                             }
                         }
                     }
@@ -201,13 +201,13 @@ function ErmZerg.make_devourer(level)
                     }
                 }
             },
-            dying_explosion = name .. "-air-death",
+            dying_explosion = MOD_NAME .. "/" .. name .. "-air-death",
             dying_sound = ZergSound.enemy_death(name, 0.75),
-            corpse = name .. '-corpse'
+            corpse = MOD_NAME .. "/" .. name .. '-corpse'
         },
         {
             type = "explosion",
-            name = name .. "-air-death",
+            name = MOD_NAME .. "/" .. name .. "-air-death",
             flags = { "not-on-map" },
             animations = {
                 filename = "__erm_zerg__/graphics/entity/units/" .. name .. "/" .. name .. "-death.png",
@@ -222,7 +222,7 @@ function ErmZerg.make_devourer(level)
         },
         {
             type = "corpse",
-            name = name .. '-corpse',
+            name = MOD_NAME .. "/" .. name .. '-corpse',
             icon = "__erm_zerg__/graphics/entity/icons/units/" .. name .. ".png",
             icon_size = 64,
 
@@ -237,7 +237,7 @@ function ErmZerg.make_devourer(level)
         },
         {
             type = "stream",
-            name = name .. "-stream-" .. level,
+            name = MOD_NAME .. "/" .. name .. "-stream-" .. level,
             flags = { "not-on-map" },
             particle_spawn_interval = 1,
             particle_spawn_timeout = 6,
@@ -258,7 +258,7 @@ function ErmZerg.make_devourer(level)
                             },
                             {
                                 type = "create-explosion",
-                                entity_name = "devourer-cloud-explosion"
+                                entity_name = MOD_NAME.."/devourer-cloud-explosion"
                             },
                             {
                                 type = "play-sound",

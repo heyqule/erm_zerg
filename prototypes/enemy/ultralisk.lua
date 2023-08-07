@@ -189,11 +189,11 @@ function ErmZerg.make_ultralisk(level)
             },
             dying_explosion = "blood-explosion-small",
             dying_sound = ZergSound.enemy_death(name, 0.75),
-            corpse = name .. '-corpse'
+            corpse = MOD_NAME .. "/" .. name .. '-corpse'
         },
         {
             type = "corpse",
-            name = name .. '-corpse',
+            name = MOD_NAME .. "/" .. name .. '-corpse',
             icon = "__erm_zerg__/graphics/entity/icons/units/" .. name .. ".png",
             icon_size = 64,
 

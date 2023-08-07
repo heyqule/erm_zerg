@@ -208,11 +208,11 @@ function ErmZerg.make_infested(level)
                 }
             },
             dying_sound = ZergSound.infested_death(0.75),
-            corpse = name .. '-corpse'
+            corpse = MOD_NAME .. "/" .. name .. '-corpse'
         },
         {
             type = "corpse",
-            name = name .. '-corpse',
+            name = MOD_NAME .. "/" .. name .. '-corpse',
             icon = "__erm_zerg__/graphics/entity/icons/units/" .. name .. ".png",
             icon_size = 64,
             flags = { "placeable-off-grid", "building-direction-8-way", "not-on-map" },

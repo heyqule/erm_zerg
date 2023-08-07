@@ -14,14 +14,5 @@ data:extend {
         setting_type = "startup",
         default_value = ZERG_MAP_COLOR,
         order = "erm_zerg-100"
-    },
-    {
-        type = "color-setting",
-        name = "erm_zerg-team-color",
-        description = "erm_zerg-team-color",
-        setting_type = "startup",
-        default_value = ZERG_TEAM_COLOR,
-        order = "erm_zerg-110",
-        hidden = true
-    },
+    }
 }

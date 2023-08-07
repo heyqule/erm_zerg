@@ -107,8 +107,8 @@ function ErmZerg.make_boss_hive(level, hitpoint)
             selection_box = selection_box,
             pollution_absorption_absolute = pollution_absorption_absolute,
             pollution_absorption_proportional = 0.01,
-            corpse = "zerg-large-base-corpse",
-            dying_explosion = "zerg-building-explosion",
+            corpse = MOD_NAME.."/large-base-corpse",
+            dying_explosion = MOD_NAME.."/large-base-corpse",
             dying_trigger_effect = {
                 type = "script",
                 effect_id = TRIGGER_BOSS_DIES,

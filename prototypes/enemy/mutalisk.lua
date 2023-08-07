@@ -117,7 +117,7 @@ function ErmZerg.make_mutalisk(level)
                         type = "direct",
                         action_delivery = {
                             type = "projectile",
-                            projectile = "mutalisk-projectile",
+                            projectile = MOD_NAME..'/mutalisk-projectile',
                             starting_speed = 0.3,
                             max_range = ERM_Config.get_max_projectile_range(),
                         }
@@ -185,14 +185,14 @@ function ErmZerg.make_mutalisk(level)
                     }
                 }
             },
-            dying_explosion = name .. "-air-death",
+            dying_explosion = MOD_NAME .. "/" .. name .. "-air-death",
             dying_sound = ZergSound.enemy_death(name, 0.75),
 
-            corpse = name .. '-corpse'
+            corpse = MOD_NAME .. "/" .. name .. '-corpse'
         },
         {
             type = "corpse",
-            name = name .. '-corpse',
+            name = MOD_NAME .. "/" .. name .. '-corpse',
             icon = "__erm_zerg__/graphics/entity/icons/units/" .. name .. ".png",
             icon_size = 64,
             flags = { "placeable-off-grid", "building-direction-8-way", "not-on-map" },
@@ -206,7 +206,7 @@ function ErmZerg.make_mutalisk(level)
         },
         {
             type = "explosion",
-            name = name .. "-air-death",
+            name = MOD_NAME .. "/" .. name .. "-air-death",
             flags = { "not-on-map" },
             animations = {
                 filename = "__erm_zerg__/graphics/entity/units/" .. name .. "/" .. name .. "-death.png",

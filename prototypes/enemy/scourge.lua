@@ -129,7 +129,7 @@ function ErmZerg.make_scourge(level)
                                 },
                                 {
                                     type = "create-entity",
-                                    entity_name = 'scourge-explosion'
+                                    entity_name =  MOD_NAME.."/scourge-explosion"
                                 }
                             },
                             target_effects = {
@@ -214,14 +214,14 @@ function ErmZerg.make_scourge(level)
                     }
                 }
             },
-            dying_explosion = name .. "-air-death",
+            dying_explosion = MOD_NAME .. "/" .. name .. "-air-death",
             dying_sound = ZergSound.enemy_death(name, 0.75),
 
-            corpse = name .. '-corpse'
+            corpse = MOD_NAME .. "/" .. name .. '-corpse'
         },
         {
             type = "corpse",
-            name = name .. '-corpse',
+            name = MOD_NAME .. "/" .. name .. '-corpse',
             icon = "__erm_zerg__/graphics/entity/icons/units/" .. name .. ".png",
             icon_size = 64,
             flags = { "placeable-off-grid", "building-direction-8-way", "not-on-map" },
@@ -235,7 +235,7 @@ function ErmZerg.make_scourge(level)
         },
         {
             type = "explosion",
-            name = name .. "-air-death",
+            name = MOD_NAME .. "/" .. name .. "-air-death",
             flags = { "not-on-map" },
             animations = {
                 filename = "__erm_zerg__/graphics/entity/units/" .. name .. "/" .. name .. "-death.png",

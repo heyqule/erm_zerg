@@ -101,8 +101,8 @@ function ErmZerg.make_hatchery(level)
             selection_box = selection_box,
             pollution_absorption_absolute = pollution_absorption_absolute,
             pollution_absorption_proportional = 0.01,
-            corpse = "zerg-large-base-corpse",
-            dying_explosion = "zerg-building-explosion",
+            corpse = MOD_NAME.."/large-base-corpse",
+            dying_explosion = MOD_NAME.."/large-base-corpse",
             max_count_of_owned_units = max_count_of_owned_units,
             max_friends_around_to_spawn = max_friends_around_to_spawn,
             animations = {

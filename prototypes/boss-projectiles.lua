@@ -77,7 +77,7 @@ local create_acid_cloud_projectile = function(tier)
                 target_effects = {
                     {
                         type = "create-entity",
-                        entity_name = "acid-cloud-explosion",
+                        entity_name = MOD_NAME..'/acid-cloud-explosion',
                         trigger_created_entity = false
                     },
                     {
@@ -302,7 +302,7 @@ local create_swamp_cloud_projectile = function(tier, script_attack)
                 target_effects = {
                     {
                         type = "create-entity",
-                        entity_name = "dark-swarm-explosion",
+                        entity_name = MOD_NAME.."/dark-swarm-explosion",
                     },
                     {
                         type = "create-smoke",
