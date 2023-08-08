@@ -37,7 +37,7 @@ local create_blood_cloud_projectile = function(tier)
                 target_effects = {
                     {
                         type = "create-entity",
-                        entity_name = "blood-cloud-explosion",
+                        entity_name = MOD_NAME.."/blood-cloud-explosion",
                         trigger_created_entity = false
                     },
                     {

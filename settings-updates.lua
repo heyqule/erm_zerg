@@ -57,5 +57,13 @@ if mods['erm_zerg_hd'] then
             default_value = false,
             order = "erm_zerg-113",
         },
+        {
+            type = "bool-setting",
+            name = "erm_zerg-enable_floor_decals",
+            description = "erm_zerg-enable_floor_decals",
+            setting_type = "startup",
+            default_value = true,
+            order = "erm_zerg-115",
+        },
     }
 end
