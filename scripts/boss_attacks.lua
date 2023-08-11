@@ -5,7 +5,17 @@
 ---
 local ErmBossAttackRemote = require('__enemyracemanager__/lib/boss_attack_data')
 local ErmBossAttackProcessor = require('__enemyracemanager__/lib/boss_attack_processor')
-
+---
+---
+--- Boss perform attacks when it take around the following damage numbers
+--- 999999 - super attack
+--- 500000 - Spawn boss level units
+--- 250000 - Spawn Base attack
+--- 69420 - Advanced attack (may spawn regular level units)
+--- 20000 - Basic attack
+---
+--- Basic attack happens when boss take 20000 damage
+---
 ErmBossAttackRemote.basic_attacks =
 {
     projectile_name = {'blood-cloud','acid-cloud','blood-fire'},
@@ -30,6 +40,9 @@ ErmBossAttackRemote.basic_attacks =
     },
 }
 
+---
+--- Advanced attack happens when boss take 250000 damage
+---
 ErmBossAttackRemote.advanced_attacks =
 {
     projectile_name = {'swamp-cloud-'..UNITS_SPAWN_ATTACK , 'blood-explosion'},
@@ -49,6 +62,8 @@ ErmBossAttackRemote.advanced_attacks =
     },
 }
 
+----
+---250000
 ErmBossAttackRemote.super_attacks =
 {
     projectile_name = {'swamp-cloud-'..BOSS_SPAWN_ATTACK},

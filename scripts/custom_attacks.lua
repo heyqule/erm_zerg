@@ -52,12 +52,12 @@ function CustomAttacks.process_self_destruct(event)
 end
 
 function CustomAttacks.process_boss_units(event, batch_size)
-    batch_size = batch_size or 6
+    batch_size = batch_size or 12
     CustomAttackHelper.drop_boss_units(event, MOD_NAME, ERMConfig.boss_spawn_size * batch_size)
 end
 
 function CustomAttacks.process_batch_units(event, batch_size)
-    batch_size = batch_size or 4
+    batch_size = batch_size or 8
     CustomAttackHelper.drop_batch_units(event, MOD_NAME, ERMConfig.boss_spawn_size * batch_size)
 end
 
