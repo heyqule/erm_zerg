@@ -6,6 +6,7 @@ Date: 2023-??-??
     - Refactor default autoplace
     - Fix sunker_colony to sunken_colony
     - Prefix all entities for better compatiblity.
+    - use new ERM mod registration system
 
 ---------------------------------------------------------------------------------------------------
 Version: 1.20.5
