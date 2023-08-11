@@ -186,7 +186,7 @@ function ErmZerg.make_scourge(level)
                 }
             },
             render_layer = "wires-above",
-            distance_per_frame = 0.22,
+            distance_per_frame = 0.2,
             run_animation = {
                 layers = {
                     {

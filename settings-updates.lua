@@ -45,7 +45,7 @@ if mods['erm_zerg_hd'] then
             name = "erm_zerg-team_blend_mode",
             description = "erm_zerg-team_blend_mode",
             setting_type = "startup",
-            default_value = 4,
+            default_value = 3,
             order = "erm_zerg-112",
             allowed_values = { 1,2,3,4,5,6 },
         },

@@ -1,12 +1,14 @@
 ---------------------------------------------------------------------------------------------------
 Version: 1.21.0
-Date: 2023-??-??
+Date: 2023-08-11
 
   Changes:
     - Refactor default autoplace
     - Fix sunker_colony to sunken_colony
     - Prefix all entities for better compatiblity.
     - use new ERM mod registration system
+    - Added team color settings when HD package is installed
+    - Normalize distance_per_frame to 0.2 / 0.5 for units
 
 ---------------------------------------------------------------------------------------------------
 Version: 1.20.5

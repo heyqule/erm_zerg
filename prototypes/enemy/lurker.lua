@@ -174,7 +174,7 @@ function ErmZerg.make_lurker(level)
                 }
             },
 
-            distance_per_frame = 0.17,
+            distance_per_frame = 0.2,
             run_animation = {
                 layers = {
                     {
