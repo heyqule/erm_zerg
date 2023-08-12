@@ -50,7 +50,7 @@ local incremental_physical_damage = 14
 local base_attack_speed = 120
 local incremental_attack_speed = 60
 
-local attack_range = 30
+local attack_range = ERM_Config.get_max_attack_range() + 16
 local shortrange_attack_range = ERM_Config.get_max_attack_range() + 1
 
 -- Animation Settings

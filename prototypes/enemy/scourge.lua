@@ -44,7 +44,7 @@ local incremental_cold_resistance = 85
 -- Handles explosion damages
 
 local base_explosion_damage = 0.5
-local incremental_explosion_damage = 2
+local incremental_explosion_damage = 1.5
 
 -- Handles Attack Speed
 
@@ -138,7 +138,7 @@ function ErmZerg.make_scourge(level)
                                     action = {
                                         type = "area",
                                         force = 'not-same',
-                                        radius = 2,
+                                        radius = 3,
                                         ignore_collision_condition = true,
                                         action_delivery = {
                                             type = "instant",
