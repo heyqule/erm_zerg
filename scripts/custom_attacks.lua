@@ -11,6 +11,7 @@ local CustomAttacks = {}
 
 CustomAttacks.valid = CustomAttackHelper.valid
 CustomAttacks.clearTimeToLiveUnits = CustomAttackHelper.clear_time_to_live_units
+CustomAttacks.get_race_settings = CustomAttackHelper.get_race_settings
 
 function CustomAttacks.process_overlord(event)
     local race_settings = CustomAttackHelper.get_race_settings(MOD_NAME)
