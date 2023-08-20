@@ -167,6 +167,12 @@ local attack_functions = {
     [SELF_DESTRUCT_ATTACK] = function(args)
         CustomAttacks.process_self_destruct(args)
     end,
+    [TIME_TO_LIVE_DIED] = function(args)
+        CustomAttacks.process_time_to_live_unit_died(args)
+    end,
+    [TIME_TO_LIVE_CREATED] = function(args)
+        CustomAttacks.process_time_to_live_unit_created(args)
+    end,
     [BOSS_SPAWN_ATTACK] = function(args)
         CustomAttacks.process_boss_units(args)
     end,
@@ -182,8 +188,8 @@ Event.register(defines.events.on_script_trigger_effect, function(event)
     end
 end)
 
-Event.on_nth_tick(607, function(event)
-    CustomAttacks.clearTimeToLiveUnits(event)
+Event.on_nth_tick(907, function(event)
+    CustomAttacks.clear_time_to_live_units(event)
 end)
 
 

@@ -102,7 +102,7 @@ function ErmZerg.make_lair(level)
             pollution_absorption_absolute = pollution_absorption_absolute,
             pollution_absorption_proportional = 0.01,
             corpse = MOD_NAME.."/large-base-corpse",
-            dying_explosion = MOD_NAME.."/large-base-corpse",
+            dying_explosion = MOD_NAME.."/building-explosion",
             max_count_of_owned_units = max_count_of_owned_units,
             max_friends_around_to_spawn = max_friends_around_to_spawn,
             animations = {

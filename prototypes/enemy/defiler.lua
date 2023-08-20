@@ -179,7 +179,7 @@ function ErmZerg.make_defiler(level)
                         },
                     }
                 },
-                sound = ZergSound.defiler_attack(0.75),
+                sound = ZergSound.defiler_attack(0.66),
                 animation = {
                     layers = {
                         {

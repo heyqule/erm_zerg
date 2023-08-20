@@ -1,4 +1,16 @@
 ---------------------------------------------------------------------------------------------------
+Version: 1.21.2
+Date: 2023-08-11
+
+  Changes:
+    - Improved unit time to live handling.
+    - Lower meele units' some 95% elemental resists back to 90%, same across the race.
+    - Minor bump to meele units' health.
+
+  Bugfixes
+    - Fix death animations on building.
+
+---------------------------------------------------------------------------------------------------
 Version: 1.21.1
 Date: 2023-08-11
 

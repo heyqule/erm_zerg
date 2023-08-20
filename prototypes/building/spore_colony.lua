@@ -118,7 +118,7 @@ function ErmZerg.make_spore_colony(level)
             shooting_cursor_size = 4,
             rotation_speed = 1,
             corpse = MOD_NAME.."/small-base-corpse",
-            dying_explosion = MOD_NAME.."/large-base-corpse",
+            dying_explosion = MOD_NAME.."/building-explosion",
             dying_sound = ZergSound.building_dying_sound(0.75),
             call_for_help_radius = 50,
             folded_speed = 0.01,

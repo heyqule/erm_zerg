@@ -15,17 +15,17 @@ local name = 'zergling'
 
 
 local hitpoint = 35
-local max_hitpoint_multiplier = settings.startup["enemyracemanager-max-hitpoint-multipliers"].value * 5
+local max_hitpoint_multiplier = settings.startup["enemyracemanager-max-hitpoint-multipliers"].value * 5.5
 
 
 -- Handles acid and poison resistance
-local base_acid_resistance = 25
+local base_acid_resistance = 20
 local incremental_acid_resistance = 70
 -- Handles physical resistance
 local base_physical_resistance = 0
 local incremental_physical_resistance = 95
 -- Handles fire and explosive resistance
-local base_fire_resistance = 15
+local base_fire_resistance = 10
 local incremental_fire_resistance = 80
 -- Handles laser and electric resistance
 local base_electric_resistance = 0

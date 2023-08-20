@@ -15,17 +15,17 @@ local name = 'broodling'
 
 
 local hitpoint = 30
-local max_hitpoint_multiplier = settings.startup["enemyracemanager-max-hitpoint-multipliers"].value * 3
+local max_hitpoint_multiplier = settings.startup["enemyracemanager-max-hitpoint-multipliers"].value * 3.5
 
 
 -- Handles acid and poison resistance
-local base_acid_resistance = 25
+local base_acid_resistance = 20
 local incremental_acid_resistance = 70
 -- Handles physical resistance
 local base_physical_resistance = 0
 local incremental_physical_resistance = 95
 -- Handles fire and explosive resistance
-local base_fire_resistance = 15
+local base_fire_resistance = 10
 local incremental_fire_resistance = 80
 -- Handles laser and electric resistance
 local base_electric_resistance = 0
@@ -166,7 +166,25 @@ function ErmZerg.make_broodling(level)
                     }
                 }
             },
-            dying_sound = ZergSound.enemy_death(name, 0.75),
+            created_effect = {
+                type = "direct",
+                action_delivery = {
+                    type = "instant",
+                    source_effects = {
+                        {
+                            type = "script",
+                            effect_id = TIME_TO_LIVE_CREATED,
+                        }
+                    }
+                }
+            },
+            dying_trigger_effects = {
+                {
+                    type = "script",
+                    effect_id = TIME_TO_LIVE_DIED,
+                },
+            },
+            dying_sound = ZergSound.enemy_death(name, 0.5),
             corpse = MOD_NAME .. "/" ..name .. '-corpse'
         },
         {

@@ -156,7 +156,7 @@ function ErmZerg.make_scourge(level)
                         }
                     },
                 },
-                sound = ZergSound.scourge_attack(0.75),
+                sound = ZergSound.scourge_attack(0.5),
                 animation = {
                     layers = {
                         {
@@ -214,8 +214,26 @@ function ErmZerg.make_scourge(level)
                     }
                 }
             },
+            created_effect = {
+                type = "direct",
+                action_delivery = {
+                    type = "instant",
+                    source_effects = {
+                        {
+                            type = "script",
+                            effect_id = TIME_TO_LIVE_CREATED,
+                        }
+                    }
+                }
+            },
+            dying_trigger_effect = {
+                {
+                    type = "script",
+                    effect_id = TIME_TO_LIVE_DIED,
+                },
+            },
             dying_explosion = MOD_NAME .. "/" .. name .. "-air-death",
-            dying_sound = ZergSound.enemy_death(name, 0.75),
+            dying_sound = ZergSound.enemy_death(name, 0.5),
 
             corpse = MOD_NAME .. "/" .. name .. '-corpse'
         },

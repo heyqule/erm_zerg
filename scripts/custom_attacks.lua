@@ -7,11 +7,7 @@
 local CustomAttackHelper = require('__enemyracemanager__/lib/helper/custom_attack_helper')
 local ERMConfig = require('__enemyracemanager__/lib/global_config')
 
-local CustomAttacks = {}
-
-CustomAttacks.valid = CustomAttackHelper.valid
-CustomAttacks.clearTimeToLiveUnits = CustomAttackHelper.clear_time_to_live_units
-CustomAttacks.get_race_settings = CustomAttackHelper.get_race_settings
+local CustomAttacks = CustomAttackHelper
 
 function CustomAttacks.process_overlord(event)
     local race_settings = CustomAttackHelper.get_race_settings(MOD_NAME)
@@ -48,9 +44,6 @@ function CustomAttacks.process_drone(event)
     event.source_entity.destroy()
 end
 
-function CustomAttacks.process_self_destruct(event)
-    event.source_entity.destroy()
-end
 
 function CustomAttacks.process_boss_units(event, batch_size)
     batch_size = batch_size or 12
