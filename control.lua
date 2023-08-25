@@ -188,10 +188,10 @@ Event.register(defines.events.on_script_trigger_effect, function(event)
     end
 end)
 
+---- Clear time to live unit every 15s.
 Event.on_nth_tick(907, function(event)
     CustomAttacks.clear_time_to_live_units(event)
 end)
-
 
 ---
 --- Register required remote interfaces

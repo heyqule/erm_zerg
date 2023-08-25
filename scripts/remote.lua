@@ -5,6 +5,7 @@
 ---
 require('util')
 local ErmConfig = require('__enemyracemanager__/lib/global_config')
+local CustomAttacks = require('scripts/custom_attacks')
 
 local RemoteAPI = {}
 
@@ -54,5 +55,11 @@ end
 function RemoteAPI.register_new_enemy_race()
     return true
 end
+
+--- Refresh custom attack race setting cache
+function RemoteAPI.refresh_custom_attack_cache()
+    CustomAttacks.get_race_settings(MOD_NAME, true)
+end
+
 
 return RemoteAPI
