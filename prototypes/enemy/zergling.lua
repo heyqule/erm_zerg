@@ -107,7 +107,7 @@ function ErmZerg.make_zergling(level)
                 cooldown_deviation = 0.1,
                 damage_modifier = ERM_UnitHelper.get_damage(base_physical_damage, incremental_physical_damage,  level),
                 ammo_type = make_unit_melee_ammo_type(10),
-                sound = ZergSound.meele_attack(0.75),
+                sound = ZergSound.meele_attack(0.66),
                 animation = {
                     layers = {
                         {

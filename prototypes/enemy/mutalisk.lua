@@ -123,7 +123,7 @@ function ErmZerg.make_mutalisk(level)
                         }
                     }
                 },
-                sound = ZergSound.mutalisk_attack(0.75),
+                sound = ZergSound.mutalisk_attack(0.66),
                 animation = {
                     layers = {
                         {

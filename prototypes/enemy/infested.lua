@@ -149,7 +149,7 @@ function ErmZerg.make_infested(level)
                         }
                     },
                 },
-                sound = ZergSound.infested_attack(0.75),
+                sound = ZergSound.infested_attack(0.66),
                 animation = {
                     layers = {
                         {

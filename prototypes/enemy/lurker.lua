@@ -146,7 +146,7 @@ function ErmZerg.make_lurker(level)
                         }
                     },
                 },
-                sound = ZergSound.lurker_attack(0.75),
+                sound = ZergSound.lurker_attack(0.66),
                 animation = {
                     layers = {
                         {

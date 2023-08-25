@@ -139,7 +139,7 @@ function ErmZerg.make_guardian(level)
                         }
                     }
                 },
-                sound = ZergSound.guardian_attack(0.75),
+                sound = ZergSound.guardian_attack(0.66),
                 animation = {
                     layers = {
                         {

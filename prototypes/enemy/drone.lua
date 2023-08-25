@@ -125,7 +125,7 @@ function ErmZerg.make_drone(level)
                         }
                     }
                 },
-                sound = ZergSound.overlord_drop(0.75),
+                sound = ZergSound.overlord_drop(0.66),
                 animation = {
                     layers = {
                         {

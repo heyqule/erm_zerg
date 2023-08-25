@@ -122,7 +122,7 @@ function ErmZerg.make_hydralisk(level)
                         }
                     }
                 },
-                sound = ZergSound.hydralisk_attack(0.75),
+                sound = ZergSound.hydralisk_attack(0.66),
                 animation = {
                     layers = {
                         {

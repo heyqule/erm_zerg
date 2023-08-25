@@ -124,7 +124,7 @@ function ErmZerg.make_overlord(level)
                         }
                     }
                 },
-                sound = ZergSound.overlord_drop(0.75),
+                sound = ZergSound.overlord_drop(0.66),
                 animation = {
                     layers = {
                         {

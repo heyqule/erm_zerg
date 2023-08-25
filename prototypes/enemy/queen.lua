@@ -142,7 +142,7 @@ function ErmZerg.make_queen(level)
                         }
                     },
                 },
-                sound = ZergSound.defiler_attack(0.75),
+                sound = ZergSound.defiler_attack(0.66),
                 lead_target_for_projectile_speed = 5,
                 animation = {
                     layers = {

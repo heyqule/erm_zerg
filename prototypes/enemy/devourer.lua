@@ -136,7 +136,7 @@ function ErmZerg.make_devourer(level)
                     }
                 },
                 cyclic_sound = {
-                    begin_sound = ZergSound.devourer_attack(0.75),
+                    begin_sound = ZergSound.devourer_attack(0.66),
                 },
                 animation = {
                     layers = {
@@ -262,7 +262,7 @@ function ErmZerg.make_devourer(level)
                             },
                             {
                                 type = "play-sound",
-                                sound = ZergSound.devourer_hit(0.75)
+                                sound = ZergSound.devourer_hit(0.66)
                             },
                         }
                     }

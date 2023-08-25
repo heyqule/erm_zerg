@@ -129,7 +129,7 @@ function ErmZerg.make_ultralisk(level)
                         }
                     }
                 },
-                sound = ZergSound.meele_attack(0.75),
+                sound = ZergSound.meele_attack(0.66),
                 animation = {
                     layers = {
                         {
