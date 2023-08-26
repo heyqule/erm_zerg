@@ -1,11 +1,13 @@
 ---------------------------------------------------------------------------------------------------
 Version: 1.21.2
-Date: 2023-08-11
+Date: 2023-08-??
 
   Changes:
     - Improved unit time to live handling.
     - Lower meele units' some 95% elemental resists back to 90%, same across the race.
     - Minor bump to meele units' health.
+    - Hydralisk projectile is now a directional attack.
+    - Infested and scourge explosion happen as source_effect, so that they are escapable.
 
   Bugfixes
     - Fix death animations on building.

@@ -41,8 +41,8 @@ local incremental_explosion_damage = 4
 
 -- Handles Attack Speed
 
-local base_attack_speed = 600
-local incremental_attack_speed = 0
+local base_attack_speed = 90
+local incremental_attack_speed = 45
 
 local attack_range = 1
 
@@ -103,9 +103,8 @@ function ErmZerg.make_infested(level)
                 type = "projectile",
                 range_mode = "bounding-box-to-bounding-box",
                 range = attack_range,
-                cooldown = ERM_UnitHelper.get_attack_speed(base_attack_speed, incremental_attack_speed,  level),
-                cooldown_deviation = 0.1,
-                warmup = 12,
+                cooldown = 10,
+                warmup = ERM_UnitHelper.get_attack_speed(base_attack_speed, incremental_attack_speed,  level),
                 damage_modifier = ERM_UnitHelper.get_damage(base_explosion_damage, incremental_explosion_damage,  level),
                 ammo_type = {
                     category = "biological",
@@ -124,8 +123,6 @@ function ErmZerg.make_infested(level)
                                     type = "create-explosion",
                                     entity_name = 'medium-explosion'
                                 },
-                            },
-                            target_effects = {
                                 {
                                     type = "nested-result",
                                     action = {
@@ -145,7 +142,7 @@ function ErmZerg.make_infested(level)
                                         }
                                     }
                                 },
-                            }
+                            },
                         }
                     },
                 },

@@ -55,4 +55,10 @@ function CustomAttacks.process_batch_units(event, batch_size)
     CustomAttackHelper.drop_batch_units(event, MOD_NAME, ERMConfig.boss_spawn_size * batch_size)
 end
 
+function CustomAttacks.process_self_destruct(event)
+    if event.source_entity then
+        event.source_entity.destroy()
+    end
+end
+
 return CustomAttacks

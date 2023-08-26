@@ -5,6 +5,7 @@
 ---
 
 local Sprites = require('__stdlib__/stdlib/data/modules/sprites')
+local ERMDataHelper = require('__enemyracemanager__/lib/rig/data_helper')
 
 data:extend({
     --- Projectiles
@@ -68,6 +69,13 @@ data:extend({
         name = MOD_NAME.."/hydralisk-projectile",
         flags = { "not-on-map" },
         acceleration = 0.05,
+
+        direction_only = true,
+        collision_box = {{-0.5,-0.5},{0.5,0.5}},
+        force_condition = "not-same",
+        hit_collision_mask = {"player-layer", "train-layer", ERMDataHelper.getFlyingLayerName()},
+        hit_at_collision_position = true,
+
         action = {
             type = "direct",
             action_delivery = {

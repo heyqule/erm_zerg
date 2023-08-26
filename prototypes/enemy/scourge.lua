@@ -48,8 +48,8 @@ local incremental_explosion_damage = 1.5
 
 -- Handles Attack Speed
 
-local base_attack_speed = 600
-local incremental_attack_speed = 0
+local base_attack_speed = 90
+local incremental_attack_speed = 30
 
 local attack_range = 1
 
@@ -110,9 +110,9 @@ function ErmZerg.make_scourge(level)
                 type = "projectile",
                 range_mode = "bounding-box-to-bounding-box",
                 range = attack_range,
-                cooldown = ERM_UnitHelper.get_attack_speed(base_attack_speed, incremental_attack_speed,  level),
+                cooldown = 10,
                 cooldown_deviation = 0.1,
-                warmup = 12,
+                warmup = ERM_UnitHelper.get_attack_speed(base_attack_speed, incremental_attack_speed,  level),
                 damage_modifier = ERM_UnitHelper.get_damage(base_explosion_damage, incremental_explosion_damage,  level),
                 ammo_type = {
                     category = "biological",
@@ -130,9 +130,7 @@ function ErmZerg.make_scourge(level)
                                 {
                                     type = "create-entity",
                                     entity_name =  MOD_NAME.."/scourge-explosion"
-                                }
-                            },
-                            target_effects = {
+                                },
                                 {
                                     type = "nested-result",
                                     action = {
@@ -152,7 +150,7 @@ function ErmZerg.make_scourge(level)
                                         }
                                     }
                                 },
-                            }
+                            },
                         }
                     },
                 },

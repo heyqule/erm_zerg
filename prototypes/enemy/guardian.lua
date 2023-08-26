@@ -123,7 +123,7 @@ function ErmZerg.make_guardian(level)
                                 type = "projectile",
                                 projectile = MOD_NAME.."/"..name .. "-projectile",
                                 starting_speed = 0.1,
-                                max_range = ERM_Config.get_max_projectile_range(2),
+                                max_range = ERM_Config.get_max_projectile_range(),
                             }
                         },
                         {
