@@ -49,7 +49,7 @@ local incremental_explosion_damage = 1.5
 -- Handles Attack Speed
 
 local base_attack_speed = 90
-local incremental_attack_speed = 30
+local incremental_attack_speed = 60
 
 local attack_range = 1
 
