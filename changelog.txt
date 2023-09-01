@@ -3,7 +3,7 @@ Version: 1.22.1
 Date: 2023-09-01
 
   Changes:
-    - Unit spawn table tweaks
+    - early game unit spawn table tweaks
     - Pollution to join tweaks
 
 ---------------------------------------------------------------------------------------------------
