@@ -59,7 +59,7 @@ local incremental_movement_speed = 0.15
 
 -- Misc settings
 local vision_distance = ERM_UnitHelper.get_vision_distance(attack_range)
-local pollution_to_join_attack = 50
+local pollution_to_join_attack = 25
 local distraction_cooldown = 300
 
 -- Animation Settings
