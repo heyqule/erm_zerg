@@ -80,7 +80,7 @@ function ErmZerg.make_lair(level)
             icon_size = 64,
             flags = { "placeable-player", "placeable-enemy", "breaths-air" },
             max_health = ERM_UnitHelper.get_building_health(hitpoint, hitpoint * max_hitpoint_multiplier,  level),
-            order = MOD_NAME .. '/' .. name,
+            order = MOD_NAME .. '/' .. name .. '/'.. level,
             subgroup = "enemies",
             map_color = ERM_UnitHelper.format_map_color(settings.startup['erm_zerg-map-color'].value),
             working_sound = ZergSound.building_working_sound(name, 0.75),

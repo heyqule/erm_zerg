@@ -86,7 +86,7 @@ function ErmZerg.make_boss_hive(level, hitpoint)
             icon_size = 64,
             flags = { "placeable-player", "placeable-enemy", "breaths-air" },
             max_health = hitpoint,
-            order = MOD_NAME .. '/' .. name,
+            order = MOD_NAME .. '/' .. name .. '/'.. level,
             subgroup = "enemies",
             working_sound = ZergSound.building_working_sound('hive', 0.75),
             dying_sound = ZergSound.building_dying_sound(0.75),
