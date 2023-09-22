@@ -51,9 +51,6 @@ local incremental_acid_damage = 25
 local base_attack_speed = 120
 local incremental_attack_speed = 60
 
-local attack_range = ERM_Config.get_max_attack_range() + 16
-local attack_shortrange = ERM_Config.get_max_attack_range()
-
 -- Animation Settings
 local unit_scale = 1.5
 
@@ -88,6 +85,8 @@ end
 
 function ErmZerg.make_spore_colony(level)
     level = level or 1
+
+    local attack_range = ERM_UnitHelper.get_attack_range(level) + 16
 
     data:extend({
         {

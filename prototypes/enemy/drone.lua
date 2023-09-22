@@ -45,15 +45,10 @@ local incremental_physical_damage = 45
 local base_attack_speed = 300
 local incremental_attack_speed = 240
 
-local attack_range = math.ceil(ERM_Config.get_max_attack_range() * 0.75)
-
-
 local base_movement_speed = 0.125
 local incremental_movement_speed = 0.05
 
 -- Misc settings
-local vision_distance = ERM_UnitHelper.get_vision_distance(attack_range)
-
 local pollution_to_join_attack = 100
 local distraction_cooldown = 300
 
@@ -65,6 +60,8 @@ local selection_box = { { -0.75, -0.75 }, { 0.75, 0.75 } }
 
 function ErmZerg.make_drone(level)
     level = level or 1
+    local attack_range = ERM_UnitHelper.get_attack_range(level, 0.75)
+    local vision_distance = ERM_UnitHelper.get_vision_distance(attack_range)
 
     data:extend({
         {

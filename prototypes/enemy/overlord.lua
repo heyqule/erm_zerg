@@ -48,14 +48,11 @@ local incremental_cold_resistance = 85
 local base_attack_speed = 3600
 local incremental_attack_speed = 900
 
-local attack_range = math.ceil(ERM_Config.get_max_attack_range() * 0.5)
-
 
 local base_movement_speed = 0.15
 local incremental_movement_speed = 0.125
 
 -- Misc Settings
-local vision_distance = ERM_UnitHelper.get_vision_distance(attack_range)
 local pollution_to_join_attack = 200
 local distraction_cooldown = 300
 
@@ -66,6 +63,8 @@ local selection_box = { { -1, -2 }, { 1, 2 } }
 
 function ErmZerg.make_overlord(level)
     level = level or 1
+    local attack_range = ERM_UnitHelper.get_attack_range(level, 0.5)
+    local vision_distance = ERM_UnitHelper.get_vision_distance(attack_range)
 
     data:extend({
         {

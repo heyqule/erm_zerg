@@ -47,14 +47,10 @@ local incremental_physical_damage = 6
 local base_attack_speed = 210
 local incremental_attack_speed = 90
 
-local attack_range = math.ceil(ERM_Config.get_max_attack_range() * 0.75)
-
-
 local base_movement_speed = 0.125
 local incremental_movement_speed = 0.075
 
 -- Misc settings
-local vision_distance = ERM_UnitHelper.get_vision_distance(attack_range)
 local pollution_to_join_attack = 80
 local distraction_cooldown = 300
 
@@ -65,6 +61,8 @@ local selection_box = { { -1.0, -1.0 }, { 1.0, 1.0 } }
 
 function ErmZerg.make_lurker(level)
     level = level or 1
+    local attack_range = ERM_UnitHelper.get_attack_range(level, 0.75)
+    local vision_distance = ERM_UnitHelper.get_vision_distance(attack_range)
 
     data:extend({
         {
