@@ -38,7 +38,7 @@ local incremental_cold_resistance = 85
 -- Handles acid damages
 
 local base_acid_damage = 1
-local incremental_acid_damage = 9
+local incremental_acid_damage = 8
 
 -- Handles Attack Speed
 
@@ -50,7 +50,7 @@ local base_movement_speed = 0.125
 local incremental_movement_speed = 0.1
 
 -- Misc settings
-local pollution_to_join_attack = 10
+local pollution_to_join_attack = 8
 local distraction_cooldown = 300
 
 -- Animation Settings

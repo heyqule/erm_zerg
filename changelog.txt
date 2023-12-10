@@ -1,4 +1,21 @@
 ---------------------------------------------------------------------------------------------------
+Version: 1.22.3
+Date: 2023-12-10
+
+  Changes:
+    - Zergling pollution_to_join_attack from 3 to 4
+    - Hydralisk pollution_to_join_attack from 10 to 8
+    - Hydralisk base damage increase from 10 to 15, L20 damage is 135.
+    - Ultralist pollution_to_join_attack from 400 to 350
+    - Queen pollution_to_join_attack from 250 to 200
+    - Overlord pollution_to_join_attack from 200 to 120
+    - Infested pollution_to_join_attack from 150 to 80
+    - Devourer pollution_to_join_attack from 150 to 100
+
+  Bugfixes:
+    - Fixed ground units projectiles not hitting belt.
+
+---------------------------------------------------------------------------------------------------
 Version: 1.22.2
 Date: 2023-09-22
 

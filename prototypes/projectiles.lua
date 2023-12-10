@@ -73,7 +73,7 @@ data:extend({
         direction_only = true,
         collision_box = {{-0.5,-0.5},{0.5,0.5}},
         force_condition = "not-same",
-        hit_collision_mask = {"player-layer", "train-layer", ERMDataHelper.getFlyingLayerName()},
+        hit_collision_mask = {"player-layer", "train-layer", "transport-belt-layer", ERMDataHelper.getFlyingLayerName()},
         hit_at_collision_position = true,
 
         action = {
@@ -87,7 +87,7 @@ data:extend({
                     },
                     {
                         type = "damage",
-                        damage = { amount = 10, type = "acid" },
+                        damage = { amount = 15, type = "acid" },
                         apply_damage_to_trees = true
                     }
                 }
