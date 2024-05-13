@@ -4,6 +4,7 @@ Date: 2024-??-??
 
   Features:
     - Added support for fog of war beacons
+    - Added units for scouting subsystem
 
 ---------------------------------------------------------------------------------------------------
 Version: 1.22.3
