@@ -6,6 +6,9 @@ Date: 2024-??-??
     - Added support for fog of war beacons
     - Added units for scouting subsystem
 
+  Bugfixes:
+    - Fixed scourge is not using flyer mask.
+
 ---------------------------------------------------------------------------------------------------
 Version: 1.22.3
 Date: 2023-12-10

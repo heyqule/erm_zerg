@@ -16,6 +16,7 @@ local Sprites = require('__stdlib__/stdlib/data/modules/sprites')
 
 local ERM_UnitHelper = require('__enemyracemanager__/lib/rig/unit_helper')
 local ERM_UnitTint = require('__enemyracemanager__/lib/rig/unit_tint')
+local ERMDataHelper = require('__enemyracemanager__/lib/rig/data_helper')
 local ERM_DebugHelper = require('__enemyracemanager__/lib/debug_helper')
 local ZergSound = require('__erm_zerg__/prototypes/sound')
 local name = 'scourge'
@@ -96,7 +97,7 @@ function ErmZerg.make_scourge(level)
                 { type = "cold", percent = ERM_UnitHelper.get_resistance(base_cold_resistance, incremental_cold_resistance,  level) }
             },
             healing_per_tick = ERM_UnitHelper.get_healing(hitpoint, max_hitpoint_multiplier,  level),
-            --collision_mask = { "player-layer" },
+            collision_mask = ERMDataHelper.getFlyingCollisionMask(),
             collision_box = collision_box,
             selection_box = selection_box,
             sticker_box = selection_box,
