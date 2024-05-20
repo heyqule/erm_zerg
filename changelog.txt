@@ -7,7 +7,7 @@ Date: 2024-??-??
     - Added units for scouting subsystem
 
   Bugfixes:
-    - Fixed scourge is not using flyer mask.
+    - Fixed scourge is not using aerial mask.
 
 ---------------------------------------------------------------------------------------------------
 Version: 1.22.3
