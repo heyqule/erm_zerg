@@ -167,4 +167,8 @@ for i = 1, max_level do
     ErmZerg.make_infested_cmd(i)
 end
 
+data.erm_land_scout = data.erm_land_scout or {}
+data.erm_land_scout[MOD_NAME] = 'zergling'
 
+data.erm_aerial_scout = data.erm_aerial_scout or {}
+data.erm_aerial_scout[MOD_NAME] = 'mutalisk'

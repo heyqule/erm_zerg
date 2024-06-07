@@ -1,4 +1,15 @@
 ---------------------------------------------------------------------------------------------------
+Version: 1.23.0
+Date: 2024-06-07
+
+  Features:
+    - Added support for fog of war beacons
+    - Added units for scouting subsystem
+
+  Bugfixes:
+    - Fixed scourge is not using aerial mask.
+
+---------------------------------------------------------------------------------------------------
 Version: 1.22.3
 Date: 2023-12-10
 
