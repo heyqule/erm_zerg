@@ -130,8 +130,6 @@ local addRaceSettings = function()
         race_settings.enable_k2_creep = settings.startup['erm_zerg-k2-creep'].value
     end
 
-    ErmRaceSettingsHelper.process_unit_spawn_rate_cache(race_settings)
-
     remote.call('enemyracemanager', 'register_race', race_settings)
 
     -- reload local cache
