@@ -126,9 +126,9 @@ local addRaceSettings = function()
     race_settings.boss_tier = race_settings.boss_tier or 1
     race_settings.boss_kill_count = race_settings.boss_kill_count or 0
 
-    if game.active_mods['Krastorio2'] then
-        race_settings.enable_k2_creep = settings.startup['erm_zerg-k2-creep'].value
-    end
+    --if game.active_mods['Krastorio2'] then
+    --    race_settings.enable_k2_creep = settings.startup['erm_zerg-k2-creep'].value
+    --end
 
     remote.call('enemyracemanager', 'register_race', race_settings)
 
@@ -199,7 +199,7 @@ local ErmBossAttack = require('scripts/boss_attacks')
 --- Register boss attacks
 --- Interface Name: {race_name}_boss_attacks
 ---
-remote.add_interface("erm_zerg_boss_attacks", {
+remote.add_interface('erm_zerg_boss_attacks', {
     get_attack_data = ErmBossAttack.get_attack_data,
 })
 
@@ -208,5 +208,5 @@ remote.add_interface("erm_zerg_boss_attacks", {
 --- Interface Name: {race_name}
 ---
 local RemoteApi = require('scripts/remote')
-remote.add_interface("erm_zerg", RemoteApi)
+remote.add_interface('erm_zerg', RemoteApi)
 

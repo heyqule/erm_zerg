@@ -11,13 +11,15 @@ local ERM_UnitTint = require('__enemyracemanager__/lib/rig/unit_tint')
 local ERM_DebugHelper = require('__enemyracemanager__/lib/debug_helper')
 local ZergSound = require('__erm_zerg__/prototypes/sound')
 
-local enemy_autoplace = require("__enemyracemanager__/lib/enemy-autoplace-utils")
+local CreepFunction = require('__erm_zerg__/prototypes/creep_function')
+local AnimationDB = require('__erm_zerg_hd_assets__/animation_db')
+local enemy_autoplace = require ('__base__/prototypes/entity/enemy-autoplace-utils')
 local name = 'lair'
 
 -- Hitpoints
 
 local hitpoint = 1800
-local max_hitpoint_multiplier = settings.startup["enemyracemanager-max-hitpoint-multipliers"].value
+local max_hitpoint_multiplier = settings.startup['enemyracemanager-max-hitpoint-multipliers'].value
 
 
 -- Handles acid and poison resistance
@@ -47,20 +49,20 @@ local max_friends_around_to_spawn = 10
 local spawn_table = function(level)
     local res = {}
     --Tire 1
-    res[1] = { MOD_NAME .. '/zergling/' .. level, { { 0.0, 0.7 }, { 0.2, 0.45 }, { 0.4, 0.3 }, { 0.6, 0.2 }, { 0.8, 0.15 }, {1.0, 0.05} } }
-    res[2] = { MOD_NAME .. '/hydralisk/' .. level, { { 0.0, 0.3 }, { 0.2, 0.5 }, { 0.4, 0.4 }, { 0.6, 0.2 }, { 0.8, 0.15 }, {1.0, 0.05} } }
-    res[3] = { MOD_NAME .. '/mutalisk/' .. level, { { 0.0, 0.0 }, { 0.2, 0.05 }, { 0.4, 0.2 }, { 0.6, 0.2 }, { 0.8, 0.1 }, {1.0, 0.05} } }
+    res[1] = { MOD_NAME .. '--zergling--' .. level, { { 0.0, 0.7 }, { 0.2, 0.45 }, { 0.4, 0.3 }, { 0.6, 0.2 }, { 0.8, 0.15 }, {1.0, 0.05} } }
+    res[2] = { MOD_NAME .. '--hydralisk--' .. level, { { 0.0, 0.3 }, { 0.2, 0.5 }, { 0.4, 0.4 }, { 0.6, 0.2 }, { 0.8, 0.15 }, {1.0, 0.05} } }
+    res[3] = { MOD_NAME .. '--mutalisk--' .. level, { { 0.0, 0.0 }, { 0.2, 0.05 }, { 0.4, 0.2 }, { 0.6, 0.2 }, { 0.8, 0.1 }, {1.0, 0.05} } }
     --Tire 2
-    res[4] = { MOD_NAME .. '/lurker/' .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.05 }, { 0.6, 0.1 }, { 0.8, 0.1 }, {1.0, 0.1} } }
-    res[5] = { MOD_NAME .. '/guardian/' .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.0 }, { 0.8, 0.1 }, {1.0, 0.1} } }
-    res[6] = { MOD_NAME .. '/devourer/' .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.1 }, { 0.8, 0.1 }, {1.0, 0.1} } }
-    res[7] = { MOD_NAME .. '/overlord/' .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.1 }, { 0.8, 0.2 }, {1.0, 0.1} } }
+    res[4] = { MOD_NAME .. '--lurker--' .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.05 }, { 0.6, 0.1 }, { 0.8, 0.1 }, {1.0, 0.1} } }
+    res[5] = { MOD_NAME .. '--guardian--' .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.0 }, { 0.8, 0.1 }, {1.0, 0.1} } }
+    res[6] = { MOD_NAME .. '--devourer--' .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.1 }, { 0.8, 0.1 }, {1.0, 0.1} } }
+    res[7] = { MOD_NAME .. '--overlord--' .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.1 }, { 0.8, 0.2 }, {1.0, 0.1} } }
     --Tier 3
-    res[8] = { MOD_NAME .. '/drone/' .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.05 }, { 0.6, 0.1 }, { 0.8, 0.1 }, {1.0, 0.1} } }
-    res[9] = { MOD_NAME .. '/ultralisk/' .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0 }, { 0.6, 0 }, { 0.8, 0.0 }, {1.0, 0.1} } }
-    res[10] = { MOD_NAME .. '/defiler/' .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0 }, { 0.6, 0 }, { 0.8, 0.0 }, {1.0, 0.1} } }
-    res[11] = { MOD_NAME .. '/queen/' .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0 }, { 0.6, 0 }, { 0.8, 0.0 }, {1.0, 0.1} } }
-    res[12] = { MOD_NAME .. '/infested/' .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0 }, { 0.6, 0 }, { 0.8, 0.0 }, {1.0, 0.05} } }
+    res[8] = { MOD_NAME .. '--drone--' .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.05 }, { 0.6, 0.1 }, { 0.8, 0.1 }, {1.0, 0.1} } }
+    res[9] = { MOD_NAME .. '--ultralisk--' .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0 }, { 0.6, 0 }, { 0.8, 0.0 }, {1.0, 0.1} } }
+    res[10] = { MOD_NAME .. '--defiler--' .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0 }, { 0.6, 0 }, { 0.8, 0.0 }, {1.0, 0.1} } }
+    res[11] = { MOD_NAME .. '--queen--' .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0 }, { 0.6, 0 }, { 0.8, 0.0 }, {1.0, 0.1} } }
+    res[12] = { MOD_NAME .. '--infested--' .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0 }, { 0.6, 0 }, { 0.8, 0.0 }, {1.0, 0.05} } }
     return res
 end
 
@@ -73,64 +75,41 @@ function ErmZerg.make_lair(level)
 
     data:extend({
         {
-            type = "unit-spawner",
-            name = MOD_NAME .. '/' .. name .. '/' .. level,
-            localised_name = { 'entity-name.' .. MOD_NAME .. '/' .. name, level },
-            icon = "__erm_zerg__/graphics/entity/icons/buildings/advisor.png",
+            type = 'unit-spawner',
+            name = MOD_NAME .. '--' .. name .. '--' .. level,
+            localised_name = { 'entity-name.' .. MOD_NAME .. '--' .. name, tostring(level) },
+            icon = '__erm_zerg_hd_assets__/graphics/entity/icons/buildings/advisor.png',
             icon_size = 64,
-            flags = { "placeable-player", "placeable-enemy", "breaths-air" },
+            flags = { 'placeable-player', 'placeable-enemy', 'breaths-air' },
             max_health = ERM_UnitHelper.get_building_health(hitpoint, hitpoint * max_hitpoint_multiplier,  level),
-            order = MOD_NAME .. '/' .. name .. '/'.. level,
-            subgroup = "enemies",
+            order = MOD_NAME .. '--' .. name .. '--'.. level,
+            subgroup = 'enemies',
             map_color = ERM_UnitHelper.format_map_color(settings.startup['erm_zerg-map-color'].value),
             working_sound = ZergSound.building_working_sound(name, 0.75),
             dying_sound = ZergSound.building_dying_sound(0.75),
             resistances = {
-                { type = "acid", percent = ERM_UnitHelper.get_resistance(base_acid_resistance, incremental_acid_resistance,  level) },
-                { type = "poison", percent = ERM_UnitHelper.get_resistance(base_acid_resistance, incremental_acid_resistance,  level) },
-                { type = "physical", percent = ERM_UnitHelper.get_resistance(base_physical_resistance, incremental_physical_resistance,  level) },
-                { type = "fire", percent = ERM_UnitHelper.get_resistance(base_fire_resistance, incremental_fire_resistance,  level) },
-                { type = "explosion", percent = ERM_UnitHelper.get_resistance(base_fire_resistance, incremental_fire_resistance,  level) },
-                { type = "laser", percent = ERM_UnitHelper.get_resistance(base_electric_resistance, incremental_electric_resistance,  level) },
-                { type = "electric", percent = ERM_UnitHelper.get_resistance(base_electric_resistance, incremental_electric_resistance,  level) },
-                { type = "cold", percent = ERM_UnitHelper.get_resistance(base_cold_resistance, incremental_cold_resistance,  level) }
+                { type = 'acid', percent = ERM_UnitHelper.get_resistance(base_acid_resistance, incremental_acid_resistance,  level) },
+                { type = 'poison', percent = ERM_UnitHelper.get_resistance(base_acid_resistance, incremental_acid_resistance,  level) },
+                { type = 'physical', percent = ERM_UnitHelper.get_resistance(base_physical_resistance, incremental_physical_resistance,  level) },
+                { type = 'fire', percent = ERM_UnitHelper.get_resistance(base_fire_resistance, incremental_fire_resistance,  level) },
+                { type = 'explosion', percent = ERM_UnitHelper.get_resistance(base_fire_resistance, incremental_fire_resistance,  level) },
+                { type = 'laser', percent = ERM_UnitHelper.get_resistance(base_electric_resistance, incremental_electric_resistance,  level) },
+                { type = 'electric', percent = ERM_UnitHelper.get_resistance(base_electric_resistance, incremental_electric_resistance,  level) },
+                { type = 'cold', percent = ERM_UnitHelper.get_resistance(base_cold_resistance, incremental_cold_resistance,  level) }
             },
             healing_per_tick = ERM_UnitHelper.get_building_healing(hitpoint, max_hitpoint_multiplier,  level),
             collision_box = collision_box,
             map_generator_bounding_box = map_generator_bounding_box,
             selection_box = selection_box,
-            pollution_absorption_absolute = pollution_absorption_absolute,
-            pollution_absorption_proportional = 0.01,
-            corpse = MOD_NAME.."/large-base-corpse",
-            dying_explosion = MOD_NAME.."/building-explosion",
+    absorptions_per_second = { pollution = { absolute = pollution_absorption_absolute, proportional = 0.01 } },
+            corpse = MOD_NAME..'--large-base-corpse',
+            dying_explosion = MOD_NAME..'--building-explosion',
             max_count_of_owned_units = max_count_of_owned_units,
-            max_friends_around_to_spawn = max_friends_around_to_spawn,
-            animations = {
-                layers = {
-                    {
-                        filename = "__erm_zerg__/graphics/entity/buildings/" .. name .. "/" .. name .. ".png",
-                        width = 192,
-                        height = 160,
-                        frame_count = 5,
-                        animation_speed = 0.15,
-                        direction_count = 1,
-                        run_mode = "forward-then-backward",
-                        scale = unit_scale
-                    },
-                    {
-                        filename = "__erm_zerg__/graphics/entity/buildings/" .. name .. "/" .. name .. ".png",
-                        width = 192,
-                        height = 160,
-                        frame_count = 5,
-                        animation_speed = 0.15,
-                        direction_count = 1,
-                        run_mode = "forward-then-backward",
-                        scale = unit_scale,
-                        draw_as_shadow = true,
-                        shift = { 0.25, 0.1 },
-                    }
-                }
-            },
+	            max_friends_around_to_spawn = max_friends_around_to_spawn,
+				graphics_set = {
+                    animations = AnimationDB.get_layered_animations('buildings', name, 'run')
+                },
+
             result_units = spawn_table(level),
             -- With zero evolution the spawn rate is 6 seconds, with max evolution it is 2.5 seconds
             spawning_cooldown = spawning_cooldown,
@@ -139,70 +118,12 @@ function ErmZerg.make_lair(level)
             max_spawn_shift = 0,
             max_richness_for_spawn_shift = 100,
             -- distance_factor used to be 1, but Twinsen says:
-            -- "The number or spitter spwners should be roughly equal to the number of biter spawners(regardless of difficulty)."
+            -- 'The number or spitter spwners should be roughly equal to the number of biter spawners(regardless of difficulty).'
             -- (2018-12-07)
-            autoplace = enemy_autoplace.enemy_spawner_autoplace(0, FORCE_NAME),
+           autoplace = enemy_autoplace.enemy_spawner_autoplace('enemy_autoplace_base(0, 6)'),
             call_for_help_radius = 50,
             spawn_decorations_on_expansion = true,
-            spawn_decoration = {
-                {
-                    decorative = "light-mud-decal",
-                    spawn_min = 0,
-                    spawn_max = 2,
-                    spawn_min_radius = 2,
-                    spawn_max_radius = 5
-                },
-                {
-                    decorative = "dark-mud-decal",
-                    spawn_min = 0,
-                    spawn_max = 3,
-                    spawn_min_radius = 2,
-                    spawn_max_radius = 6
-                },
-                {
-                    decorative = "enemy-decal",
-                    spawn_min = 3,
-                    spawn_max = 5,
-                    spawn_min_radius = 2,
-                    spawn_max_radius = 7
-                },
-                {
-                    decorative = "enemy-decal-transparent",
-                    spawn_min = 4,
-                    spawn_max = 20,
-                    spawn_min_radius = 2,
-                    spawn_max_radius = 14,
-                    radius_curve = 0.9
-                },
-                {
-                    decorative = "muddy-stump",
-                    spawn_min = 2,
-                    spawn_max = 5,
-                    spawn_min_radius = 3,
-                    spawn_max_radius = 6
-                },
-                {
-                    decorative = "red-croton",
-                    spawn_min = 2,
-                    spawn_max = 8,
-                    spawn_min_radius = 3,
-                    spawn_max_radius = 6
-                },
-                {
-                    decorative = "red-pita",
-                    spawn_min = 1,
-                    spawn_max = 5,
-                    spawn_min_radius = 3,
-                    spawn_max_radius = 6
-                },
-                {
-                    decorative = "lichen-decal",
-                    spawn_min = 1,
-                    spawn_max = 2,
-                    spawn_min_radius = 2,
-                    spawn_max_radius = 7
-                }
-            }
+            spawn_decoration =  CreepFunction.getSpawnerCreep(),
         }
     })
 end

@@ -5,123 +5,87 @@
 ---
 require('__base__/prototypes/entity/spawner-animation')
 
+local AnimationDB = require('__erm_zerg_hd_assets__/animation_db')
 data:extend({
     {
-        type = "corpse",
-        name = MOD_NAME.."/small-base-corpse",
-        flags = { "placeable-neutral", "not-on-map" },
-        icon = "__erm_zerg__/graphics/entity/icons/buildings/advisor.png",
+        type = 'corpse',
+        name = MOD_NAME..'--small-base-corpse',
+        flags = { 'placeable-neutral', 'not-on-map' },
+        icon = '__erm_zerg_hd_assets__/graphics/entity/icons/buildings/advisor.png',
         icon_size = 64,
         collision_box = { { -2, -2 }, { 2, 2 } },
         selection_box = { { -2, -2 }, { 2, 2 } },
         selectable_in_game = false,
         dying_speed = 0.04,
-        time_before_removed = defines.time.minute * settings.startup["enemyracemanager-enemy-corpse-time"].value,
-        subgroup = "corpses",
-        order = "c[corpse]-c[small-zerg-base-corpse]",
-        final_render_layer = "remnants",
-        animation = {
-            {
-                filename = "__erm_zerg__/graphics/entity/buildings/death/zerg_small_rubble.png",
-                variation_count = 1,
-                width = 96,
-                height = 96,
-                frame_count = 1,
-                direction_count = 1,
-                scale = 2
-            }
-        },
-        ground_path = spawner_integration()
+        time_before_removed = defines.time.minute * settings.startup['enemyracemanager-enemy-corpse-time'].value,
+        subgroup = 'corpses',
+        order = 'c[corpse]-c[small-zerg-base-corpse]',
+        final_render_layer = 'remnants',
+        animation = AnimationDB.get_layered_animations('death', 'small_rubble', 'run')
     },
     {
-        type = "corpse",
-        name = MOD_NAME.."/large-base-corpse",
-        flags = { "placeable-neutral",  "not-on-map" },
-        icon = "__erm_zerg__/graphics/entity/icons/buildings/advisor.png",
+        type = 'corpse',
+        name = MOD_NAME..'--large-base-corpse',
+        flags = { 'placeable-neutral',  'not-on-map' },
+        icon = '__erm_zerg_hd_assets__/graphics/entity/icons/buildings/advisor.png',
         icon_size = 64,
         collision_box = { { -2, -2 }, { 2, 2 } },
         selection_box = { { -2, -2 }, { 2, 2 } },
         selectable_in_game = false,
         dying_speed = 0.04,
-        time_before_removed = defines.time.minute * settings.startup["enemyracemanager-enemy-corpse-time"].value,
-        subgroup = "corpses",
-        order = "c[corpse]-c[large-zerg-base-corpse]",
-        final_render_layer = "remnants",
-        animation = {
-            {
-                filename = "__erm_zerg__/graphics/entity/buildings/death/zerg_large_rubble.png",
-                width = 128,
-                height = 128,
-                variation_count = 1,
-                frame_count = 1,
-                direction_count = 1,
-                scale = 2
-            }
-        },
-        ground_path = spawner_integration()
+        time_before_removed = defines.time.minute * settings.startup['enemyracemanager-enemy-corpse-time'].value,
+        subgroup = 'corpses',
+        order = 'c[corpse]-c[large-zerg-base-corpse]',
+        final_render_layer = 'remnants',
+        animation = AnimationDB.get_layered_animations('death', 'large_rubble', 'run')
     },
     {
-        type = "explosion",
-        name = MOD_NAME.."/building-explosion",
-        icon = "__erm_zerg__/graphics/entity/icons/buildings/advisor.png",
+        type = 'explosion',
+        name = MOD_NAME..'--building-explosion',
+        icon = '__erm_zerg_hd_assets__/graphics/entity/icons/buildings/advisor.png',
         icon_size = 64,
         subgroup = 'explosions',
-        flags = { "not-on-map", "hidden" },
-        order = "zerg-explosions",
-        render_layer = "explosion",
-        animations = {
-            filename = "__erm_zerg__/graphics/entity/buildings/death/zerg_building_blood.png",
-            width = 200,
-            height = 200,
-            frame_count = 12,
-            animation_speed = 0.15,
-            direction_count = 1,
-            scale = 2
-        }
+        flags = { 'not-on-map' },
+        hidden = true,
+        order = 'zerg-explosions',
+        render_layer = 'explosion',
+        animations = AnimationDB.get_layered_animations('death', 'large_building', 'explosion')
     },
     {
-        type = "explosion",
-        name = MOD_NAME.."/terran-building-xlarge-explosion",
-        flags = { "not-on-map" },
+        type = 'explosion',
+        name = MOD_NAME..'--terran-building-xlarge-explosion',
+        flags = { 'not-on-map' },
         subgroup = 'explosions',
-        order = "zerg-terran-xlarge-explosion",
-        animations = {
-            filename = "__erm_zerg__/graphics/entity/buildings/infested_cmd/xlarge-explosion.png",
-            width = 252,
-            height = 200,
-            frame_count = 10,
-            animation_speed = 0.25,
-            direction_count = 1,
-            scale = 1.25,
-            draw_as_glow = true,
-            shift = {0, 1}
-        },
+        order = 'zerg-terran-xlarge-explosion',
+        animations = AnimationDB.get_layered_animations('death', 'terran_cmd', 'explosion')
         --light = {intensity = 1, size = 50, color = {r=1.0, g=1.0, b=1.0}},
     },
     {
-        type = "corpse",
-        name = MOD_NAME.."/terran-large-base-corpse",
-        flags = { "placeable-neutral",  "not-on-map" },
-        icon = "__erm_zerg__/graphics/entity/icons/buildings/advisor.png",
+        type = 'corpse',
+        name = MOD_NAME..'--terran-large-base-corpse',
+        flags = { 'placeable-neutral',  'not-on-map' },
+        icon = '__erm_zerg_hd_assets__/graphics/entity/icons/buildings/advisor.png',
         icon_size = 64,
         collision_box = { { -2, -2 }, { 2, 2 } },
         selection_box = { { -2, -2 }, { 2, 2 } },
         selectable_in_game = false,
         dying_speed = 0.04,
-        time_before_removed = defines.time.minute * settings.startup["enemyracemanager-enemy-corpse-time"].value,
-        subgroup = "corpses",
-        order = "c[corpse]-c[zerg-large-terran-base-corpse]",
-        final_render_layer = "remnants",
-        animation = {
-            {
-                filename =  "__erm_zerg__/graphics/entity/buildings/infested_cmd/large-rubble.png",
-                width = 128,
-                height = 128,
-                variation_count = 1,
-                frame_count = 1,
-                direction_count = 1,
-                scale = 1.5,
-            }
-        }
-    }
+        time_before_removed = defines.time.minute * settings.startup['enemyracemanager-enemy-corpse-time'].value,
+        subgroup = 'corpses',
+        order = 'c[corpse]-c[zerg-large-terran-base-corpse]',
+        final_render_layer = 'remnants',
+        animation = AnimationDB.get_layered_animations('death', 'small_building', 'explosion')
+    },
+    {
+        type = "explosion",
+        name = MOD_NAME.."--building-explosion-small",
+        icon = "__erm_zerg__/graphics/entity/icons/buildings/advisor.png",
+        icon_size = 64,
+        subgroup = 'explosions',
+        flags = { "not-on-map" },
+        hidden = true,
+        order = "zerg-explosions",
+        render_layer = "explosion",
+        animations = AnimationDB.get_layered_animations('death', 'small_building', 'explosion')
+    },
 });

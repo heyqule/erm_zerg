@@ -11,11 +11,13 @@ local ERM_UnitHelper = require('__enemyracemanager__/lib/rig/unit_helper')
 local ERM_UnitTint = require('__enemyracemanager__/lib/rig/unit_tint')
 local ERM_DebugHelper = require('__enemyracemanager__/lib/debug_helper')
 local ZergSound = require('__erm_zerg__/prototypes/sound')
+local biter_ai_settings = require ('__base__.prototypes.entity.biter-ai-settings')
+local AnimationDB = require('__erm_zerg_hd_assets__/animation_db')
 local name = 'zergling'
 
 
 local hitpoint = 35
-local max_hitpoint_multiplier = settings.startup["enemyracemanager-max-hitpoint-multipliers"].value * 5.5
+local max_hitpoint_multiplier = settings.startup['enemyracemanager-max-hitpoint-multipliers'].value * 5.5
 
 
 -- Handles acid and poison resistance
@@ -67,129 +69,69 @@ function ErmZerg.make_zergling(level)
 
     data:extend({
         {
-            type = "unit",
-            name = MOD_NAME .. '/' .. name .. '/' .. level,
-            localised_name = { 'entity-name.' .. MOD_NAME .. '/' .. name, level },
-            icon = "__erm_zerg__/graphics/entity/icons/units/" .. name .. ".png",
+            type = 'unit',
+            name = MOD_NAME .. '--' .. name .. '--' .. level,
+            localised_name = { 'entity-name.' .. MOD_NAME .. '--' .. name, tostring(level) },
+            icon = '__erm_zerg_hd_assets__/graphics/entity/icons/units/' .. name .. '.png',
             icon_size = 64,
-            flags = { "placeable-enemy", "placeable-player", "placeable-off-grid", "breaths-air" },
+            flags = { 'placeable-enemy', 'placeable-player', 'placeable-off-grid', 'breaths-air' },
             has_belt_immunity = false,
             max_health = ERM_UnitHelper.get_health(hitpoint, hitpoint * max_hitpoint_multiplier,  level),
-            order = MOD_NAME .. '/'  .. name .. '/' .. level,
-            subgroup = "enemies",
+            order = MOD_NAME .. '--'  .. name .. '--' .. level,
+            subgroup = 'enemies',
             map_color = ERM_UnitHelper.format_map_color(settings.startup['erm_zerg-map-color'].value),
             shooting_cursor_size = 2,
             resistances = {
-                { type = "acid", percent = ERM_UnitHelper.get_resistance(base_acid_resistance, incremental_acid_resistance,  level) },
-                { type = "poison", percent = ERM_UnitHelper.get_resistance(base_acid_resistance, incremental_acid_resistance,  level) },
-                { type = "physical", percent = ERM_UnitHelper.get_resistance(base_physical_resistance, incremental_physical_resistance,  level) },
-                { type = "fire", percent = ERM_UnitHelper.get_resistance(base_fire_resistance, incremental_fire_resistance,  level) },
-                { type = "explosion", percent = ERM_UnitHelper.get_resistance(base_fire_resistance, incremental_fire_resistance,  level) },
-                { type = "laser", percent = ERM_UnitHelper.get_resistance(base_electric_resistance, incremental_electric_resistance,  level) },
-                { type = "electric", percent = ERM_UnitHelper.get_resistance(base_electric_resistance, incremental_electric_resistance,  level) },
-                { type = "cold", percent = ERM_UnitHelper.get_resistance(base_cold_resistance, incremental_cold_resistance,  level) }
+                { type = 'acid', percent = ERM_UnitHelper.get_resistance(base_acid_resistance, incremental_acid_resistance,  level) },
+                { type = 'poison', percent = ERM_UnitHelper.get_resistance(base_acid_resistance, incremental_acid_resistance,  level) },
+                { type = 'physical', percent = ERM_UnitHelper.get_resistance(base_physical_resistance, incremental_physical_resistance,  level) },
+                { type = 'fire', percent = ERM_UnitHelper.get_resistance(base_fire_resistance, incremental_fire_resistance,  level) },
+                { type = 'explosion', percent = ERM_UnitHelper.get_resistance(base_fire_resistance, incremental_fire_resistance,  level) },
+                { type = 'laser', percent = ERM_UnitHelper.get_resistance(base_electric_resistance, incremental_electric_resistance,  level) },
+                { type = 'electric', percent = ERM_UnitHelper.get_resistance(base_electric_resistance, incremental_electric_resistance,  level) },
+                { type = 'cold', percent = ERM_UnitHelper.get_resistance(base_cold_resistance, incremental_cold_resistance,  level) }
             },
             healing_per_tick = ERM_UnitHelper.get_healing(hitpoint, max_hitpoint_multiplier,  level),
-            --collision_mask = { "player-layer" },
+            --collision_mask = { 'player-layer' },
             collision_box = collision_box,
             selection_box = selection_box,
             sticker_box = selection_box,
             vision_distance = vision_distance,
             movement_speed = ERM_UnitHelper.get_movement_speed(base_movement_speed, incremental_movement_speed,  level),
-            pollution_to_join_attack = ERM_UnitHelper.get_pollution_attack(pollution_to_join_attack, level),
+            absorptions_to_join_attack = { pollution = ERM_UnitHelper.get_pollution_attack(pollution_to_join_attack, level)},
             distraction_cooldown = distraction_cooldown,
             ai_settings = biter_ai_settings,
             attack_parameters = {
-                type = "projectile",
-                range_mode = "bounding-box-to-bounding-box",
+                type = 'projectile',
+                range_mode = 'bounding-box-to-bounding-box',
                 range = attack_range,
                 cooldown = ERM_UnitHelper.get_attack_speed(base_attack_speed, incremental_attack_speed,  level),
                 cooldown_deviation = 0.1,
                 damage_modifier = ERM_UnitHelper.get_damage(base_physical_damage, incremental_physical_damage,  level),
-                ammo_type = make_unit_melee_ammo_type(10),
+                ammo_category = 'biological',
+                ammo_type = ERM_UnitHelper.make_unit_melee_ammo_type(10),
                 sound = ZergSound.meele_attack(0.66),
-                animation = {
-                    layers = {
-                        {
-                            filename = "__erm_zerg__/graphics/entity/units/" .. name .. "/" .. name .. "-attack.png",
-                            width = 128,
-                            height = 128,
-                            frame_count = 5,
-                            axially_symmetrical = false,
-                            direction_count = 16,
-                            scale = unit_scale,
-                            animation_speed = 0.5
-                        },
-                        {
-                            filename = "__erm_zerg__/graphics/entity/units/" .. name .. "/" .. name .. "-attack.png",
-                            width = 128,
-                            height = 128,
-                            frame_count = 5,
-                            axially_symmetrical = false,
-                            direction_count = 16,
-                            scale = unit_scale,
-                            draw_as_shadow = true,
-                            tint = ERM_UnitTint.tint_shadow(),
-                            animation_speed = 0.5,
-                            shift = {0.2, 0}
-                        }
-                    }
-                }
+                animation = AnimationDB.get_layered_animations('units', name, 'attack')
             },
-            distance_per_frame = 0.2,
-            run_animation = {
-                layers = {
-                    {
-                        filename = "__erm_zerg__/graphics/entity/units/" .. name .. "/" .. name .. "-run.png",
-                        width = 128,
-                        height = 128,
-                        frame_count = 5,
-                        axially_symmetrical = false,
-                        direction_count = 16,
-                        scale = unit_scale,
-                        animation_speed = 1,
-                    },
-                    {
-                        filename = "__erm_zerg__/graphics/entity/units/" .. name .. "/" .. name .. "-run.png",
-                        width = 128,
-                        height = 128,
-                        frame_count = 5,
-                        axially_symmetrical = false,
-                        direction_count = 16,
-                        scale = unit_scale,
-                        tint = ERM_UnitTint.tint_shadow(),
-                        draw_as_shadow = true,
-                        animation_speed = 1,
-                        shift = {0.2, 0}
-                    }
-                }
-            },
+            distance_per_frame = 0.16,
+            run_animation = AnimationDB.get_layered_animations('units', name, 'run'),
             dying_sound = ZergSound.enemy_death(name, 0.75),
-            corpse = MOD_NAME .. "/" .. name .. '-corpse'
+            corpse = MOD_NAME .. '--' .. name .. '-corpse'
         },
         {
-            type = "corpse",
-            name = MOD_NAME .. "/" .. name .. '-corpse',
-            icon = "__erm_zerg__/graphics/entity/icons/units/" .. name .. ".png",
+            type = 'corpse',
+            name = MOD_NAME .. '--' .. name .. '-corpse',
+            icon = '__erm_zerg_hd_assets__/graphics/entity/icons/units/' .. name .. '.png',
             icon_size = 64,
-            flags = { "placeable-off-grid", "building-direction-8-way", "not-on-map" },
+            flags = { 'placeable-off-grid', 'building-direction-8-way', 'not-on-map' },
             selection_box = selection_box,
             selectable_in_game = false,
             dying_speed = 0.04,
 
-            subgroup = "corpses",
-            order = MOD_NAME .. "/" .. name .. level,
-            final_render_layer = "corpse",
-            animation = {
-                filename = "__erm_zerg__/graphics/entity/units/" .. name .. "/" .. name .. "-death.png",
-                width = 128,
-                height = 128,
-                frame_count = 7,
-                direction_count = 1,
-                axially_symmetrical = false,
-                scale = unit_scale,
-                animation_speed = 0.2
-            },
+            subgroup = 'corpses',
+            order = MOD_NAME .. '--' .. name .. level,
+            final_render_layer = 'corpse',
+            animation = AnimationDB.get_layered_animations('units', name, 'corpse'),
         }
     })
 end
