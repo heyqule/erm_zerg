@@ -7,24 +7,24 @@
 local SharedFunctions = {}
 
 function SharedFunctions.getSpawnerCreep()
-    if settings.startup['erm_zerg-enable_floor_decals'].value then
+    if settings.startup["erm_zerg-enable_floor_decals"].value then
         return {
             {
-                decorative = 'creep-decal',
+                decorative = "creep-decal",
                 spawn_min = 1,
                 spawn_max = 2,
                 spawn_min_radius = 0,
                 spawn_max_radius = 2
             },
             {
-                decorative = 'creep-decal',
+                decorative = "creep-decal",
                 spawn_min = 3,
                 spawn_max = 5,
                 spawn_min_radius = 2,
                 spawn_max_radius = 7
             },
             {
-                decorative = 'creep-decal-transparent',
+                decorative = "creep-decal-transparent",
                 spawn_min = 4,
                 spawn_max = 20,
                 spawn_min_radius = 2,

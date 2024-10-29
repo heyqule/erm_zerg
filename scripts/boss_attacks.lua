@@ -3,8 +3,8 @@
 --- Created by heyqule.
 --- DateTime: 8/28/2022 8:19 PM
 ---
-local ErmBossAttackRemote = require('__enemyracemanager__/lib/boss_attack_data')
-local ErmBossAttackProcessor = require('__enemyracemanager__/lib/boss_attack_processor')
+local ErmBossAttackRemote = require("__enemyracemanager__/lib/boss_attack_data")
+local ErmBossAttackProcessor = require("__enemyracemanager__/lib/boss_attack_processor")
 ---
 ---
 --- Boss perform attacks when it take around the following damage numbers
@@ -18,7 +18,7 @@ local ErmBossAttackProcessor = require('__enemyracemanager__/lib/boss_attack_pro
 ---
 ErmBossAttackRemote.basic_attacks =
 {
-    projectile_name = {'blood-cloud','acid-cloud','blood-fire'},
+    projectile_name = {"blood-cloud","acid-cloud","blood-fire"},
     projectile_type = {
         ErmBossAttackProcessor.TYPE_PROJECTILE,
         ErmBossAttackProcessor.TYPE_PROJECTILE,
@@ -45,7 +45,7 @@ ErmBossAttackRemote.basic_attacks =
 ---
 ErmBossAttackRemote.advanced_attacks =
 {
-    projectile_name = {'swamp-cloud-'..UNITS_SPAWN_ATTACK , 'blood-explosion'},
+    projectile_name = {"swamp-cloud-"..UNITS_SPAWN_ATTACK , "blood-explosion"},
     projectile_type = {
         ErmBossAttackProcessor.TYPE_PROJECTILE,
         ErmBossAttackProcessor.TYPE_PROJECTILE,
@@ -66,7 +66,7 @@ ErmBossAttackRemote.advanced_attacks =
 ---250000
 ErmBossAttackRemote.super_attacks =
 {
-    projectile_name = {'swamp-cloud-'..BOSS_SPAWN_ATTACK},
+    projectile_name = {"swamp-cloud-"..BOSS_SPAWN_ATTACK},
     projectile_type = {
         ErmBossAttackProcessor.TYPE_PROJECTILE,
     },
@@ -84,7 +84,7 @@ ErmBossAttackRemote.super_attacks =
 
 ErmBossAttackRemote.despawn_attacks =
 {
-    projectile_name = {'swamp-cloud-'..UNITS_SPAWN_ATTACK},
+    projectile_name = {"swamp-cloud-"..UNITS_SPAWN_ATTACK},
     projectile_type = {
         ErmBossAttackProcessor.TYPE_PROJECTILE,
     },

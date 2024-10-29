@@ -3,9 +3,9 @@
 --- Created by heyqule.
 --- DateTime: 2/8/2023 9:02 PM
 ---
-require('util')
-local ErmConfig = require('__enemyracemanager__/lib/global_config')
-local CustomAttacks = require('scripts/custom_attacks')
+require("util")
+local ErmConfig = require("__enemyracemanager__/lib/global_config")
+local CustomAttacks = require("scripts/custom_attacks")
 
 local RemoteAPI = {}
 
@@ -15,27 +15,27 @@ local RemoteAPI = {}
 function RemoteAPI.milestones_preset_addons()
     local boss_level = ErmConfig.BOSS_LEVELS
     local preset = {
-        ['erm_zerg'] = {
-            required_mods = {'erm_zerg'},
+        ["erm_zerg"] = {
+            required_mods = {"erm_zerg"},
             milestones = {
-                {type='group', name='Kills'},
-                {type='kill', name='erm_zerg--hive--5',  quantity=1},
-                {type='kill', name='erm_zerg--hive--10',  quantity=1},
-                {type='kill', name='erm_zerg--hive--15',  quantity=1},
-                {type='kill', name='erm_zerg--hive--20',  quantity=1, next='x10'},
+                {type="group", name="Kills"},
+                {type="kill", name="erm_zerg--hive--5",  quantity=1},
+                {type="kill", name="erm_zerg--hive--10",  quantity=1},
+                {type="kill", name="erm_zerg--hive--15",  quantity=1},
+                {type="kill", name="erm_zerg--hive--20",  quantity=1, next="x10"},
             }
         },
     }
 
-    preset['erm_zerg_boss'] = {
-        required_mods = {'erm_zerg'},
+    preset["erm_zerg_boss"] = {
+        required_mods = {"erm_zerg"},
         milestones = {
-            {type='group', name='ERM Boss Kills'},
-            {type='kill', name='erm_zerg--overmind--'..boss_level[1],  quantity=1},
-            {type='kill', name='erm_zerg--overmind--'..boss_level[2],  quantity=1},
-            {type='kill', name='erm_zerg--overmind--'..boss_level[3],  quantity=1},
-            {type='kill', name='erm_zerg--overmind--'..boss_level[4],  quantity=1},
-            {type='kill', name='erm_zerg--overmind--'..boss_level[5],  quantity=1},
+            {type="group", name="ERM Boss Kills"},
+            {type="kill", name="erm_zerg--overmind--"..boss_level[1],  quantity=1},
+            {type="kill", name="erm_zerg--overmind--"..boss_level[2],  quantity=1},
+            {type="kill", name="erm_zerg--overmind--"..boss_level[3],  quantity=1},
+            {type="kill", name="erm_zerg--overmind--"..boss_level[4],  quantity=1},
+            {type="kill", name="erm_zerg--overmind--"..boss_level[5],  quantity=1},
         }
     }
 
@@ -43,10 +43,10 @@ function RemoteAPI.milestones_preset_addons()
 end
 
 ---
---- Print global for debug purpose when you run remote.call('enemyracemanager_debug', 'print_global')'
+--- Print global for debug purpose when you run remote.call("enemyracemanager_debug", "print_global")"
 ---
 function RemoteAPI.print_global()
-    helpers.write_file('erm_zerg/erm-global.json', helpers.table_to_json(util.copy(global)))
+    helpers.write_file("erm_zerg/erm-global.json", helpers.table_to_json(util.copy(global)))
 end
 
 ---

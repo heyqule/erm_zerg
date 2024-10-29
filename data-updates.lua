@@ -3,14 +3,14 @@
 --- Created by heyqule.
 --- DateTime: 10/29/2024 2:29 AM
 ---
-require('__erm_zerg__/global')
+require("__erm_zerg__/global")
 
 -- Update RTS world
-local mapgen = data.raw['map-gen-presets']['default']
-mapgen['erm-rts-world']['basic_settings']['autoplace_controls'][AUTOCONTROL_NAME] = { frequency = 'very-high', size = 'very-big' }
+local mapgen = data.raw["map-gen-presets"]["default"]
+mapgen["erm-rts-world"]["basic_settings"]["autoplace_controls"][AUTOCONTROL_NAME] = { frequency = "very-high", size = "very-big" }
 
-if mapgen['erm-debug'] then
-    mapgen['erm-debug']['basic_settings']['autoplace_controls'][AUTOCONTROL_NAME] = { frequency = 5, size = 5 }
+if mapgen["erm-debug"] then
+    mapgen["erm-debug"]["basic_settings"]["autoplace_controls"][AUTOCONTROL_NAME] = { frequency = 5, size = 5 }
 end
 
 
@@ -19,5 +19,6 @@ nauvis.map_gen_settings.autoplace_controls[AUTOCONTROL_NAME] = {}
 
 if feature_flags.space_travel then
     local vulcanus = data.raw.planet.vulcanus
-    vulcanus.map_gen_settings.autoplace_controls[AUTOCONTROL_NAME] = {}
+    --- Fixed spawn size, not affected by Menu"s map gen setting
+    vulcanus.map_gen_settings.autoplace_controls[AUTOCONTROL_NAME] = { frequency = 0.25, size = 0.25 }
 end

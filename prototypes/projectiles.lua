@@ -4,170 +4,170 @@
 --- DateTime: 12/22/2020 6:40 PM
 ---
 
-local ERMDataHelper = require('__enemyracemanager__/lib/rig/data_helper')
-local AnimationDB = require('__erm_zerg_hd_assets__/animation_db')
+local ERMDataHelper = require("__enemyracemanager__/lib/rig/data_helper")
+local AnimationDB = require("__erm_zerg_hd_assets__/animation_db")
 
 data:extend({
     --- Projectiles
     {
-        type = 'projectile',
-        name = MOD_NAME..'--mutalisk-projectile',
-        flags = { 'not-on-map' },
+        type = "projectile",
+        name = MOD_NAME.."--mutalisk-projectile",
+        flags = { "not-on-map" },
         acceleration = 0.005,
         action = {
-            type = 'direct',
+            type = "direct",
             action_delivery = {
-                type = 'instant',
+                type = "instant",
                 target_effects = {
                     {
-                        type = 'create-entity',
-                        entity_name = MOD_NAME..'--mutalisk-explosion-small'
+                        type = "create-entity",
+                        entity_name = MOD_NAME.."--mutalisk-explosion-small"
                     },
                     {
-                        type = 'damage',
-                        damage = { amount = 20, type = 'acid' }
+                        type = "damage",
+                        damage = { amount = 20, type = "acid" }
                     }
                 }
             }
         },
-        animation = AnimationDB.get_single_animation('projectiles','mutalisk','projectile')
+        animation = AnimationDB.get_single_animation("projectiles","mutalisk","projectile")
     },
     {
-        type = 'projectile',
-        name = MOD_NAME..'--parasite-projectile',
-        flags = { 'not-on-map' },
+        type = "projectile",
+        name = MOD_NAME.."--parasite-projectile",
+        flags = { "not-on-map" },
         acceleration = 0.005,
         action = {
-            type = 'direct',
+            type = "direct",
             action_delivery = {
-                type = 'instant',
+                type = "instant",
                 target_effects = {
-                    type = 'script',
+                    type = "script",
                     effect_id = QUEEN_SPAWN,
                 }
             }
         },
-        animation = AnimationDB.get_single_animation('projectiles','parasite','projectile')
+        animation = AnimationDB.get_single_animation("projectiles","parasite","projectile")
     },
     {
-        type = 'projectile',
-        name = MOD_NAME..'--hydralisk-projectile',
-        flags = { 'not-on-map' },
+        type = "projectile",
+        name = MOD_NAME.."--hydralisk-projectile",
+        flags = { "not-on-map" },
         acceleration = 0.05,
 
         direction_only = true,
         collision_box = {{-0.5,-0.5},{0.5,0.5}},
-        force_condition = 'not-same',
+        force_condition = "not-same",
         hit_collision_mask = { layers = {player = true, train = true, transport_belt = true, [ERMDataHelper.getFlyingLayerName()] =  true} },
         hit_at_collision_position = true,
 
         action = {
-            type = 'direct',
+            type = "direct",
             action_delivery = {
-                type = 'instant',
+                type = "instant",
                 target_effects = {
                     {
-                        type = 'create-entity',
-                        entity_name = MOD_NAME..'--hydralisk-explosion-small'
+                        type = "create-entity",
+                        entity_name = MOD_NAME.."--hydralisk-explosion-small"
                     },
                     {
-                        type = 'damage',
-                        damage = { amount = 15, type = 'acid' },
+                        type = "damage",
+                        damage = { amount = 15, type = "acid" },
                         apply_damage_to_trees = true
                     }
                 }
             }
         },
-        animation = AnimationDB.get_single_animation('projectiles','hydralisk','projectile')
+        animation = AnimationDB.get_single_animation("projectiles","hydralisk","projectile")
     },
     {
-        type = 'projectile',
-        name = MOD_NAME..'--guardian-projectile',
-        flags = { 'not-on-map' },
+        type = "projectile",
+        name = MOD_NAME.."--guardian-projectile",
+        flags = { "not-on-map" },
         acceleration = 0.01,
         action = {
-            type = 'direct',
+            type = "direct",
             action_delivery = {
-                type = 'instant',
+                type = "instant",
                 target_effects = {
                     {
-                        type = 'create-entity',
-                        entity_name = MOD_NAME..'--mutalisk-explosion-small'
+                        type = "create-entity",
+                        entity_name = MOD_NAME.."--mutalisk-explosion-small"
                     },
                     {
-                        type = 'damage',
-                        damage = { amount = 40, type = 'acid' },
+                        type = "damage",
+                        damage = { amount = 40, type = "acid" },
                         apply_damage_to_trees = true
                     },
                 }
             }
         },
-        animation = AnimationDB.get_single_animation('projectiles','guardian','projectile')
+        animation = AnimationDB.get_single_animation("projectiles","guardian","projectile")
     },
     --- Explosions
     {
-        type = 'explosion',
-        name = MOD_NAME..'--lurker-explosion',
-        flags = { 'not-on-map' },
-        render_layer = 'projectile',
-        animations = AnimationDB.get_single_animation('projectiles','lurker','explosion')
+        type = "explosion",
+        name = MOD_NAME.."--lurker-explosion",
+        flags = { "not-on-map" },
+        render_layer = "projectile",
+        animations = AnimationDB.get_single_animation("projectiles","lurker","explosion")
     },
     {
-        type = 'explosion',
-        name = MOD_NAME..'--colony-explosion',
-        flags = { 'not-on-map' },
-        render_layer = 'projectile',
-        animations = AnimationDB.get_layered_animations('projectiles','colony','explosion')
+        type = "explosion",
+        name = MOD_NAME.."--colony-explosion",
+        flags = { "not-on-map" },
+        render_layer = "projectile",
+        animations = AnimationDB.get_layered_animations("projectiles","colony","explosion")
     },
     {
-        type = 'explosion',
-        name = MOD_NAME..'--mutalisk-explosion-small',
-        flags = { 'not-on-map' },
-        animations = AnimationDB.get_layered_animations('projectiles','mutalisk','explosion')
+        type = "explosion",
+        name = MOD_NAME.."--mutalisk-explosion-small",
+        flags = { "not-on-map" },
+        animations = AnimationDB.get_layered_animations("projectiles","mutalisk","explosion")
     },
     {
-        type = 'explosion',
-        name = MOD_NAME..'--hydralisk-explosion-small',
-        flags = { 'not-on-map' },
-        animations = AnimationDB.get_layered_animations('projectiles','hydralisk','explosion')
+        type = "explosion",
+        name = MOD_NAME.."--hydralisk-explosion-small",
+        flags = { "not-on-map" },
+        animations = AnimationDB.get_layered_animations("projectiles","hydralisk","explosion")
     },
     {
-        type = 'explosion',
-        name = MOD_NAME..'--blood-cloud-explosion',
-        flags = { 'not-on-map' },
-        animations = AnimationDB.get_layered_animations('projectiles','blood_cloud','explosion')
+        type = "explosion",
+        name = MOD_NAME.."--blood-cloud-explosion",
+        flags = { "not-on-map" },
+        animations = AnimationDB.get_layered_animations("projectiles","blood_cloud","explosion")
     },
     {
-        type = 'explosion',
-        name = MOD_NAME..'--dark-swarm-80-explosion',
-        flags = { 'not-on-map' },
-        animations = AnimationDB.get_layered_animations('projectiles','dark_swam_80','explosion')
+        type = "explosion",
+        name = MOD_NAME.."--dark-swarm-80-explosion",
+        flags = { "not-on-map" },
+        animations = AnimationDB.get_layered_animations("projectiles","dark_swam_80","explosion")
     },
     {
-        type = 'explosion',
-        name = MOD_NAME..'--dark-swarm-explosion',
-        flags = { 'not-on-map' },
-        animations = AnimationDB.get_layered_animations('projectiles','dark_swam','explosion')
+        type = "explosion",
+        name = MOD_NAME.."--dark-swarm-explosion",
+        flags = { "not-on-map" },
+        animations = AnimationDB.get_layered_animations("projectiles","dark_swam","explosion")
     },
     {
-        type = 'explosion',
-        name = MOD_NAME..'--acid-cloud-explosion',
-        flags = { 'not-on-map' },
-        animations = AnimationDB.get_layered_animations('projectiles','acid_cloud','explosion')
+        type = "explosion",
+        name = MOD_NAME.."--acid-cloud-explosion",
+        flags = { "not-on-map" },
+        animations = AnimationDB.get_layered_animations("projectiles","acid_cloud","explosion")
     },
     {
-        type = 'explosion',
-        name = MOD_NAME..'--devourer-cloud-explosion',
-        flags = { 'not-on-map' },
-        animations = AnimationDB.get_layered_animations('projectiles','devourer','explosion')
+        type = "explosion",
+        name = MOD_NAME.."--devourer-cloud-explosion",
+        flags = { "not-on-map" },
+        animations = AnimationDB.get_layered_animations("projectiles","devourer","explosion")
     },
     {
-        type = 'explosion',
-        name = MOD_NAME..'--scourge-explosion',
-        flags = { 'not-on-map' },
-        animations = AnimationDB.get_layered_animations('projectiles','scourge_explosion','explosion')
+        type = "explosion",
+        name = MOD_NAME.."--scourge-explosion",
+        flags = { "not-on-map" },
+        animations = AnimationDB.get_layered_animations("projectiles","scourge_explosion","explosion")
     }
 })
 
-print('--graphic debug--')
-print(serpent.block(data.raw.explosion['erm_zerg--colony-explosion'].animations))
+print("--graphic debug--")
+print(serpent.block(data.raw.explosion["erm_zerg--colony-explosion"].animations))
