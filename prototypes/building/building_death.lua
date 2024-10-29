@@ -77,15 +77,15 @@ data:extend({
         animation = AnimationDB.get_layered_animations('death', 'small_building', 'explosion')
     },
     {
-        type = "explosion",
-        name = MOD_NAME.."--building-explosion-small",
-        icon = "__erm_zerg__/graphics/entity/icons/buildings/advisor.png",
+        type = 'explosion',
+        name = MOD_NAME..'--building-explosion-small',
+        icon = '__erm_zerg__/graphics/entity/icons/buildings/advisor.png',
         icon_size = 64,
         subgroup = 'explosions',
-        flags = { "not-on-map" },
+        flags = { 'not-on-map' },
         hidden = true,
-        order = "zerg-explosions",
-        render_layer = "explosion",
+        order = 'zerg-explosions',
+        render_layer = 'explosion',
         animations = AnimationDB.get_layered_animations('death', 'small_building', 'explosion')
     },
 });

@@ -112,7 +112,11 @@ function ErmZerg.make_queen_nest(level)
             -- distance_factor used to be 1, but Twinsen says:
             -- 'The number or spitter spwners should be roughly equal to the number of biter spawners(regardless of difficulty).'
             -- (2018-12-07)
-           autoplace = enemy_autoplace.enemy_spawner_autoplace('enemy_autoplace_base(0, 20009)', FORCE_NAME),
+            autoplace = enemy_autoplace.enemy_spawner_autoplace({
+                probability_expression = 'erm_zerg_autoplace_base(0, 1000009)',
+                force = FORCE_NAME,
+                control = AUTOCONTROL_NAME
+            }),
             call_for_help_radius = 50,
             spawn_decorations_on_expansion = true,
             spawn_decoration =  CreepFunction.getSpawnerCreep(),

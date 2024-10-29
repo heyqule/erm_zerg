@@ -4,6 +4,7 @@ require('__erm_zerg__/global')
 
 local ErmConfig = require('__enemyracemanager__/lib/global_config')
 
+require 'prototypes.noise-function'
 ---
 --- This is REQUIRED to register the mod as an ERM race mod.
 --- There are further data processing in data-updates and data-final-fixes.
