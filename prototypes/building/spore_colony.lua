@@ -103,7 +103,7 @@ function ErmZerg.make_spore_colony(level)
             folded_animation = folded_animation(),
             graphics_set = {},
             working_sound = ZergSound.spore_idle(0.75),
-            autoplace = enemy_autoplace.enemy_worm_autoplace("enemy_autoplace_base(2, 3)", FORCE_NAME),
+            autoplace = enemy_autoplace.enemy_worm_autoplace("enemy_autoplace_base(2, 20013)", FORCE_NAME),
             attack_from_start_frame = true,
             prepare_range = attack_range,
             allow_turning_when_starting_attack = true,

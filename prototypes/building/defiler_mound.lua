@@ -110,7 +110,8 @@ function ErmZerg.make_defiler_mound(level)
             -- distance_factor used to be 1, but Twinsen says:
             -- 'The number or spitter spwners should be roughly equal to the number of biter spawners(regardless of difficulty).'
             -- (2018-12-07)
-           autoplace = enemy_autoplace.enemy_spawner_autoplace('enemy_autoplace_base(0, 6)', FORCE_NAME),
+            -- Seed number MUST be unique for each autoplace.  Otherwise one will overide another, zerg 2xxxxx, protoss 3xxxxx
+           autoplace = enemy_autoplace.enemy_spawner_autoplace('enemy_autoplace_base(0, 20001)', FORCE_NAME),
             call_for_help_radius = 50,
             spawn_decorations_on_expansion = true,
             spawn_decoration =  CreepFunction.getSpawnerCreep(),

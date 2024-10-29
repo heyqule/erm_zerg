@@ -139,7 +139,7 @@ function ErmZerg.make_infested_cmd(level)
             -- distance_factor used to be 1, but Twinsen says:
             -- 'The number or spitter spwners should be roughly equal to the number of biter spawners(regardless of difficulty).'
             -- (2018-12-07)
-           autoplace = enemy_autoplace.enemy_spawner_autoplace('enemy_autoplace_base(0, 6)', FORCE_NAME),
+           autoplace = enemy_autoplace.enemy_spawner_autoplace('enemy_autoplace_base(0, 20006)', FORCE_NAME),
             call_for_help_radius = 50,
             -- Remove the following if you don't want creep under your base.
             spawn_decorations_on_expansion = true,
