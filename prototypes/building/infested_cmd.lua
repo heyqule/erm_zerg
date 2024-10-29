@@ -20,7 +20,7 @@ local ZergSound = require('__erm_zerg__/prototypes/sound')
 -- This is a custom autoplace that accept custom forces. search 'autoplace ='
 local CreepFunction = require('__erm_zerg__/prototypes/creep_function')
 local AnimationDB = require('__erm_zerg_hd_assets__/animation_db')
-local enemy_autoplace = require ('__base__/prototypes/entity/enemy-autoplace-utils')
+local enemy_autoplace = require ('__enemyracemanager__/prototypes/enemy-autoplace')
 local name = 'infested_cmd'
 
 -- Hitpoints
@@ -139,7 +139,7 @@ function ErmZerg.make_infested_cmd(level)
             -- distance_factor used to be 1, but Twinsen says:
             -- 'The number or spitter spwners should be roughly equal to the number of biter spawners(regardless of difficulty).'
             -- (2018-12-07)
-           autoplace = enemy_autoplace.enemy_spawner_autoplace('enemy_autoplace_base(0, 6)'),
+           autoplace = enemy_autoplace.enemy_spawner_autoplace('enemy_autoplace_base(0, 6)', FORCE_NAME),
             call_for_help_radius = 50,
             -- Remove the following if you don't want creep under your base.
             spawn_decorations_on_expansion = true,

@@ -15,7 +15,7 @@ local ZergSound = require('__erm_zerg__/prototypes/sound')
 -- This is a custom autoplace that accept custom forces. search 'autoplace ='
 local CreepFunction = require('__erm_zerg__/prototypes/creep_function')
 local AnimationDB = require('__erm_zerg_hd_assets__/animation_db')
-local enemy_autoplace = require ('__base__/prototypes/entity/enemy-autoplace-utils')
+local enemy_autoplace = require ('__enemyracemanager__/prototypes/enemy-autoplace')
 local name = 'overmind'
 
 -- Hitpoints

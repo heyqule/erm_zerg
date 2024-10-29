@@ -12,7 +12,7 @@ local ERM_Config = require('__enemyracemanager__/lib/global_config')
 local ZergSound = require('__erm_zerg__/prototypes/sound')
 local AnimationDB = require('__erm_zerg_hd_assets__/animation_db')
 
-local enemy_autoplace = require ('__base__/prototypes/entity/enemy-autoplace-utils')
+local enemy_autoplace = require ('__enemyracemanager__/prototypes/enemy-autoplace')
 local name = 'spore_colony'
 local shortrange_name = 'spore_colony_shortrange'
 
@@ -103,7 +103,7 @@ function ErmZerg.make_spore_colony(level)
             folded_animation = folded_animation(),
             graphics_set = {},
             working_sound = ZergSound.spore_idle(0.75),
-            autoplace = enemy_autoplace.enemy_worm_autoplace("enemy_autoplace_base(2, 3)"),
+            autoplace = enemy_autoplace.enemy_worm_autoplace("enemy_autoplace_base(2, 3)", FORCE_NAME),
             attack_from_start_frame = true,
             prepare_range = attack_range,
             allow_turning_when_starting_attack = true,

@@ -15,7 +15,7 @@ local ZergSound = require('__erm_zerg__/prototypes/sound')
 local AnimationDB = require('__erm_zerg_hd_assets__/animation_db')
 
 
-local enemy_autoplace = require ('__base__/prototypes/entity/enemy-autoplace-utils')
+local enemy_autoplace = require ('__enemyracemanager__/prototypes/enemy-autoplace')
 local name = 'sunken_colony'
 local short_range_name = 'sunken_colony_shortrange'
 -- Hitpoints
@@ -111,7 +111,7 @@ function ErmZerg.make_sunken_colony(level)
             starting_attack_animation = attack_animation(),
             starting_attack_speed = 0.02,
             starting_attack_sound = ZergSound.sunken_attack(0.75),
-            autoplace = enemy_autoplace.enemy_spawner_autoplace('enemy_autoplace_base(0, 6)'),
+            autoplace = enemy_autoplace.enemy_worm_autoplace("enemy_autoplace_base(2, 3)", FORCE_NAME),
             attack_from_start_frame = true,
             prepare_range = attack_range,
             allow_turning_when_starting_attack = true,

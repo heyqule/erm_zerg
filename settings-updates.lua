@@ -8,24 +8,6 @@ table.insert(data.raw['string-setting']['enemyracemanager-4way-top-right'].allow
 table.insert(data.raw['string-setting']['enemyracemanager-4way-bottom-right'].allowed_values, MOD_NAME)
 table.insert(data.raw['string-setting']['enemyracemanager-4way-bottom-left'].allowed_values, MOD_NAME)
 
-table.insert(data.raw['string-setting']['enemyracemanager-menu-replacement-race'].allowed_values, MOD_NAME)
-data.raw['string-setting']['enemyracemanager-menu-replacement-race'].default_value = MOD_NAME
-
-
-if mods['Krastorio2'] then
-    data:extend {
-        {
-            type = 'bool-setting',
-            name = 'erm_zerg-k2-creep',
-            description = 'erm_zerg-k2-creep',
-            setting_type = 'startup',
-            default_value = true,
-            order = 'erm_zerg-120',
-        },
-    }
-end
-
-
 data:extend {
     {
         type = 'bool-setting',
