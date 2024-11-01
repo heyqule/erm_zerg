@@ -10,6 +10,7 @@ MOD_NAME = "erm_zerg"
 -- Must be prefix with "enemy_"
 FORCE_NAME = "enemy_erm_zerg"
 
+-- Must be in the format of {MOD_NAME}_enemy_base
 AUTOCONTROL_NAME = "erm_zerg_enemy_base"
 
 DEBUG_MODE = false
