@@ -186,6 +186,14 @@ Event.register(defines.events.on_script_trigger_effect, function(event)
     end
 end)
 
+
+Event.register(defines.events.on_segment_entity_created, function(event)
+    -- Change demolish to zerg force, hmm.. doesn't look realistic when building survives
+    --event.entity.force = FORCE_NAME
+
+    -- @TODO track them Demolishers.  If they get attacked, they shits zergs
+end)
+
 ---- Clear time to live unit every 15s.
 Event.on_nth_tick(907, function(event)
     CustomAttacks.clear_time_to_live_units(event)

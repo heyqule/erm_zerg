@@ -16,7 +16,7 @@ local AnimationDB = require("__erm_zerg_hd_assets__/animation_db")
 local name = "infested"
 
 local hitpoint = 60
-local max_hitpoint_multiplier = settings.startup["enemyracemanager-max-hitpoint-multipliers"].value * 3
+local max_hitpoint_multiplier = settings.startup["enemyracemanager-max-hitpoint-multipliers"].value
 
 
 -- Handles acid and poison resistance
@@ -74,7 +74,7 @@ function ErmZerg.make_infested(level)
             icon_size = 64,
             flags = { "placeable-enemy", "placeable-player", "placeable-off-grid", "breaths-air" },
             has_belt_immunity = false,
-            max_health = ERM_UnitHelper.get_health(hitpoint, hitpoint * max_hitpoint_multiplier,  level),
+            max_health = ERM_UnitHelper.get_health(hitpoint, max_hitpoint_multiplier,  level),
             order = MOD_NAME .. "--"  .. name .. "--" .. level,
             subgroup = "enemies",
             map_color = ERM_UnitHelper.format_map_color(settings.startup["erm_zerg-map-color"].value),
