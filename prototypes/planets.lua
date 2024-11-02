@@ -153,7 +153,6 @@ local planet_catalogue_vulcanus = require("__space-age__.prototypes.planet.proce
             magnitude = 1,
             order = "b[char]",
             subgroup = "planets",
-            hidden_in_factoriopedia = true,
             map_gen_settings = char_mapgen(),
             pollutant_type = nil,
             solar_power_in_space = 500,
