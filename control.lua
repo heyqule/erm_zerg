@@ -6,14 +6,10 @@
 -- To change this template use File | Settings | File Templates.
 --
 
-local Game = require("__stdlib__/stdlib/game")
 
-local ErmConfig = require("__enemyracemanager__/lib/global_config")
-local ErmForceHelper = require("__enemyracemanager__/lib/helper/force_helper")
-local ErmRaceSettingsHelper = require("__enemyracemanager__/lib/helper/race_settings_helper")
 
-local Event = require("__stdlib__/stdlib/event/event")
-local String = require("__stdlib__/stdlib/utils/string")
+local ForceHelper = require("__enemyracemanager__/lib/helper/force_helper")
+
 local CustomAttacks = require("__erm_zerg__/scripts/custom_attacks")
 
 require("__erm_zerg__/global")
@@ -33,12 +29,12 @@ local createRace = function()
     force.friendly_fire = false;
 
     if settings.startup["enemyracemanager-free-for-all"].value then
-        ErmForceHelper.set_friends(game, FORCE_NAME, false)
+        ForceHelper.set_friends(game, FORCE_NAME, false)
     else
-        ErmForceHelper.set_friends(game, FORCE_NAME, true)
+        ForceHelper.set_friends(game, FORCE_NAME, true)
     end
 
-    ErmForceHelper.set_neutral_force(game, FORCE_NAME)
+    ForceHelper.set_neutral_force(game, FORCE_NAME)
 end
 
 ---
@@ -135,15 +131,15 @@ local addRaceSettings = function()
     CustomAttacks.get_race_settings(MOD_NAME, true)
 end
 
-Event.on_init(function(event)
+script.on_init(function(event)
     createRace()
     addRaceSettings()
 end)
 
-Event.on_load(function(event)
+script.on_load(function(event)
 end)
 
-Event.on_configuration_changed(function(event)
+script.on_configuration_changed(function(event)
     createRace()
     addRaceSettings()
 end)
@@ -177,7 +173,7 @@ local attack_functions = {
         CustomAttacks.process_batch_units(args)
     end
 }
-Event.register(defines.events.on_script_trigger_effect, function(event)
+script.on_event(defines.events.on_script_trigger_effect, function(event)
     if  attack_functions[event.effect_id] and
         CustomAttacks.valid(event, MOD_NAME)
     then
@@ -186,7 +182,7 @@ Event.register(defines.events.on_script_trigger_effect, function(event)
 end)
 
 
-Event.register(defines.events.on_segment_entity_created, function(event)
+script.on_event(defines.events.on_segment_entity_created, function(event)
     -- Change demolish to zerg force, hmm.. doesn't look realistic when building survives
     --event.entity.force = FORCE_NAME
 
@@ -194,20 +190,20 @@ Event.register(defines.events.on_segment_entity_created, function(event)
 end)
 
 ---- Clear time to live unit every 15s.
-Event.on_nth_tick(907, function(event)
+script.on_nth_tick(907, function(event)
     CustomAttacks.clear_time_to_live_units(event)
 end)
 
 ---
 --- Register required remote interfaces
 ---
-local ErmBossAttack = require("scripts/boss_attacks")
+local BossAttack = require("scripts/boss_attacks")
 ---
 --- Register boss attacks
 --- Interface Name: {race_name}_boss_attacks
 ---
 remote.add_interface("erm_zerg_boss_attacks", {
-    get_attack_data = ErmBossAttack.get_attack_data,
+    get_attack_data = BossAttack.get_attack_data,
 })
 
 ---

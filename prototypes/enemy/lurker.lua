@@ -6,7 +6,7 @@
 -- To change this template use File | Settings | File Templates.
 --
 
-require("__stdlib__/stdlib/utils/defines/time")
+
 
 local ERM_UnitHelper = require("__enemyracemanager__/lib/rig/unit_helper")
 local ERM_UnitTint = require("__enemyracemanager__/lib/rig/unit_tint")
@@ -164,7 +164,7 @@ function ErmZerg.make_lurker(level)
             selection_box = selection_box,
             selectable_in_game = false,
             dying_speed = 0.04,
-            time_before_removed = defines.time.minute * settings.startup["enemyracemanager-enemy-corpse-time"].value,
+            time_before_removed = minute * settings.startup["enemyracemanager-enemy-corpse-time"].value,
             subgroup = "corpses",
             order = MOD_NAME .. "--" .. name .. level,
             final_render_layer = "corpse",

@@ -3,7 +3,7 @@
 --- Created by heyqule.
 --- DateTime: 12/23/2020 11:29 PM
 ---
-require("__stdlib__/stdlib/utils/defines/time")
+
 
 local ERM_UnitHelper = require("__enemyracemanager__/lib/rig/unit_helper")
 local ERM_UnitTint = require("__enemyracemanager__/lib/rig/unit_tint")

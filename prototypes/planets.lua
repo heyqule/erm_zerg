@@ -268,7 +268,7 @@ local planet_catalogue_vulcanus = require("__space-age__.prototypes.planet.proce
             name = "planet-discovery-char",
             icons = util.technology_icon_constant_planet("__space-age__/graphics/technology/vulcanus.png"),
             icon_size = 256,
-            essential = true,
+            essential = false,
             effects =
             {
                 {

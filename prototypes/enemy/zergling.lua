@@ -5,7 +5,7 @@
 -- Time: 9:39 PM
 -- To change this template use File | Settings | File Templates.
 --
-require("__stdlib__/stdlib/utils/defines/time")
+
 
 local ERM_UnitHelper = require("__enemyracemanager__/lib/rig/unit_helper")
 local ERM_UnitTint = require("__enemyracemanager__/lib/rig/unit_tint")

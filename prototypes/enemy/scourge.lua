@@ -11,7 +11,7 @@
 -- Time: 9:39 PM
 -- To change this template use File | Settings | File Templates.
 --
-require("__stdlib__/stdlib/utils/defines/time")
+
 
 
 local ERM_UnitHelper = require("__enemyracemanager__/lib/rig/unit_helper")
@@ -87,7 +87,7 @@ function ErmZerg.make_scourge(level)
             subgroup = "erm-flying-enemies",
             map_color = ERM_UnitHelper.format_map_color(settings.startup["erm_zerg-map-color"].value),
             shooting_cursor_size = 2,
-            min_pursue_time = 120 * defines.time.second,
+            min_pursue_time = 120 * second,
             resistances = {
                 { type = "acid", percent = ERM_UnitHelper.get_resistance(base_acid_resistance, incremental_acid_resistance,  level) },
                 { type = "poison", percent = ERM_UnitHelper.get_resistance(base_acid_resistance, incremental_acid_resistance,  level) },
@@ -196,7 +196,7 @@ function ErmZerg.make_scourge(level)
             selection_box = selection_box,
             selectable_in_game = false,
             dying_speed = 0.04,
-            time_before_removed = defines.time.second,
+            time_before_removed = second,
             subgroup = "corpses",
             order = MOD_NAME .. "--" .. name .. level,
             animation = util.empty_sprite(),

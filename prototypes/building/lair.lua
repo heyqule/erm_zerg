@@ -4,7 +4,7 @@
 --- DateTime: 12/21/2020 4:42 PM
 ---
 
-require("__stdlib__/stdlib/utils/defines/time")
+
 
 local ERM_UnitHelper = require("__enemyracemanager__/lib/rig/unit_helper")
 local ERM_UnitTint = require("__enemyracemanager__/lib/rig/unit_tint")
