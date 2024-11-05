@@ -16,7 +16,7 @@ local AnimationDB = require("__erm_zerg_hd_assets__/animation_db")
 local name = "infested"
 
 local hitpoint = 60
-local max_hitpoint_multiplier = settings.startup["enemyracemanager-max-hitpoint-multipliers"].value
+local max_hitpoint_multiplier = settings.startup["enemyracemanager-max-hitpoint-multipliers"].value * 3
 
 
 -- Handles acid and poison resistance

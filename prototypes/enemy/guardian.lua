@@ -21,7 +21,7 @@ local name = "guardian"
 -- Hitpoints
 
 local hitpoint = 150
-local max_hitpoint_multiplier = settings.startup["enemyracemanager-max-hitpoint-multipliers"].value
+local max_hitpoint_multiplier = settings.startup["enemyracemanager-max-hitpoint-multipliers"].value * 1.35
 
 
 -- Handles acid and poison resistance

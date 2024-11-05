@@ -17,7 +17,7 @@ local name = "zergling"
 
 
 local hitpoint = 35
-local max_hitpoint_multiplier = settings.startup["enemyracemanager-max-hitpoint-multipliers"].value
+local max_hitpoint_multiplier = settings.startup["enemyracemanager-max-hitpoint-multipliers"].value * 3.5
 
 
 -- Handles acid and poison resistance

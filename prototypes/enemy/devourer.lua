@@ -21,7 +21,7 @@ local name = "devourer"
 -- Hitpoints
 
 local hitpoint = 250
-local max_hitpoint_multiplier = settings.startup["enemyracemanager-max-hitpoint-multipliers"].value
+local max_hitpoint_multiplier = settings.startup["enemyracemanager-max-hitpoint-multipliers"].value * 1.15
 
 
 -- Handles acid and poison resistance

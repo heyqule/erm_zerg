@@ -17,7 +17,7 @@ local name = "broodling"
 
 
 local hitpoint = 30
-local max_hitpoint_multiplier = settings.startup["enemyracemanager-max-hitpoint-multipliers"].value
+local max_hitpoint_multiplier = settings.startup["enemyracemanager-max-hitpoint-multipliers"].value * 3
 
 
 -- Handles acid and poison resistance

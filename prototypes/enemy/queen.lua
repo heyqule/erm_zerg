@@ -19,7 +19,7 @@ local name = "queen"
 
 
 local hitpoint = 120
-local max_hitpoint_multiplier = settings.startup["enemyracemanager-max-hitpoint-multipliers"].value
+local max_hitpoint_multiplier = settings.startup["enemyracemanager-max-hitpoint-multipliers"].value * 1.75
 
 
 -- Handles acid and poison resistance
