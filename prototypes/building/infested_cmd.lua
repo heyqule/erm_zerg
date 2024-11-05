@@ -30,20 +30,20 @@ local max_hitpoint_multiplier = settings.startup["enemyracemanager-max-hitpoint-
 
 
 -- Handles acid and poison resistance
-local base_acid_resistance = 25
-local incremental_acid_resistance = 55
+local base_acid_resistance = 20
+local incremental_acid_resistance = 20
 -- Handles physical resistance
 local base_physical_resistance = 0
-local incremental_physical_resistance = 85
+local incremental_physical_resistance = 45
 -- Handles fire and explosive resistance
 local base_fire_resistance = 10
-local incremental_fire_resistance = 70
+local incremental_fire_resistance = 30
 -- Handles laser and electric resistance
 local base_electric_resistance = 0
-local incremental_electric_resistance = 75
+local incremental_electric_resistance = 35
 -- Handles cold resistance
 local base_cold_resistance = 0
-local incremental_cold_resistance = 75
+local incremental_cold_resistance = 40
 
 -- Animation Settings
 local unit_scale = 1.5
