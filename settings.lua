@@ -56,4 +56,12 @@ data:extend {
         default_value = true,
         order = "erm_zerg-115",
     },
+    {
+        type = "bool-setting",
+        name = "erm_zerg-on_vulcanus",
+        description = "erm_zerg-on_vulcanus",
+        setting_type = "startup",
+        default_value = true,
+        order = "erm_zerg-200",
+    },
 }
