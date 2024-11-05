@@ -168,6 +168,3 @@ data:extend({
         animations = AnimationDB.get_layered_animations("projectiles","scourge_explosion","explosion")
     }
 })
-
-print("--graphic debug--")
-print(serpent.block(data.raw.explosion["erm_zerg--colony-explosion"].animations))
