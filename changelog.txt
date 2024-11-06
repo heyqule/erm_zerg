@@ -6,7 +6,8 @@ Date: ??-??-??
     - Update for Factorio 2.0
     - Default to HD graphic and removed the classic graphics.
     - Replaced leveling system with quality system to determine enemy stats.
-    - [space-age] Added planet Char.  Legendary units spawn in there.  You may encounter boss(alpha) as well.
+    - [space-age] Added planet Char.  Only legendary units spawn on there.
+    - [space-age] Zerg hides in asteroid in connections to Char.  You'll encounter Epic / Legendary units.
     - [space-age] Demolishers join zerg as an active nydus worm.
     - [space-age] Zerg sparsely spawns on Vulcanus.  They evolve differently there as you don't pollute on Vulcanus.
 
