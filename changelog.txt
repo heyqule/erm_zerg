@@ -8,10 +8,11 @@ Date: ??-??-??
     - Replaced leveling system with quality system to determine enemy stats.
     - [space-age] Added planet Char.  Legendary units spawn in there.  You may encounter boss(alpha) as well.
     - [space-age] Demolishers join zerg as an active nydus worm.
-    - [space-age] Zerg sparsely spawns on Vulcanus.  They evolve differently there as you don't pollute on vulcanus.
+    - [space-age] Zerg sparsely spawns on Vulcanus.  They evolve differently there as you don't pollute on Vulcanus.
 
   Changes:
     - Sound adjustments to make them sound less busy.
+    - Health adjustments, slightly higher than before on higher tiers.
 
 ---------------------------------------------------------------------------------------------------
 Version: 1.23.1
