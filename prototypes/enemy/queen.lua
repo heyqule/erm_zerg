@@ -76,7 +76,7 @@ function ErmZerg.make_queen(level)
             max_health = ERM_UnitHelper.get_health(hitpoint, max_hitpoint_multiplier,  level),
             order = MOD_NAME .. "--"  .. name .. "--" .. level,
             subgroup = "erm-flying-enemies",
-            map_color = ERM_UnitHelper.format_map_color(settings.startup["erm_zerg-map-color"].value),
+            map_color = ERM_UnitHelper.format_map_color(settings.startup["enemy_erm_zerg-map-color"].value),
             shooting_cursor_size = 2,
             resistances = {
                 { type = "acid", percent = ERM_UnitHelper.get_resistance(base_acid_resistance, incremental_acid_resistance,  level) },

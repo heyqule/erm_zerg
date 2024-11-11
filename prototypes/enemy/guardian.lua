@@ -80,7 +80,7 @@ function ErmZerg.make_guardian(level)
             max_health = ERM_UnitHelper.get_health(hitpoint, max_hitpoint_multiplier,  level),
             order = MOD_NAME .. "--"  .. name .. "--" .. level,
             subgroup = "erm-flying-enemies",
-            map_color = ERM_UnitHelper.format_map_color(settings.startup["erm_zerg-map-color"].value),
+            map_color = ERM_UnitHelper.format_map_color(settings.startup["enemy_erm_zerg-map-color"].value),
             shooting_cursor_size = 2,
             spawning_time_modifier = 2,
             resistances = {

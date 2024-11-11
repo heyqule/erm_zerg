@@ -19,10 +19,10 @@ function RemoteAPI.milestones_preset_addons()
             required_mods = {"erm_zerg"},
             milestones = {
                 {type="group", name="Kills"},
-                {type="kill", name="erm_zerg--hive--5",  quantity=1},
-                {type="kill", name="erm_zerg--hive--10",  quantity=1},
-                {type="kill", name="erm_zerg--hive--15",  quantity=1},
-                {type="kill", name="erm_zerg--hive--20",  quantity=1, next="x10"},
+                {type="kill", name="enemy_erm_zerg--hive--5",  quantity=1},
+                {type="kill", name="enemy_erm_zerg--hive--10",  quantity=1},
+                {type="kill", name="enemy_erm_zerg--hive--15",  quantity=1},
+                {type="kill", name="enemy_erm_zerg--hive--20",  quantity=1, next="x10"},
             }
         },
     }
@@ -31,11 +31,11 @@ function RemoteAPI.milestones_preset_addons()
     --    required_mods = {"erm_zerg"},
     --    milestones = {
     --        {type="group", name="ERM Boss Kills"},
-    --        {type="kill", name="erm_zerg--overmind--"..boss_level[1],  quantity=1},
-    --        {type="kill", name="erm_zerg--overmind--"..boss_level[2],  quantity=1},
-    --        {type="kill", name="erm_zerg--overmind--"..boss_level[3],  quantity=1},
-    --        {type="kill", name="erm_zerg--overmind--"..boss_level[4],  quantity=1},
-    --        {type="kill", name="erm_zerg--overmind--"..boss_level[5],  quantity=1},
+    --        {type="kill", name="enemy_erm_zerg--overmind--"..boss_level[1],  quantity=1},
+    --        {type="kill", name="enemy_erm_zerg--overmind--"..boss_level[2],  quantity=1},
+    --        {type="kill", name="enemy_erm_zerg--overmind--"..boss_level[3],  quantity=1},
+    --        {type="kill", name="enemy_erm_zerg--overmind--"..boss_level[4],  quantity=1},
+    --        {type="kill", name="enemy_erm_zerg--overmind--"..boss_level[5],  quantity=1},
     --    }
     --}
 
@@ -53,7 +53,7 @@ end
 --- This is REQUIRED to register ERM mods for control stage.
 ---
 function RemoteAPI.register_new_enemy_race()
-    return true
+    return MOD_NAME
 end
 
 --- Refresh custom attack race setting cache

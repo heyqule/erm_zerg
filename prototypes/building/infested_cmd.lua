@@ -104,7 +104,7 @@ function ErmZerg.make_infested_cmd(level)
             max_health = ERM_UnitHelper.get_building_health(hitpoint, max_hitpoint_multiplier,  level),
             order = MOD_NAME .. "--" .. name .. "--".. level,
             subgroup = "enemies",
-            map_color = ERM_UnitHelper.format_map_color(settings.startup["erm_zerg-map-color"].value),
+            map_color = ERM_UnitHelper.format_map_color(settings.startup["enemy_erm_zerg-map-color"].value),
             working_sound = ZergSound.building_working_sound(name, 0.75),
             dying_sound = ZergSound.cmd_building_dying_sound(0.75),
             resistances = {
