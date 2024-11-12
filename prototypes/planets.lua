@@ -152,7 +152,8 @@ local astreroid_data = {
         mutalisk = { [4] = 0.25, [5] = 0.05},
     },
     [carbonic_name] = {
-        overlord = { [4] = 0.1},
+        mutalisk = { [4] = 0.2},
+        overlord = { [4] = 0.05},
     },
     [oxide_name] = {
         guardian = { [4] = 0.05, [5] = 0.005},
