@@ -25,37 +25,6 @@ table.insert(data.erm_spawn_specs, {
     temperature=3, --1,2,3 (1 cold, 2. normal, 3 hot)
 })
 
----
---- This set of data replace vanilla biters for the menu.  It may interfere with other mods that use vanilla biter.
----
-data.erm_menu_replacement = data.erm_menu_replacement or {}
-data.erm_menu_replacement[MOD_NAME] = {
-    race = MOD_NAME,
-    level = 3,
-    ["unit"] = {
-        ["small-biter"] = "zergling",
-        ["small-spitter"] = "mutalisk",
-        ["medium-biter"] = "hydralisk",
-        ["medium-spitter"] = "ultralisk",
-        ["big-biter"] = "hydralisk",
-        ["big-spitter"] = "devourer",
-        ["behemoth-biter"] = "ultralisk",
-        ["behemoth-spitter"] = "devourer",
-    },
-    ["turret"] = {
-        ["small-worm-turret"] = "sunken_colony",
-        ["medium-worm-turret"] = "sunken_colony",
-        ["big-worm-turret"] = "sunken_colony",
-        ["behemoth-worm-turret"] = "sunken_colony",
-    },
-    ["turret-scale"] = 0.8,
-    ["unit-spawner"] = {
-        ["biter-spawner"] = "hive",
-        ["spitter-spawner"] = "spawning_pool",
-    },
-    ["unit-spawner-scale"] = 0.8
-}
-
 require "prototypes/projectiles"
 require "prototypes/boss-projectiles"
 
