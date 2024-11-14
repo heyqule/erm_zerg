@@ -149,15 +149,16 @@ local new_asteroids = {
 
 local astreroid_data = {
     [metallic_name] = {
-        mutalisk = { [4] = 0.25, [5] = 0.05},
+        mutalisk = { [4] = 0.35, [5] = 0.1},
+        devourer = { [4] = 0.2, [5] = 0.05},
     },
     [carbonic_name] = {
-        mutalisk = { [4] = 0.2},
-        overlord = { [4] = 0.05},
+        mutalisk = { [4] = 0.35, [5] = 0.1},
+        overlord = { [4] = 0.1},
     },
     [oxide_name] = {
-        guardian = { [4] = 0.05, [5] = 0.005},
-        devourer = { [4] = 0.1, [5] = 0.01},
+        guardian = { [4] = 0.1, [5] = 0.02},
+        devourer = { [4] = 0.2, [5] = 0.05},
     }
 }
 for key, a_data in pairs(astreroid_data) do
@@ -443,7 +444,7 @@ data:extend({
         from = "nauvis",
         to = "char",
         order = "nauvis-char",
-        length = 30000,
+        length = 22500,
         asteroid_spawn_definitions = char_space_connection_asteroid_spawn_definition
     },
     {
@@ -483,5 +484,3 @@ data:extend({
         }
     },
 })
-
-print(data.raw['planet']['char'])
