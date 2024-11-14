@@ -301,6 +301,48 @@ local char_space_connection_asteroid_spawn_definition = {
     }
 }
 
+local char_space_asteroid_spawn_definition = {
+    {
+        asteroid = "metallic-asteroid-chunk",
+        angle_when_stopped = 1,
+        probability = 0.0025,
+        speed = 0.016666666666666665,
+        type = "asteroid-chunk"
+    },
+    {
+        asteroid = "carbonic-asteroid-chunk",
+        angle_when_stopped = 1,
+        probability = 0.001875,
+        speed = 0.016666666666666665,
+        type = "asteroid-chunk"
+    },
+    {
+        asteroid = "oxide-asteroid-chunk",
+        angle_when_stopped = 1,
+        probability = 0.000625,
+        speed = 0.016666666666666665,
+        type = "asteroid-chunk"
+    },
+    {
+        asteroid = metallic_name,
+        angle_when_stopped = 0.6,
+        probability = 0.0025,
+        speed = 0.016666666666666665,
+    },
+    {
+        asteroid = carbonic_name,
+        angle_when_stopped = 0.6,
+        probability = 0.001875,
+        speed = 0.016666666666666665
+    },
+    {
+        asteroid = oxide_name,
+        angle_when_stopped = 0.6,
+        probability = 0.000625,
+        speed = 0.016666666666666665
+    }
+}
+
 data:extend({
     --- Planet
     {
@@ -335,7 +377,7 @@ data:extend({
             gravity = 40
         },
         asteroid_spawn_influence = 1,
-        asteroid_spawn_definitions = asteroid_util.spawn_definitions(asteroid_util.nauvis_vulcanus, 0.9),
+        asteroid_spawn_definitions = char_space_asteroid_spawn_definition,
         persistent_ambient_sounds = {
             base_ambience = { filename = "__space-age__/sound/wind/base-wind-vulcanus.ogg", volume = 0.8 },
             wind = { filename = "__space-age__/sound/wind/wind-vulcanus.ogg", volume = 0.8 },

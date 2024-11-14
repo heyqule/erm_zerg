@@ -8,7 +8,7 @@ data:extend{
     {
         type = "autoplace-control",
         name = AUTOCONTROL_NAME,
-        order = "erm_zerg_enemy-base",
+        order = AUTOCONTROL_NAME,
         category = "enemy",
         can_be_disabled = false
     },
