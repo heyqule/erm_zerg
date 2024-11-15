@@ -15,6 +15,7 @@ local CustomAttacks = require("__erm_zerg__/scripts/custom_attacks")
 require("__erm_zerg__/global")
 -- Constants
 
+local using_demolisher_nydus_worm = settings.startup['enemy_erm_zerg-demolisher_nydus_worm'].value
 ---
 --- Enemy Force initialization.
 ---
@@ -26,7 +27,7 @@ local createRace = function()
 
     force.ai_controllable = true;
     force.disable_research()
-    force.friendly_fire = false;
+    force.friendly_fire = true;
 
     if settings.startup["enemyracemanager-free-for-all"].value then
         ForceHelper.set_friends(game, FORCE_NAME, false)
@@ -35,6 +36,9 @@ local createRace = function()
     end
 
     ForceHelper.set_neutral_force(game, FORCE_NAME)
+
+    --- store units created by demolisher for additional evil processing. :)
+    storage.demolisher_units = {}
 end
 
 ---
@@ -180,17 +184,54 @@ script.on_event(defines.events.on_script_trigger_effect, function(event)
     end
 end)
 
+local is_demolisher = {
+    ['small-demolisher'] =  true,
+    ['medium-demolisher'] =  true,
+    ['big-demolisher'] =  true,
+}
+
+local on_trigger_created_entity_handlers = {
+    ["segmented-unit"] = function(entity, source)
+        if is_demolisher[source.name] then
+            entity.force = FORCE_NAME
+            table.insert(storage.demolisher_units, {
+                entity = entity,
+                tick = game.tick
+            })
+        end
+
+        if entity.commandable and CustomAttacks.can_spawn(30) then
+            entity.commandable.set_command({
+                type =  defines.command.go_to_location,
+                distraction = defines.distraction.by_anything,
+                destination = {0, 0},
+            })
+        end
+    end
+}
+
+script.on_event(defines.events.on_trigger_created_entity, function(event)
+    local entity = event.entity
+    local source = event.source
+    if on_trigger_created_entity_handlers[source.type] and entity.valid then
+        on_trigger_created_entity_handlers[source.type](entity, source)
+    end
+end)
+
 
 script.on_event(defines.events.on_segment_entity_created, function(event)
-    -- Change demolish to zerg force, hmm.. doesn't look realistic when building survives
-    --event.entity.force = FORCE_NAME
-
-    -- @TODO track them Demolishers.  If they get attacked, they shits zergs
+    if is_demolisher[event.entity.name] then
+        event.entity.force = FORCE_NAME
+    end
 end)
 
 ---- Clear time to live unit every 15s.
 script.on_nth_tick(907, function(event)
     CustomAttacks.clear_time_to_live_units(event)
+
+    if using_demolisher_nydus_worm then
+        CustomAttacks.demolisher_units_attack()
+    end
 end)
 
 ---

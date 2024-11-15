@@ -61,4 +61,51 @@ function CustomAttacks.process_self_destruct(event)
     end
 end
 
+---
+--- Handles aftermath of demolisher unit attack
+--- Either attack 0,0 or build a base
+---
+function CustomAttacks.demolisher_units_attack()
+    local i = 0
+    local unit_group = {}
+    for key, unit_data in pairs(storage.demolisher_units) do
+        local unit = unit_data.entity
+        if unit.valid and
+           (unit.commandable.has_command == false or unit.commandable.command.type == defines.command.wander)
+        then
+            table.insert(unit_group, unit)
+            storage.demolisher_units[key] = nil
+        elseif unit.valid == false then
+            storage.demolisher_units[key] = nil
+        end
+        i = i + 1
+        if i == 20 then
+            break
+        end
+    end
+
+    local surface_group
+    for _, unit in pairs(unit_group) do
+        if surface_group == nil then
+            surface_group = unit.surface.create_unit_group({position = unit.position, force = unit.force})
+        end
+
+        surface_group.add_member(unit)
+    end
+
+    if surface_group then
+        if CustomAttacks.can_spawn(66) then
+            surface_group.set_command({
+                type =  defines.command.go_to_location,
+                distraction = defines.distraction.by_enemy,
+                --- @TODO look for attackable beacon
+                destination = {0, 0}
+            })
+              
+        else
+            remote.call("enemyracemanager", "build_base_formation", surface_group)
+        end
+    end
+end
+
 return CustomAttacks

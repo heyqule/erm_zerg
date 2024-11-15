@@ -5,6 +5,9 @@
 ---
 require("__erm_zerg__/global")
 
+require "prototypes.update-teamcolour"
+require "prototypes.update-demolisher"
+
 -- Update RTS world
 local mapgen = data.raw["map-gen-presets"]["default"]
 mapgen["erm-rts-death-world"]["basic_settings"]["autoplace_controls"][AUTOCONTROL_NAME] = { frequency = "very-high", size = "very-big" }

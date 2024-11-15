@@ -144,4 +144,3 @@ data.erm_aerial_scout = data.erm_aerial_scout or {}
 data.erm_aerial_scout[MOD_NAME] = "mutalisk"
 
 require "prototypes.planets"
-require "prototypes.update-teamcolour"
