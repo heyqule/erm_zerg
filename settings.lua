@@ -56,20 +56,25 @@ data:extend {
         default_value = true,
         order = "enemy_erm_zerg-115",
     },
-    {
-        type = "bool-setting",
-        name = "enemy_erm_zerg-on_vulcanus",
-        description = "enemy_erm_zerg-on_vulcanus",
-        setting_type = "startup",
-        default_value = true,
-        order = "enemy_erm_zerg-200",
-    },
-    {
-        type = "bool-setting",
-        name = "enemy_erm_zerg-demolisher_nydus_worm",
-        description = "enemy_erm_zerg-demolisher_nydus_worm",
-        setting_type = "startup",
-        default_value = true,
-        order = "enemy_erm_zerg-201",
-    },
 }
+
+if feature_flags.space_travel then
+    data:extend {
+        {
+            type = "bool-setting",
+            name = "enemy_erm_zerg-on_vulcanus",
+            description = "enemy_erm_zerg-on_vulcanus",
+            setting_type = "startup",
+            default_value = true,
+            order = "enemy_erm_zerg-200",
+        },
+        {
+            type = "bool-setting",
+            name = "enemy_erm_zerg-demolisher_nydus_worm",
+            description = "enemy_erm_zerg-demolisher_nydus_worm",
+            setting_type = "startup",
+            default_value = true,
+            order = "enemy_erm_zerg-201",
+        },
+    }
+end

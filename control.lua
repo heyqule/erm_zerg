@@ -15,7 +15,7 @@ local CustomAttacks = require("__erm_zerg__/scripts/custom_attacks")
 require("__erm_zerg__/global")
 -- Constants
 
-local using_demolisher_nydus_worm = settings.startup['enemy_erm_zerg-demolisher_nydus_worm'].value
+local using_demolisher_nydus_worm = script.feature_flags.space_travel and settings.startup['enemy_erm_zerg-demolisher_nydus_worm'].value
 ---
 --- Enemy Force initialization.
 ---
@@ -38,7 +38,7 @@ local createRace = function()
     ForceHelper.set_neutral_force(game, FORCE_NAME)
 
     --- store units created by demolisher for additional evil processing. :)
-    storage.demolisher_units = {}
+    storage.demolisher_units = storage.demolisher_units or {}
 end
 
 ---
@@ -184,7 +184,7 @@ script.on_event(defines.events.on_script_trigger_effect, function(event)
     end
 end)
 
-local is_demolisher = {
+local is_compatible_demolisher = {
     ['small-demolisher'] =  true,
     ['medium-demolisher'] =  true,
     ['big-demolisher'] =  true,
@@ -192,18 +192,24 @@ local is_demolisher = {
 
 local on_trigger_created_entity_handlers = {
     ["segmented-unit"] = function(entity, source)
-        if is_demolisher[source.name] then
+        if is_compatible_demolisher[source.name] then
             entity.force = FORCE_NAME
-            table.insert(storage.demolisher_units, {
+            local surface_name = entity.surface.name
+            if storage.demolisher_units[surface_name] == nil then
+                storage.demolisher_units[surface_name] = {}
+            end
+
+            storage.demolisher_units[surface_name][entity.unit_number] = {
                 entity = entity,
                 tick = game.tick
-            })
+            }
         end
 
-        if entity.commandable and CustomAttacks.can_spawn(30) then
+        if entity.commandable then
             entity.commandable.set_command({
                 type =  defines.command.go_to_location,
                 distraction = defines.distraction.by_anything,
+                --- @TODO use attack beacon
                 destination = {0, 0},
             })
         end
@@ -220,7 +226,7 @@ end)
 
 
 script.on_event(defines.events.on_segment_entity_created, function(event)
-    if is_demolisher[event.entity.name] then
+    if is_compatible_demolisher[event.entity.name] then
         event.entity.force = FORCE_NAME
     end
 end)
