@@ -10,7 +10,7 @@
 local ERM_UnitHelper = require("__enemyracemanager__/lib/rig/unit_helper")
 local GlobalConfig = require("__enemyracemanager__/lib/global_config")
 local ERM_DebugHelper = require("__enemyracemanager__/lib/debug_helper")
-local ZergSound = require("__erm_zerg__/prototypes/sound")
+local ZergSound = require("__erm_zerg_hd_assets__/sound")
 local biter_ai_settings = require ("__base__.prototypes.entity.biter-ai-settings")
 local AnimationDB = require("__erm_zerg_hd_assets__/animation_db")
 local name = "infested"
@@ -147,13 +147,13 @@ function ErmZerg.make_infested(level)
                         }
                     },
                 },
-                sound = ZergSound.infested_attack(0.66),
+                sound = ZergSound.infested_attack(0.9),
                 animation = AnimationDB.get_layered_animations("units", name, "run")
             },
 
             distance_per_frame = 0.16,
             run_animation = AnimationDB.get_layered_animations("units", name, "run"),
-            dying_sound = ZergSound.infested_death(0.75),
+            dying_sound = ZergSound.infested_death(1),
             corpse = MOD_NAME .. "--" .. name .. "-corpse"
         },
         {

@@ -9,7 +9,7 @@
 local ERM_UnitHelper = require("__enemyracemanager__/lib/rig/unit_helper")
 local GlobalConfig = require("__enemyracemanager__/lib/global_config")
 local ERM_DebugHelper = require("__enemyracemanager__/lib/debug_helper")
-local ZergSound = require("__erm_zerg__/prototypes/sound")
+local ZergSound = require("__erm_zerg_hd_assets__/sound")
 
 local CreepFunction = require("__erm_zerg__/prototypes/creep_function")
 local AnimationDB = require("__erm_zerg_hd_assets__/animation_db")
@@ -73,8 +73,8 @@ function ErmZerg.make_chamber(level)
             order = MOD_NAME .. "--" .. name .. "--".. level,
             subgroup = "enemies",
             map_color = ERM_UnitHelper.format_map_color(settings.startup["enemy_erm_zerg-map-color"].value),
-            working_sound = ZergSound.building_working_sound(name, 0.75),
-            dying_sound = ZergSound.building_dying_sound(0.75),
+            working_sound = ZergSound.building_working_sound(name, 0.9),
+            dying_sound = ZergSound.building_dying_sound(0.9),
             resistances = {
                 { type = "acid", percent = ERM_UnitHelper.get_resistance(base_acid_resistance, incremental_acid_resistance,  level) },
                 { type = "poison", percent = ERM_UnitHelper.get_resistance(base_acid_resistance, incremental_acid_resistance,  level) },
@@ -108,7 +108,7 @@ function ErmZerg.make_chamber(level)
             -- "The number or spitter spwners should be roughly equal to the number of biter spawners(regardless of difficulty)."
             -- (2018-12-07)
             autoplace = enemy_autoplace.enemy_spawner_autoplace({
-                probability_expression = "erm_zerg_autoplace_base(0, 1000000)",
+                probability_expression = "erm_zerg_autoplace_base(0, 4)",
                 force = FORCE_NAME,
                 control = AUTOCONTROL_NAME
             }),

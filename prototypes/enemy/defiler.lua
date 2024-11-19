@@ -13,7 +13,7 @@ local ERM_DebugHelper = require("__enemyracemanager__/lib/debug_helper")
 local GlobalConfig = require("__enemyracemanager__/lib/global_config")
 local biter_ai_settings = require ("__base__.prototypes.entity.biter-ai-settings")
 local AnimationDB = require("__erm_zerg_hd_assets__/animation_db")
-local ZergSound = require("__erm_zerg__/prototypes/sound")
+local ZergSound = require("__erm_zerg_hd_assets__/sound")
 
 local name = "defiler"
 
@@ -178,13 +178,13 @@ function ErmZerg.make_defiler(level)
                         },
                     }
                 },
-                sound = ZergSound.defiler_attack(0.66),
+                sound = ZergSound.defiler_attack(0.9),
                 animation = AnimationDB.get_layered_animations("units", name, "run")
             },
 
             distance_per_frame = 0.16,
             run_animation =AnimationDB.get_layered_animations("units", name, "run"),
-            dying_sound = ZergSound.enemy_death(name, 0.75),
+            dying_sound = ZergSound.enemy_death(name, 0.9),
             corpse = MOD_NAME .. "--" .. name .. "-corpse"
         },
         {

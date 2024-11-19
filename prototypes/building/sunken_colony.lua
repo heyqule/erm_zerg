@@ -9,7 +9,7 @@ local ERM_UnitHelper = require("__enemyracemanager__/lib/rig/unit_helper")
 local GlobalConfig = require("__enemyracemanager__/lib/global_config")
 local ERM_DebugHelper = require("__enemyracemanager__/lib/debug_helper")
 local ERM_Config = require("__enemyracemanager__/lib/global_config")
-local ZergSound = require("__erm_zerg__/prototypes/sound")
+local ZergSound = require("__erm_zerg_hd_assets__/sound")
 
 
 local AnimationDB = require("__erm_zerg_hd_assets__/animation_db")
@@ -101,18 +101,18 @@ function ErmZerg.make_sunken_colony(level)
             rotation_speed = 1,
             corpse = MOD_NAME.."--small-base-corpse",
             dying_explosion = MOD_NAME.."--building-explosion-small",
-            dying_sound = ZergSound.building_dying_sound(0.75),
+            dying_sound = ZergSound.building_dying_sound(0.9),
             call_for_help_radius = 50,
             folded_speed = 0.01,
             folded_speed_secondary = 0.01,
             folded_animation = folded_animation(),
             graphics_set = {},
-            working_sound = ZergSound.sunken_idle(0.75),
+            working_sound = ZergSound.sunken_idle(1),
             starting_attack_animation = attack_animation(),
             starting_attack_speed = 0.02,
-            starting_attack_sound = ZergSound.sunken_attack(0.75),
+            starting_attack_sound = ZergSound.sunken_attack(0.9),
             autoplace = enemy_autoplace.enemy_worm_autoplace({
-                probability_expression = "erm_zerg_autoplace_base(2, 1000013)",
+                probability_expression = "erm_zerg_autoplace_base(0, 3)",
                 force = FORCE_NAME,
                 control = AUTOCONTROL_NAME
             }),
@@ -143,7 +143,7 @@ function ErmZerg.make_sunken_colony(level)
                                 },
                                 {
                                     type = "play-sound",
-                                    sound = ZergSound.sunken_hit(0.75),
+                                    sound = ZergSound.sunken_hit(1),
                                 },
                                 {
                                     type = "damage",
@@ -184,16 +184,16 @@ function ErmZerg.make_sunken_colony(level)
             rotation_speed = 1,
             corpse = MOD_NAME.."--small-base-corpse",
             dying_explosion = MOD_NAME.."--building-explosion-small",
-            dying_sound = ZergSound.building_dying_sound(0.75),
+            dying_sound = ZergSound.building_dying_sound(0.9),
             call_for_help_radius = 50,
             folded_speed = 0.01,
             folded_speed_secondary = 0.01,
             folded_animation = folded_animation(),
             graphics_set = {},
-            working_sound = ZergSound.sunken_idle(0.75),
+            working_sound = ZergSound.sunken_idle(1),
             starting_attack_animation = attack_animation(),
             starting_attack_speed = 0.02,
-            starting_attack_sound = ZergSound.sunken_attack(0.75),
+            starting_attack_sound = ZergSound.sunken_attack(0.9),
             --autoplace = nil
             attack_from_start_frame = true,
             prepare_range = attack_range,
@@ -222,7 +222,7 @@ function ErmZerg.make_sunken_colony(level)
                                 },
                                 {
                                     type = "play-sound",
-                                    sound = ZergSound.sunken_hit(0.75),
+                                    sound = ZergSound.sunken_hit(1),
                                 },
                                 {
                                     type = "damage",

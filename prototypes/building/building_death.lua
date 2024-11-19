@@ -79,7 +79,7 @@ data:extend({
     {
         type = "explosion",
         name = MOD_NAME.."--building-explosion-small",
-        icon = "__erm_zerg__/graphics/entity/icons/buildings/advisor.png",
+        icon = "__erm_zerg_hd_assets__/graphics/entity/icons/buildings/advisor.png",
         icon_size = 64,
         subgroup = "explosions",
         flags = { "not-on-map" },

@@ -9,7 +9,7 @@ local ERM_UnitHelper = require("__enemyracemanager__/lib/rig/unit_helper")
 local GlobalConfig = require("__enemyracemanager__/lib/global_config")
 local ERM_DebugHelper = require("__enemyracemanager__/lib/debug_helper")
 local ERM_Config = require("__enemyracemanager__/lib/global_config")
-local ZergSound = require("__erm_zerg__/prototypes/sound")
+local ZergSound = require("__erm_zerg_hd_assets__/sound")
 local AnimationDB = require("__erm_zerg_hd_assets__/animation_db")
 
 local enemy_autoplace = require ("__enemyracemanager__/prototypes/enemy-autoplace")
@@ -96,15 +96,15 @@ function ErmZerg.make_spore_colony(level)
             rotation_speed = 1,
             corpse = MOD_NAME.."--small-base-corpse",
             dying_explosion = MOD_NAME.."--building-explosion-small",
-            dying_sound = ZergSound.building_dying_sound(0.75),
+            dying_sound = ZergSound.building_dying_sound(0.9),
             call_for_help_radius = 50,
             folded_speed = 0.01,
             folded_speed_secondary = 0.024,
             folded_animation = folded_animation(),
             graphics_set = {},
-            working_sound = ZergSound.spore_idle(0.75),
+            working_sound = ZergSound.spore_idle(1),
             autoplace = enemy_autoplace.enemy_worm_autoplace({
-                probability_expression = "erm_zerg_autoplace_base(2, 1000012)",
+                probability_expression = "erm_zerg_autoplace_base(0, 2)",
                 force = FORCE_NAME,
                 control = AUTOCONTROL_NAME
             }),
@@ -122,7 +122,7 @@ function ErmZerg.make_spore_colony(level)
                 warmup = 12,
                 use_shooter_direction = true,
                 lead_target_for_projectile_speed = 0.2 * 0.75 * 1.5 * 1.5,
-                sound = ZergSound.sunken_attack(0.75),
+                sound = ZergSound.sunken_attack(0.9),
                 ammo_type = {
                     category = "biological",
                     action = {

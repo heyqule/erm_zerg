@@ -11,7 +11,7 @@
 local ERM_UnitHelper = require("__enemyracemanager__/lib/rig/unit_helper")
 local ERM_DebugHelper = require("__enemyracemanager__/lib/debug_helper")
 local ERMDataHelper = require("__enemyracemanager__/lib/rig/data_helper")
-local ZergSound = require("__erm_zerg__/prototypes/sound")
+local ZergSound = require("__erm_zerg_hd_assets__/sound")
 local GlobalConfig = require("__enemyracemanager__/lib/global_config")
 local biter_ai_settings = require ("__base__.prototypes.entity.biter-ai-settings")
 local AnimationDB = require("__erm_zerg_hd_assets__/animation_db")
@@ -136,7 +136,7 @@ function ErmZerg.make_devourer(level)
                     }
                 },
                 cyclic_sound = {
-                    begin_sound = ZergSound.devourer_attack(0.66),
+                    begin_sound = ZergSound.devourer_attack(0.9),
                 },
                 animation =  AnimationDB.get_layered_animations("units", name, "attack")
             },
@@ -144,7 +144,7 @@ function ErmZerg.make_devourer(level)
             distance_per_frame = 0.5,
             run_animation = AnimationDB.get_layered_animations("units", name, "attack"),
             dying_explosion = MOD_NAME .. "--" .. name .. "-air-death",
-            dying_sound = ZergSound.enemy_death(name, 0.75),
+            dying_sound = ZergSound.enemy_death(name, 0.9),
             corpse = MOD_NAME .. "--" .. name .. "-corpse"
         },
         {
@@ -195,7 +195,7 @@ function ErmZerg.make_devourer(level)
                             },
                             {
                                 type = "play-sound",
-                                sound = ZergSound.devourer_hit(0.66)
+                                sound = ZergSound.devourer_hit(1)
                             },
                         }
                     }

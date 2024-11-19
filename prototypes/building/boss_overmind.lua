@@ -10,7 +10,7 @@ local ERM_UnitHelper = require("__enemyracemanager__/lib/rig/unit_helper")
 local GlobalConfig = require("__enemyracemanager__/lib/global_config")
 local ERM_DebugHelper = require("__enemyracemanager__/lib/debug_helper")
 local ERM_Config = require("__enemyracemanager__/lib/global_config")
-local ZergSound = require("__erm_zerg__/prototypes/sound")
+local ZergSound = require("__erm_zerg_hd_assets__/sound")
 
 -- This is a custom autoplace that accept custom forces. search "autoplace ="
 local CreepFunction = require("__erm_zerg__/prototypes/creep_function")
@@ -90,8 +90,8 @@ function ErmZerg.make_boss_hive(level, hitpoint)
             max_health = hitpoint,
             order = MOD_NAME .. "--" .. name .. "--".. level,
             subgroup = "enemies",
-            working_sound = ZergSound.building_working_sound("hive", 0.75),
-            dying_sound = ZergSound.building_dying_sound(0.75),
+            working_sound = ZergSound.building_working_sound("hive", 0.9),
+            dying_sound = ZergSound.building_dying_sound(0.9),
             resistances = {
                 { type = "acid", percent = ERM_UnitHelper.get_resistance(base_acid_resistance, incremental_acid_resistance,  level) },
                 { type = "poison", percent = ERM_UnitHelper.get_resistance(base_acid_resistance, incremental_acid_resistance,  level) },

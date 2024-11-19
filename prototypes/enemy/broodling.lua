@@ -10,7 +10,7 @@
 local ERM_UnitHelper = require("__enemyracemanager__/lib/rig/unit_helper")
 local GlobalConfig = require("__enemyracemanager__/lib/global_config")
 local ERM_DebugHelper = require("__enemyracemanager__/lib/debug_helper")
-local ZergSound = require("__erm_zerg__/prototypes/sound")
+local ZergSound = require("__erm_zerg_hd_assets__/sound")
 local biter_ai_settings = require ("__base__.prototypes.entity.biter-ai-settings")
 local AnimationDB = require("__erm_zerg_hd_assets__/animation_db")
 local name = "broodling"
@@ -110,7 +110,7 @@ function ErmZerg.make_broodling(level)
                 cooldown_deviation = 0.1,
                 damage_modifier = ERM_UnitHelper.get_damage(base_physical_damage, incremental_physical_damage,  level),
                 ammo_type = ERM_UnitHelper.make_unit_melee_ammo_type(8),
-                sound = ZergSound.broodling_attack(0.5),
+                sound = ZergSound.broodling_attack(0.9),
                 ammo_category = "biological",
                 animation = AnimationDB.get_layered_animations("units", name, "attack")
             },
@@ -135,7 +135,7 @@ function ErmZerg.make_broodling(level)
                     effect_id = TIME_TO_LIVE_DIED,
                 },
             },
-            dying_sound = ZergSound.enemy_death(name, 0.5),
+            dying_sound = ZergSound.enemy_death(name, 0.9),
             corpse = MOD_NAME .. "--" ..name .. "-corpse"
         },
         {

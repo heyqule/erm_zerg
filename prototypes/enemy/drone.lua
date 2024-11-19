@@ -9,7 +9,7 @@
 
 local ERM_UnitHelper = require("__enemyracemanager__/lib/rig/unit_helper")
 local ERM_DebugHelper = require("__enemyracemanager__/lib/debug_helper")
-local ZergSound = require("__erm_zerg__/prototypes/sound")
+local ZergSound = require("__erm_zerg_hd_assets__/sound")
 local GlobalConfig = require("__enemyracemanager__/lib/global_config")
 local biter_ai_settings = require ("__base__.prototypes.entity.biter-ai-settings")
 local AnimationDB = require("__erm_zerg_hd_assets__/animation_db")
@@ -124,13 +124,13 @@ function ErmZerg.make_drone(level)
                         }
                     }
                 },
-                sound = ZergSound.overlord_drop(0.66),
+                sound = ZergSound.overlord_drop(1),
                 animation = AnimationDB.get_layered_animations("units", name, "attack")
             },
 
             distance_per_frame = 0.16,
             run_animation = AnimationDB.get_layered_animations("units", name, "run"),
-            dying_sound = ZergSound.enemy_death(name, 0.75),
+            dying_sound = ZergSound.enemy_death(name, 0.9),
             corpse = MOD_NAME .. "--" .. name .. "-corpse"
         },
         {
@@ -147,7 +147,7 @@ function ErmZerg.make_drone(level)
             order = MOD_NAME .. "--" .. name .. level,
             final_render_layer = "corpse",
             animation = {
-                filename = "__erm_zerg__/graphics/entity/units/" .. name .. "/" .. name .. "-death.png",
+                filename = "__erm_zerg_hd_assets__/graphics/entity/units/" .. name .. "/" .. name .. "-death.png",
                 width = 128,
                 height = 128,
                 frame_count = 7,

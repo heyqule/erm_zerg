@@ -12,7 +12,7 @@ local ERM_UnitHelper = require("__enemyracemanager__/lib/rig/unit_helper")
 local ERM_DebugHelper = require("__enemyracemanager__/lib/debug_helper")
 local ERMDataHelper = require("__enemyracemanager__/lib/rig/data_helper")
 local GlobalConfig = require("__enemyracemanager__/lib/global_config")
-local ZergSound = require("__erm_zerg__/prototypes/sound")
+local ZergSound = require("__erm_zerg_hd_assets__/sound")
 local biter_ai_settings = require ("__base__.prototypes.entity.biter-ai-settings")
 local AnimationDB = require("__erm_zerg_hd_assets__/animation_db")
 local name = "overlord"
@@ -124,14 +124,14 @@ function ErmZerg.make_overlord(level)
                         }
                     }
                 },
-                sound = ZergSound.overlord_drop(0.66),
+                sound = ZergSound.overlord_drop(1),
                 animation = AnimationDB.get_layered_animations("units", name, "run")
             },
             render_layer = "wires-above",
             distance_per_frame = 0.5,
             run_animation = AnimationDB.get_layered_animations("units", name, "run"),
             dying_explosion = MOD_NAME .. "--" .. name .. "-air-death",
-            dying_sound = ZergSound.enemy_death(name, 0.75),
+            dying_sound = ZergSound.enemy_death(name, 0.9),
 
             corpse = MOD_NAME .. "--" .. name .. "-corpse"
         },
