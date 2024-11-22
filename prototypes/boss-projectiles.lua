@@ -102,11 +102,12 @@ local create_blood_fire_projectile = function(tier)
             action_delivery = {
                 type = "instant",
                 target_effects = {
-                    {
-                        type = "create-entity",
-                        entity_name = "erm-small-explosion-blood-1",
-                        trigger_created_entity = false
-                    },
+                    --@TODO new explosion
+                    --{
+                    --    type = "create-entity",
+                    --    entity_name = "erm-small-explosion-blood-1",
+                    --    trigger_created_entity = false
+                    --},
                     {
                         type = "nested-result",
                         action = {
@@ -228,11 +229,12 @@ local create_blood_explosion_projectile = function(tier)
             action_delivery = {
                 type = "instant",
                 target_effects = {
-                    {
-                        type = "create-entity",
-                        entity_name = "erm-ball-explosion-blood-1",
-                        trigger_created_entity = false
-                    },
+                    --@TODO new explosion
+                    --{
+                    --    type = "create-entity",
+                    --    entity_name = "erm-ball-explosion-blood-1",
+                    --    trigger_created_entity = false
+                    --},
                     {
                         type = "nested-result",
                         action = {

@@ -25,19 +25,19 @@ local max_hitpoint_multiplier = settings.startup["enemyracemanager-max-hitpoint-
 
 -- Handles acid and poison resistance
 local base_acid_resistance = 25
-local incremental_acid_resistance = 65
+local incremental_acid_resistance = 50
 -- Handles physical resistance
 local base_physical_resistance = 0
-local incremental_physical_resistance = 95
+local incremental_physical_resistance = 80
 -- Handles fire and explosive resistance
 local base_fire_resistance = 10
-local incremental_fire_resistance = 80
+local incremental_fire_resistance = 65
 -- Handles laser and electric resistance
 local base_electric_resistance = 0
-local incremental_electric_resistance = 85
+local incremental_electric_resistance = 70
 -- Handles cold resistance
 local base_cold_resistance = 0
-local incremental_cold_resistance = 85
+local incremental_cold_resistance = 70
 
 -- Handles damages
 
@@ -78,7 +78,7 @@ function ErmZerg.make_guardian(level)
             flags = { "placeable-enemy", "placeable-player", "placeable-off-grid", "breaths-air", "not-flammable" },
             has_belt_immunity = true,
             max_health = ERM_UnitHelper.get_health(hitpoint, max_hitpoint_multiplier,  level),
-            order = MOD_NAME .. "--"  .. name .. "--" .. level,
+            order = MOD_NAME .. "--unit--" .. name .. "--".. level,
             subgroup = "erm-flying-enemies",
             map_color = ERM_UnitHelper.format_map_color(settings.startup["enemy_erm_zerg-map-color"].value),
             shooting_cursor_size = 2,

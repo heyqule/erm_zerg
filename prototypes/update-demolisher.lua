@@ -4,10 +4,6 @@
 --- DateTime: 11/14/2024 6:07 PM
 ---
 
-if settings.startup['enemy_erm_zerg-demolisher_nydus_worm'].value == false then
-    return
-end
-
 local demolisher = {
     ["small-demolisher"] = 1,
     ["medium-demolisher"] = 2,
@@ -16,11 +12,18 @@ local demolisher = {
 
 for _, unit in pairs(data.raw['segmented-unit']) do
     if demolisher[unit.name] then
-        if unit.revenge_attack_parameters.ammo_type.action.action_delivery.source_effects == nil then
-            unit.revenge_attack_parameters.ammo_type.action.action_delivery.source_effects = {}
+        local zerg_nydus = util.table.deepcopy(unit)
+        --- using non standard name b/c it doesn't support quality spawn. Using -- may cause issues.
+        zerg_nydus.name = MOD_NAME.."-"..unit.name
+        zerg_nydus.localized_name = { "entity-name." .. MOD_NAME.."-"..unit.name }
+
+
+        if zerg_nydus.revenge_attack_parameters.ammo_type.action.action_delivery.source_effects == nil then
+            zerg_nydus.revenge_attack_parameters.ammo_type.action.action_delivery.source_effects = {}
         end
-        table.insert(unit.revenge_attack_parameters.ammo_type.action.action_delivery.source_effects, {
+        table.insert(zerg_nydus.revenge_attack_parameters.ammo_type.action.action_delivery.source_effects, {
             type = "create-entity",
+            --- Spawn tier 1 and let quality system take care the rest.
             entity_name = MOD_NAME.."--zergling--1",
             offset_deviation = {{-8, -8}, {8, 8}},
             offsets = {
@@ -35,7 +38,7 @@ for _, unit in pairs(data.raw['segmented-unit']) do
             non_colliding_search_radius = 8,
             non_colliding_search_precision = 2,
         })
-        table.insert(unit.revenge_attack_parameters.ammo_type.action.action_delivery.source_effects, {
+        table.insert(zerg_nydus.revenge_attack_parameters.ammo_type.action.action_delivery.source_effects, {
             type = "create-entity",
             entity_name = MOD_NAME.."--hydralisk--1",
             offset_deviation = {{-8, -8}, {8, 8}},
@@ -51,7 +54,7 @@ for _, unit in pairs(data.raw['segmented-unit']) do
             non_colliding_search_radius = 8,
             non_colliding_search_precision = 2,
         })
-        table.insert(unit.revenge_attack_parameters.ammo_type.action.action_delivery.source_effects, {
+        table.insert(zerg_nydus.revenge_attack_parameters.ammo_type.action.action_delivery.source_effects, {
             type = "create-entity",
             entity_name = MOD_NAME.."--mutalisk--1",
             offset_deviation = {{-8, -8}, {8, 8}},
@@ -68,8 +71,8 @@ for _, unit in pairs(data.raw['segmented-unit']) do
             non_colliding_search_precision = 2,
         })
 
-        if  demolisher[unit.name] == 2 then
-            table.insert(unit.revenge_attack_parameters.ammo_type.action.action_delivery.source_effects, {
+        if  demolisher[zerg_nydus.name] == 2 then
+            table.insert(zerg_nydus.revenge_attack_parameters.ammo_type.action.action_delivery.source_effects, {
                 type = "create-entity",
                 entity_name = MOD_NAME.."--lurker--1",
                 offset_deviation = {{-8, -8}, {8, 8}},
@@ -84,7 +87,7 @@ for _, unit in pairs(data.raw['segmented-unit']) do
                 non_colliding_search_radius = 8,
                 non_colliding_search_precision = 2,
             })
-            table.insert(unit.revenge_attack_parameters.ammo_type.action.action_delivery.source_effects, {
+            table.insert(zerg_nydus.revenge_attack_parameters.ammo_type.action.action_delivery.source_effects, {
                 type = "create-entity",
                 entity_name = MOD_NAME.."--infested--1",
                 repeat_count_deviation = 1,
@@ -102,8 +105,8 @@ for _, unit in pairs(data.raw['segmented-unit']) do
             })
         end
 
-        if  demolisher[unit.name] == 4 then
-            table.insert(unit.revenge_attack_parameters.ammo_type.action.action_delivery.source_effects, {
+        if demolisher[unit.name] == 4 then
+            table.insert(zerg_nydus.revenge_attack_parameters.ammo_type.action.action_delivery.source_effects, {
                 type = "create-entity",
                 entity_name = MOD_NAME.."--ultralisk--1",
                 offset_deviation = {{-8, -8}, {8, 8}},
@@ -119,5 +122,9 @@ for _, unit in pairs(data.raw['segmented-unit']) do
                 non_colliding_search_precision = 2,
             })
         end
+
+        data:extend {
+            zerg_nydus
+        }
     end
 end

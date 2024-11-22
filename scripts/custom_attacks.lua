@@ -63,7 +63,7 @@ end
 
 ---
 --- Handles aftermath of demolisher unit attack, process 20 units per batch.
---- Either attack 0,0 or build a base
+--- Either build a base or kill themselves
 ---
 function CustomAttacks.demolisher_units_attack()
     local i = 0
@@ -99,11 +99,14 @@ function CustomAttacks.demolisher_units_attack()
         end
 
         if surface_group then
-            if CustomAttacks.can_spawn(10) then
+            --- either build base or die.
+            if CustomAttacks.can_spawn(33) then
                 remote.call("enemyracemanager", "build_base_formation", surface_group)
             end
         end
     end
+
+
 end
 
 return CustomAttacks

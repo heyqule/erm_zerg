@@ -6,8 +6,6 @@
 -- To change this template use File | Settings | File Templates.
 --
 
-
-
 local ForceHelper = require("__enemyracemanager__/lib/helper/force_helper")
 
 local CustomAttacks = require("__erm_zerg__/scripts/custom_attacks")
@@ -15,7 +13,7 @@ local CustomAttacks = require("__erm_zerg__/scripts/custom_attacks")
 require("__erm_zerg__/global")
 -- Constants
 
-local using_demolisher_nydus_worm = script.feature_flags.space_travel and settings.startup['enemy_erm_zerg-demolisher_nydus_worm'].value
+local using_demolisher_nydus_worm = script.feature_flags.space_travel
 ---
 --- Enemy Force initialization.
 ---
@@ -110,6 +108,7 @@ local addRaceSettings = function()
         {{"zergling","ultralisk","defiler"}, {6, 3, 1}, 30},
         {{"zergling", "hydralisk", "lurker", "ultralisk"}, {4, 2, 1, 1}, 25},
         {{"zergling", "hydralisk", "lurker", "ultralisk", "defiler"}, {3, 2, 1, 2, 1}, 20},
+        {{"zergling", "mutalisk", "ultralisk", "defiler"}, {4, 2, 1, 1}, 30},
     }
     race_settings.featured_flying_groups = {
         {{"mutalisk"}, {1}, 50},
@@ -117,6 +116,8 @@ local addRaceSettings = function()
         {{"mutalisk", "devourer", "queen" }, {4,2,1}, 90},
         {{"mutalisk", "guardian", "overlord" }, {4,2,1}, 80},
         {{"mutalisk", "queen","devourer", "guardian"}, {4, 1, 2, 2}, 75},
+        {{"overlord", "mutalisk"}, {1, 2}, 50 },
+        {{"overlord", "mutalisk", "guardian"}, {1,3,2}, 50},
     }
 
     race_settings.boss_building = "overmind"
@@ -127,6 +128,9 @@ local addRaceSettings = function()
     race_settings.home_planet = "char"
     race_settings.boss_tier = race_settings.boss_tier or 1
     race_settings.boss_kill_count = race_settings.boss_kill_count or 0
+
+    race_settings.structure_killed_count_by_planet = {}
+    race_settings.unit_killed_count_by_planet = {}
 
     remote.call("enemyracemanager", "register_race", race_settings)
 
@@ -185,9 +189,9 @@ script.on_event(defines.events.on_script_trigger_effect, function(event)
 end)
 
 local is_compatible_demolisher = {
-    ['small-demolisher'] =  true,
-    ['medium-demolisher'] =  true,
-    ['big-demolisher'] =  true,
+    ['enemy_erm_zerg-small-demolisher'] =  true,
+    ['enemy_erm_zerg-medium-demolisher'] =  true,
+    ['enemy_erm_zerg-big-demolisher'] =  true,
 }
 
 local on_trigger_created_entity_handlers = {

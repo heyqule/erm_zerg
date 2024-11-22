@@ -11,7 +11,6 @@ end
 local effects = require("__core__.lualib.surface-render-parameter-effects")
 local planet_catalogue_vulcanus = require("__space-age__.prototypes.planet.procession-catalogue-vulcanus")
 local asteroid_triggers = require("__erm_libs__.prototypes.asteroid_triggers")
-local asteroid_util = require("__space-age__.prototypes.planet.asteroid-spawn-definitions")
 
 local char_mapgen = {
     property_expression_names = {
@@ -42,7 +41,6 @@ local char_mapgen = {
     autoplace_controls = {
         ["vulcanus_coal"] = {},
         ["sulfuric_acid_geyser"] = {},
-        ["tungsten_ore"] = {},
         ["calcite"] = {},
         ["vulcanus_volcanism"] = {},
         [AUTOCONTROL_NAME] = {},
@@ -149,16 +147,19 @@ local new_asteroids = {
 
 local astreroid_data = {
     [metallic_name] = {
-        mutalisk = { [4] = 0.35, [5] = 0.1},
-        devourer = { [4] = 0.2, [5] = 0.05},
+        scourge = { [4] = 0.35},
+        mutalisk = { [4] = 0.25, [5] = 0.1},
+        devourer = { [4] = 0.15, [5] = 0.05},
     },
     [carbonic_name] = {
-        mutalisk = { [4] = 0.35, [5] = 0.1},
+        scourge = { [4] = 0.35},
+        mutalisk = { [4] = 0.25, [5] = 0.1},
         overlord = { [4] = 0.1},
     },
     [oxide_name] = {
+        scourge = { [4] = 0.35},
         guardian = { [4] = 0.1, [5] = 0.02},
-        devourer = { [4] = 0.2, [5] = 0.05},
+        devourer = { [4] = 0.15, [5] = 0.05},
     }
 }
 for key, a_data in pairs(astreroid_data) do
