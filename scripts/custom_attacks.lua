@@ -102,6 +102,12 @@ function CustomAttacks.demolisher_units_attack()
             --- either build base or die.
             if CustomAttacks.can_spawn(33) then
                 remote.call("enemyracemanager", "build_base_formation", surface_group)
+            else
+                remote.call("enemyracemanager", "process_attack_position", {
+                    group = surface_group,
+                    distraction = defines.distraction.by_anything,
+                    target_force = 'player',
+                })
             end
         end
     end

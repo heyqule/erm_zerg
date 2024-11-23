@@ -13,6 +13,7 @@ local planet_catalogue_vulcanus = require("__space-age__.prototypes.planet.proce
 local asteroid_triggers = require("__erm_libs__.prototypes.asteroid_triggers")
 
 local char_mapgen = {
+    starting_area = 2,
     property_expression_names = {
         elevation = "vulcanus_elevation",
         temperature = "vulcanus_temperature",
@@ -33,7 +34,11 @@ local char_mapgen = {
         cliff_elevation_0 = 70
     },
     territory_settings = {
-        units = { "small-demolisher", "medium-demolisher", "big-demolisher" },
+        units = {
+            MOD_NAME .. "-small-demolisher",
+            MOD_NAME .. "-medium-demolisher",
+            MOD_NAME .. "-big-demolisher",
+        },
         territory_index_expression = "demolisher_territory_expression",
         territory_variation_expression = "demolisher_variation_expression",
         minimum_territory_size = 10
