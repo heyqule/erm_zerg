@@ -123,6 +123,11 @@ for _, unit in pairs(data.raw['segmented-unit']) do
             })
         end
 
+        table.insert(zerg_nydus.dying_trigger_effect, {
+            type = "script",
+            effect_id = NYDUS_DEATH_ATTACK
+        })
+
         data:extend {
             zerg_nydus
         }

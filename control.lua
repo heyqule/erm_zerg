@@ -14,6 +14,8 @@ require("__erm_zerg__/global")
 -- Constants
 
 local using_demolisher_nydus_worm = script.feature_flags.space_travel
+
+local zerg_on_vulcanus = script.feature_flags.space_travel and settings.startup["enemy_erm_zerg-on_vulcanus"].value
 ---
 --- Enemy Force initialization.
 ---
@@ -141,7 +143,7 @@ end
 local update_world = function()
     --- Insert autoplace into existing vulcanus surface
     local vulcanus = game.surfaces["vulcanus"]
-    if vulcanus and settings.startup["enemy_erm_zerg-on_vulcanus"].value
+    if vulcanus and zerg_on_vulcanus
     then
         --- =_= map_gen_settings write only support writing the whole block.
         local map_gen = vulcanus.map_gen_settings
@@ -149,14 +151,12 @@ local update_world = function()
             vulcanus.planet.prototype.map_gen_settings.autoplace_controls[AUTOCONTROL_NAME]
         vulcanus.map_gen_settings = map_gen
 
-        --- hmmm.. replacing the demolishers rekt bases lol.  They don't follow the grid.
-        --local demolishers = { "small-demolisher","medium-demolisher","big-demolisher" }
-        --local entities = vulcanus.find_entities_filtered({name = demolishers })
-        --for _, entity in pairs(entities) do
-        --    local position = util.table.deepcopy(entity.position)
-        --    vulcanus.create_entity {name = MOD_NAME..'-'..entity.name, position = position, force = FORCE_NAME}
-        --    entity.destroy()
-        --end
+        --- hmmm.. replacing the demolishers makes them spawn in explored area lol.  They don't follow the grid?
+        local demolishers = { "small-demolisher","medium-demolisher","big-demolisher" }
+        local entities = vulcanus.find_entities_filtered({name = demolishers })
+        for _, entity in pairs(entities) do
+            entity.force = FORCE_NAME
+        end
     end
 end
 
@@ -202,6 +202,9 @@ local attack_functions = {
     end,
     [UNITS_SPAWN_ATTACK] = function(args)
         CustomAttacks.process_batch_units(args)
+    end,
+    [NYDUS_DEATH_ATTACK] = function(args)
+        CustomAttacks.process_batch_units(args)
     end
 }
 script.on_event(defines.events.on_script_trigger_effect, function(event)
@@ -213,9 +216,13 @@ script.on_event(defines.events.on_script_trigger_effect, function(event)
 end)
 
 local is_compatible_demolisher = {
-    ['enemy_erm_zerg-small-demolisher'] =  true,
-    ['enemy_erm_zerg-medium-demolisher'] =  true,
-    ['enemy_erm_zerg-big-demolisher'] =  true,
+    ["enemy_erm_zerg-small-demolisher"] =  true,
+    ["enemy_erm_zerg-medium-demolisher"] =  true,
+    ["enemy_erm_zerg-big-demolisher"] =  true,
+}
+
+local demolisher_name_filter = {
+    "enemy_erm_zerg-small-demolisher","enemy_erm_zerg-medium-demolisher","enemy_erm_zerg-big-demolisher"
 }
 
 local on_trigger_created_entity_handlers = {
@@ -265,6 +272,28 @@ script.on_nth_tick(907, function(event)
 
     if using_demolisher_nydus_worm then
         CustomAttacks.demolisher_units_attack()
+    end
+end)
+
+--- Spawn attack group periodically once evolution reach 5%
+script.on_nth_tick(9 * minute + 13, function(event)
+    local vulcanus = game.surfaces['vulcanus']
+    if vulcanus and zerg_on_vulcanus and CustomAttacks.can_spawn(33) then
+        if game.forces[FORCE_NAME].get_evolution_factor(vulcanus) < 0.05 then
+            return
+        end
+
+        local worms = vulcanus.find_entities_filtered {name = demolisher_name_filter, limit = 1}
+        local key, worm = next(worms)
+        if worm then
+            if CustomAttacks.can_spawn(10) then
+                remote.call("enemyracemanager", "generate_dropship_group", FORCE_NAME, 20, {surface=vulcanus})
+            elseif CustomAttacks.can_spawn(33) then
+                remote.call("enemyracemanager", "generate_flying_group", FORCE_NAME, 30, {surface=vulcanus})
+            else
+                remote.call("enemyracemanager", "generate_attack_group", FORCE_NAME, 60, {surface=vulcanus})
+            end
+        end
     end
 end)
 

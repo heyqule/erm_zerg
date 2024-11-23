@@ -11,9 +11,9 @@ Date: ??-??-??
     - Zerg units hide in asteroid in the routes to Char.  You'll encounter Epic and a few Legendary units.
     - [space-age] [Zerg on Vulcanus]
     - Optional settings in startup tab.
-    - When this is enabled, the lightning have a small chance to summon Protoss.
-    - They evolve differently there as you don't pollute on Fulgora
-    - Demolishers join zerg as an active nydus worm.
+    - When this is enabled, Demolishers join zerg as an active nydus worm.
+    - They evolve differently there as you don't pollute on Vulcanus.
+
 
   Changes:
     - Sound adjustments to make them sound less busy.
