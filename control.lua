@@ -138,9 +138,31 @@ local addRaceSettings = function()
     CustomAttacks.get_race_settings(MOD_NAME, true)
 end
 
+local update_world = function()
+    --- Insert autoplace into existing vulcanus surface
+    local vulcanus = game.surfaces["vulcanus"]
+    if vulcanus and settings.startup["enemy_erm_zerg-on_vulcanus"].value
+    then
+        --- =_= map_gen_settings write only support writing the whole block.
+        local map_gen = vulcanus.map_gen_settings
+        map_gen.autoplace_controls[AUTOCONTROL_NAME] =
+            vulcanus.planet.prototype.map_gen_settings.autoplace_controls[AUTOCONTROL_NAME]
+        vulcanus.map_gen_settings = map_gen
+
+        local demolishers = { "small-demolisher","medium-demolisher","big-demolisher" }
+        local entities = vulcanus.find_entities_filtered({name = demolishers })
+        for _, entity in pairs(entities) do
+            local position = util.table.deepcopy(entity.position)
+            vulcanus.create_entity {name = MOD_NAME..'-'..entity.name, position = position, force = FORCE_NAME}
+            entity.destroy()
+        end
+    end
+end
+
 script.on_init(function(event)
     createRace()
     addRaceSettings()
+    update_world()
 end)
 
 script.on_load(function(event)
@@ -149,6 +171,7 @@ end)
 script.on_configuration_changed(function(event)
     createRace()
     addRaceSettings()
+    update_world()
 end)
 
 local attack_functions = {
