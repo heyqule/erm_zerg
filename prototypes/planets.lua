@@ -35,13 +35,12 @@ local char_mapgen = {
     },
     territory_settings = {
         units = {
-            MOD_NAME .. "-small-demolisher",
             MOD_NAME .. "-medium-demolisher",
             MOD_NAME .. "-big-demolisher",
         },
         territory_index_expression = "demolisher_territory_expression",
         territory_variation_expression = "demolisher_variation_expression",
-        minimum_territory_size = 10
+        minimum_territory_size = 7
     },
     autoplace_controls = {
         ["vulcanus_coal"] = {},

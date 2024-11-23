@@ -149,13 +149,14 @@ local update_world = function()
             vulcanus.planet.prototype.map_gen_settings.autoplace_controls[AUTOCONTROL_NAME]
         vulcanus.map_gen_settings = map_gen
 
-        local demolishers = { "small-demolisher","medium-demolisher","big-demolisher" }
-        local entities = vulcanus.find_entities_filtered({name = demolishers })
-        for _, entity in pairs(entities) do
-            local position = util.table.deepcopy(entity.position)
-            vulcanus.create_entity {name = MOD_NAME..'-'..entity.name, position = position, force = FORCE_NAME}
-            entity.destroy()
-        end
+        --- hmmm.. replacing the demolishers rekt bases lol.  They don't follow the grid.
+        --local demolishers = { "small-demolisher","medium-demolisher","big-demolisher" }
+        --local entities = vulcanus.find_entities_filtered({name = demolishers })
+        --for _, entity in pairs(entities) do
+        --    local position = util.table.deepcopy(entity.position)
+        --    vulcanus.create_entity {name = MOD_NAME..'-'..entity.name, position = position, force = FORCE_NAME}
+        --    entity.destroy()
+        --end
     end
 end
 
