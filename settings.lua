@@ -65,7 +65,7 @@ if feature_flags.space_travel then
             name = "enemy_erm_zerg-on_vulcanus",
             description = "enemy_erm_zerg-on_vulcanus",
             setting_type = "startup",
-            default_value = true,
+            default_value = false,
             order = "enemy_erm_zerg-200",
         },
     }
