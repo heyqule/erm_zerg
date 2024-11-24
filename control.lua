@@ -141,6 +141,7 @@ local addRaceSettings = function()
     CustomAttacks.get_race_settings(MOD_NAME, true)
 end
 
+--- Update world entities if required.
 local update_world = function()
     --- Insert autoplace into existing vulcanus surface
     local vulcanus = game.surfaces["vulcanus"]
@@ -152,7 +153,7 @@ local update_world = function()
             vulcanus.planet.prototype.map_gen_settings.autoplace_controls[AUTOCONTROL_NAME]
         vulcanus.map_gen_settings = map_gen
 
-        --- hmmm.. replacing the demolishers makes them spawn in explored area lol.  They don't follow the grid?
+        --- hmmm.. replacing the demolishers marks the area as explored.  Just swap the force for now.
         local demolishers = { "small-demolisher","medium-demolisher","big-demolisher" }
         local entities = vulcanus.find_entities_filtered({name = demolishers })
         for _, entity in pairs(entities) do
@@ -208,6 +209,7 @@ local attack_functions = {
         CustomAttacks.process_batch_units(args)
     end
 }
+--- Handles custom attacks
 script.on_event(defines.events.on_script_trigger_effect, function(event)
     if  attack_functions[event.effect_id] and
         CustomAttacks.valid(event, MOD_NAME)
@@ -250,6 +252,7 @@ local on_trigger_created_entity_handlers = {
     end
 }
 
+--- Handles custom logic for units spawned by demolisher
 script.on_event(defines.events.on_trigger_created_entity, function(event)
     local entity = event.entity
     local source = event.source
@@ -265,10 +268,11 @@ script.on_event(defines.events.on_segment_entity_created, function(event)
     end
 end)
 
----- Clear time to live unit every 15s.
 script.on_nth_tick(907, function(event)
+    ---- Clear time to live unit every 15s.
     CustomAttacks.clear_time_to_live_units(event)
 
+    ---- Clear demolisher spawned unit. Either make them build base or attack.
     if using_demolisher_nydus_worm then
         CustomAttacks.demolisher_units_attack()
     end

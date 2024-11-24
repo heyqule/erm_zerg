@@ -47,8 +47,8 @@ local incremental_acid_damage = 15
 local base_attack_speed = 600
 local incremental_attack_speed = 300
 
-local base_movement_speed = 0.15
-local incremental_movement_speed = 0.125
+local base_movement_speed = 0.25
+local incremental_movement_speed = 0.2
 
 -- Misc settings
 local pollution_to_join_attack = 200
@@ -146,7 +146,7 @@ function ErmZerg.make_queen(level)
                 animation = AnimationDB.get_layered_animations("units", name, "attack")
             },
 
-            distance_per_frame = 0.16,
+            distance_per_frame = 0.32,
             run_animation = AnimationDB.get_layered_animations("units", name, "run"),
             dying_explosion = MOD_NAME .. "--" .. name .. "-air-death",
             dying_sound = ZergSound.enemy_death(name, 0.9),

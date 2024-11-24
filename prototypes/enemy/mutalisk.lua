@@ -49,8 +49,8 @@ local incremental_acid_damage = 5
 local base_attack_speed = 120
 local incremental_attack_speed = 60
 
-local base_movement_speed = 0.2
-local incremental_movement_speed = 0.15
+local base_movement_speed = 0.3
+local incremental_movement_speed = 0.3
 
 -- Misc Settings
 local pollution_to_join_attack = 50
@@ -126,7 +126,7 @@ function ErmZerg.make_mutalisk(level)
                 animation = AnimationDB.get_layered_animations("units", name, "run")
             },
             render_layer = "wires-above",
-            distance_per_frame = 0.4,
+            distance_per_frame = 0.64,
             run_animation = AnimationDB.get_layered_animations("units", name, "run"),
             dying_explosion = MOD_NAME .. "--" .. name .. "-air-death",
             dying_sound = ZergSound.enemy_death(name, 0.9),

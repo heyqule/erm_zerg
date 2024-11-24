@@ -48,7 +48,7 @@ local incremental_attack_speed = 45
 local attack_range = 1
 
 
-local base_movement_speed = 0.15
+local base_movement_speed = 0.25
 local incremental_movement_speed = 0.1
 
 -- Misc settings
@@ -151,7 +151,7 @@ function ErmZerg.make_infested(level)
                 animation = AnimationDB.get_layered_animations("units", name, "run")
             },
 
-            distance_per_frame = 0.16,
+            distance_per_frame = 0.24,
             run_animation = AnimationDB.get_layered_animations("units", name, "run"),
             dying_sound = ZergSound.infested_death(1),
             corpse = MOD_NAME .. "--" .. name .. "-corpse"

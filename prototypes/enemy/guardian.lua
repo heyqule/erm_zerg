@@ -50,8 +50,8 @@ local base_attack_speed = 150
 local incremental_attack_speed = 90
 
 
-local base_movement_speed = 0.15
-local incremental_movement_speed = 0.125
+local base_movement_speed = 0.25
+local incremental_movement_speed = 0.2
 
 -- Misc Settings
 local pollution_to_join_attack = 150
@@ -143,7 +143,7 @@ function ErmZerg.make_guardian(level)
                 animation = AnimationDB.get_layered_animations("units", name, "run")
             },
             render_layer = "wires-above",
-            distance_per_frame = 0.5,
+            distance_per_frame = 0.64,
             run_animation = AnimationDB.get_layered_animations("units", name, "run"),
             dying_explosion = MOD_NAME .. "--" .. name .. "-air-death",
             dying_sound = ZergSound.enemy_death(name, 0.9),

@@ -19,6 +19,7 @@ Date: ??-??-??
     - Sound adjustments to make them sound less busy.
     - Health adjustments, slightly higher than before on higher tiers.
     - Max resistance lower from 85-95% to 70-85% with some exceptions.
+    - Increased unit movement speed.
 
 ---------------------------------------------------------------------------------------------------
 Version: 1.23.1

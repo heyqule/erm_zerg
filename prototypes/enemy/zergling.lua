@@ -49,8 +49,8 @@ local incremental_attack_speed = 30
 local attack_range = 1
 
 
-local base_movement_speed = 0.175
-local incremental_movement_speed = 0.075
+local base_movement_speed = 0.25
+local incremental_movement_speed = 0.15
 
 -- Misc settings
 local vision_distance = ERM_UnitHelper.get_vision_distance(attack_range)
@@ -113,7 +113,7 @@ function ErmZerg.make_zergling(level)
                 sound = ZergSound.meele_attack(0.9),
                 animation = AnimationDB.get_layered_animations("units", name, "attack")
             },
-            distance_per_frame = 0.16,
+            distance_per_frame = 0.24,
             run_animation = AnimationDB.get_layered_animations("units", name, "run"),
             dying_sound = ZergSound.enemy_death(name, 0.9),
             corpse = MOD_NAME .. "--" .. name .. "-corpse"

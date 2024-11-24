@@ -48,8 +48,8 @@ local incremental_physical_damage = 6
 local base_attack_speed = 210
 local incremental_attack_speed = 90
 
-local base_movement_speed = 0.125
-local incremental_movement_speed = 0.075
+local base_movement_speed = 0.2
+local incremental_movement_speed = 0.1
 
 -- Misc settings
 local pollution_to_join_attack = 80
@@ -149,7 +149,7 @@ function ErmZerg.make_lurker(level)
                 animation = AnimationDB.get_layered_animations("units", name, "attack")
             },
 
-            distance_per_frame = 0.16,
+            distance_per_frame = 0.24,
             run_animation = AnimationDB.get_layered_animations("units", name, "run"),
             dying_sound = ZergSound.enemy_death(name, 0.9),
             corpse = MOD_NAME .. "--" .. name .. "-corpse"

@@ -57,8 +57,8 @@ local incremental_attack_speed = 60
 local attack_range = 1
 
 
-local base_movement_speed = 0.2
-local incremental_movement_speed = 0.15
+local base_movement_speed = 0.3
+local incremental_movement_speed = 0.3
 
 -- Misc settings
 local vision_distance = ERM_UnitHelper.get_vision_distance(attack_range)
@@ -162,7 +162,7 @@ function ErmZerg.make_scourge(level)
                 animation = AnimationDB.get_layered_animations("units", name, "run")
             },
             render_layer = "wires-above",
-            distance_per_frame = 0.2,
+            distance_per_frame = 0.32,
             run_animation = AnimationDB.get_layered_animations("units", name, "run"),
             created_effect = {
                 type = "direct",
