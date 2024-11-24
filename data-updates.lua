@@ -6,7 +6,10 @@
 require("__erm_zerg__/global")
 
 require "prototypes.update-teamcolour"
-require "prototypes.update-demolisher"
+
+if feature_flags.space_travel then
+    require "prototypes.update-demolisher"
+end
 
 -- Update RTS world
 local mapgen = data.raw["map-gen-presets"]["default"]
