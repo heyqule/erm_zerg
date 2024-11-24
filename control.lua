@@ -9,6 +9,7 @@
 local ForceHelper = require("__enemyracemanager__/lib/helper/force_helper")
 
 local CustomAttacks = require("__erm_zerg__/scripts/custom_attacks")
+local AttackGroupBeaconProcessor = require("__enemyracemanager__/lib/attack_group_beacon_processor")
 
 require("__erm_zerg__/global")
 -- Constants
@@ -241,11 +242,9 @@ local on_trigger_created_entity_handlers = {
         end
 
         if entity.commandable then
-            entity.commandable.set_command({
-                type =  defines.command.go_to_location,
-                distraction = defines.distraction.by_anything,
-                --- @TODO use attack beacon
-                destination = {0, 0},
+            remote.call("enemyracemanager", "process_attack_position", {
+                group = entity.commandable,
+                distraction = defines.distraction.by_enemy,
             })
         end
     end
@@ -275,24 +274,25 @@ script.on_nth_tick(907, function(event)
     end
 end)
 
---- Spawn attack group periodically once evolution reach 5%
+--- Spawn attack group periodically once evolution reach 1%
 script.on_nth_tick(9 * minute + 13, function(event)
     local vulcanus = game.surfaces['vulcanus']
     if vulcanus and zerg_on_vulcanus and CustomAttacks.can_spawn(33) then
-        if game.forces[FORCE_NAME].get_evolution_factor(vulcanus) < 0.05 then
+        if game.forces[FORCE_NAME].get_evolution_factor(vulcanus) < 0.01 then
             return
         end
 
-        local worms = vulcanus.find_entities_filtered {name = demolisher_name_filter, limit = 1}
-        local key, worm = next(worms)
-        if worm then
-            if CustomAttacks.can_spawn(10) then
-                remote.call("enemyracemanager", "generate_dropship_group", FORCE_NAME, 20, {surface=vulcanus})
-            elseif CustomAttacks.can_spawn(33) then
-                remote.call("enemyracemanager", "generate_flying_group", FORCE_NAME, 30, {surface=vulcanus})
-            else
-                remote.call("enemyracemanager", "generate_attack_group", FORCE_NAME, 60, {surface=vulcanus})
-            end
+        local has_entity = vulcanus.count_entities_filtered({type=AttackGroupBeaconProcessor.get_attackable_entity_types(), limit = 1})
+        if has_entity < 1 then
+            return
+        end
+
+        if CustomAttacks.can_spawn(10) then
+            remote.call("enemyracemanager", "generate_dropship_group", FORCE_NAME, 20, {surface=vulcanus})
+        elseif CustomAttacks.can_spawn(33) then
+            remote.call("enemyracemanager", "generate_flying_group", FORCE_NAME, 30, {surface=vulcanus})
+        else
+            remote.call("enemyracemanager", "generate_attack_group", FORCE_NAME, 80, {surface=vulcanus})
         end
     end
 end)

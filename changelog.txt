@@ -12,7 +12,7 @@ Date: ??-??-??
     - [space-age] [Zerg on Vulcanus]
     - Optional settings in startup tab.
     - When this is enabled, Demolishers join zerg as an active nydus worm.
-    - They evolve differently there as you don't pollute on Vulcanus.
+    - Spawns attack group periodically.
 
 
   Changes:
