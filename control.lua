@@ -219,13 +219,13 @@ script.on_event(defines.events.on_script_trigger_effect, function(event)
 end)
 
 local is_compatible_demolisher = {
-    ["enemy_erm_zerg-small-demolisher"] =  true,
-    ["enemy_erm_zerg-medium-demolisher"] =  true,
-    ["enemy_erm_zerg-big-demolisher"] =  true,
+    ["enemy_erm_zerg--small-demolisher"] =  true,
+    ["enemy_erm_zerg--medium-demolisher"] =  true,
+    ["enemy_erm_zerg--big-demolisher"] =  true,
 }
 
 local demolisher_name_filter = {
-    "enemy_erm_zerg-small-demolisher","enemy_erm_zerg-medium-demolisher","enemy_erm_zerg-big-demolisher"
+    "enemy_erm_zerg--small-demolisher","enemy_erm_zerg--medium-demolisher","enemy_erm_zerg--big-demolisher"
 }
 
 local on_trigger_created_entity_handlers = {

@@ -7,12 +7,13 @@ Date: ??-??-??
     - Default to HD graphic and removed the classic graphics.
     - Utilized 2.0 autoplace and noise functions.
     - Replaced leveling system with quality spawning system to determine enemy stats.
+    - Added tips and tricks
     - [space-age] [Planet Char]
     - Only legendary units spawn in there.
     - Zerg units hide in asteroid in the routes to Char.  You'll encounter Epic and a few Legendary units.
     - Planet features are subject to change.
     - [space-age] [Zerg on Vulcanus]
-    - Optional settings in startup tab.
+    - Enable it in startup tab. Default to OFF until stable release.
     - When this is enabled, Demolishers join zerg as an active nydus worm.
     - Spawns attack group periodically.
 

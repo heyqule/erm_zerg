@@ -47,8 +47,8 @@ if feature_flags.space_travel and settings.startup["enemy_erm_zerg-on_vulcanus"]
     vulcanus.map_gen_settings.autoplace_controls[AUTOCONTROL_NAME] = {}
     --- Replace territory bosses with zerg variance.
     vulcanus.map_gen_settings.territory_settings.units = {
-        MOD_NAME .. "-small-demolisher",
-        MOD_NAME .. "-medium-demolisher",
-        MOD_NAME .. "-big-demolisher",
+        MOD_NAME .. "--small-demolisher",
+        MOD_NAME .. "--medium-demolisher",
+        MOD_NAME .. "--big-demolisher",
     }
 end

@@ -13,8 +13,7 @@ local demolisher = {
 for _, unit in pairs(data.raw['segmented-unit']) do
     if demolisher[unit.name] then
         local zerg_nydus = util.table.deepcopy(unit)
-        --- using non standard name b/c it doesn't support quality spawn. Using -- may cause issues.
-        zerg_nydus.name = MOD_NAME.."-"..unit.name
+        zerg_nydus.name = MOD_NAME.."--"..unit.name
         zerg_nydus.localized_name = { "entity-name." .. MOD_NAME.."-"..unit.name }
         zerg_nydus.order = MOD_NAME.."-"..zerg_nydus.name
 
