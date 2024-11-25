@@ -5,36 +5,36 @@
 -- Time: 9:39 PM
 -- To change this template use File | Settings | File Templates.
 --
-require("__stdlib__/stdlib/utils/defines/time")
+
 
 local ERM_UnitHelper = require("__enemyracemanager__/lib/rig/unit_helper")
-local ERM_UnitTint = require("__enemyracemanager__/lib/rig/unit_tint")
+local GlobalConfig = require("__enemyracemanager__/lib/global_config")
 local ERM_DebugHelper = require("__enemyracemanager__/lib/debug_helper")
-local ZergSound = require("__erm_zerg__/prototypes/sound")
+local ZergSound = require("__erm_zerg_hd_assets__/sound")
 local biter_ai_settings = require ("__base__.prototypes.entity.biter-ai-settings")
 local AnimationDB = require("__erm_zerg_hd_assets__/animation_db")
 local name = "broodling"
 
 
 local hitpoint = 30
-local max_hitpoint_multiplier = settings.startup["enemyracemanager-max-hitpoint-multipliers"].value
+local max_hitpoint_multiplier = settings.startup["enemyracemanager-max-hitpoint-multipliers"].value * 3
 
 
 -- Handles acid and poison resistance
-local base_acid_resistance = 20
-local incremental_acid_resistance = 70
+local base_acid_resistance = 25
+local incremental_acid_resistance = 45
 -- Handles physical resistance
 local base_physical_resistance = 0
-local incremental_physical_resistance = 95
+local incremental_physical_resistance = 75
 -- Handles fire and explosive resistance
 local base_fire_resistance = 10
-local incremental_fire_resistance = 80
+local incremental_fire_resistance = 60
 -- Handles laser and electric resistance
 local base_electric_resistance = 0
-local incremental_electric_resistance = 90
+local incremental_electric_resistance = 65
 -- Handles cold resistance
 local base_cold_resistance = 0
-local incremental_cold_resistance = 90
+local incremental_cold_resistance = 65
 
 -- Handles physical damages
 
@@ -49,8 +49,8 @@ local incremental_attack_speed = 30
 local attack_range = 1
 
 
-local base_movement_speed = 0.175
-local incremental_movement_speed = 0.075
+local base_movement_speed = 0.25
+local incremental_movement_speed = 0.15
 
 -- Misc settings
 local vision_distance = ERM_UnitHelper.get_vision_distance(attack_range)
@@ -71,15 +71,15 @@ function ErmZerg.make_broodling(level)
         {
             type = "unit",
             name = MOD_NAME .. "--" .. name .. "--" .. level,
-            localised_name = { "entity-name." .. MOD_NAME .. "--" .. name, tostring(level) },
+            localised_name = { "entity-name." .. MOD_NAME .. "--" .. name, GlobalConfig.QUALITY_MAPPING[level] },
             icon = "__erm_zerg_hd_assets__/graphics/entity/icons/units/" .. name .. ".png",
             icon_size = 64,
             flags = { "placeable-enemy", "placeable-player", "placeable-off-grid", "breaths-air" },
             has_belt_immunity = false,
             max_health = ERM_UnitHelper.get_health(hitpoint, max_hitpoint_multiplier,  level),
-            order = MOD_NAME .. "--"  .. name .. "--" .. level,
+            order = MOD_NAME .. "--unit--" .. name .. "--".. level,
             subgroup = "enemies",
-            map_color = ERM_UnitHelper.format_map_color(settings.startup["erm_zerg-map-color"].value),
+            map_color = ERM_UnitHelper.format_map_color(settings.startup["enemy_erm_zerg-map-color"].value),
             shooting_cursor_size = 2,
             resistances = {
                 { type = "acid", percent = ERM_UnitHelper.get_resistance(base_acid_resistance, incremental_acid_resistance,  level) },
@@ -101,7 +101,7 @@ function ErmZerg.make_broodling(level)
             absorptions_to_join_attack = { pollution = ERM_UnitHelper.get_pollution_attack(pollution_to_join_attack, level)},
             distraction_cooldown = distraction_cooldown,
             ai_settings = biter_ai_settings,
-            min_pursue_time = 120 * defines.time.second,
+            min_pursue_time = 120 * second,
             attack_parameters = {
                 type = "projectile",
                 range_mode = "bounding-box-to-bounding-box",
@@ -110,12 +110,12 @@ function ErmZerg.make_broodling(level)
                 cooldown_deviation = 0.1,
                 damage_modifier = ERM_UnitHelper.get_damage(base_physical_damage, incremental_physical_damage,  level),
                 ammo_type = ERM_UnitHelper.make_unit_melee_ammo_type(8),
-                sound = ZergSound.broodling_attack(0.5),
+                sound = ZergSound.broodling_attack(0.9),
                 ammo_category = "biological",
                 animation = AnimationDB.get_layered_animations("units", name, "attack")
             },
 
-            distance_per_frame = 0.16,
+            distance_per_frame = 0.24,
             run_animation = AnimationDB.get_layered_animations("units", name, "run"),
             created_effect = {
                 type = "direct",
@@ -135,7 +135,7 @@ function ErmZerg.make_broodling(level)
                     effect_id = TIME_TO_LIVE_DIED,
                 },
             },
-            dying_sound = ZergSound.enemy_death(name, 0.5),
+            dying_sound = ZergSound.enemy_death(name, 0.9),
             corpse = MOD_NAME .. "--" ..name .. "-corpse"
         },
         {

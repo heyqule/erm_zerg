@@ -8,8 +8,7 @@ data:extend{
     {
         type = "autoplace-control",
         name = AUTOCONTROL_NAME,
-        richness = false, --??
-        order = "erm_zerg_enemy_base",
+        order = AUTOCONTROL_NAME,
         category = "enemy",
         can_be_disabled = false
     },
@@ -40,7 +39,7 @@ data:extend{
                              spot_radius_expression = spot_radius_expression,\z
                              spot_favorability_expression = 1,\z
                              seed0 = map_seed,\z
-                             seed1 = 123,\z
+                             seed1 = 2345643,\z
                              region_size = 512,\z
                              candidate_point_count = 100,\z
                              hard_region_target_quantity = 0,\z

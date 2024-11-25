@@ -58,8 +58,8 @@ data:extend({
         direction_only = true,
         collision_box = {{-0.5,-0.5},{0.5,0.5}},
         force_condition = "not-same",
-        hit_collision_mask = { layers = {player = true, train = true, transport_belt = true, [ERMDataHelper.getFlyingLayerName()] =  true} },
-        hit_at_collision_position = true,
+        hit_collision_mask = { layers = {player = true, train = true, rail=true, transport_belt=true, trigger_target=true, [ERMDataHelper.getFlyingLayerName()] =  true} },
+        hit_at_collision_position = false,
 
         action = {
             type = "direct",
@@ -168,6 +168,3 @@ data:extend({
         animations = AnimationDB.get_layered_animations("projectiles","scourge_explosion","explosion")
     }
 })
-
-print("--graphic debug--")
-print(serpent.block(data.raw.explosion["erm_zerg--colony-explosion"].animations))

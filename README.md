@@ -7,7 +7,12 @@ Discord:  [https://discord.gg/BwWXygyEyQ](https://discord.gg/BwWXygyEyQ)
 
 ERM - Features Reel: [https://www.youtube.com/watch?v=phLRReAjxHA](https://www.youtube.com/watch?v=phLRReAjxHA)
 
-##### Changes in 1.20
+#### Changes in 2.0
+- Support Factorio 2.0
+- Default to HD graphic. erm_zerg_hd is no longer required.
+- [space-age] Zerg on Vulcanus.  Demolish pairs them as nydus worms.
+- [space-age] Planet Char as new planet. Home of Legendary forces.
+- This is an experimental release.
 
 
 ##### Licenses
@@ -19,9 +24,7 @@ However, Starcraft graphic and sound assets are properties of Blizzard Entertain
 
 
 # Features
-All units start with same base health point as original Starcraft. They have unique health multiplier to balance bullet damage on higher levels.
-
-Weak to electric, laser and cold (-5%)
+All units start with same base health point as original Starcraft. They have unique health multiplier to balance bullet damage on higher tiers.
 
 #### Tier 1 Units
 
@@ -64,6 +67,4 @@ Weak to electric, laser and cold (-5%)
 ##### Ultralisk
 - Attack: Physical (3 radius AOE)
 
-Physical resistance: 95
-Weak elemental resistance: 85
-Elemental resistance: 90
+Physical resistance: 85, Weak elemental resistance: 75, Elemental resistance: 80 with some exceptions.

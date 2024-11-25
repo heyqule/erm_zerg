@@ -61,4 +61,58 @@ function CustomAttacks.process_self_destruct(event)
     end
 end
 
+---
+--- Handles aftermath of demolisher unit attack, process 20 units per batch.
+--- Either build a base or kill themselves
+---
+function CustomAttacks.demolisher_units_attack()
+    local i = 0
+    local unit_group = {}
+    for surface, units in pairs(storage.demolisher_units) do
+        for key, unit_data in pairs(units) do
+            local unit = unit_data.entity
+            if unit.valid then
+                local commandable = unit.commandable
+                if (commandable.has_command == false or
+                        commandable.command.type == defines.command.wander or
+                        (commandable.command.type == defines.command.compound and commandable.command.commands[1].type == defines.command.wander)
+                ) then
+                    table.insert(unit_group, unit)
+                    storage.demolisher_units[surface][key] = nil
+                end
+            elseif unit.valid == false then
+                storage.demolisher_units[surface][key] = nil
+            end
+            i = i + 1
+            if i == 20 then
+                break
+            end
+        end
+
+        local surface_group
+        for _, unit in pairs(unit_group) do
+            if surface_group == nil then
+                surface_group = unit.surface.create_unit_group({position = unit.position, force = unit.force})
+            end
+
+            surface_group.add_member(unit)
+        end
+
+        if surface_group then
+            --- either build base or die.
+            if CustomAttacks.can_spawn(33) then
+                remote.call("enemyracemanager", "build_base_formation", surface_group)
+            else
+                remote.call("enemyracemanager", "process_attack_position", {
+                    group = surface_group,
+                    distraction = defines.distraction.by_anything,
+                    target_force = 'player',
+                })
+            end
+        end
+    end
+
+
+end
+
 return CustomAttacks

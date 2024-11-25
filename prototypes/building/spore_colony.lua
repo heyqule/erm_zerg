@@ -3,13 +3,13 @@
 --- Created by heyqule.
 --- DateTime: 12/22/2020 12:37 AM
 ---
-require("__stdlib__/stdlib/utils/defines/time")
+
 
 local ERM_UnitHelper = require("__enemyracemanager__/lib/rig/unit_helper")
-local ERM_UnitTint = require("__enemyracemanager__/lib/rig/unit_tint")
+local GlobalConfig = require("__enemyracemanager__/lib/global_config")
 local ERM_DebugHelper = require("__enemyracemanager__/lib/debug_helper")
 local ERM_Config = require("__enemyracemanager__/lib/global_config")
-local ZergSound = require("__erm_zerg__/prototypes/sound")
+local ZergSound = require("__erm_zerg_hd_assets__/sound")
 local AnimationDB = require("__erm_zerg_hd_assets__/animation_db")
 
 local enemy_autoplace = require ("__enemyracemanager__/prototypes/enemy-autoplace")
@@ -70,14 +70,14 @@ function ErmZerg.make_spore_colony(level)
         {
             type = "turret",
             name = MOD_NAME .. "--" .. name .. "--" .. level,
-            localised_name = { "entity-name." .. MOD_NAME .. "--" .. name, tostring(level) },
+            localised_name = { "entity-name." .. MOD_NAME .. "--" .. name, GlobalConfig.QUALITY_MAPPING[level] },
             icon = "__erm_zerg_hd_assets__/graphics/entity/icons/buildings/advisor.png",
             icon_size = 64,
             flags = { "placeable-player", "placeable-enemy",  "breaths-air" },
             max_health = ERM_UnitHelper.get_building_health(hitpoint, max_hitpoint_multiplier,  level),
-            order = MOD_NAME .. "--" .. name .. "--".. level,
+            order = MOD_NAME .. "--building--" .. name .. "--".. level,
             subgroup = "enemies",
-            map_color = ERM_UnitHelper.format_map_color(settings.startup["erm_zerg-map-color"].value),
+            map_color = ERM_UnitHelper.format_map_color(settings.startup["enemy_erm_zerg-map-color"].value),
             resistances = {
                 { type = "acid", percent = ERM_UnitHelper.get_resistance(base_acid_resistance, incremental_acid_resistance,  level) },
                 { type = "poison", percent = ERM_UnitHelper.get_resistance(base_acid_resistance, incremental_acid_resistance,  level) },
@@ -88,7 +88,7 @@ function ErmZerg.make_spore_colony(level)
                 { type = "electric", percent = ERM_UnitHelper.get_resistance(base_electric_resistance, incremental_electric_resistance,  level) },
                 { type = "cold", percent = ERM_UnitHelper.get_resistance(base_cold_resistance, incremental_cold_resistance,  level) }
             },
-            healing_per_tick = ERM_UnitHelper.get_building_healing(hitpoint, max_hitpoint_multiplier,  level, true),
+            healing_per_tick = ERM_UnitHelper.get_building_healing(hitpoint, max_hitpoint_multiplier,  level),
             collision_box = collision_box,
             map_generator_bounding_box = map_generator_bounding_box,
             selection_box = selection_box,
@@ -96,15 +96,15 @@ function ErmZerg.make_spore_colony(level)
             rotation_speed = 1,
             corpse = MOD_NAME.."--small-base-corpse",
             dying_explosion = MOD_NAME.."--building-explosion-small",
-            dying_sound = ZergSound.building_dying_sound(0.75),
+            dying_sound = ZergSound.building_dying_sound(0.9),
             call_for_help_radius = 50,
             folded_speed = 0.01,
             folded_speed_secondary = 0.024,
             folded_animation = folded_animation(),
             graphics_set = {},
-            working_sound = ZergSound.spore_idle(0.75),
+            working_sound = ZergSound.spore_idle(1),
             autoplace = enemy_autoplace.enemy_worm_autoplace({
-                probability_expression = "erm_zerg_autoplace_base(2, 1000012)",
+                probability_expression = "erm_zerg_autoplace_base(0, 2)",
                 force = FORCE_NAME,
                 control = AUTOCONTROL_NAME
             }),
@@ -122,7 +122,7 @@ function ErmZerg.make_spore_colony(level)
                 warmup = 12,
                 use_shooter_direction = true,
                 lead_target_for_projectile_speed = 0.2 * 0.75 * 1.5 * 1.5,
-                sound = ZergSound.sunken_attack(0.75),
+                sound = ZergSound.sunken_attack(0.9),
                 ammo_type = {
                     category = "biological",
                     action = {

@@ -1,17 +1,29 @@
 ---------------------------------------------------------------------------------------------------
 Version: 2.0.0
-Date: ??-??-??
+Date: 2024-11-25
 
   Features:
     - Update for Factorio 2.0
     - Default to HD graphic and removed the classic graphics.
-    - Replaced leveling system with quality system to determine enemy stats.
-    - [space-age] Added planet Char.  Legendary units spawn in there.  You may encounter boss(alpha) as well.
-    - [space-age] Demolishers join zerg as an active nydus worm.
-    - [space-age] Zerg sparsely spawns on Vulcanus.  They evolve differently there as you don't pollute on vulcanus.
+    - Utilized 2.0 autoplace and noise functions.
+    - Replaced leveling system with quality spawning system to determine enemy stats.
+    - Added tips and tricks
+    - Hatchery, Lair and Hive can be captured as captive biter spawner.  They become biter afterward.
+    - [space-age] [Planet Char]
+    - Only legendary units spawn in there.
+    - Zerg units hide in asteroid in the routes to Char.  You'll encounter Epic and a few Legendary units.
+    - Planet features are subject to change.
+    - [space-age] [Zerg on Vulcanus]
+    - Enable it in startup tab. Default to OFF until stable release.
+    - When this is enabled, Demolishers join zerg as an active nydus worm.
+    - Spawns attack group periodically.
+
 
   Changes:
     - Sound adjustments to make them sound less busy.
+    - Health adjustments, slightly higher than before on higher tiers.
+    - Max resistance lower from 85-95% to 70-85% with some exceptions.
+    - Increased unit movement speed.
 
 ---------------------------------------------------------------------------------------------------
 Version: 1.23.1

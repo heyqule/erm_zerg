@@ -3,18 +3,18 @@
 --- Created by heyqule.
 --- DateTime: 12/21/2020 4:42 PM
 ---
-
-require("__stdlib__/stdlib/utils/defines/time")
-
 local ERM_UnitHelper = require("__enemyracemanager__/lib/rig/unit_helper")
-local ERM_UnitTint = require("__enemyracemanager__/lib/rig/unit_tint")
+local GlobalConfig = require("__enemyracemanager__/lib/global_config")
 local ERM_DebugHelper = require("__enemyracemanager__/lib/debug_helper")
-local ZergSound = require("__erm_zerg__/prototypes/sound")
+local ZergSound = require("__erm_zerg_hd_assets__/sound")
 
 -- This is a custom autoplace that accept custom forces. search "autoplace ="
 local CreepFunction = require("__erm_zerg__/prototypes/creep_function")
+--- Predefined function to set up animations
 local AnimationDB = require("__erm_zerg_hd_assets__/animation_db")
+--- Autoplace control
 local enemy_autoplace = require ("__enemyracemanager__/prototypes/enemy-autoplace")
+
 local name = "hive"
 
 -- Hitpoints
@@ -22,32 +22,33 @@ local name = "hive"
 local hitpoint = 2500
 local max_hitpoint_multiplier = settings.startup["enemyracemanager-max-hitpoint-multipliers"].value
 
-
+-- Resistance target for end-game spawners is 45-55%, signature/special building may have 55%+
 -- Handles acid and poison resistance
-local base_acid_resistance = 25
-local incremental_acid_resistance = 55
+local base_acid_resistance = 20
+local incremental_acid_resistance = 40
 -- Handles physical resistance
 local base_physical_resistance = 0
-local incremental_physical_resistance = 85
+local incremental_physical_resistance = 65
 -- Handles fire and explosive resistance
 local base_fire_resistance = 10
-local incremental_fire_resistance = 70
+local incremental_fire_resistance = 50
 -- Handles laser and electric resistance
 local base_electric_resistance = 0
-local incremental_electric_resistance = 75
+local incremental_electric_resistance = 60
 -- Handles cold resistance
 local base_cold_resistance = 0
-local incremental_cold_resistance = 75
+local incremental_cold_resistance = 55
 
--- Animation Settings
-local unit_scale = 2
 local pollution_absorption_absolute = 300
--- Spawning cooldown is based on evolution factor
+
+-- Spawning cooldown is based on evolution factor, base value is 10s
 local spawning_cooldown = { 600, 300 }
 local spawning_radius = 10
 
+-- how many friend can it spawn and own.
 local max_count_of_owned_units = 16
 local max_friends_around_to_spawn = 10
+
 --- Spawn Table
 --- This control how unit spawns based on evolution factor.  It divided into 6 sections by 0.2.
 --- ERM have 3 tiers, Tier 1 - 0.0 - 0.4, Tier 2 - 0.4 - 0.8, Tier 3 - 0.8 - 1.0
@@ -83,16 +84,19 @@ function ErmZerg.make_hive(level)
         {
             type = "unit-spawner",
             name = MOD_NAME .. "--" .. name .. "--" .. level,
-            localised_name = { "entity-name." .. MOD_NAME .. "--" .. name, tostring(level) },
+            --- Quality_mapping conver from number value to text.
+            localised_name = { "entity-name." .. MOD_NAME .. "--" .. name, GlobalConfig.QUALITY_MAPPING[level] },
             icon = "__erm_zerg_hd_assets__/graphics/entity/icons/buildings/advisor.png",
             icon_size = 64,
             flags = { "placeable-player", "placeable-enemy", "breaths-air" },
             max_health = ERM_UnitHelper.get_building_health(hitpoint, max_hitpoint_multiplier,  level),
-            order = MOD_NAME .. "--" .. name .. "--".. level,
+            --- Order should be grouped by building / units
+            order = MOD_NAME .. "--building--" .. name .. "--".. level,
             subgroup = "enemies",
-            map_color = ERM_UnitHelper.format_map_color(settings.startup["erm_zerg-map-color"].value),
-            working_sound = ZergSound.building_working_sound(name, 0.75),
-            dying_sound = ZergSound.building_dying_sound(0.75),
+            --- Map color uses your mod's color config
+            map_color = ERM_UnitHelper.format_map_color(settings.startup["enemy_erm_zerg-map-color"].value),
+            working_sound = ZergSound.building_working_sound(name, 0.9),
+            dying_sound = ZergSound.building_dying_sound(0.9),
             resistances = {
                 { type = "acid", percent = ERM_UnitHelper.get_resistance(base_acid_resistance, incremental_acid_resistance,  level) },
                 { type = "poison", percent = ERM_UnitHelper.get_resistance(base_acid_resistance, incremental_acid_resistance,  level) },
@@ -127,14 +131,18 @@ function ErmZerg.make_hive(level)
             -- "The number or spitter spwners should be roughly equal to the number of biter spawners(regardless of difficulty)."
             -- (2018-12-07)
             autoplace = enemy_autoplace.enemy_spawner_autoplace({
-                probability_expression = "erm_zerg_autoplace_base(0, 1000004)",
+                probability_expression = "erm_zerg_autoplace_base(0, 9)",
                 force = FORCE_NAME,
                 control = AUTOCONTROL_NAME
             }),
             call_for_help_radius = 50,
-            -- Remove the following if you don"t want creep under your base.
+            -- Remove the following if you don't use creep like decoration under your base.
             spawn_decorations_on_expansion = true,
             spawn_decoration =  CreepFunction.getSpawnerCreep(),
         }
     })
+
+    if feature_flags.space_travel then
+        data.raw["unit-spawner"][MOD_NAME .. "--" .. name .. "--" .. level].captured_spawner_entity = "captive-biter-spawner"
+    end
 end

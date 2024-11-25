@@ -7,7 +7,7 @@
 local SharedFunctions = {}
 
 function SharedFunctions.getSpawnerCreep()
-    if settings.startup["erm_zerg-enable_floor_decals"].value then
+    if settings.startup["enemy_erm_zerg-enable_floor_decals"].value then
         return {
             {
                 decorative = "creep-decal",

@@ -6,19 +6,17 @@
 -- To change this template use File | Settings | File Templates.
 --
 
-local Game = require("__stdlib__/stdlib/game")
+local ForceHelper = require("__enemyracemanager__/lib/helper/force_helper")
 
-local ErmConfig = require("__enemyracemanager__/lib/global_config")
-local ErmForceHelper = require("__enemyracemanager__/lib/helper/force_helper")
-local ErmRaceSettingsHelper = require("__enemyracemanager__/lib/helper/race_settings_helper")
-
-local Event = require("__stdlib__/stdlib/event/event")
-local String = require("__stdlib__/stdlib/utils/string")
 local CustomAttacks = require("__erm_zerg__/scripts/custom_attacks")
+local AttackGroupBeaconProcessor = require("__enemyracemanager__/lib/attack_group_beacon_processor")
 
 require("__erm_zerg__/global")
 -- Constants
 
+local using_demolisher_nydus_worm = script.feature_flags.space_travel
+
+local zerg_on_vulcanus = script.feature_flags.space_travel and settings.startup["enemy_erm_zerg-on_vulcanus"].value
 ---
 --- Enemy Force initialization.
 ---
@@ -30,15 +28,18 @@ local createRace = function()
 
     force.ai_controllable = true;
     force.disable_research()
-    force.friendly_fire = false;
+    force.friendly_fire = true;
 
     if settings.startup["enemyracemanager-free-for-all"].value then
-        ErmForceHelper.set_friends(game, FORCE_NAME, false)
+        ForceHelper.set_friends(game, FORCE_NAME, false)
     else
-        ErmForceHelper.set_friends(game, FORCE_NAME, true)
+        ForceHelper.set_friends(game, FORCE_NAME, true)
     end
 
-    ErmForceHelper.set_neutral_force(game, FORCE_NAME)
+    ForceHelper.set_neutral_force(game, FORCE_NAME)
+
+    --- store units created by demolisher for additional evil processing. :)
+    storage.demolisher_units = storage.demolisher_units or {}
 end
 
 ---
@@ -52,7 +53,6 @@ local addRaceSettings = function()
 
     race_settings.race =  race_settings.race or MOD_NAME
     race_settings.label = {"gui.label-erm-zerg"}
-    race_settings.level =  race_settings.level or 1
     race_settings.tier =  race_settings.tier or 1
     race_settings.evolution_point =  race_settings.evolution_point or 0
     race_settings.evolution_base_point =  race_settings.evolution_base_point or 0
@@ -111,6 +111,7 @@ local addRaceSettings = function()
         {{"zergling","ultralisk","defiler"}, {6, 3, 1}, 30},
         {{"zergling", "hydralisk", "lurker", "ultralisk"}, {4, 2, 1, 1}, 25},
         {{"zergling", "hydralisk", "lurker", "ultralisk", "defiler"}, {3, 2, 1, 2, 1}, 20},
+        {{"zergling", "mutalisk", "ultralisk", "defiler"}, {4, 2, 1, 1}, 30},
     }
     race_settings.featured_flying_groups = {
         {{"mutalisk"}, {1}, 50},
@@ -118,17 +119,21 @@ local addRaceSettings = function()
         {{"mutalisk", "devourer", "queen" }, {4,2,1}, 90},
         {{"mutalisk", "guardian", "overlord" }, {4,2,1}, 80},
         {{"mutalisk", "queen","devourer", "guardian"}, {4, 1, 2, 2}, 75},
+        {{"overlord", "mutalisk"}, {1, 2}, 50 },
+        {{"overlord", "mutalisk", "guardian"}, {1,3,2}, 50},
     }
 
     race_settings.boss_building = "overmind"
+    --- used to do pathing.
     race_settings.pathing_unit = "zergling"
+    --- used for collision checks. It's the largest ground unit.
     race_settings.colliding_unit = "ultralisk"
+    race_settings.home_planet = "char"
     race_settings.boss_tier = race_settings.boss_tier or 1
     race_settings.boss_kill_count = race_settings.boss_kill_count or 0
 
-    --if game.active_mods["Krastorio2"] then
-    --    race_settings.enable_k2_creep = settings.startup["erm_zerg-k2-creep"].value
-    --end
+    race_settings.structure_killed_count_by_planet = {}
+    race_settings.unit_killed_count_by_planet = {}
 
     remote.call("enemyracemanager", "register_race", race_settings)
 
@@ -136,17 +141,40 @@ local addRaceSettings = function()
     CustomAttacks.get_race_settings(MOD_NAME, true)
 end
 
-Event.on_init(function(event)
+--- Update world entities if required.
+local update_world = function()
+    --- Insert autoplace into existing vulcanus surface
+    local vulcanus = game.surfaces["vulcanus"]
+    if vulcanus and zerg_on_vulcanus
+    then
+        --- =_= map_gen_settings write only support writing the whole block.
+        local map_gen = vulcanus.map_gen_settings
+        map_gen.autoplace_controls[AUTOCONTROL_NAME] =
+            vulcanus.planet.prototype.map_gen_settings.autoplace_controls[AUTOCONTROL_NAME]
+        vulcanus.map_gen_settings = map_gen
+
+        --- hmmm.. replacing the demolishers marks the area as explored.  Just swap the force for now.
+        local demolishers = { "small-demolisher","medium-demolisher","big-demolisher" }
+        local entities = vulcanus.find_entities_filtered({name = demolishers })
+        for _, entity in pairs(entities) do
+            entity.force = FORCE_NAME
+        end
+    end
+end
+
+script.on_init(function(event)
     createRace()
     addRaceSettings()
+    update_world()
 end)
 
-Event.on_load(function(event)
+script.on_load(function(event)
 end)
 
-Event.on_configuration_changed(function(event)
+script.on_configuration_changed(function(event)
     createRace()
     addRaceSettings()
+    update_world()
 end)
 
 local attack_functions = {
@@ -176,9 +204,13 @@ local attack_functions = {
     end,
     [UNITS_SPAWN_ATTACK] = function(args)
         CustomAttacks.process_batch_units(args)
+    end,
+    [NYDUS_DEATH_ATTACK] = function(args)
+        CustomAttacks.process_batch_units(args)
     end
 }
-Event.register(defines.events.on_script_trigger_effect, function(event)
+--- Handles custom attacks
+script.on_event(defines.events.on_script_trigger_effect, function(event)
     if  attack_functions[event.effect_id] and
         CustomAttacks.valid(event, MOD_NAME)
     then
@@ -186,29 +218,99 @@ Event.register(defines.events.on_script_trigger_effect, function(event)
     end
 end)
 
+local is_compatible_demolisher = {
+    ["enemy_erm_zerg--small-demolisher"] =  true,
+    ["enemy_erm_zerg--medium-demolisher"] =  true,
+    ["enemy_erm_zerg--big-demolisher"] =  true,
+}
 
-Event.register(defines.events.on_segment_entity_created, function(event)
-    -- Change demolish to zerg force, hmm.. doesn't look realistic when building survives
-    --event.entity.force = FORCE_NAME
+local demolisher_name_filter = {
+    "enemy_erm_zerg--small-demolisher","enemy_erm_zerg--medium-demolisher","enemy_erm_zerg--big-demolisher"
+}
 
-    -- @TODO track them Demolishers.  If they get attacked, they shits zergs
+local on_trigger_created_entity_handlers = {
+    ["segmented-unit"] = function(entity, source)
+        if is_compatible_demolisher[source.name] then
+            entity.force = FORCE_NAME
+            local surface_name = entity.surface.name
+            if storage.demolisher_units[surface_name] == nil then
+                storage.demolisher_units[surface_name] = {}
+            end
+
+            storage.demolisher_units[surface_name][entity.unit_number] = {
+                entity = entity,
+                tick = game.tick
+            }
+        end
+
+        if entity.commandable then
+            remote.call("enemyracemanager", "process_attack_position", {
+                group = entity.commandable,
+                distraction = defines.distraction.by_enemy,
+            })
+        end
+    end
+}
+
+--- Handles custom logic for units spawned by demolisher
+script.on_event(defines.events.on_trigger_created_entity, function(event)
+    local entity = event.entity
+    local source = event.source
+    if on_trigger_created_entity_handlers[source.type] and entity.valid then
+        on_trigger_created_entity_handlers[source.type](entity, source)
+    end
 end)
 
----- Clear time to live unit every 15s.
-Event.on_nth_tick(907, function(event)
+
+script.on_event(defines.events.on_segment_entity_created, function(event)
+    if is_compatible_demolisher[event.entity.name] then
+        event.entity.force = FORCE_NAME
+    end
+end)
+
+script.on_nth_tick(907, function(event)
+    ---- Clear time to live unit every 15s.
     CustomAttacks.clear_time_to_live_units(event)
+
+    ---- Clear demolisher spawned unit. Either make them build base or attack.
+    if using_demolisher_nydus_worm then
+        CustomAttacks.demolisher_units_attack()
+    end
+end)
+
+--- Spawn attack group periodically once evolution reach 1%
+script.on_nth_tick(9 * minute + 13, function(event)
+    local vulcanus = game.surfaces['vulcanus']
+    if vulcanus and zerg_on_vulcanus and CustomAttacks.can_spawn(33) then
+        if game.forces[FORCE_NAME].get_evolution_factor(vulcanus) < 0.01 then
+            return
+        end
+
+        local has_entity = vulcanus.count_entities_filtered({type=AttackGroupBeaconProcessor.get_attackable_entity_types(), limit = 1})
+        if has_entity < 1 then
+            return
+        end
+
+        if CustomAttacks.can_spawn(10) then
+            remote.call("enemyracemanager", "generate_dropship_group", FORCE_NAME, 20, {surface=vulcanus})
+        elseif CustomAttacks.can_spawn(33) then
+            remote.call("enemyracemanager", "generate_flying_group", FORCE_NAME, 30, {surface=vulcanus})
+        else
+            remote.call("enemyracemanager", "generate_attack_group", FORCE_NAME, 80, {surface=vulcanus})
+        end
+    end
 end)
 
 ---
 --- Register required remote interfaces
 ---
-local ErmBossAttack = require("scripts/boss_attacks")
+local BossAttack = require("scripts/boss_attacks")
 ---
 --- Register boss attacks
 --- Interface Name: {race_name}_boss_attacks
 ---
 remote.add_interface("erm_zerg_boss_attacks", {
-    get_attack_data = ErmBossAttack.get_attack_data,
+    get_attack_data = BossAttack.get_attack_data,
 })
 
 ---

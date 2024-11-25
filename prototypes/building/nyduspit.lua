@@ -4,12 +4,12 @@
 --- DateTime: 12/21/2020 4:42 PM
 ---
 
-require("__stdlib__/stdlib/utils/defines/time")
+
 
 local ERM_UnitHelper = require("__enemyracemanager__/lib/rig/unit_helper")
-local ERM_UnitTint = require("__enemyracemanager__/lib/rig/unit_tint")
+local GlobalConfig = require("__enemyracemanager__/lib/global_config")
 local ERM_DebugHelper = require("__enemyracemanager__/lib/debug_helper")
-local ZergSound = require("__erm_zerg__/prototypes/sound")
+local ZergSound = require("__erm_zerg_hd_assets__/sound")
 
 local CreepFunction = require("__erm_zerg__/prototypes/creep_function")
 local AnimationDB = require("__erm_zerg_hd_assets__/animation_db")
@@ -21,22 +21,21 @@ local name = "nyduspit"
 local hitpoint = 250
 local max_hitpoint_multiplier = settings.startup["enemyracemanager-max-hitpoint-multipliers"].value * 2
 
-
 -- Handles acid and poison resistance
-local base_acid_resistance = 25
-local incremental_acid_resistance = 55
+local base_acid_resistance = 20
+local incremental_acid_resistance = 30
 -- Handles physical resistance
 local base_physical_resistance = 0
-local incremental_physical_resistance = 85
+local incremental_physical_resistance = 55
 -- Handles fire and explosive resistance
 local base_fire_resistance = 10
-local incremental_fire_resistance = 70
+local incremental_fire_resistance = 40
 -- Handles laser and electric resistance
 local base_electric_resistance = 0
-local incremental_electric_resistance = 75
+local incremental_electric_resistance = 50
 -- Handles cold resistance
 local base_cold_resistance = 0
-local incremental_cold_resistance = 75
+local incremental_cold_resistance = 45
 
 -- Animation Settings
 local unit_scale = 2
@@ -76,16 +75,16 @@ function ErmZerg.make_nyduspit(level)
         {
             type = "unit-spawner",
             name = MOD_NAME .. "--" .. name .. "--" .. level,
-            localised_name = { "entity-name." .. MOD_NAME .. "--" .. name, tostring(level) },
+            localised_name = { "entity-name." .. MOD_NAME .. "--" .. name, GlobalConfig.QUALITY_MAPPING[level] },
             icon = "__erm_zerg_hd_assets__/graphics/entity/icons/buildings/advisor.png",
             icon_size = 64,
             flags = { "placeable-player", "placeable-enemy", "breaths-air" },
             max_health = ERM_UnitHelper.get_building_health(hitpoint, max_hitpoint_multiplier,  level),
-            order = MOD_NAME .. "--" .. name .. "--".. level,
+            order = MOD_NAME .. "--building--" .. name .. "--".. level,
             subgroup = "enemies",
-            map_color = ERM_UnitHelper.format_map_color(settings.startup["erm_zerg-map-color"].value),
-            working_sound = ZergSound.building_working_sound(name, 0.75),
-            dying_sound = ZergSound.building_dying_sound(0.75),
+            map_color = ERM_UnitHelper.format_map_color(settings.startup["enemy_erm_zerg-map-color"].value),
+            working_sound = ZergSound.building_working_sound(name, 0.9),
+            dying_sound = ZergSound.building_dying_sound(0.9),
             resistances = {
                 { type = "acid", percent = ERM_UnitHelper.get_resistance(base_acid_resistance, incremental_acid_resistance,  level) },
                 { type = "poison", percent = ERM_UnitHelper.get_resistance(base_acid_resistance, incremental_acid_resistance,  level) },
@@ -120,7 +119,7 @@ graphics_set = {
             -- "The number or spitter spwners should be roughly equal to the number of biter spawners(regardless of difficulty)."
             -- (2018-12-07)
             autoplace = enemy_autoplace.enemy_spawner_autoplace({
-                probability_expression = "erm_zerg_autoplace_base(0, 1000008)",
+                probability_expression = "erm_zerg_autoplace_base(0, 4)",
                 force = FORCE_NAME,
                 control = AUTOCONTROL_NAME
             }),

@@ -4,13 +4,13 @@
 --- DateTime: 12/21/2020 4:42 PM
 ---
 
-require("__stdlib__/stdlib/utils/defines/time")
+
 
 local ERM_UnitHelper = require("__enemyracemanager__/lib/rig/unit_helper")
-local ERM_UnitTint = require("__enemyracemanager__/lib/rig/unit_tint")
+local GlobalConfig = require("__enemyracemanager__/lib/global_config")
 local ERM_DebugHelper = require("__enemyracemanager__/lib/debug_helper")
 local ERM_Config = require("__enemyracemanager__/lib/global_config")
-local ZergSound = require("__erm_zerg__/prototypes/sound")
+local ZergSound = require("__erm_zerg_hd_assets__/sound")
 
 -- This is a custom autoplace that accept custom forces. search "autoplace ="
 local CreepFunction = require("__erm_zerg__/prototypes/creep_function")
@@ -25,20 +25,20 @@ local max_hitpoint_multiplier = settings.startup["enemyracemanager-max-hitpoint-
 
 
 -- Handles acid and poison resistance
-local base_acid_resistance = 25
-local incremental_acid_resistance = 55
+local base_acid_resistance = 20
+local incremental_acid_resistance = 30
 -- Handles physical resistance
 local base_physical_resistance = 0
-local incremental_physical_resistance = 85
+local incremental_physical_resistance = 55
 -- Handles fire and explosive resistance
 local base_fire_resistance = 10
-local incremental_fire_resistance = 70
+local incremental_fire_resistance = 40
 -- Handles laser and electric resistance
 local base_electric_resistance = 0
-local incremental_electric_resistance = 75
+local incremental_electric_resistance = 50
 -- Handles cold resistance
 local base_cold_resistance = 0
-local incremental_cold_resistance = 75
+local incremental_cold_resistance = 45
 
 -- Animation Settings
 local unit_scale = 2
@@ -83,15 +83,15 @@ function ErmZerg.make_boss_hive(level, hitpoint)
         {
             type = "unit-spawner",
             name = MOD_NAME .. "--" .. name .. "--" .. level,
-            localised_name = { "entity-name." .. MOD_NAME .. "--" .. name, tostring(level) },
+            localised_name = { "entity-name." .. MOD_NAME .. "--" .. name, GlobalConfig.QUALITY_MAPPING[level] },
             icon = "__erm_zerg_hd_assets__/graphics/entity/icons/buildings/advisor.png",
             icon_size = 64,
             flags = { "placeable-player", "placeable-enemy", "breaths-air" },
             max_health = hitpoint,
-            order = MOD_NAME .. "--" .. name .. "--".. level,
+            order = MOD_NAME .. "--building--" .. name .. "--".. level,
             subgroup = "enemies",
-            working_sound = ZergSound.building_working_sound("hive", 0.75),
-            dying_sound = ZergSound.building_dying_sound(0.75),
+            working_sound = ZergSound.building_working_sound("hive", 0.9),
+            dying_sound = ZergSound.building_dying_sound(0.9),
             resistances = {
                 { type = "acid", percent = ERM_UnitHelper.get_resistance(base_acid_resistance, incremental_acid_resistance,  level) },
                 { type = "poison", percent = ERM_UnitHelper.get_resistance(base_acid_resistance, incremental_acid_resistance,  level) },
@@ -103,7 +103,7 @@ function ErmZerg.make_boss_hive(level, hitpoint)
                 { type = "cold", percent = ERM_UnitHelper.get_resistance(base_cold_resistance, incremental_cold_resistance,  level) }
             },
             healing_per_tick = 0,
-            map_color = ERM_UnitHelper.format_map_color(settings.startup["erm_zerg-map-color"].value),
+            map_color = ERM_UnitHelper.format_map_color(settings.startup["enemy_erm_zerg-map-color"].value),
             collision_box = collision_box,
             map_generator_bounding_box = map_generator_bounding_box,
             selection_box = selection_box,

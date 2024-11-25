@@ -11,38 +11,38 @@
 -- Time: 9:39 PM
 -- To change this template use File | Settings | File Templates.
 --
-require("__stdlib__/stdlib/utils/defines/time")
+
 
 
 local ERM_UnitHelper = require("__enemyracemanager__/lib/rig/unit_helper")
-local ERM_UnitTint = require("__enemyracemanager__/lib/rig/unit_tint")
+local GlobalConfig = require("__enemyracemanager__/lib/global_config")
 local ERMDataHelper = require("__enemyracemanager__/lib/rig/data_helper")
 local ERM_DebugHelper = require("__enemyracemanager__/lib/debug_helper")
-local ZergSound = require("__erm_zerg__/prototypes/sound")
+local ZergSound = require("__erm_zerg_hd_assets__/sound")
 local biter_ai_settings = require ("__base__.prototypes.entity.biter-ai-settings")
 local AnimationDB = require("__erm_zerg_hd_assets__/animation_db")
 local name = "scourge"
 
 
 local hitpoint = 25
-local max_hitpoint_multiplier = settings.startup["enemyracemanager-max-hitpoint-multipliers"].value
+local max_hitpoint_multiplier = settings.startup["enemyracemanager-max-hitpoint-multipliers"].value * 5
 
 
 -- Handles acid and poison resistance
-local base_acid_resistance = 20
-local incremental_acid_resistance = 70
+local base_acid_resistance = 25
+local incremental_acid_resistance = 50
 -- Handles physical resistance
 local base_physical_resistance = 0
-local incremental_physical_resistance = 95
+local incremental_physical_resistance = 80
 -- Handles fire and explosive resistance
 local base_fire_resistance = 10
-local incremental_fire_resistance = 80
+local incremental_fire_resistance = 65
 -- Handles laser and electric resistance
 local base_electric_resistance = 0
-local incremental_electric_resistance = 85
+local incremental_electric_resistance = 70
 -- Handles cold resistance
 local base_cold_resistance = 0
-local incremental_cold_resistance = 85
+local incremental_cold_resistance = 70
 
 -- Handles explosion damages
 
@@ -57,8 +57,8 @@ local incremental_attack_speed = 60
 local attack_range = 1
 
 
-local base_movement_speed = 0.2
-local incremental_movement_speed = 0.15
+local base_movement_speed = 0.3
+local incremental_movement_speed = 0.3
 
 -- Misc settings
 local vision_distance = ERM_UnitHelper.get_vision_distance(attack_range)
@@ -77,17 +77,17 @@ function ErmZerg.make_scourge(level)
         {
             type = "unit",
             name = MOD_NAME .. "--" .. name .. "--" .. level,
-            localised_name = { "entity-name." .. MOD_NAME .. "--" .. name, tostring(level) },
+            localised_name = { "entity-name." .. MOD_NAME .. "--" .. name, GlobalConfig.QUALITY_MAPPING[level] },
             icon = "__erm_zerg_hd_assets__/graphics/entity/icons/units/" .. name .. ".png",
             icon_size = 64,
             flags = { "placeable-enemy", "placeable-player", "placeable-off-grid", "breaths-air" },
             has_belt_immunity = false,
             max_health = ERM_UnitHelper.get_health(hitpoint, max_hitpoint_multiplier,  level),
-            order = MOD_NAME .. "--"  .. name .. "--" .. level,
+            order = MOD_NAME .. "--unit--" .. name .. "--".. level,
             subgroup = "erm-flying-enemies",
-            map_color = ERM_UnitHelper.format_map_color(settings.startup["erm_zerg-map-color"].value),
+            map_color = ERM_UnitHelper.format_map_color(settings.startup["enemy_erm_zerg-map-color"].value),
             shooting_cursor_size = 2,
-            min_pursue_time = 120 * defines.time.second,
+            min_pursue_time = 120 * second,
             resistances = {
                 { type = "acid", percent = ERM_UnitHelper.get_resistance(base_acid_resistance, incremental_acid_resistance,  level) },
                 { type = "poison", percent = ERM_UnitHelper.get_resistance(base_acid_resistance, incremental_acid_resistance,  level) },
@@ -158,11 +158,11 @@ function ErmZerg.make_scourge(level)
                         }
                     },
                 },
-                sound = ZergSound.scourge_attack(0.5),
+                sound = ZergSound.scourge_attack(0.9),
                 animation = AnimationDB.get_layered_animations("units", name, "run")
             },
             render_layer = "wires-above",
-            distance_per_frame = 0.2,
+            distance_per_frame = 0.32,
             run_animation = AnimationDB.get_layered_animations("units", name, "run"),
             created_effect = {
                 type = "direct",
@@ -183,7 +183,7 @@ function ErmZerg.make_scourge(level)
                 },
             },
             dying_explosion = MOD_NAME .. "--" .. name .. "-air-death",
-            dying_sound = ZergSound.enemy_death(name, 0.5),
+            dying_sound = ZergSound.enemy_death(name, 0.9),
 
             corpse = MOD_NAME .. "--" .. name .. "-corpse"
         },
@@ -196,7 +196,7 @@ function ErmZerg.make_scourge(level)
             selection_box = selection_box,
             selectable_in_game = false,
             dying_speed = 0.04,
-            time_before_removed = defines.time.second,
+            time_before_removed = second,
             subgroup = "corpses",
             order = MOD_NAME .. "--" .. name .. level,
             animation = util.empty_sprite(),

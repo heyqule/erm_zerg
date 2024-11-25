@@ -3,13 +3,13 @@
 --- Created by heyqule.
 --- DateTime: 12/22/2020 12:37 AM
 ---
-require("__stdlib__/stdlib/utils/defines/time")
+
 
 local ERM_UnitHelper = require("__enemyracemanager__/lib/rig/unit_helper")
-local ERM_UnitTint = require("__enemyracemanager__/lib/rig/unit_tint")
+local GlobalConfig = require("__enemyracemanager__/lib/global_config")
 local ERM_DebugHelper = require("__enemyracemanager__/lib/debug_helper")
 local ERM_Config = require("__enemyracemanager__/lib/global_config")
-local ZergSound = require("__erm_zerg__/prototypes/sound")
+local ZergSound = require("__erm_zerg_hd_assets__/sound")
 
 
 local AnimationDB = require("__erm_zerg_hd_assets__/animation_db")
@@ -21,7 +21,7 @@ local short_range_name = "sunken_colony_shortrange"
 -- Hitpoints
 
 local hitpoint = 400
-local max_hitpoint_multiplier = settings.startup["enemyracemanager-max-hitpoint-multipliers"].value  * 2
+local max_hitpoint_multiplier = settings.startup["enemyracemanager-max-hitpoint-multipliers"].value * 2
 
 
 -- Handles acid and poison resistance
@@ -75,14 +75,14 @@ function ErmZerg.make_sunken_colony(level)
         {
             type = "turret",
             name = MOD_NAME .. "--" .. name .. "--" .. level,
-            localised_name = { "entity-name." .. MOD_NAME .. "--" .. name, tostring(level) },
+            localised_name = { "entity-name." .. MOD_NAME .. "--" .. name, GlobalConfig.QUALITY_MAPPING[level] },
             icon = "__erm_zerg_hd_assets__/graphics/entity/icons/buildings/advisor.png",
             icon_size = 64,
             flags = { "placeable-player", "placeable-enemy", "breaths-air" },
-            max_health = ERM_UnitHelper.get_building_health(hitpoint, max_hitpoint_multiplier,  level, true),
-            order = MOD_NAME .. "--" .. name .. "--".. level,
+            max_health = ERM_UnitHelper.get_building_health(hitpoint, max_hitpoint_multiplier,  level),
+            order = MOD_NAME .. "--building--" .. name .. "--".. level,
             subgroup = "enemies",
-            map_color = ERM_UnitHelper.format_map_color(settings.startup["erm_zerg-map-color"].value),
+            map_color = ERM_UnitHelper.format_map_color(settings.startup["enemy_erm_zerg-map-color"].value),
             resistances = {
                 { type = "acid", percent = ERM_UnitHelper.get_resistance(base_acid_resistance, incremental_acid_resistance,  level) },
                 { type = "poison", percent = ERM_UnitHelper.get_resistance(base_acid_resistance, incremental_acid_resistance,  level) },
@@ -101,18 +101,18 @@ function ErmZerg.make_sunken_colony(level)
             rotation_speed = 1,
             corpse = MOD_NAME.."--small-base-corpse",
             dying_explosion = MOD_NAME.."--building-explosion-small",
-            dying_sound = ZergSound.building_dying_sound(0.75),
+            dying_sound = ZergSound.building_dying_sound(0.9),
             call_for_help_radius = 50,
             folded_speed = 0.01,
             folded_speed_secondary = 0.01,
             folded_animation = folded_animation(),
             graphics_set = {},
-            working_sound = ZergSound.sunken_idle(0.75),
+            working_sound = ZergSound.sunken_idle(1),
             starting_attack_animation = attack_animation(),
             starting_attack_speed = 0.02,
-            starting_attack_sound = ZergSound.sunken_attack(0.75),
+            starting_attack_sound = ZergSound.sunken_attack(0.9),
             autoplace = enemy_autoplace.enemy_worm_autoplace({
-                probability_expression = "erm_zerg_autoplace_base(2, 1000013)",
+                probability_expression = "erm_zerg_autoplace_base(0, 3)",
                 force = FORCE_NAME,
                 control = AUTOCONTROL_NAME
             }),
@@ -143,7 +143,7 @@ function ErmZerg.make_sunken_colony(level)
                                 },
                                 {
                                     type = "play-sound",
-                                    sound = ZergSound.sunken_hit(0.75),
+                                    sound = ZergSound.sunken_hit(1),
                                 },
                                 {
                                     type = "damage",
@@ -158,14 +158,14 @@ function ErmZerg.make_sunken_colony(level)
         {
             type = "turret",
             name = MOD_NAME .. "--" .. short_range_name .. "--" .. level,
-            localised_name = { "entity-name." .. MOD_NAME .. "--" .. short_range_name, tostring(level) },
+            localised_name = { "entity-name." .. MOD_NAME .. "--" .. short_range_name, GlobalConfig.QUALITY_MAPPING[level] },
             icon = "__erm_zerg_hd_assets__/graphics/entity/icons/buildings/advisor.png",
             icon_size = 64,
             flags = { "placeable-player", "placeable-enemy", "breaths-air" },
-            max_health = ERM_UnitHelper.get_building_health(hitpoint, max_hitpoint_multiplier,  level, true),
-            order = MOD_NAME .. "--" .. name .. "--".. level,
+            max_health = ERM_UnitHelper.get_building_health(hitpoint, max_hitpoint_multiplier,  level),
+            order = MOD_NAME .. "--building--" .. short_range_name .. "--".. level,
             subgroup = "enemies",
-            map_color = ERM_UnitHelper.format_map_color(settings.startup["erm_zerg-map-color"].value),
+            map_color = ERM_UnitHelper.format_map_color(settings.startup["enemy_erm_zerg-map-color"].value),
             resistances = {
                 { type = "acid", percent = ERM_UnitHelper.get_resistance(base_acid_resistance, incremental_acid_resistance,  level) },
                 { type = "poison", percent = ERM_UnitHelper.get_resistance(base_acid_resistance, incremental_acid_resistance,  level) },
@@ -184,16 +184,16 @@ function ErmZerg.make_sunken_colony(level)
             rotation_speed = 1,
             corpse = MOD_NAME.."--small-base-corpse",
             dying_explosion = MOD_NAME.."--building-explosion-small",
-            dying_sound = ZergSound.building_dying_sound(0.75),
+            dying_sound = ZergSound.building_dying_sound(0.9),
             call_for_help_radius = 50,
             folded_speed = 0.01,
             folded_speed_secondary = 0.01,
             folded_animation = folded_animation(),
             graphics_set = {},
-            working_sound = ZergSound.sunken_idle(0.75),
+            working_sound = ZergSound.sunken_idle(1),
             starting_attack_animation = attack_animation(),
             starting_attack_speed = 0.02,
-            starting_attack_sound = ZergSound.sunken_attack(0.75),
+            starting_attack_sound = ZergSound.sunken_attack(0.9),
             --autoplace = nil
             attack_from_start_frame = true,
             prepare_range = attack_range,
@@ -222,7 +222,7 @@ function ErmZerg.make_sunken_colony(level)
                                 },
                                 {
                                     type = "play-sound",
-                                    sound = ZergSound.sunken_hit(0.75),
+                                    sound = ZergSound.sunken_hit(1),
                                 },
                                 {
                                     type = "damage",
