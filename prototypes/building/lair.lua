@@ -101,7 +101,7 @@ function ErmZerg.make_lair(level)
             collision_box = collision_box,
             map_generator_bounding_box = map_generator_bounding_box,
             selection_box = selection_box,
-    absorptions_per_second = { pollution = { absolute = pollution_absorption_absolute, proportional = 0.01 } },
+            absorptions_per_second = { pollution = { absolute = pollution_absorption_absolute, proportional = 0.01 } },
             corpse = MOD_NAME.."--large-base-corpse",
             dying_explosion = MOD_NAME.."--building-explosion",
             max_count_of_owned_units = max_count_of_owned_units,
@@ -130,4 +130,8 @@ function ErmZerg.make_lair(level)
             spawn_decoration =  CreepFunction.getSpawnerCreep(),
         }
     })
+
+    if feature_flags.space_travel then
+        data.raw["unit-spawner"][MOD_NAME .. "--" .. name .. "--" .. level].captured_spawner_entity = "captive-biter-spawner"
+    end
 end

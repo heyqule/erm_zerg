@@ -1,6 +1,6 @@
 ---------------------------------------------------------------------------------------------------
 Version: 2.0.0
-Date: ??-??-??
+Date: 2024-11-25
 
   Features:
     - Update for Factorio 2.0
@@ -8,6 +8,7 @@ Date: ??-??-??
     - Utilized 2.0 autoplace and noise functions.
     - Replaced leveling system with quality spawning system to determine enemy stats.
     - Added tips and tricks
+    - Hatchery, Lair and Hive can be captured as captive biter spawner.  They become biter afterward.
     - [space-age] [Planet Char]
     - Only legendary units spawn in there.
     - Zerg units hide in asteroid in the routes to Char.  You'll encounter Epic and a few Legendary units.
@@ -23,7 +24,6 @@ Date: ??-??-??
     - Health adjustments, slightly higher than before on higher tiers.
     - Max resistance lower from 85-95% to 70-85% with some exceptions.
     - Increased unit movement speed.
-    - Capturing Hatchery will turn it into Captive Biter Spawner to make biter eggs.
 
 ---------------------------------------------------------------------------------------------------
 Version: 1.23.1
