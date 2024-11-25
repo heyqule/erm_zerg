@@ -10,12 +10,15 @@ simulations.general = {
     init = [[
 require("__core__/lualib/story")
 local sim = game.simulation
-
-
+player = sim.create_test_player{name = "you"}
+sim.camera_player = player
 sim.camera_position = {0, 0}
 sim.camera_zoom = 0.85
 sim.hide_cursor = true
-local surface = game.surfaces[1]
+game.planets["vulcanus"].create_surface()
+local surface = game.surfaces["vulcanus"]
+surface.request_to_generate_chunks({0,0}, 2)
+surface.force_generate_chunk_requests()
 
 
 local tank
@@ -29,6 +32,7 @@ local story_table =
                 for _, ent in pairs(entities) do
                     ent.destroy()
                 end
+                player.teleport({-3,10},surface)
                 tank = surface.create_entity { name="tank", position={0, 10}, force="player" }
                 biter1 = surface.create_entity { name="enemy_erm_zerg--zergling--5", position={-3, -10} }
                 biter2 = surface.create_entity { name="enemy_erm_zerg--broodling--5", position={0, -10} }
