@@ -121,7 +121,7 @@ function ErmZerg.make_lair(level)
             -- "The number or spitter spwners should be roughly equal to the number of biter spawners(regardless of difficulty)."
             -- (2018-12-07)
             autoplace = enemy_autoplace.enemy_spawner_autoplace({
-                probability_expression = "erm_zerg_autoplace_base(0, 7)",
+                probability_expression = "erm_zerg_autoplace_base(0, 10)",
                 force = FORCE_NAME,
                 control = AUTOCONTROL_NAME
             }),

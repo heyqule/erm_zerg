@@ -1,4 +1,19 @@
 ---------------------------------------------------------------------------------------------------
+Version: 2.0.1
+Date: 2024-12-05
+
+  Features:
+    - Re-add support for 2 and 4 way split.
+    - Added Mixed races support for Nauvis in space age 
+    - Improved autoplace pattern
+
+  Changes:
+    - Increased lurker damage from 140 to 220 (110 DPS). (lower tiers changed accordingly by a formula, except normal)
+  
+  Bugfixes:
+    - Fixed a crash for the event on_trigger_created_entity without event.source
+
+---------------------------------------------------------------------------------------------------
 Version: 2.0.0
 Date: 2024-11-25
 

@@ -256,7 +256,7 @@ local on_trigger_created_entity_handlers = {
 script.on_event(defines.events.on_trigger_created_entity, function(event)
     local entity = event.entity
     local source = event.source
-    if on_trigger_created_entity_handlers[source.type] and entity.valid then
+    if source and entity.valid and on_trigger_created_entity_handlers[source.type] then
         on_trigger_created_entity_handlers[source.type](entity, source)
     end
 end)

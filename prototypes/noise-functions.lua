@@ -29,6 +29,8 @@ data:extend{
         -- bases_per_km2 = 10 + 3 * erm_zerg_base_intensity
         expression = "(0.00001 + 0.000003 * erm_zerg_base_intensity) * var('control:"..AUTOCONTROL_NAME..":frequency')"
     },
+    ---- Seed1 must have a different value between each probablity expression.  Otherwise it causes map gen slider conflict.
+    ---- https://forums.factorio.com/viewtopic.php?f=23&t=123582
     {
         type = "noise-expression",
         name = "erm_zerg_base_probability",
@@ -39,7 +41,7 @@ data:extend{
                              spot_radius_expression = spot_radius_expression,\z
                              spot_favorability_expression = 1,\z
                              seed0 = map_seed,\z
-                             seed1 = 2345643,\z
+                             seed1 = 9999999,\z
                              region_size = 512,\z
                              candidate_point_count = 100,\z
                              hard_region_target_quantity = 0,\z

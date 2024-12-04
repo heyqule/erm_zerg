@@ -106,7 +106,7 @@ function ErmZerg.make_spawning_pool(level)
             -- "The number or spitter spwners should be roughly equal to the number of biter spawners(regardless of difficulty)."
             -- (2018-12-07)
             autoplace = enemy_autoplace.enemy_spawner_autoplace({
-                probability_expression = "erm_zerg_autoplace_base(0, 5)",
+                probability_expression = "erm_zerg_autoplace_base(0, 6)",
                 force = FORCE_NAME,
                 control = AUTOCONTROL_NAME
             }),
