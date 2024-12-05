@@ -9,7 +9,7 @@ Date: 2024-12-05
 
   Changes:
     - Increased lurker damage from 140 to 220 (110 DPS). (lower tiers changed accordingly by a formula, except normal)
-  
+
   Bugfixes:
     - Fixed a crash for the event on_trigger_created_entity without event.source
 
