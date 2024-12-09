@@ -1,4 +1,14 @@
 ---------------------------------------------------------------------------------------------------
+Version: 2.0.2
+Date: 2024-12-09
+
+  Changes:
+    - Added map_seed_offset to planet Char
+    - Updated General in tip and trick about biter egg and building capture.
+    - Updated Planet in tip and trick about its WIP state.    
+    - Fixed Locale    
+
+---------------------------------------------------------------------------------------------------
 Version: 2.0.1
 Date: 2024-12-05
 

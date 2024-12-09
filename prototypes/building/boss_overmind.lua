@@ -111,8 +111,10 @@ function ErmZerg.make_boss_hive(level, hitpoint)
             corpse = MOD_NAME.."--large-base-corpse",
             dying_explosion = MOD_NAME.."--building-explosion",
             dying_trigger_effect = {
-                type = "script",
-                effect_id = TRIGGER_BOSS_DIES,
+                {
+                    type = "script",
+                    effect_id = TRIGGER_BOSS_DIES,
+                }
             },
             max_count_of_owned_units = max_count_of_owned_units,
 	            max_friends_around_to_spawn = max_friends_around_to_spawn,

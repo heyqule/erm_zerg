@@ -363,6 +363,7 @@ data:extend({
         magnitude = 1,
         order = "b[char]",
         subgroup = "planets",
+        map_seed_offset = 100010,
         map_gen_settings = char_mapgen,
         pollutant_type = nil,
         solar_power_in_space = 500,
