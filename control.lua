@@ -132,8 +132,8 @@ local addRaceSettings = function()
     race_settings.boss_tier = race_settings.boss_tier or 1
     race_settings.boss_kill_count = race_settings.boss_kill_count or 0
 
-    race_settings.structure_killed_count_by_planet = {}
-    race_settings.unit_killed_count_by_planet = {}
+    race_settings.structure_killed_count_by_planet = race_settings.structure_killed_count_by_planet or {}
+    race_settings.unit_killed_count_by_planet = race_settings.unit_killed_count_by_planet or {}
 
     remote.call("enemyracemanager", "register_race", race_settings)
 
