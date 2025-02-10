@@ -52,8 +52,6 @@ local incremental_acid_damage = 25
 local base_attack_speed = 120
 local incremental_attack_speed = 60
 
--- Animation Settings
-local unit_scale = 1.5
 
 local folded_animation = function()
     return AnimationDB.get_layered_animations("buildings", name, "folded")

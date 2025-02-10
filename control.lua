@@ -17,6 +17,17 @@ require("__erm_zerg__/global")
 local using_demolisher_nydus_worm = script.feature_flags.space_travel
 
 local zerg_on_vulcanus = script.feature_flags.space_travel and settings.startup["enemy_erm_zerg-on_vulcanus"].value
+
+local HOME_PLANET = 'char'
+
+local demolisher_head = {
+    [FORCE_NAME.."--small-demolisher"] =  true,
+    [FORCE_NAME.."--medium-demolisher"] =  true,
+    [FORCE_NAME.."--big-demolisher"] =  true,
+}
+
+local demolisher_names = {"small-demolisher","medium-demolisher","big-demolisher"}
+
 ---
 --- Enemy Force initialization.
 ---
@@ -40,6 +51,9 @@ local createRace = function()
 
     --- store units created by demolisher for additional evil processing. :)
     storage.demolisher_units = storage.demolisher_units or {}
+
+    --- for guerrilla tactic processing
+    storage.guerrilla_distances = storage.guerrilla_distances or {}
 end
 
 ---
@@ -54,8 +68,8 @@ local addRaceSettings = function()
     race_settings.race =  race_settings.race or MOD_NAME
     race_settings.label = {"gui.label-erm-zerg"}
     race_settings.tier =  race_settings.tier or 1
-    race_settings.evolution_point =  race_settings.evolution_point or 0
-    race_settings.evolution_base_point =  race_settings.evolution_base_point or 0
+    race_settings.is_primitive = race_settings.is_primitive or false
+    race_settings.autoplace_name = AUTOCONTROL_NAME
     race_settings.attack_meter = race_settings.attack_meter or 0
     race_settings.attack_meter_total = race_settings.attack_meter_total or 0
     race_settings.last_attack_meter_total = race_settings.last_attack_meter_total or 0
@@ -128,7 +142,9 @@ local addRaceSettings = function()
     race_settings.pathing_unit = "zergling"
     --- used for collision checks. It's the largest ground unit.
     race_settings.colliding_unit = "ultralisk"
-    race_settings.home_planet = "char"
+    race_settings.home_planet = HOME_PLANET
+    race_settings.interplanetary_attack_active = race_settings.interplanetary_attack_active or false
+    
     race_settings.boss_tier = race_settings.boss_tier or 1
     race_settings.boss_kill_count = race_settings.boss_kill_count or 0
 
@@ -154,10 +170,20 @@ local update_world = function()
         vulcanus.map_gen_settings = map_gen
 
         --- hmmm.. replacing the demolishers marks the area as explored.  Just swap the force for now.
-        local demolishers = { "small-demolisher","medium-demolisher","big-demolisher" }
-        local entities = vulcanus.find_entities_filtered({name = demolishers })
+        local entities = vulcanus.find_entities_filtered({name = demolisher_names })
         for _, entity in pairs(entities) do
             entity.force = FORCE_NAME
+        end
+
+        --- Convert segments
+        local seg_entities = vulcanus.find_entities_filtered({type = "segment" })
+        for _, entity in pairs(seg_entities) do
+            for _, name in pairs(demolisher_names) do
+                if string.find(entity.name, name, nil, true) then
+                    entity.force = FORCE_NAME
+                    break;
+                end
+            end
         end
     end
 end
@@ -207,6 +233,9 @@ local attack_functions = {
     end,
     [NYDUS_DEATH_ATTACK] = function(args)
         CustomAttacks.process_batch_units(args)
+    end,
+    [GUERRILLA_ATTACK] = function(args)
+        CustomAttacks.process_guerrilla(args)
     end
 }
 --- Handles custom attacks
@@ -218,19 +247,24 @@ script.on_event(defines.events.on_script_trigger_effect, function(event)
     end
 end)
 
-local is_compatible_demolisher = {
-    ["enemy_erm_zerg--small-demolisher"] =  true,
-    ["enemy_erm_zerg--medium-demolisher"] =  true,
-    ["enemy_erm_zerg--big-demolisher"] =  true,
-}
 
-local demolisher_name_filter = {
-    "enemy_erm_zerg--small-demolisher","enemy_erm_zerg--medium-demolisher","enemy_erm_zerg--big-demolisher"
-}
+local is_compatible_demolisher = function(name)
+    if demolisher_head[name] then
+        return true
+    end
+
+    for _, dname in pairs(demolisher_names) do
+        if string.find(name, dname, nil, true) then
+            return true
+        end 
+    end
+
+    return false
+end
 
 local on_trigger_created_entity_handlers = {
     ["segmented-unit"] = function(entity, source)
-        if is_compatible_demolisher[source.name] then
+        if is_compatible_demolisher(source.name) then
             entity.force = FORCE_NAME
             local surface_name = entity.surface.name
             if storage.demolisher_units[surface_name] == nil then
@@ -263,7 +297,7 @@ end)
 
 
 script.on_event(defines.events.on_segment_entity_created, function(event)
-    if is_compatible_demolisher[event.entity.name] then
+    if is_compatible_demolisher(event.entity.name) then
         event.entity.force = FORCE_NAME
     end
 end)

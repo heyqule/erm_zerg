@@ -30,6 +30,7 @@ BOSS_SPAWN_ATTACK = "emzrg-bs1"
 UNITS_SPAWN_ATTACK = "emzrg-bs2"
 
 NYDUS_DEATH_ATTACK = "emzrg-nd1"
+GUERRILLA_ATTACK = "emzrg-grl"
 
 ZERG_MAP_COLOR = {r=248, g=140, b=20}
 ZERG_TEAM_COLOR = {r=248, g=140, b=20}

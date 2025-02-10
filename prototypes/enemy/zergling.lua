@@ -58,9 +58,6 @@ local vision_distance = ERM_UnitHelper.get_vision_distance(attack_range)
 local pollution_to_join_attack = 4
 local distraction_cooldown = 300
 
--- Animation Settings
-local unit_scale = 1.3
-
 local collision_box = { { -0.25, -0.25 }, { 0.25, 0.25 } }
 local selection_box = { { -0.5, -0.5 }, { 0.5, 0.5 } }
 
@@ -110,7 +107,7 @@ function ErmZerg.make_zergling(level)
                 damage_modifier = ERM_UnitHelper.get_damage(base_physical_damage, incremental_physical_damage,  level),
                 ammo_category = "biological",
                 ammo_type = ERM_UnitHelper.make_unit_melee_ammo_type(10),
-                sound = ZergSound.meele_attack(0.9),
+                sound = ZergSound.zergling_attack(0.9),
                 animation = AnimationDB.get_layered_animations("units", name, "attack")
             },
             distance_per_frame = 0.24,

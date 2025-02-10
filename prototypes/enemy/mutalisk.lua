@@ -46,9 +46,6 @@ local incremental_acid_damage = 5
 
 -- Handles Attack Speed
 
-local base_attack_speed = 120
-local incremental_attack_speed = 60
-
 local base_movement_speed = 0.3
 local incremental_movement_speed = 0.3
 
@@ -56,8 +53,7 @@ local incremental_movement_speed = 0.3
 local pollution_to_join_attack = 50
 local distraction_cooldown = 300
 
--- Animation Settings
-local unit_scale = 1.3
+
 local collision_box = { { -0.25, -0.25 }, { 0.25, 0.25 } }
 local selection_box = { { -0.75, -0.75 }, { 0.75, 0.75 } }
 
@@ -106,19 +102,30 @@ function ErmZerg.make_mutalisk(level)
                 ammo_category = "biological",
                 range = attack_range,
                 min_attack_distance = attack_range - 3,
-                cooldown = ERM_UnitHelper.get_attack_speed(base_attack_speed, incremental_attack_speed,  level),
-                cooldown_deviation = 0.1,
+                cooldown = 5,
                 damage_modifier = ERM_UnitHelper.get_damage(base_acid_damage, incremental_acid_damage,  level),
                 ammo_type = {
                     category = "biological",
                     target_type = "direction",
                     action = {
-                        type = "direct",
-                        action_delivery = {
-                            type = "projectile",
-                            projectile = MOD_NAME.."--mutalisk-projectile",
-                            starting_speed = 0.3,
-                            max_range = GlobalConfig.get_max_projectile_range(),
+                        {
+                            type = "direct",
+                            action_delivery = {
+                                type = "projectile",
+                                projectile = MOD_NAME.."--mutalisk-projectile",
+                                starting_speed = 0.3,
+                                max_range = GlobalConfig.get_max_projectile_range(),
+                            }                            
+                        },
+                        {
+                            type = "direct",
+                            action_delivery = {
+                                type = "instant",
+                                source_effects = {
+                                    type = "script",
+                                    effect_id = GUERRILLA_ATTACK,
+                                }
+                            }
                         }
                     }
                 },

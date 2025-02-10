@@ -38,8 +38,6 @@ local incremental_electric_resistance = 55
 local base_cold_resistance = 0
 local incremental_cold_resistance = 55
 
--- Animation Settings
-local unit_scale = 2
 
 local pollution_absorption_absolute = 200
 local spawning_cooldown = { 600, 300 }

@@ -54,8 +54,7 @@ local incremental_movement_speed = 0.2
 local pollution_to_join_attack = 200
 local distraction_cooldown = 300
 
--- Animation Settings
-local unit_scale = 1.5
+
 local collision_box = { { -0.25, -0.25 }, { 0.25, 0.25 } }
 local selection_box = { { -0.75, -0.75 }, { 0.75, 0.75 } }
 
@@ -145,7 +144,7 @@ function ErmZerg.make_queen(level)
                 lead_target_for_projectile_speed = 5,
                 animation = AnimationDB.get_layered_animations("units", name, "attack")
             },
-
+            render_layer = "wires-above",
             distance_per_frame = 0.32,
             run_animation = AnimationDB.get_layered_animations("units", name, "run"),
             dying_explosion = MOD_NAME .. "--" .. name .. "-air-death",

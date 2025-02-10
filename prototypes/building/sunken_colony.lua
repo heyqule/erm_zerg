@@ -54,8 +54,6 @@ local incremental_physical_damage = 14
 local base_attack_speed = 120
 local incremental_attack_speed = 60
 
--- Animation Settings
-local unit_scale = 1.5
 
 local folded_animation = function()
     return AnimationDB.get_layered_animations("buildings", name, "folded")
@@ -182,6 +180,11 @@ function ErmZerg.make_sunken_colony(level)
             selection_box = selection_box,
             shooting_cursor_size = 4,
             rotation_speed = 1,
+            autoplace = {
+                probability_expression = "0",
+                force = FORCE_NAME,
+                control = AUTOCONTROL_NAME
+            },
             corpse = MOD_NAME.."--small-base-corpse",
             dying_explosion = MOD_NAME.."--building-explosion-small",
             dying_sound = ZergSound.building_dying_sound(0.9),

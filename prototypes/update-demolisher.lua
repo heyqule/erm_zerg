@@ -12,9 +12,18 @@ local demolisher = {
 
 for _, unit in pairs(data.raw['segmented-unit']) do
     if demolisher[unit.name] then
+        if unit.update_effects then
+            for _, distance_effect in pairs(unit.update_effects) do
+                if distance_effect.effect.type == 'nested-result' then
+                    if distance_effect.effect.action.force == 'not-same' then
+                        distance_effect.effect.action.force = 'all'
+                    end
+                end
+            end
+        end
         local zerg_nydus = util.table.deepcopy(unit)
         zerg_nydus.name = MOD_NAME.."--"..unit.name
-        zerg_nydus.localized_name = { "entity-name." .. MOD_NAME.."-"..unit.name }
+        zerg_nydus.localized_name = { "entity-name." .. MOD_NAME.."--"..unit.name }
         zerg_nydus.order = MOD_NAME.."-"..zerg_nydus.name
 
 
@@ -132,4 +141,16 @@ for _, unit in pairs(data.raw['segmented-unit']) do
             zerg_nydus
         }
     end
+end
+
+for _, unit in pairs(data.raw['segment']) do
+    if unit.update_effects then
+        for _, distance_effect in pairs(unit.update_effects) do
+            if distance_effect.effect.type == 'nested-result' then
+                if distance_effect.effect.action.force == 'not-same' then
+                    distance_effect.effect.action.force = 'all'
+                end
+            end
+        end
+    end 
 end

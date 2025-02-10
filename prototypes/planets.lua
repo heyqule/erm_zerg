@@ -35,8 +35,8 @@ local char_mapgen = {
     },
     territory_settings = {
         units = {
-            MOD_NAME .. "-medium-demolisher",
-            MOD_NAME .. "-big-demolisher",
+            MOD_NAME .. "--medium-demolisher",
+            MOD_NAME .. "--big-demolisher",
         },
         territory_index_expression = "demolisher_territory_expression",
         territory_variation_expression = "demolisher_variation_expression",
@@ -365,7 +365,7 @@ data:extend({
         subgroup = "planets",
         map_seed_offset = 100010,
         map_gen_settings = char_mapgen,
-        pollutant_type = nil,
+        pollutant_type = "pollution",
         solar_power_in_space = 500,
         platform_procession_set = {
             arrival = { "planet-to-platform-b" },

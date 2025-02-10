@@ -61,5 +61,9 @@ function RemoteAPI.refresh_custom_attack_cache()
     CustomAttacks.get_race_settings(MOD_NAME, true)
 end
 
+--- Add home planet to ignore list
+function RemoteAPI.interplanetary_attack_ignore_planets()
+    return {'char'}
+end
 
 return RemoteAPI

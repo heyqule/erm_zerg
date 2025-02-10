@@ -1,4 +1,23 @@
 ---------------------------------------------------------------------------------------------------
+Version: 2.0.6
+Date: 2025-0?-??
+  
+  Features:
+    - Re-added interplanetary attack support.
+
+  Changes:
+    - Mutalisk learnt lousy hit and run tactic.   
+    - Changed demolisher/nydus worm earthquake AOE attack to affect all forces, instead of not-same.
+    - Updated Ultralisk sound.
+    - Added missing render_layer to scourge
+  
+  Bugfixes:
+    - Fixed nydus worm did not spawn on planet char due to name change in later version. Warning: this may affect existing save.
+
+  Optimization:
+    - Fixed an issue that higher level base building group they can't path to destination.           
+
+---------------------------------------------------------------------------------------------------
 Version: 2.0.5
 Date: 2025-01-18
 
