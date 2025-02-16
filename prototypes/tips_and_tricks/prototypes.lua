@@ -32,7 +32,7 @@ if feature_flags.space_travel then
             {
                 type = "tips-and-tricks-item",
                 name = FORCE_NAME.."-nydus_worms",
-                tag = "[entity="..FORCE_NAME.."--small-demolisher]",
+                tag = "[entity="..FORCE_NAME.."--small-nydusworm]",
                 category = FORCE_NAME,
                 order = "b",
                 indent = 1,

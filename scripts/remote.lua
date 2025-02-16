@@ -66,4 +66,60 @@ function RemoteAPI.interplanetary_attack_ignore_planets()
     return {'char'}
 end
 
+function RemoteAPI.advanced_target_priorities_register_section_data()
+    local data =  {
+        {
+            delimiter = '--',
+            name = "erm_zerg",
+            prefix = 'enemy_erm_zerg',
+            suffix = nil,
+            --- 4 type of options 'size', 'unit_type', 'tier','variant'
+            options = {
+                { "zergling", "overlord", 
+                  "hydralisk", "mutalisk",  
+                  "drone", "devourer", 
+                  "lurker", "guardian", 
+                  "ultralisk", "queen", 
+                  "broodling", "scourge", 
+                  "infested", "defiler",  
+                },
+                {1,2,3,4,5}
+            },
+            unit_type_columns = 2,
+            --- controls order of text concatenation
+            option_titles = {
+                'unit_type', 'tier'
+            },
+            option_delimiters = {
+            }
+        },
+        {
+            delimiter = '--',
+            name = "erm_zerg_custom",
+            prefix = "enemy_erm_zerg",
+            suffix = nil,
+            --- 4 type of options 'size', 'unit_type', 'tier','variant'
+            options = {
+                { 
+                    'small-nydusworm',
+                    'medium-nydusworm',
+                    'big-nydusworm',
+                    'medium-infested-oxide-asteroid',
+                    'medium-infested-carbonic-asteroid',
+                    'medium-infested-metallic-asteroid'
+                },
+            },
+            --- controls order of text concatenation
+            option_titles = {
+                'unit_type'
+            },
+            option_delimiters = {
+            }
+        }
+    }
+    
+    return data
+end
+
+
 return RemoteAPI

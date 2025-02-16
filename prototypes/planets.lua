@@ -131,15 +131,15 @@ local char_mapgen = {
 }
 
 ----- Add Large asteroid that spawn units
-local oxide_name = "zerg-spawning-medium-oxide-asteroid"
+local oxide_name = MOD_NAME.."--medium-infested-oxide-asteroid"
 local zerg_spawning_oxide_asteroid = util.table.deepcopy(data.raw['asteroid']['medium-oxide-asteroid'])
 zerg_spawning_oxide_asteroid["name"] = oxide_name
 
-local carbonic_name = "zerg-spawning-medium-carbonic-asteroid"
+local carbonic_name = MOD_NAME.."--medium-infested-carbonic-asteroid"
 local zerg_spawning_carbonic_asteroid = util.table.deepcopy(data.raw['asteroid']['medium-carbonic-asteroid'])
 zerg_spawning_carbonic_asteroid["name"]  = carbonic_name
 
-local metallic_name = "zerg-spawning-medium-metallic-asteroid"
+local metallic_name = MOD_NAME.."--medium-infested-metallic-asteroid"
 local zerg_spawning_metallic_asteroid = util.table.deepcopy(data.raw['asteroid']['medium-metallic-asteroid'])
 zerg_spawning_metallic_asteroid["name"]  = metallic_name
 

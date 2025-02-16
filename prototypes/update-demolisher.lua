@@ -10,6 +10,12 @@ local demolisher = {
     ["big-demolisher"] = 4
 }
 
+local name_map = {
+    ["small-demolisher"] = "small-nydusworm",
+    ["medium-demolisher"] = "medium-nydusworm",
+    ["big-demolisher"] = "big-nydusworm"
+}
+
 for _, unit in pairs(data.raw['segmented-unit']) do
     if demolisher[unit.name] then
         if unit.update_effects then
@@ -22,7 +28,7 @@ for _, unit in pairs(data.raw['segmented-unit']) do
             end
         end
         local zerg_nydus = util.table.deepcopy(unit)
-        zerg_nydus.name = MOD_NAME.."--"..unit.name
+        zerg_nydus.name = MOD_NAME.."--"..name_map[unit.name]
         zerg_nydus.localized_name = { "entity-name." .. MOD_NAME.."--"..unit.name }
         zerg_nydus.order = MOD_NAME.."-"..zerg_nydus.name
 

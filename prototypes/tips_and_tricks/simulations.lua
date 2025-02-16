@@ -95,7 +95,7 @@ local story_table =
                     ent.destroy()
                 end
                 player.teleport({0,0}, "vulcanus")
-                vulcanus_surface.create_entity { name="enemy_erm_zerg--small-demolisher", position={0, 0} }
+                vulcanus_surface.create_entity { name="enemy_erm_zerg--small-nydusworm", position={0, 0} }
             end,
         },
         {

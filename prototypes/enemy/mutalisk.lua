@@ -102,7 +102,7 @@ function ErmZerg.make_mutalisk(level)
                 ammo_category = "biological",
                 range = attack_range,
                 min_attack_distance = attack_range - 3,
-                cooldown = 5,
+                cooldown = 15,
                 damage_modifier = ERM_UnitHelper.get_damage(base_acid_damage, incremental_acid_damage,  level),
                 ammo_type = {
                     category = "biological",

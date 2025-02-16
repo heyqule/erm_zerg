@@ -1,0 +1,8 @@
+﻿{
+  "entity":
+  [
+    ["enemy_erm_zerg--small-demolisher", "enemy_erm_zerg--small-nydusworm"],
+    ["enemy_erm_zerg--medium-demolisher", "enemy_erm_zerg--medium-nydusworm"],
+    ["enemy_erm_zerg--big-demolisher", "enemy_erm_zerg--big-nydusworm"]
+  ]
+}
