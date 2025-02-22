@@ -101,7 +101,6 @@ function ErmZerg.make_drone(level)
                 type = "projectile",
                 range_mode = "bounding-box-to-bounding-box",
                 range = attack_range,
-                min_attack_distance = attack_range - 4,
                 cooldown = 10,
                 warmup = ERM_UnitHelper.get_attack_speed(base_attack_speed, incremental_attack_speed,  level),
                 ammo_category = "biological",

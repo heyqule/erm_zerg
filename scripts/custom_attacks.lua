@@ -40,7 +40,7 @@ function CustomAttacks.process_scourge_spawn(event)
 end
 
 function CustomAttacks.process_drone(event)
-    CustomAttackHelper.drop_unit(event, MOD_NAME, CustomAttackHelper.get_unit(MOD_NAME, "construction_buildings"))
+    CustomAttackHelper.build(event, MOD_NAME, CustomAttackHelper.get_unit(MOD_NAME, "construction_buildings"))
     event.source_entity.destroy()
 end
 

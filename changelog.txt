@@ -1,9 +1,10 @@
 ---------------------------------------------------------------------------------------------------
 Version: 2.0.6
-Date: 2025-0?-??
-  
+Date: 2025-02-21
+
   Features:
     - Re-added interplanetary attack support.
+    - Added advanced_target_priorities mod support.
 
   Changes:
     - Mutalisk learnt lousy hit and run tactic.   
@@ -11,8 +12,10 @@ Date: 2025-0?-??
     - Updated Ultralisk sound.
     - Added missing render_layer to scourge
     - Changed nydus worm internal name to *-nydusworm, instead of *-demolisher.
-    - Added advanced_target_priorities mod support.
-  
+    - Removed min_attack_range for drone.
+    - Change Vulcanus custom attack (if zerg is enabled on vulcanus) from 9 minutes to every 17 minutes, starts when evolution is at 10%, instead of 1%.
+    - Changed proxy builder's building placement function to use bounding box, instead of radius. It *should* reduce the chance of building on the player's entity ghost.    
+
   Bugfixes:
     - Fixed nydus worm did not spawn on planet char due to name change in later version. Warning: this may affect existing save.
 

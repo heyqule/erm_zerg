@@ -313,10 +313,10 @@ script.on_nth_tick(907, function(event)
 end)
 
 --- Spawn attack group periodically once evolution reach 1%
-script.on_nth_tick(9 * minute + 13, function(event)
+script.on_nth_tick(17 * minute + 13, function(event)
     local vulcanus = game.surfaces['vulcanus']
     if vulcanus and zerg_on_vulcanus and CustomAttacks.can_spawn(33) then
-        if game.forces[FORCE_NAME].get_evolution_factor(vulcanus) < 0.01 then
+        if game.forces[FORCE_NAME].get_evolution_factor(vulcanus) < 0.1 then
             return
         end
 
