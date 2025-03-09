@@ -147,13 +147,13 @@ function ErmZerg.make_queen(level)
             render_layer = "wires-above",
             distance_per_frame = 0.32,
             run_animation = AnimationDB.get_layered_animations("units", name, "run"),
-            dying_explosion = MOD_NAME .. "--" .. name .. "-air-death",
+            dying_explosion = name .. "-air-death",
             dying_sound = ZergSound.enemy_death(name, 0.9),
-            corpse = MOD_NAME .. "--" .. name .. "-corpse"
+            corpse = name .. "-corpse"
         },
         {
             type = "corpse",
-            name = MOD_NAME .. "--" .. name .. "-corpse",
+            name = name .. "-corpse",
             icon = "__erm_zerg_hd_assets__/graphics/entity/icons/units/" .. name .. ".png",
             icon_size = 64,
             flags = { "placeable-off-grid", "building-direction-8-way", "not-on-map" },
@@ -162,12 +162,12 @@ function ErmZerg.make_queen(level)
             dying_speed = 0.04,
             time_before_removed = second,
             subgroup = "corpses",
-            order = MOD_NAME .. "--" .. name .. level,
+            order = name,
             animation = util.empty_sprite(),
         },
         {
             type = "explosion",
-            name = MOD_NAME .. "--" .. name .. "-air-death",
+            name = name .. "-air-death",
             flags = { "not-on-map" },
             animations = AnimationDB.get_single_animation("units", name, "corpse")
         },

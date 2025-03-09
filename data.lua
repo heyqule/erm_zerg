@@ -145,3 +145,6 @@ data.erm_aerial_scout[MOD_NAME] = "mutalisk"
 
 require "prototypes.planets"
 require "prototypes.tips_and_tricks.prototypes"
+
+
+require "prototypes.economy"

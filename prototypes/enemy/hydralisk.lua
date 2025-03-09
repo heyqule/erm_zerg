@@ -129,11 +129,11 @@ function ErmZerg.make_hydralisk(level)
             distance_per_frame = 0.24,
             run_animation = AnimationDB.get_layered_animations("units", name, "run"),
             dying_sound = ZergSound.enemy_death(name, 0.9),
-            corpse = MOD_NAME .. "--" .. name .. "-corpse"
+            corpse = name .. "-corpse"
         },
         {
             type = "corpse",
-            name = MOD_NAME .. "--" .. name .. "-corpse",
+            name = name .. "-corpse",
             icon = "__erm_zerg_hd_assets__/graphics/entity/icons/units/" .. name .. ".png",
             icon_size = 64,
             flags = { "placeable-off-grid", "building-direction-8-way", "not-on-map" },
@@ -142,7 +142,7 @@ function ErmZerg.make_hydralisk(level)
             dying_speed = 0.04,
             time_before_removed = minute * settings.startup["enemyracemanager-enemy-corpse-time"].value,
             subgroup = "corpses",
-            order = MOD_NAME .. "--" .. name .. level,
+            order = name,
             final_render_layer = "corpse",
             animation = AnimationDB.get_single_animation("units", name, "corpse"),
         }

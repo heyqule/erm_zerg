@@ -128,8 +128,4 @@ function ErmZerg.make_lair(level)
             spawn_decoration =  CreepFunction.getSpawnerCreep(),
         }
     })
-
-    if feature_flags.space_travel then
-        data.raw["unit-spawner"][MOD_NAME .. "--" .. name .. "--" .. level].captured_spawner_entity = "captive-biter-spawner"
-    end
 end

@@ -1,6 +1,6 @@
 {
   "name": "erm_zerg",
-  "version": "2.0.6",
+  "version": "2.0.7",
   "date": "2021-07-10",
   "title": "ERM - Zerg / Garm Brood",
   "author": "heyqule",
@@ -9,6 +9,7 @@
   "dependencies": [
     "base >= 2.0.34",
     "enemyracemanager >= 2.0.22",
-    "erm_zerg_hd_assets >= 2.0.0"
+    "erm_zerg_hd_assets >= 2.0.0",
+    "erm_zerg_economy >= 0.1.0"
   ]
 }

@@ -1,4 +1,20 @@
 ---------------------------------------------------------------------------------------------------
+Version: 2.0.7
+Date: 2025-03-??
+
+  Features:
+    - Added support for zerg economy.
+    - Exceptional+ tier Hive / Hatchery / Lair / Nydus Pit will drop larva eggs.
+    - Larva eggs can transform to biter egg in Biochamber as a captive biter spawner replacement.
+    - Larva eggs can use to build certain synthetic zerg army units.
+    
+  Changes:    
+    - Removed captive biter spawner support on zerg spawners.
+    - Proxy builder now builds nydus pit at tier 2
+    - Removed prefix in some of the prototype names for sharing with zerg economy units.
+    - Periodic attack on vulcanus starts at 10% evolution, instead of 1%
+
+---------------------------------------------------------------------------------------------------
 Version: 2.0.6
 Date: 2025-02-21
 

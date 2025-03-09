@@ -58,7 +58,7 @@ data:extend {
     },
 }
 
-if feature_flags.space_travel then
+if mods["space-age"] then
     data:extend {
         {
             type = "bool-setting",

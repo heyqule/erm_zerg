@@ -8,7 +8,7 @@ require("__erm_zerg__/global")
 require "prototypes.update-teamcolour"
 local MapGenFunctions = require('__erm_libs__/prototypes/map_gen')
 
-if feature_flags.space_travel then
+if mods["space-age"] then
     require "prototypes.update-demolisher"
 end
 
@@ -37,7 +37,7 @@ elseif nauvis_enemy_settings == NAUVIS_MIXED then
 end
 
 
-if feature_flags.space_travel and settings.startup["enemy_erm_zerg-on_vulcanus"].value then
+if mods["space-age"] and settings.startup["enemy_erm_zerg-on_vulcanus"].value then
     local vulcanus = data.raw.planet.vulcanus
     vulcanus.map_gen_settings.autoplace_controls[AUTOCONTROL_NAME] = {}
     --- Replace territory bosses with zerg variance.

@@ -55,12 +55,6 @@ function CustomAttacks.process_batch_units(event, batch_size)
     CustomAttackHelper.drop_batch_units(event, MOD_NAME, ERMConfig.boss_spawn_size * batch_size)
 end
 
-function CustomAttacks.process_self_destruct(event)
-    if event.source_entity then
-        event.source_entity.destroy()
-    end
-end
-
 ---
 --- Handles aftermath of demolisher unit attack, process 20 units per batch.
 --- Either build a base or kill themselves
@@ -111,8 +105,26 @@ function CustomAttacks.demolisher_units_attack()
             end
         end
     end
+end
 
-
+function CustomAttacks.process_egg(event)
+    -- Remove source_entity to prevent drop_unit() using it to get unit level.
+    event.source_entity = nil
+    local unit_name = "zergling"
+    local amount = 2
+    if CustomAttackHelper.can_spawn(50) then
+        unit_name = "hydralisk"
+        amount = 2
+    end
+    if CustomAttackHelper.can_spawn(25) then
+        unit_name = "mutalisk"
+        amount = 2
+    end
+    if CustomAttackHelper.can_spawn(10) then
+        unit_name =  "ultralisk"
+        amount = 1
+    end
+    CustomAttackHelper.drop_unit(event, MOD_NAME, unit_name, amount)
 end
 
 return CustomAttacks

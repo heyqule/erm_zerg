@@ -6,17 +6,17 @@
 -- To change this template use File | Settings | File Templates.
 --
 
+local String = require("__erm_libs__/stdlib/string")
 local ForceHelper = require("__enemyracemanager__/lib/helper/force_helper")
-
 local CustomAttacks = require("__erm_zerg__/scripts/custom_attacks")
 local AttackGroupBeaconProcessor = require("__enemyracemanager__/lib/attack_group_beacon_processor")
 
 require("__erm_zerg__/global")
 -- Constants
 
-local using_demolisher_nydus_worm = script.feature_flags.space_travel
+local using_demolisher_nydus_worm = script.active_mods["space-age"]
 
-local zerg_on_vulcanus = script.feature_flags.space_travel and settings.startup["enemy_erm_zerg-on_vulcanus"].value
+local zerg_on_vulcanus = script.active_mods["space-age"] and settings.startup["enemy_erm_zerg-on_vulcanus"].value
 
 local HOME_PLANET = 'char'
 
@@ -27,6 +27,34 @@ local demolisher_head = {
 }
 
 local demolisher_names = {"small-demolisher","medium-demolisher","big-demolisher"}
+
+
+local populations = {
+    ["ultralisk"] = 5,
+    ["guardian"] = 3,
+    ["mutalisk"] = 2,
+    ["hydralisk"] = 1,
+    ["zergling"] = 1,
+    ["infested"] = 1,
+}
+
+local refresh_army_data = function()
+    -- Register Army Units
+    for _, prototype in pairs(prototypes.get_entity_filtered({{filter = "type", type = "unit"}})) do
+        local nameToken = String.split(prototype.name, "--")
+        if nameToken[1] == MOD_NAME and nameToken[2] == 'controllable' and populations[nameToken[3]] then
+            remote.call("enemyracemanager","army_units_register", prototype.name, populations[nameToken[3]]);
+        end
+    end
+
+    -- Register Auto Deployers
+    for _, prototype in pairs(prototypes.get_entity_filtered({{filter = "type", type = "assembling-machine"}})) do
+        local nameToken = String.split(prototype.name, "--")
+        if nameToken[1] == MOD_NAME and nameToken[2] == 'controllable' then
+            remote.call("enemyracemanager","army_deployer_register", prototype.name);
+        end
+    end
+end
 
 ---
 --- Enemy Force initialization.
@@ -114,7 +142,7 @@ local addRaceSettings = function()
     }
     race_settings.construction_buildings = {
         {{ "sunken_colony_shortrange"},{1}},
-        {{ "sunken_colony_shortrange"},{1}},
+        {{ "sunken_colony_shortrange","nyduspit"},{1}},
         {{ "sunken_colony_shortrange","nyduspit"},{2,1}},
     }
     race_settings.featured_groups = {
@@ -192,6 +220,7 @@ script.on_init(function(event)
     createRace()
     addRaceSettings()
     update_world()
+    refresh_army_data()
 end)
 
 script.on_load(function(event)
@@ -201,6 +230,7 @@ script.on_configuration_changed(function(event)
     createRace()
     addRaceSettings()
     update_world()
+    refresh_army_data()
 end)
 
 local attack_functions = {
@@ -236,12 +266,19 @@ local attack_functions = {
     end,
     [GUERRILLA_ATTACK] = function(args)
         CustomAttacks.process_guerrilla(args)
+    end,
+    [LARVA_EGG_TRIGGER] = function(args)
+        CustomAttacks.process_egg(args)
     end
+}
+
+local bypass_valid_check_trigger = {
+    [LARVA_EGG_TRIGGER] = true
 }
 --- Handles custom attacks
 script.on_event(defines.events.on_script_trigger_effect, function(event)
     if  attack_functions[event.effect_id] and
-        CustomAttacks.valid(event, MOD_NAME)
+        CustomAttacks.valid(event, MOD_NAME) or bypass_valid_check_trigger[event.effect_id]
     then
         attack_functions[event.effect_id](event)
     end
@@ -312,7 +349,7 @@ script.on_nth_tick(907, function(event)
     end
 end)
 
---- Spawn attack group periodically once evolution reach 1%
+--- Spawn attack group periodically once evolution reach 10%
 script.on_nth_tick(17 * minute + 13, function(event)
     local vulcanus = game.surfaces['vulcanus']
     if vulcanus and zerg_on_vulcanus and CustomAttacks.can_spawn(33) then
