@@ -39,8 +39,8 @@ Minerals.add_recycle_recipe({
     },
     results = {
         {type = "item", name = "calcite",  amount = 1, probability = 0.66, show_details_in_recipe_tooltip = false},
+        {type = "item", name = "coal",  amount = 1, probability = 0.2, show_details_in_recipe_tooltip = false},
         {type = "item", name = "tungsten-ore",  amount = 1, probability = 0.02, show_details_in_recipe_tooltip = false},
-        {type = "item", name = "coal",  amount = 1, probability = 0.1, show_details_in_recipe_tooltip = false},
         {type = "item", name = "holmium-ore", amount = 1, probability = 0.01, show_details_in_recipe_tooltip = false},
         {type = "item", name = MOD_NAME..'--larva_egg',  amount = 1, probability = 0.005, show_details_in_recipe_tooltip = false},
     }
@@ -69,8 +69,8 @@ Minerals.add_recycle_recipe({
     },
     results = {
         {type = "item", name = "tungsten-ore", amount = 1, probability = 0.5, show_details_in_recipe_tooltip = false},
-        {type = "item", name = "calcite",  amount = 1, probability = 0.05, show_details_in_recipe_tooltip = false},
-        {type = "item", name = "coal",  amount = 1, probability = 0.1, show_details_in_recipe_tooltip = false},
+        {type = "item", name = "calcite",  amount = 1, probability = 0.1, show_details_in_recipe_tooltip = false},
+        {type = "item", name = "coal",  amount = 1, probability = 0.25, show_details_in_recipe_tooltip = false},
         {type = "item", name = "uranium-ore",  amount = 1, probability = 0.01, show_details_in_recipe_tooltip = false},
         {type = "item", name = MOD_NAME..'--larva_egg',  amount = 1, probability = 0.005, show_details_in_recipe_tooltip = false},
     }
