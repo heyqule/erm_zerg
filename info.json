@@ -9,7 +9,7 @@
   "dependencies": [
     "base >= 2.0.34",
     "enemyracemanager >= 2.0.26",
-    "erm_zerg_hd_assets >= 2.0.1",
+    "erm_zerg_hd_assets >= 2.0.3",
     "erm_shared_economy >= 1.0.0",
     "erm_zerg_economy >= 1.0.0",
     "(?) alien-biomes >= 0.7.2"
