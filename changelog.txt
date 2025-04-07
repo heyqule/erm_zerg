@@ -12,7 +12,7 @@ Date: 2025-04-??
     - [space-age] When larva egg "spoils", it spawn enemy zerg units.
     - [space-age] Added tip and trick regarding to larva eggs.
     - [space-age] Replaced base game resources on Char with Yellow and Purple Mineral (Char), Verspene Geysers (Char). 
-    - [space-age] New resources are not migrated on existing surface.  Player will have to delete their existing surface and recreate it.
+    - [space-age] New resources appears on new chunks on explored planet Char.
     
   Changes:    
     - Removed captive biter spawner support on zerg spawners.
