@@ -24,17 +24,22 @@ if mapgen["erm-debug"] then
     mapgen["erm-debug"]["basic_settings"]["autoplace_controls"][AUTOCONTROL_NAME] = { frequency = 5, size = 5 }
 end
 
-local nauvis_autocontrols = data.raw.planet.nauvis.map_gen_settings.autoplace_controls
-local nauvis_enemy_settings = settings.startup["enemyracemanager-nauvis-enemy"].value
+local nauvis_planet = data.raw.planet.nauvis
+local map_gen_settings = nauvis_planet.map_gen_settings
+if map_gen_settings then
+    local nauvis_autocontrols = map_gen_settings.autoplace_controls
+    local nauvis_enemy_settings = settings.startup["enemyracemanager-nauvis-enemy"].value
 
-if nauvis_enemy_settings == MOD_NAME then
-    MapGenFunctions.remove_enemy_autoplace_controls(nauvis_autocontrols)
+    if nauvis_enemy_settings == MOD_NAME then
+        MapGenFunctions.remove_enemy_autoplace_controls(nauvis_autocontrols)
 
-    nauvis_autocontrols[AUTOCONTROL_NAME] = {}
---- Inject itself autocontrol for mixed mode    
-elseif nauvis_enemy_settings == NAUVIS_MIXED then
-    nauvis_autocontrols[AUTOCONTROL_NAME] = {}
+        nauvis_autocontrols[AUTOCONTROL_NAME] = {}
+        --- Inject itself autocontrol for mixed mode    
+    elseif nauvis_enemy_settings == NAUVIS_MIXED then
+        nauvis_autocontrols[AUTOCONTROL_NAME] = {}
+    end
 end
+
 
 
 if mods["space-age"] and settings.startup["enemy_erm_zerg-on_vulcanus"].value then

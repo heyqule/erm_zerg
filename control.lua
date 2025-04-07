@@ -350,9 +350,9 @@ script.on_nth_tick(907, function(event)
 end)
 
 --- Spawn attack group periodically once evolution reach 10%
-script.on_nth_tick(17 * minute + 13, function(event)
+script.on_nth_tick(13 * minute + 13, function(event)
     local vulcanus = game.surfaces['vulcanus']
-    if vulcanus and zerg_on_vulcanus and CustomAttacks.can_spawn(33) then
+    if vulcanus and zerg_on_vulcanus and CustomAttacks.can_spawn(40) then
         if game.forces[FORCE_NAME].get_evolution_factor(vulcanus) < 0.1 then
             return
         end
@@ -363,11 +363,11 @@ script.on_nth_tick(17 * minute + 13, function(event)
         end
 
         if CustomAttacks.can_spawn(10) then
-            remote.call("enemyracemanager", "generate_dropship_group", FORCE_NAME, 20, {surface=vulcanus})
+            remote.call("enemyracemanager", "generate_dropship_group", FORCE_NAME, 15, {surface=vulcanus})
         elseif CustomAttacks.can_spawn(33) then
-            remote.call("enemyracemanager", "generate_flying_group", FORCE_NAME, 30, {surface=vulcanus})
+            remote.call("enemyracemanager", "generate_flying_group", FORCE_NAME, 25, {surface=vulcanus})
         else
-            remote.call("enemyracemanager", "generate_attack_group", FORCE_NAME, 80, {surface=vulcanus})
+            remote.call("enemyracemanager", "generate_attack_group", FORCE_NAME, 60, {surface=vulcanus})
         end
     end
 end)

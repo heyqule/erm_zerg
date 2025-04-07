@@ -11,6 +11,175 @@ end
 local effects = require("__core__.lualib.surface-render-parameter-effects")
 local planet_catalogue_vulcanus = require("__space-age__.prototypes.planet.procession-catalogue-vulcanus")
 local asteroid_triggers = require("__erm_libs__.prototypes.asteroid_triggers")
+local Minerals = require('__erm_shared_economy__/prototypes/mineral')
+local Geyser = require('__erm_shared_economy__/prototypes/geyser')
+local Refinery = require('__erm_shared_economy__/prototypes/refinery')
+
+--- Char mineral uses vulcanus_calcite_probability for placement
+local mineral_name = 'char_mineral'
+Minerals.add_resource({
+    name = mineral_name,
+    icon_color = "yellow",
+    order = 'b', -- same order as iron
+    mining_time = 2,
+    import_location = 'char',
+    ---autoplace
+    has_starting_area_placement = true,
+    base_density = 8,
+    regular_rq_factor_multiplier = 1.2,
+    starting_rq_factor_multiplier = 1.5,
+})
+Minerals.add_recycle_recipe({
+    name = mineral_name,
+    icon_color = "yellow",
+    enabled = false,
+    energy_required = 0.2,
+    ingredients = {
+        {type = "item", name = mineral_name, amount = 1}
+    },
+    results = {
+        {type = "item", name = "calcite",  amount = 1, probability = 0.66, show_details_in_recipe_tooltip = false},
+        {type = "item", name = "tungsten-ore",  amount = 1, probability = 0.02, show_details_in_recipe_tooltip = false},
+        {type = "item", name = "coal",  amount = 1, probability = 0.1, show_details_in_recipe_tooltip = false},
+        {type = "item", name = "holmium-ore", amount = 1, probability = 0.01, show_details_in_recipe_tooltip = false},
+        {type = "item", name = MOD_NAME..'--larva_egg',  amount = 1, probability = 0.005, show_details_in_recipe_tooltip = false},
+    }
+})
+
+local mineral_name2 = 'char_mineral_2'
+Minerals.add_resource({
+    name = mineral_name2,
+    icon_color = "purple",
+    order = 'b', -- same order as iron
+    mining_time = 2,
+    import_location = 'char',
+    ---autoplace
+    has_starting_area_placement = true,
+    base_density = 4,
+    regular_rq_factor_multiplier = 1.2,
+    starting_rq_factor_multiplier = 1.5,
+})
+Minerals.add_recycle_recipe({
+    name = mineral_name2,
+    icon_color = "purple",
+    enabled = false,
+    energy_required = 0.2,
+    ingredients = {
+        {type = "item", name = mineral_name2, amount = 1}
+    },
+    results = {
+        {type = "item", name = "tungsten-ore", amount = 1, probability = 0.5, show_details_in_recipe_tooltip = false},
+        {type = "item", name = "calcite",  amount = 1, probability = 0.05, show_details_in_recipe_tooltip = false},
+        {type = "item", name = "coal",  amount = 1, probability = 0.1, show_details_in_recipe_tooltip = false},
+        {type = "item", name = "uranium-ore",  amount = 1, probability = 0.01, show_details_in_recipe_tooltip = false},
+        {type = "item", name = MOD_NAME..'--larva_egg',  amount = 1, probability = 0.005, show_details_in_recipe_tooltip = false},
+    }
+})
+
+
+local geyser_name = 'char_geyser'
+Geyser.add_resource({
+    name = geyser_name,
+    type = 'zerg',
+    order = 'c', -- same order as iron
+    mining_time = 2,
+    import_location = 'char',
+    ---autoplace
+    has_starting_area_placement = false,
+    base_density = 4,
+    regular_rq_factor_multiplier = 1,
+    starting_rq_factor_multiplier = 1,
+    random_probability = 1/128,
+    random_spot_size_minimum = 1,
+    random_spot_size_maximum = 1,
+
+    
+    smoke_color_1_outer = {r=0.72, g=0.79, b=0.43},
+    smoke_color_1_outer_strength = 0.2,
+    smoke_color_1_inner = {r=0.72, g=0.79, b=0.43},
+    smoke_color_1_inner_strength = 0.5,
+    smoke_color_2_outer = {r=0.72, g=0.79, b=0.43},
+    smoke_color_2_outer_strength = 0.3,
+    smoke_color_2_inner = {r=0.72, g=0.79, b=0.43},
+    smoke_color_2_inner_strength = 0.7,
+    map_color = {r=0.72, g=0.79, b=0.43},
+})
+Geyser.add_refinery_recipe({
+    name = geyser_name,
+    type = 'zerg',
+    enabled = false,
+    energy_required = 5,
+    ingredients = {
+        {type = "item", name = geyser_name, amount = 12}
+    },
+    results = {
+        {type = "fluid", name = "steam", amount = 240, temperature = 500},
+        {type = "fluid", name = "sulfuric-acid", amount = 600},
+        {type = "fluid", name = "heavy-oil", amount = 6},
+    }
+})
+
+Refinery.add_zerg_machine()
+
+data.extend({
+    --- Changed from 80000 to 50000
+    {
+        type = "noise-expression",
+        name = "char_vespene_geyser_richness",
+        expression = "(vulcanus_sulfuric_acid_region > 0) * random_penalty_between(0.5, 1, 1)\z
+                  * 50000 * 40 * vulcanus_richness_multiplier * vulcanus_starting_area_multiplier\z
+                  * control:char_geyser:richness / char_vespene_geyser_size"
+    },
+    --- Changed from 2 to 0.75
+    {
+        type = "noise-expression",
+        name = "char_vespene_geyser_size",
+        expression = "slider_rescale(control:char_geyser:size, 0.66)"
+    },
+    --- Density 4 -> 3
+    {
+        type = "noise-function",
+        name = "char_vespene_geyser_spots",
+        parameters = {"seed", "count", "offset", "size", "freq", "favor_biome"},
+        expression = "min(2 * favor_biome - 1, vulcanus_spot_noise{seed = seed,\z
+                                                               count = count,\z
+                                                               spacing = vulcanus_ore_spacing,\z
+                                                               span = 3,\z
+                                                               offset = offset,\z
+                                                               region_size = 450 + 450 / freq,\z
+                                                               density = favor_biome * 3,\z
+                                                               quantity = size,\z
+                                                               radius = size,\z
+                                                               favorability = favor_biome > 0.9})"
+    },
+    --- -1 to 1: needs a positive region for resources & decoratives plus a subzero baseline and skirt for surrounding decoratives.
+    {
+        type = "noise-expression",
+        name = "char_vespene_geyser_region",
+        expression = "max(vulcanus_starting_sulfur,\z
+                      min(1 - vulcanus_starting_circle,\z
+                          char_vespene_geyser_spots(759, 9, 0,\z
+                                                      char_vespene_geyser_size * min(1.2, vulcanus_ore_dist) * 25,\z
+                                                      control:char_geyser:frequency,\z
+                                                      vulcanus_mountains_sulfur_favorability)))"
+    },
+    {
+        type = "noise-expression",
+        name = "char_vespene_geyser_patches",
+        expression = "0.8 * abs(multioctave_noise{x = x, y = y, persistence = 0.7, seed0 = map_seed, seed1 = 21000, octaves = 2, input_scale = 1/3})"
+    },
+    {
+        type = "noise-expression",
+        name = "char_vespene_geyser_region_patchy",
+        expression = "(1 + vulcanus_sulfuric_acid_region) * (0.4 + 0.4 * char_vespene_geyser_patches) - 1"
+    },
+    {
+        type = "noise-expression",
+        name = "char_vespene_geyser_probability",
+        expression = "(control:char_geyser:size > 0) * (0.025 * ((char_vespene_geyser_region_patchy > 0) + 2 * char_vespene_geyser_region_patchy))"
+    },
+    
+})
 
 local char_mapgen = {
     starting_area = 2,
@@ -23,10 +192,12 @@ local char_mapgen = {
         cliff_elevation = "cliff_elevation_from_elevation",
         ["entity:coal:probability"] = "vulcanus_coal_probability",
         ["entity:coal:richness"] = "vulcanus_coal_richness",
-        ["entity:calcite:probability"] = "vulcanus_calcite_probability",
-        ["entity:calcite:richness"] = "vulcanus_calcite_richness",
-        ["entity:sulfuric-acid-geyser:probability"] = "vulcanus_sulfuric_acid_geyser_probability",
-        ["entity:sulfuric-acid-geyser:richness"] = "vulcanus_sulfuric_acid_geyser_richness",
+        ["entity:"..mineral_name..":probability"] = "vulcanus_calcite_probability",
+        ["entity:"..mineral_name..":richness"] = "vulcanus_calcite_richness",
+        ["entity:"..mineral_name2..":probability"] = "vulcanus_tungsten_ore_probability",
+        ["entity:"..mineral_name2..":richness"] = "vulcanus_tungsten_ore_richness",
+        ["entity:"..geyser_name..":probability"] = "char_vespene_geyser_probability",
+        ["entity:"..geyser_name..":richness"] = "char_vespene_geyser_richness",
     },
     cliff_settings = {
         name = "cliff-vulcanus",
@@ -35,18 +206,17 @@ local char_mapgen = {
     },
     territory_settings = {
         units = {
-            MOD_NAME .. "--medium-demolisher",
-            MOD_NAME .. "--big-demolisher",
+            MOD_NAME .. "--medium-nydusworm",
+            MOD_NAME .. "--big-nydusworm",
         },
         territory_index_expression = "demolisher_territory_expression",
         territory_variation_expression = "demolisher_variation_expression",
         minimum_territory_size = 7
     },
     autoplace_controls = {
-        ["vulcanus_coal"] = {},
-        ["sulfuric_acid_geyser"] = {},
-        ["calcite"] = {},
-        ["vulcanus_volcanism"] = {},
+        [mineral_name] = {},
+        [mineral_name2] = {},
+        [geyser_name] = {},
         [AUTOCONTROL_NAME] = {},
         --["rocks"] = {}, -- can"t add the rocks control otherwise nauvis rocks spawn
     },
@@ -111,10 +281,9 @@ local char_mapgen = {
         },
         ["entity"] = {
             settings = {
-                ["coal"] = {},
-                ["calcite"] = {},
-                ["sulfuric-acid-geyser"] = {},
-                ["tungsten-ore"] = {},
+                [mineral_name] = {},
+                [mineral_name2] = {},
+                [geyser_name] = {},
                 ["huge-volcanic-rock"] = {},
                 ["big-volcanic-rock"] = {},
                 ["crater-cliff"] = {},
@@ -476,6 +645,24 @@ data:extend({
                 space_location = "char",
                 use_icon_overlay_constant = true
             },
+            --- Unlock protoss refinery, it's global
+            {
+                type = "unlock-recipe",
+                recipe = "zerg_refinery"
+            },
+            --- Unlock planet specific refinery and recipes
+            {
+                type = "unlock-recipe",
+                recipe = geyser_name.."-refinery"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = mineral_name.."-recycling"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = mineral_name2.."-recycling"
+            }
         },
         prerequisites = { "space-platform-thruster", "landfill" },
         unit = {

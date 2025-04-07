@@ -26,7 +26,7 @@ data:extend(
     }
 )
 
-if mods["space-age"] then
+if mods['space-age'] then
     data:extend(
         {
             {
@@ -48,6 +48,16 @@ if mods["space-age"] then
                 indent = 1,
                 starting_status = "suggested",
                 simulation = simulations.planet_char
+            },
+            {
+                type = "tips-and-tricks-item",
+                tag = "[item=enemy_erm_zerg--larva_egg]",
+                name = FORCE_NAME.."-economy",
+                category = FORCE_NAME,
+                order = "c",
+                indent = 1,
+                starting_status = "suggested",
+                image = "__erm_zerg_hd_assets__/graphics/economy/erm-zerg.png"
             },
         })
 end

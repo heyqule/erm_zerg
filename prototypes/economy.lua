@@ -4,7 +4,7 @@
 --- DateTime: 2/22/2025 5:43 PM
 ---
 
-if not feature_flags.space_travel or not feature_flags.spoiling or not mods['space-age'] then
+if not mods['space-age'] then
     return
 end
 
@@ -26,11 +26,18 @@ local egg_name = MOD_NAME..'--larva_egg'
 LarvaEgg.init()
 --- Create larva egg based on zerg color
 LarvaEgg.create_item(egg_name, LARVA_EGG_TRIGGER, blended_color)
---- Create larva egg duplication recipe
+--- Create larva egg duplication recipe (Doesn't fresh spoil timer)
 LarvaEgg.create_larva_egg_duplication_recipe(egg_name, {
     {type = "item", name = "carbon", amount = 10},
     {type = "item", name = "nutrients", amount = 50},
-    {type = "fluid", name = "steam", amount = 200},
+    {type = "fluid", name = "steam", amount = 200, temperature = 500},
+},
+original_color)
+--- Create larva egg duplication recipe (fresh spoil timer)
+LarvaEgg.create_larva_egg_fresh_duplication_recipe(egg_name, {
+    {type = "item", name = "carbon", amount = 10},
+    {type = "item", name = "nutrients", amount = 50},
+    {type = "fluid", name = "steam", amount = 200, temperature = 500},
 },
 original_color)
 
@@ -42,10 +49,12 @@ LarvaEgg.create_larva_egg_to_nutrients_recipe(egg_name, 50, original_color)
 LarvaEgg.create_larva_egg_to_biter_egg_recipe(egg_name, {
     {type = "item", name = "bioflux", amount = 10},
     {type = "fluid", name = "water", amount = 200},
-},
-original_color)
+}, original_color)
 
+LarvaEgg.create_larva_egg_to_military_recipe(egg_name, original_color)
 LarvaEgg.create_larva_egg_to_uranium238_recipe(egg_name)
+LarvaEgg.create_larva_egg_to_promethium_recipe(egg_name)
+
 LarvaEgg.create_tech(egg_name)
 
 --- Create playable entities for zerg
@@ -70,35 +79,35 @@ ZergPlayableRecipes.zergling(MOD_NAME, {
     {type = "item", name = "supercapacitor", amount = 1},
 })
 ZergPlayableRecipes.hydralisk(MOD_NAME,{
-    {type = "item", name = "nutrients", amount = 50},
+    {type = "item", name = "nutrients", amount = 100},
     {type = "item", name = egg_name, amount = 4},
     {type = "item", name = "quantum-processor", amount = 1},
     {type = "item", name = "superconductor", amount = 1},
     {type = "item", name = "supercapacitor", amount = 1},
 })
 ZergPlayableRecipes.mutalisk(MOD_NAME,{
-    {type = "item", name = "nutrients", amount = 50},
+    {type = "item", name = "nutrients", amount = 200},
     {type = "item", name = egg_name, amount = 8},
     {type = "item", name = "quantum-processor", amount = 1},
     {type = "item", name = "superconductor", amount = 1},
     {type = "item", name = "supercapacitor", amount = 1},
 })
 ZergPlayableRecipes.guardian(MOD_NAME,{
-    {type = "item", name = "nutrients", amount = 100},
+    {type = "item", name = "nutrients", amount = 300},
     {type = "item", name = egg_name, amount = 16},
     {type = "item", name = "quantum-processor", amount = 1},
     {type = "item", name = "superconductor", amount = 1},
     {type = "item", name = "supercapacitor", amount = 1},
 })
 ZergPlayableRecipes.infested(MOD_NAME,{
-    {type = "item", name = "nutrients", amount = 50},
+    {type = "item", name = "nutrients", amount = 100},
     {type = "item", name = egg_name, amount = 4},
     {type = "item", name = "quantum-processor", amount = 1},
     {type = "item", name = "superconductor", amount = 1},
     {type = "item", name = "supercapacitor", amount = 1},
 })
 ZergPlayableRecipes.ultralisk(MOD_NAME,{
-    {type = "item", name = "nutrients", amount = 100},
+    {type = "item", name = "nutrients", amount = 500},
     {type = "item", name = egg_name, amount = 32},
     {type = "item", name = "quantum-processor", amount = 2},
     {type = "item", name = "superconductor", amount = 2},
@@ -109,7 +118,7 @@ ZergPlayableRecipes.hatchery(MOD_NAME,{
     {type = "item", name = "quantum-processor", amount = 10},
     {type = "item", name = "superconductor", amount = 10},
     {type = "item", name = "supercapacitor", amount = 10},
-    {type = "item", name = "nutrients", amount = 500},
+    {type = "item", name = "nutrients", amount = 1000},
     {type = "item", name = egg_name, amount = 50},
 })
 
@@ -123,9 +132,10 @@ local lootable_spawners = {
 }
 --- Exceptional 1x, Epix 2x, Legendary 4x
 local loot_multiplier = {
-    [3] = 2,
-    [4] = 4,
-    [5] = 8,
+    [2] = {1,1},
+    [3] = {2,4},
+    [4] = {4,8},
+    [5] = {6,12},
 }
 
 for _, spawner in pairs(lootable_spawners) do
@@ -133,7 +143,7 @@ for _, spawner in pairs(lootable_spawners) do
         local unit_prototype = data.raw['unit-spawner'][MOD_NAME..'--'..spawner..'--'..tier]
         if unit_prototype then
             unit_prototype.loot = {
-                {item = egg_name, count_min = multiplier, count_max = multiplier }
+                {item = egg_name, count_min = multiplier[1], count_max = multiplier[2] }
             }
         end
     end
@@ -145,9 +155,10 @@ local lootable_spawner_with_probablity = {
 }
 
 local loot_multiplier_with_probablity = {
-    [3] = 1,
-    [4] = 2,
-    [5] = 3,
+    [2] = {1,1},
+    [3] = {2,4},
+    [4] = {4,8},
+    [5] = {6,12},
 }
 
 for _, spawner in pairs(lootable_spawner_with_probablity) do
@@ -155,7 +166,7 @@ for _, spawner in pairs(lootable_spawner_with_probablity) do
         local unit_prototype = data.raw['unit-spawner'][MOD_NAME..'--'..spawner..'--'..tier]
         if unit_prototype then
             unit_prototype.loot = {
-                {item = egg_name, probability = 0.33, count_min = multiplier, count_max = multiplier }
+                {item = egg_name, probability = 0.33, count_min = multiplier[1], count_max = multiplier[2] }
             }
         end
     end

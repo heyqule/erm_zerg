@@ -9,7 +9,7 @@ local AnimationDB = require("__erm_zerg_hd_assets__/animation_db")
 data:extend({
     {
         type = "corpse",
-        name = MOD_NAME.."--small-base-corpse",
+        name = "zerg--small-base-corpse",
         flags = { "placeable-neutral", "not-on-map" },
         icon = "__erm_zerg_hd_assets__/graphics/entity/icons/buildings/advisor.png",
         icon_size = 64,
@@ -25,7 +25,7 @@ data:extend({
     },
     {
         type = "corpse",
-        name = MOD_NAME.."--large-base-corpse",
+        name = "zerg--large-base-corpse",
         flags = { "placeable-neutral",  "not-on-map" },
         icon = "__erm_zerg_hd_assets__/graphics/entity/icons/buildings/advisor.png",
         icon_size = 64,
@@ -41,7 +41,7 @@ data:extend({
     },
     {
         type = "explosion",
-        name = MOD_NAME.."--building-explosion",
+        name = "zerg--building-explosion",
         icon = "__erm_zerg_hd_assets__/graphics/entity/icons/buildings/advisor.png",
         icon_size = 64,
         subgroup = "explosions",
@@ -62,7 +62,7 @@ data:extend({
     },
     {
         type = "corpse",
-        name = MOD_NAME.."--terran-large-base-corpse",
+        name = "zerg--terran-large-base-corpse",
         flags = { "placeable-neutral",  "not-on-map" },
         icon = "__erm_zerg_hd_assets__/graphics/entity/icons/buildings/advisor.png",
         icon_size = 64,
@@ -78,7 +78,7 @@ data:extend({
     },
     {
         type = "explosion",
-        name = MOD_NAME.."--building-explosion-small",
+        name = "zerg--building-explosion-small",
         icon = "__erm_zerg_hd_assets__/graphics/entity/icons/buildings/advisor.png",
         icon_size = 64,
         subgroup = "explosions",

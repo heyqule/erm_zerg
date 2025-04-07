@@ -1,18 +1,28 @@
 ---------------------------------------------------------------------------------------------------
 Version: 2.0.7
-Date: 2025-03-??
+Date: 2025-04-??
 
   Features:
-    - Added support for zerg economy.
-    - Exceptional+ tier Hive / Hatchery / Lair / Nydus Pit will drop larva eggs.
-    - Larva eggs can transform to biter egg in Biochamber as a captive biter spawner replacement.
-    - Larva eggs can use to build certain synthetic zerg army units.
+    - [space-age] Added support for zerg economy. Requires mod erm_zerg_economy and erm_shared_economy.
+    - [space-age] Greater or higher tier Hive / Hatchery / Lair / Nydus Pit will drop larva eggs.
+    - [space-age] Greater or higher tier Ultralisk Cavern, Queen Nest, Greater Spire, Defiler Mound, Infested Command Center have 33% to drop larva eggs.
+    - [space-age] Larva eggs can transform to biter egg in Biochamber as a captive biter spawner replacement.
+    - [space-age] Added new larva egg recipes.
+    - [space-age] Added synthetic controllable zerg army units, build with larva eggs.
+    - [space-age] When larva egg "spoils", it spawn enemy zerg units.
+    - [space-age] Added tip and trick regarding to larva eggs.
+    - [space-age] Replaced base game resources on Char with Yellow and Purple Mineral (Char), Verspene Geysers (Char). 
+    - [space-age] New resources are not migrated on existing surface.  Player will have to delete their existing surface and recreate it.
     
   Changes:    
     - Removed captive biter spawner support on zerg spawners.
-    - Proxy builder now builds nydus pit at tier 2
-    - Removed prefix in some of the prototype names for sharing with zerg economy units.
-    - Periodic attack on vulcanus starts at 10% evolution, instead of 1%
+    - Proxy builder now builds nydus pit at evolution tier 2.
+    - Removed prefix in some of the prototype names for sharing with zerg economy playable units.
+    - Periodic attack on Vulcanus starts at 10% evolution, instead of 1%. (Only when zerg on vulcanus enabled) 
+    - Periodic attack on Vulcanus spawn rate changed from 33% to 40%
+  
+  Bugfixes:
+    - Fixed nydusworms are missing on Char due to naming change from previous change.
 
 ---------------------------------------------------------------------------------------------------
 Version: 2.0.6

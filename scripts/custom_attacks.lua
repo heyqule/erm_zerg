@@ -112,16 +112,17 @@ function CustomAttacks.process_egg(event)
     event.source_entity = nil
     local unit_name = "zergling"
     local amount = 2
-    if CustomAttackHelper.can_spawn(50) then
-        unit_name = "hydralisk"
-        amount = 2
-    end
-    if CustomAttackHelper.can_spawn(25) then
-        unit_name = "mutalisk"
-        amount = 2
-    end
     if CustomAttackHelper.can_spawn(10) then
         unit_name =  "ultralisk"
+        amount = 1
+    elseif CustomAttackHelper.can_spawn(20) then
+        unit_name = "drone"
+        amount = 1        
+    elseif CustomAttackHelper.can_spawn(33) then
+        unit_name = "mutalisk"
+        amount = 1
+    elseif CustomAttackHelper.can_spawn(50) then
+        unit_name = "hydralisk"
         amount = 1
     end
     CustomAttackHelper.drop_unit(event, MOD_NAME, unit_name, amount)

@@ -120,7 +120,7 @@ function ErmZerg.make_infested_cmd(level)
             map_generator_bounding_box = map_generator_bounding_box,
             selection_box = selection_box,
     absorptions_per_second = { pollution = { absolute = pollution_absorption_absolute, proportional = 0.01 } },
-            corpse = MOD_NAME.."--large-base-corpse",
+            corpse = "zerg--large-base-corpse",
             dying_explosion = MOD_NAME.."--terran-building-xlarge-explosion",
             max_count_of_owned_units = max_count_of_owned_units,
 	            max_friends_around_to_spawn = max_friends_around_to_spawn,
