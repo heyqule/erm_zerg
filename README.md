@@ -68,3 +68,15 @@ All units start with same base health point as original Starcraft. They have uni
 - Attack: Physical (3 radius AOE)
 
 Physical resistance: 85, Weak elemental resistance: 75, Elemental resistance: 80 with some exceptions.
+
+### Zerg Economy
+- Greater and higher tier spawner drop larva eggs
+- new recipes for larva eggs
+- convert larva egg to biter eggs
+- build new controllable zerg units.
+
+### Planet Char
+- Lava planet
+- New resources, 2 types of minerals and one gas geyser.
+- Patrolled by nydus worm.
+- [Coming soon] Boss summoning ritual

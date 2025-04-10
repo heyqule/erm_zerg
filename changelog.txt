@@ -1,6 +1,6 @@
 ---------------------------------------------------------------------------------------------------
 Version: 2.0.7
-Date: 2025-04-??
+Date: 2025-04-11
 
   Features:
     - [space-age] Added support for zerg economy. Requires mod erm_zerg_economy and erm_shared_economy.
@@ -13,14 +13,14 @@ Date: 2025-04-??
     - [space-age] Added tip and trick regarding to larva eggs.
     - [space-age] Replaced base game resources on Char with Yellow and Purple Mineral (Char), Verspene Geysers (Char). 
     - [space-age] New resources appear in new chunks on explored planet Char.
-    
-  Changes:    
+
+  Changes:
     - Removed captive biter spawner support on zerg spawners.
     - Proxy builder now builds nydus pit at evolution tier 2.
     - Removed prefix in some of the prototype names for sharing with zerg economy playable units.
     - Periodic attack on Vulcanus starts at 10% evolution, instead of 1%. (Only when zerg on vulcanus enabled) 
     - Periodic attack on Vulcanus spawn rate changed from 33% to 40%
-  
+
   Bugfixes:
     - Fixed nydusworms are missing on Char due to naming change from previous change.
 
