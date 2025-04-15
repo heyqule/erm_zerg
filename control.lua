@@ -82,6 +82,10 @@ local createRace = function()
 
     --- for guerrilla tactic processing
     storage.guerrilla_distances = storage.guerrilla_distances or {}
+
+    if script.active_mods['rso-mod'] then
+        remote.call("RSO", "ignoreSurface", "char")
+    end
 end
 
 ---

@@ -1,4 +1,12 @@
 ---------------------------------------------------------------------------------------------------
+Version: 2.0.8
+Date: 2025-04-15
+
+  Changes:
+    - Added planet "Char" to ignore list for indestructible rail entities.
+    - Added RSO bypass to Planet Char and its resource.    
+
+---------------------------------------------------------------------------------------------------
 Version: 2.0.7
 Date: 2025-04-11
 

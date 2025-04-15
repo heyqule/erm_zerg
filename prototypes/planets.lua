@@ -76,7 +76,6 @@ Minerals.add_recycle_recipe({
     }
 })
 
-
 local geyser_name = 'char_geyser'
 Geyser.add_resource({
     name = geyser_name,
@@ -677,3 +676,12 @@ data:extend({
         }
     },
 })
+
+data.rso_ignore_resource_entities = data.rso_ignore_resource_entities or {}
+data.rso_ignore_resource_entities[geyser_name] = true
+data.rso_ignore_resource_entities[mineral_name] = true
+data.rso_ignore_resource_entities[mineral_name2] = true
+
+
+data.rso_ignore_planets = data.rso_ignore_planets or {}
+data.rso_ignore_planets['char'] = true
