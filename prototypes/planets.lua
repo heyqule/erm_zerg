@@ -14,7 +14,7 @@ local asteroid_triggers = require("__erm_libs__.prototypes.asteroid_triggers")
 local Minerals = require('__erm_shared_economy__/prototypes/mineral')
 local Geyser = require('__erm_shared_economy__/prototypes/geyser')
 local Refinery = require('__erm_shared_economy__/prototypes/refinery')
-
+local SoundUtil = require('__erm_libs__/prototypes/sound_util')
 --- Char mineral uses vulcanus_calcite_probability for placement
 local mineral_name = 'char_mineral'
 Minerals.add_resource({
@@ -685,3 +685,32 @@ data.rso_ignore_resource_entities[mineral_name2] = true
 
 data.rso_ignore_planets = data.rso_ignore_planets or {}
 data.rso_ignore_planets['char'] = true
+
+if mods['starcraft-music'] then
+    local source_path = "__starcraft-music__/sounds/"
+    data:extend({
+        {
+            type = "ambient-sound",
+            planet = "char",
+            track_type = "main-track",
+            name = "char-zerg-1",
+            sound = { filename = source_path .. "Zerg One.ogg" }
+        },
+        {
+            type = "ambient-sound",
+            planet = "char",
+            track_type = "main-track",
+            name = "char-zerg-2",
+            sound = { filename = source_path .. "Zerg Two.ogg" }
+        },
+        {
+            type = "ambient-sound",
+            planet = "char",
+            track_type = "main-track",
+            name = "char-zerg-3",
+            sound = { filename = source_path .. "Zerg Three.ogg" }
+        },
+    })
+else
+    data:extend(SoundUtil.dupe_planet_music('vulcanus','char'))
+end 

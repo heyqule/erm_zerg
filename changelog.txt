@@ -1,4 +1,15 @@
 ---------------------------------------------------------------------------------------------------
+Version: 2.0.9
+Date: 2025-04-18
+
+  Features:
+    - Added vulcanus music to planet Char.
+    - Added "starcraft-music" mod as optional dependency, Zerg tracks play on planet Char.
+
+  Changes:
+    - Revert base version from 2.0.44 to 2.0.43.
+
+---------------------------------------------------------------------------------------------------
 Version: 2.0.8
 Date: 2025-04-15
 

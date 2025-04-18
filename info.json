@@ -1,17 +1,18 @@
 {
   "name": "erm_zerg",
-  "version": "2.0.8",
+  "version": "2.0.9",
   "date": "2021-07-10",
   "title": "ERM - Zerg / Garm Brood",
   "author": "heyqule",
   "description": "Add zerg as new enemy force. It features Char as a new planet and new offensive mechanics. They can optionally spawn on lore accurate Vulcanus.",
   "factorio_version": "2.0",
   "dependencies": [
-    "base >= 2.0.44",
-    "enemyracemanager >= 2.0.28",
+    "base >= 2.0.43",
+    "enemyracemanager >= 2.0.29",
     "erm_zerg_hd_assets >= 2.0.3",
     "erm_shared_economy >= 1.0.0",
     "erm_zerg_economy >= 1.0.0",
+    "? starcraft-music >= 1.0.1",
     "(?) alien-biomes >= 0.7.2"
   ]
 }
