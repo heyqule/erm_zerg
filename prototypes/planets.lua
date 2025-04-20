@@ -15,6 +15,7 @@ local Minerals = require('__erm_shared_economy__/prototypes/mineral')
 local Geyser = require('__erm_shared_economy__/prototypes/geyser')
 local Refinery = require('__erm_shared_economy__/prototypes/refinery')
 local SoundUtil = require('__erm_libs__/prototypes/sound_util')
+local PsiRadar = require('__erm_libs__/prototypes/psi_scanner')
 --- Char mineral uses vulcanus_calcite_probability for placement
 local mineral_name = 'char_mineral'
 Minerals.add_resource({
@@ -119,6 +120,43 @@ Geyser.add_refinery_recipe({
 })
 
 Refinery.add_zerg_machine()
+
+data.extend({
+    {
+        type = "surface-property",
+        name = "zerg_influence",
+        default_value = 0
+    }
+})
+
+local icons = {
+    {
+        icon = "__base__/graphics/icons/radar.png",
+        icon_size = 64,
+        scale = 0.5,
+        shift = {-9,-9}
+    },
+    {
+        icon = "__erm_zerg_hd_assets__/graphics/entity/icons/items/larva_egg.png",
+        icon_size = 64,
+        scale = 0.5,
+        shift = {9, 9},
+    },
+}
+local surface_conditions = {
+    { property = 'zerg_influence', min=50, max=100 }
+} 
+local ingredients = {
+    {type= "item", name= "steel-plate", amount= 100},
+    {type= "item", name= "refined-concrete", amount= 100},
+    {type = "item", name = "quantum-processor", amount = 1},
+    {type = "item", name = "superconductor", amount = 1},
+    {type = "item", name = "supercapacitor", amount = 1},
+    {type= "item", name= MOD_NAME..'--larva_egg', amount= 1000}
+}
+PsiRadar.make_entity(MOD_NAME, icons, surface_conditions)
+PsiRadar.make_item(MOD_NAME, icons)
+PsiRadar.make_recipe(MOD_NAME, ingredients)
 
 data.extend({
     --- Changed from 80000 to 50000
@@ -549,7 +587,8 @@ data:extend({
             ["magnetic-field"] = 25,
             ["solar-power"] = 400,
             pressure = 4000,
-            gravity = 40
+            gravity = 40,
+            zerg_influence = 100,
         },
         asteroid_spawn_influence = 1,
         asteroid_spawn_definitions = char_space_asteroid_spawn_definition,
@@ -661,6 +700,10 @@ data:extend({
             {
                 type = "unlock-recipe",
                 recipe = mineral_name2.."-recycling"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = MOD_NAME.."--psi-radar"
             }
         },
         prerequisites = { "space-platform-thruster", "landfill" },
