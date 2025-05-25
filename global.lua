@@ -37,6 +37,7 @@ LARVA_EGG_TRIGGER = "emzrg-egg"
 ZERG_MAP_COLOR = {r=248, g=140, b=20}
 ZERG_TEAM_COLOR = {r=248, g=140, b=20}
 
+REGISTER_BOSS_RADAR = "embss-rdr"
 TRIGGER_BOSS_DIES = "embss-die"
 
 

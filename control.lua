@@ -169,7 +169,7 @@ local addRaceSettings = function()
         {{"overlord", "mutalisk", "guardian"}, {1,3,2}, 50},
     }
 
-    race_settings.boss_building = "overmind"
+    race_settings.boss_building = "boss-overmind"
     --- used to do pathing.
     race_settings.pathing_unit = "zergling"
     --- used for collision checks. It's the largest ground unit.

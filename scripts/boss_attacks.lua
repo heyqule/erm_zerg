@@ -9,22 +9,22 @@ local ErmBossAttackProcessor = require("__enemyracemanager__/lib/boss_attack_pro
 ---
 --- Boss perform attacks when it take around the following damage numbers
 --- 999999 - super attack
---- 500000 - Spawn boss level units
---- 250000 - Spawn Base attack
---- 69420 - Advanced attack (may spawn regular level units)
+--- 250000 - Spawn boss level units or spawn new defense structure
+--- 69420 - Advanced attack (may spawn legendary units)
 --- 20000 - Basic attack
 ---
 --- Basic attack happens when boss take 20000 damage
 ---
 ErmBossAttackRemote.basic_attacks =
 {
-    projectile_name = {"blood-cloud","acid-cloud","blood-fire"},
+    --- Change 3rd blood cloud to ground shake
+    projectile_name = {"blood-cloud","acid-cloud", "blood-cloud"},
     projectile_type = {
         ErmBossAttackProcessor.TYPE_PROJECTILE,
         ErmBossAttackProcessor.TYPE_PROJECTILE,
         ErmBossAttackProcessor.TYPE_PROJECTILE
     },
-    projectile_chance = {25, 25, 100},
+    projectile_chance = {20, 33, 100},
     projectile_count = {1, 1, 5},
     projectile_spread = {1, 1, 2},
     projectile_use_multiplier = {true, true, true},

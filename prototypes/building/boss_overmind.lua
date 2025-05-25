@@ -20,55 +20,33 @@ local name = "overmind"
 
 -- Hitpoints
 
-local hitpoint = 2500
-local max_hitpoint_multiplier = settings.startup["enemyracemanager-max-hitpoint-multipliers"].value
-
-
--- Handles acid and poison resistance
-local base_acid_resistance = 20
-local incremental_acid_resistance = 30
--- Handles physical resistance
-local base_physical_resistance = 0
-local incremental_physical_resistance = 55
--- Handles fire and explosive resistance
-local base_fire_resistance = 10
-local incremental_fire_resistance = 40
--- Handles laser and electric resistance
-local base_electric_resistance = 0
-local incremental_electric_resistance = 50
--- Handles cold resistance
-local base_cold_resistance = 0
-local incremental_cold_resistance = 45
-
 
 local pollution_absorption_absolute = 300
 -- Spawning cooldown is based on evolution factor
-local spawning_cooldown = { 600, 300 }
-local spawning_radius = 10
+local spawning_radius = 64
 
-local max_count_of_owned_units = 25
-local max_friends_around_to_spawn = 20
+local max_friends_around_to_spawn = 200
 --- Spawn Table
 --- This control how unit spawns based on evolution factor.  It divided into 6 sections by 0.2.
 --- ERM have 3 tiers, Tier 1 - 0.0 - 0.4, Tier 2 - 0.4 - 0.8, Tier 3 - 0.8 - 1.0
 --- You can adjust the spawn rate at 0.2 interval as you please.
-local spawn_table = function(level)
+local spawn_table = function()
     local res = {}
     --Tire 1
-    res[1] = { MOD_NAME .. "--zergling--" .. level, { { 0.0, 0.7 }, { 0.2, 0.7 }, { 0.4, 0.6 }, { 0.6, 0.3 }, { 0.8, 0.15 }, {1.0, 0.0} } }
-    res[2] = { MOD_NAME .. "--hydralisk--" .. level, { { 0.0, 0.3 }, { 0.2, 0.3 }, { 0.4, 0.3 }, { 0.6, 0.2 }, { 0.8, 0.15 }, {1.0, 0.0} } }
-    res[3] = { MOD_NAME .. "--mutalisk--" .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.1 }, { 0.6, 0.1 }, { 0.8, 0.15 }, {1.0, 0.0} } }
+    res[1] = { MOD_NAME .. "--zergling--6", { { 0.0, 0.7 }, { 0.2, 0.7 }, { 0.4, 0.6 }, { 0.6, 0.3 }, { 0.8, 0.15 }, {1.0, 0.1} } }
+    res[2] = { MOD_NAME .. "--hydralisk--6", { { 0.0, 0.3 }, { 0.2, 0.3 }, { 0.4, 0.3 }, { 0.6, 0.2 }, { 0.8, 0.15 }, {1.0, 0.1} } }
+    res[3] = { MOD_NAME .. "--mutalisk--6", { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.1 }, { 0.6, 0.1 }, { 0.8, 0.15 }, {1.0, 0.1} } }
     --Tire 2
-    res[4] = { MOD_NAME .. "--lurker--" .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.0 }, { 0.8, 0.0 }, {1.0, 0.1} } }
-    res[5] = { MOD_NAME .. "--guardian--" .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.0 }, { 0.8, 0.0 }, {1.0, 0.1} } }
-    res[6] = { MOD_NAME .. "--devourer--" .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.2 }, { 0.8, 0.2 }, {1.0, 0.1} } }
-    res[7] = { MOD_NAME .. "--overlord--" .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.1 }, { 0.8, 0.2 }, {1.0, 0.15} } }
+    res[4] = { MOD_NAME .. "--lurker--6", { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.0 }, { 0.8, 0.0 }, {1.0, 0.1} } }
+    res[5] = { MOD_NAME .. "--guardian--6", { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.0 }, { 0.8, 0.0 }, {1.0, 0.1} } }
+    res[6] = { MOD_NAME .. "--devourer--6", { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.2 }, { 0.8, 0.2 }, {1.0, 0.1} } }
+    res[7] = { MOD_NAME .. "--overlord--6", { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.1 }, { 0.8, 0.2 }, {1.0, 0.1} } }
     --Tier 3
-    res[8] = { MOD_NAME .. "--drone--" .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0 }, { 0.6, 0.1 }, { 0.8, 0.1 }, {1.0, 0.1} } }
-    res[9] = { MOD_NAME .. "--ultralisk--" .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0 }, { 0.6, 0 }, { 0.8, 0.0 }, {1.0, 0.1} } }
-    res[10] = { MOD_NAME .. "--defiler--" .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0 }, { 0.6, 0 }, { 0.8, 0.0 }, {1.0, 0.1} } }
-    res[11] = { MOD_NAME .. "--queen--" .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0 }, { 0.6, 0 }, { 0.8, 0.0 }, {1.0, 0.1} } }
-    res[12] = { MOD_NAME .. "--infested--" .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0 }, { 0.6, 0 }, { 0.8, 0.0 }, {1.0, 0.15} } }
+    res[8] = { MOD_NAME .. "--drone--6", { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0 }, { 0.6, 0.1 }, { 0.8, 0.1 }, {1.0, 0.1} } }
+    res[9] = { MOD_NAME .. "--ultralisk--6", { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0 }, { 0.6, 0 }, { 0.8, 0.0 }, {1.0, 0.1} } }
+    res[10] = { MOD_NAME .. "--defiler--6", { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0 }, { 0.6, 0 }, { 0.8, 0.0 }, {1.0, 0.1} } }
+    res[11] = { MOD_NAME .. "--queen--6", { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0 }, { 0.6, 0 }, { 0.8, 0.0 }, {1.0, 0.1} } }
+    res[12] = { MOD_NAME .. "--infested--6", { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0 }, { 0.6, 0 }, { 0.8, 0.0 }, {1.0, 0.05} } }
     return res
 end
 
@@ -77,29 +55,29 @@ local collision_box = { { -3.5, -4.25 }, { 3.25, 3 } }
 local map_generator_bounding_box = { { -4.5, -5.25 }, { 4.25, 4 } }
 local selection_box = { { -3.5, -4.25 }, { 3.25, 3 } }
 
-function ErmZerg.make_boss_hive(level, hitpoint)
+function ErmZerg.make_boss_hive(level)
     data:extend({
         {
             type = "unit-spawner",
-            name = MOD_NAME .. "--" .. name .. "--" .. level,
+            name = MOD_NAME .. "--boss-" .. name .. "--" .. level,
             localised_name = { "entity-name." .. MOD_NAME .. "--" .. name, GlobalConfig.QUALITY_MAPPING[level] },
             icon = "__erm_zerg_hd_assets__/graphics/entity/icons/buildings/advisor.png",
             icon_size = 64,
             flags = { "placeable-player", "placeable-enemy", "breaths-air" },
-            max_health = hitpoint,
+            max_health = GlobalConfig.BOSS_BUILDING_HITPOINT[level],
             order = MOD_NAME .. "--building--" .. name .. "--".. level,
             subgroup = "enemies",
             working_sound = ZergSound.building_working_sound("hive", 0.9),
             dying_sound = ZergSound.building_dying_sound(0.9),
             resistances = {
-                { type = "acid", percent = ERM_UnitHelper.get_resistance(base_acid_resistance, incremental_acid_resistance,  level) },
-                { type = "poison", percent = ERM_UnitHelper.get_resistance(base_acid_resistance, incremental_acid_resistance,  level) },
-                { type = "physical", percent = ERM_UnitHelper.get_resistance(base_physical_resistance, incremental_physical_resistance,  level) },
-                { type = "fire", percent = ERM_UnitHelper.get_resistance(base_fire_resistance, incremental_fire_resistance,  level) },
-                { type = "explosion", percent = ERM_UnitHelper.get_resistance(base_fire_resistance, incremental_fire_resistance,  level) },
-                { type = "laser", percent = ERM_UnitHelper.get_resistance(base_electric_resistance, incremental_electric_resistance,  level) },
-                { type = "electric", percent = ERM_UnitHelper.get_resistance(base_electric_resistance, incremental_electric_resistance,  level) },
-                { type = "cold", percent = ERM_UnitHelper.get_resistance(base_cold_resistance, incremental_cold_resistance,  level) }
+                { type = "acid", percent = 75 },
+                { type = "poison", percent = 75 },
+                { type = "physical", percent = 80 },
+                { type = "fire", percent = 75 },
+                { type = "explosion", percent = 75 },
+                { type = "laser", percent = 75 },
+                { type = "electric", percent = 75 },
+                { type = "cold", percent = 75 }
             },
             healing_per_tick = 0,
             map_color = ERM_UnitHelper.format_map_color(settings.startup["enemy_erm_zerg-map-color"].value),
@@ -115,14 +93,14 @@ function ErmZerg.make_boss_hive(level, hitpoint)
                     effect_id = TRIGGER_BOSS_DIES,
                 }
             },
-            max_count_of_owned_units = max_count_of_owned_units,
-	            max_friends_around_to_spawn = max_friends_around_to_spawn,
+            max_count_of_owned_units = GlobalConfig.BOSS_BUILDING_UNIT[level],
+            max_friends_around_to_spawn = max_friends_around_to_spawn,
             graphics_set = {
                 animations = AnimationDB.get_layered_animations("buildings", name, "run")
             },
             result_units = spawn_table(ERM_Config.MAX_LEVELS),
             -- With zero evolution the spawn rate is 6 seconds, with max evolution it is 2.5 seconds
-            spawning_cooldown = spawning_cooldown,
+            spawning_cooldown = GlobalConfig.BOSS_SPAWN_TIMER[level],
             spawning_radius = spawning_radius,
             spawning_spacing = 3,
             max_spawn_shift = 0,

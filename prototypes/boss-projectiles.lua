@@ -9,28 +9,18 @@ local ERMConfig = require("__enemyracemanager__/lib/global_config")
 local ERMDataHelper = require("__enemyracemanager__/lib/rig/data_helper")
 local AnimationDB = require("__erm_zerg_hd_assets__/animation_db")
 
-local boss_difficulty = settings.startup["enemyracemanager-boss-difficulty"].value
-local damage_multiplier = {
-    [BOSS_NORMAL] = 1,
-    [BOSS_HARD] = 1.2,
-    [BOSS_GODLIKE] = 1.5
-}
-
-local get_damage = function(init_dmg, tier ,multiplier)
-    return init_dmg * (1 + tier * multiplier - multiplier) * damage_multiplier[boss_difficulty]
-end
 
 --- Basic Attack #1
-local create_blood_cloud_projectile = function(tier)
+local create_blood_cloud_projectile = function()
     return     {
         type = "projectile",
-        name = MOD_NAME.."--blood-cloud-projectile-t"..tier,
+        name = MOD_NAME.."--blood-cloud-projectile",
         flags = { "not-on-map" },
         acceleration = 0,
         collision_box = {{-0.5,-0.5},{0.5, 0.5}},
         direction_only = true,
         force_condition = "enemy",
-        { layers = {player = true, train = true, [ERMDataHelper.getFlyingLayerName()] =  true} },ollision_mask =  {"player-layer", "train-layer", ERMDataHelper.getFlyingLayerName()},
+        collision_mask = { layers = {player = true, train = true, [ERMDataHelper.getFlyingLayerName()] =  true} },
         final_action = {
             type = "direct",
             action_delivery = {
@@ -44,7 +34,7 @@ local create_blood_cloud_projectile = function(tier)
                     {
                         type = "create-smoke",
                         show_in_tooltip = true,
-                        entity_name = MOD_NAME .. "--blood-cloud-t" .. tier
+                        entity_name = MOD_NAME .. "--blood-cloud"
                     },
                 }
             }
@@ -54,16 +44,16 @@ local create_blood_cloud_projectile = function(tier)
 end
 
 --- Basic Attack #2
-local create_acid_cloud_projectile = function(tier)
+local create_acid_cloud_projectile = function()
     return   {
         type = "projectile",
-        name = MOD_NAME.."--acid-cloud-projectile-t"..tier,
+        name = MOD_NAME.."--acid-cloud-projectile",
         flags = { "not-on-map" },
         acceleration = 0,
         collision_box = {{-0.5,-0.5},{0.5, 0.5}},
         direction_only = true,
         force_condition = "enemy",
-        { layers = {player = true, train = true, [ERMDataHelper.getFlyingLayerName()] =  true} },ollision_mask =  {"player-layer", "train-layer", ERMDataHelper.getFlyingLayerName()},
+        collision_mask = { layers = {player = true, train = true, [ERMDataHelper.getFlyingLayerName()] =  true} },
         final_action = {
             type = "direct",
             action_delivery = {
@@ -77,7 +67,7 @@ local create_acid_cloud_projectile = function(tier)
                     {
                         type = "create-smoke",
                         show_in_tooltip = true,
-                        entity_name = MOD_NAME .. "--acid-cloud-t" .. tier
+                        entity_name = MOD_NAME .. "--acid-cloud"
                     },
                 }
             }
@@ -87,16 +77,16 @@ local create_acid_cloud_projectile = function(tier)
 end
 
 --- Basic Attack #3
-local create_blood_fire_projectile = function(tier)
+local create_blood_fire_projectile = function()
     return   {
         type = "projectile",
-        name = MOD_NAME.."--blood-fire-projectile-t"..tier,
+        name = MOD_NAME.."--blood-fire-projectile",
         flags = { "not-on-map" },
         acceleration = 0,
         collision_box = {{-0.5,-0.5},{0.5, 0.5}},
         direction_only = true,
         force_condition = "enemy",
-        { layers = {player = true, train = true, [ERMDataHelper.getFlyingLayerName()] =  true} },ollision_mask =  {"player-layer", "train-layer", ERMDataHelper.getFlyingLayerName()},
+        collision_mask =  { layers = {player = true, train = true, [ERMDataHelper.getFlyingLayerName()] =  true} },
         final_action = {
             type = "direct",
             action_delivery = {
@@ -119,7 +109,7 @@ local create_blood_fire_projectile = function(tier)
                                 type = "instant",
                                 target_effects = {
                                     type = "damage",
-                                    damage = { amount = get_damage(300, tier, 0.2), type = "acid" },
+                                    damage = { amount = 300, type = "acid" },
                                 }
                             }
                         }
@@ -131,12 +121,12 @@ local create_blood_fire_projectile = function(tier)
     }
 end
 
-local create_damage_cloud = function (name, tier, target_effects, radius, duration, cooldown)
+local create_damage_cloud = function (name, target_effects, radius, duration, cooldown)
     radius = radius or 2
     duration = duration or 120
     cooldown = cooldown or 15
     return  {
-        name = MOD_NAME.."--"..name.."-t"..tier,
+        name = MOD_NAME.."--"..name,
         type = "smoke-with-trigger",
         flags = { "not-on-map" },
         show_when_smoke_off = true,
@@ -172,12 +162,12 @@ local create_damage_cloud = function (name, tier, target_effects, radius, durati
     }
 end
 
-local create_healing_cloud = function (name, tier, target_effects, radius, duration, cooldown)
+local create_healing_cloud = function (name, target_effects, radius, duration, cooldown)
     radius = radius or 2
     duration = duration or 120
     cooldown = cooldown or 15
     return  {
-        name = MOD_NAME.."--"..name.."-t"..tier,
+        name = MOD_NAME.."--"..name,
         type = "smoke-with-trigger",
         flags = { "not-on-map" },
         show_when_smoke_off = true,
@@ -217,13 +207,13 @@ end
 local create_blood_explosion_projectile = function(tier)
     return   {
         type = "projectile",
-        name = MOD_NAME.."--blood-explosion-projectile-t"..tier,
+        name = MOD_NAME.."--blood-explosion-projectile",
         flags = { "not-on-map" },
         acceleration = 0,
         collision_box = {{-0.5,-0.5},{0.5, 0.5}},
         direction_only = true,
         force_condition = "enemy",
-        { layers = {player = true, train = true, [ERMDataHelper.getFlyingLayerName()] =  true} },ollision_mask =  {"player-layer", "train-layer", ERMDataHelper.getFlyingLayerName()},
+        collision_mask = { layers = {player = true, train = true, [ERMDataHelper.getFlyingLayerName()] =  true} },
         final_action = {
             type = "direct",
             action_delivery = {
@@ -246,7 +236,7 @@ local create_blood_explosion_projectile = function(tier)
                                 type = "instant",
                                 target_effects = {
                                     type = "damage",
-                                    damage = { amount = get_damage(1000, tier, 0.5), type = "acid" },
+                                    damage = { amount = 1000, type = "acid" },
                                 }
                             }
                         }
@@ -259,17 +249,17 @@ local create_blood_explosion_projectile = function(tier)
 end
 
 -- Super Attacks
-local create_swamp_cloud_projectile = function(tier, script_attack)
+local create_swamp_cloud_projectile = function(script_attack)
     return   {
         type = "projectile",
-        name = MOD_NAME.."--swamp-cloud-"..script_attack.."-projectile-t"..tier,
+        name = MOD_NAME.."--swamp-cloud-"..script_attack.."-projectile",
         flags = { "not-on-map" },
         acceleration = 0,
 
         collision_box = {{-1,-1},{1, 1}},
         direction_only = true,
         force_condition = "enemy",
-        { layers = {player = true, train = true, [ERMDataHelper.getFlyingLayerName()] =  true} },ollision_mask =  {"player-layer", "train-layer", ERMDataHelper.getFlyingLayerName()},
+        collision_mask = { layers = {player = true, train = true, [ERMDataHelper.getFlyingLayerName()] =  true} },
         final_action = {
             type = "direct",
             action_delivery = {
@@ -282,7 +272,7 @@ local create_swamp_cloud_projectile = function(tier, script_attack)
                     {
                         type = "create-smoke",
                         show_in_tooltip = true,
-                        entity_name = MOD_NAME .. "--swamp-cloud-t" .. tier
+                        entity_name = MOD_NAME .. "--swamp-cloud"
                     },
                     {
                         type = "script",
@@ -296,35 +286,33 @@ local create_swamp_cloud_projectile = function(tier, script_attack)
 end
 
 
-for i = 1, ERMConfig.BOSS_MAX_TIERS do
-    data:extend({
-        create_blood_cloud_projectile(i),
-        create_damage_cloud("blood-cloud", i,{
-            type = "damage",
-            --- process 4 ticks per second
-            damage = { amount = get_damage(100, i, 0.5), type = "acid" },
-            apply_damage_to_trees = true
-        },  5,60),
-        create_acid_cloud_projectile(i),
-        create_damage_cloud("acid-cloud", i,{{
-                                                 type = "damage",
-                                                 --- process 4 ticks per second
-                                                 damage = { amount = get_damage(50, i, 0.25), type = "acid" },
-                                                 apply_damage_to_trees = false
-                                             },{
-                                                 type = "create-sticker",
-                                                 sticker = "5-075-slowdown-sticker",
-                                                 show_in_tooltip = true,
-                                             }}, 5,60),
-        create_blood_fire_projectile(i),
-        create_blood_explosion_projectile(i),
-        create_swamp_cloud_projectile(i, BOSS_SPAWN_ATTACK),
-        create_swamp_cloud_projectile(i, UNITS_SPAWN_ATTACK),
-        create_healing_cloud("swamp-cloud", i,{{
-            type = "damage",
-            --- process 4 ticks per second
-            damage = { amount = get_damage(100, i, 1) * -1, type = "healing" },
-            apply_damage_to_trees = true
-        }},  10,300),
-    })
-end
+data:extend({
+    create_blood_cloud_projectile(),
+    create_damage_cloud("blood-cloud", {
+        type = "damage",
+        --- process 4 ticks per second
+        damage = { amount = 300, type = "acid" },
+        apply_damage_to_trees = true
+    },  5,120),
+    create_acid_cloud_projectile(),
+    create_damage_cloud("acid-cloud", {{
+                                             type = "damage",
+                                             --- process 4 ticks per second
+                                             damage = { amount = 150, type = "acid" },
+                                             apply_damage_to_trees = false
+                                         },{
+                                             type = "create-sticker",
+                                             sticker = "5-075-slowdown-sticker",
+                                             show_in_tooltip = true,
+                                         }}, 5,120),
+    create_blood_fire_projectile(),
+    create_blood_explosion_projectile(),
+    create_swamp_cloud_projectile(BOSS_SPAWN_ATTACK),
+    create_swamp_cloud_projectile(UNITS_SPAWN_ATTACK),
+    create_healing_cloud("swamp-cloud", {{
+        type = "damage",
+        --- process 4 ticks per second
+        damage = { amount = 500 * -1, type = "healing" },
+        apply_damage_to_trees = true
+    }},  10,180),
+})

@@ -87,34 +87,34 @@ end
 --- Register unit with boss levels.
 --- Replace its AI with boss AI
 ---
---local boss_level = ErmConfig.BOSS_LEVELS
---
---local boss_unit_ai = { destroy_when_commands_fail = true, allow_try_return_to_spawner = false }
---local override_units_ai = {"zergling","hydralisk","mutalisk","devourer","guardian","overlord","lurker","drone","defiler","queen","infested","ultralisk","broodling","scourge"}
---
---for i = 1, #boss_level do
---    local level = boss_level[i]
---    ErmZerg.make_zergling(level)
---    ErmZerg.make_hydralisk(level)
---    ErmZerg.make_mutalisk(level)
---    ErmZerg.make_ultralisk(level)
---    ErmZerg.make_devourer(level)
---    ErmZerg.make_guardian(level)
---    ErmZerg.make_overlord(level)
---    ErmZerg.make_lurker(level)
---    ErmZerg.make_drone(level)
---    ErmZerg.make_defiler(level)
---    ErmZerg.make_queen(level)
---    ErmZerg.make_infested(level)
---    ErmZerg.make_broodling(level)
---    ErmZerg.make_scourge(level)
---
---    ErmZerg.make_boss_hive(level, ErmConfig.BOSS_BUILDING_HITPOINT[i])
---
---    for _, unit in pairs(override_units_ai) do
---        data.raw["unit"][MOD_NAME.."--"..unit.."--"..level]["ai_settings"] = boss_unit_ai
---    end
---end
+local max_boss_tier = ErmConfig.BOSS_MAX_TIERS
+
+local boss_unit_ai = ErmConfig.BOSS_AI
+local override_units_ai = {"zergling","hydralisk","mutalisk","devourer","guardian","overlord","lurker","drone","defiler","queen","infested","ultralisk","broodling","scourge"}
+
+local level = ErmConfig.BOSS_UNIT_TIER
+ErmZerg.make_zergling(level)
+ErmZerg.make_hydralisk(level)
+ErmZerg.make_mutalisk(level)
+ErmZerg.make_ultralisk(level)
+ErmZerg.make_devourer(level)
+ErmZerg.make_guardian(level)
+ErmZerg.make_overlord(level)
+ErmZerg.make_lurker(level)
+ErmZerg.make_drone(level)
+ErmZerg.make_defiler(level)
+ErmZerg.make_queen(level)
+ErmZerg.make_infested(level)
+ErmZerg.make_broodling(level)
+ErmZerg.make_scourge(level)
+for _, unit in pairs(override_units_ai) do
+    data.raw["unit"][MOD_NAME.."--"..unit.."--"..level]["ai_settings"] = boss_unit_ai
+end
+
+for i = 1, max_boss_tier do
+    ErmZerg.make_boss_hive(i)
+end
+
 
 ---
 --- Register spawner/turret with max_level
