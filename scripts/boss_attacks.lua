@@ -18,22 +18,22 @@ local ErmBossAttackProcessor = require("__enemyracemanager__/lib/boss_attack_pro
 ErmBossAttackRemote.basic_attacks =
 {
     --- Change 3rd blood cloud to ground shake
-    projectile_name = {"blood-cloud","acid-cloud", "blood-cloud"},
-    projectile_type = {
+    attack_name = {"blood-cloud","acid-cloud", "blood-cloud"},
+    attack_type = {
         ErmBossAttackProcessor.TYPE_PROJECTILE,
         ErmBossAttackProcessor.TYPE_PROJECTILE,
         ErmBossAttackProcessor.TYPE_PROJECTILE
     },
-    projectile_chance = {20, 33, 100},
-    projectile_count = {1, 1, 5},
-    projectile_spread = {1, 1, 2},
-    projectile_use_multiplier = {true, true, true},
-    projectile_count_multiplier = {
+    attack_chance = {20, 33, 100},
+    attack_count = {1, 1, 5},
+    attack_spread = {1, 1, 2},
+    attack_use_multiplier = {true, true, true},
+    attack_count_multiplier = {
         {1, 1, 1, 1, 2},
         {1, 1, 1, 1, 2},
         {1, 2, 2, 3, 3}
     },
-    projectile_spread_multiplier = {
+    attack_spread_multiplier = {
         {1, 1, 2, 2, 2},
         {1, 1, 2, 2, 2},
         {1, 1, 1, 1, 1}
@@ -45,19 +45,19 @@ ErmBossAttackRemote.basic_attacks =
 ---
 ErmBossAttackRemote.advanced_attacks =
 {
-    projectile_name = {"swamp-cloud-"..UNITS_SPAWN_ATTACK , "blood-explosion"},
-    projectile_type = {
+    attack_name = {"swamp-cloud-"..UNITS_SPAWN_ATTACK , "blood-explosion"},
+    attack_type = {
         ErmBossAttackProcessor.TYPE_PROJECTILE,
         ErmBossAttackProcessor.TYPE_PROJECTILE,
     },
-    projectile_chance = {25, 100},
-    projectile_count = {1, 1},
-    projectile_spread = {1, 3},
-    projectile_use_multiplier = {false},
-    projectile_count_multiplier = {
+    attack_chance = {25, 100},
+    attack_count = {1, 1},
+    attack_spread = {1, 3},
+    attack_use_multiplier = {false},
+    attack_count_multiplier = {
         {},
     },
-    projectile_spread_multiplier = {
+    attack_spread_multiplier = {
         {},
     },
 }
@@ -66,36 +66,36 @@ ErmBossAttackRemote.advanced_attacks =
 ---250000
 ErmBossAttackRemote.super_attacks =
 {
-    projectile_name = {"swamp-cloud-"..BOSS_SPAWN_ATTACK},
-    projectile_type = {
+    attack_name = {"swamp-cloud-"..BOSS_SPAWN_ATTACK},
+    attack_type = {
         ErmBossAttackProcessor.TYPE_PROJECTILE,
     },
-    projectile_chance = {100},
-    projectile_count = {1},
-    projectile_spread = {1},
-    projectile_use_multiplier = {false},
-    projectile_count_multiplier = {
+    attack_chance = {100},
+    attack_count = {1},
+    attack_spread = {1},
+    attack_use_multiplier = {false},
+    attack_count_multiplier = {
         {},
     },
-    projectile_spread_multiplier = {
+    attack_spread_multiplier = {
         {},
     },
 }
 
 ErmBossAttackRemote.despawn_attacks =
 {
-    projectile_name = {"swamp-cloud-"..UNITS_SPAWN_ATTACK},
-    projectile_type = {
+    attack_name = {"swamp-cloud-"..UNITS_SPAWN_ATTACK},
+    attack_type = {
         ErmBossAttackProcessor.TYPE_PROJECTILE,
     },
-    projectile_chance = {100},
-    projectile_count = {1},
-    projectile_spread = {12},
-    projectile_use_multiplier = {false},
-    projectile_count_multiplier = {
+    attack_chance = {100},
+    attack_count = {1},
+    attack_spread = {12},
+    attack_use_multiplier = {false},
+    attack_count_multiplier = {
         {},
     },
-    projectile_spread_multiplier = {
+    attack_spread_multiplier = {
         {},
     },
 }
