@@ -169,7 +169,8 @@ local addRaceSettings = function()
         {{"overlord", "mutalisk", "guardian"}, {1,3,2}, 50},
     }
 
-    race_settings.boss_building = "boss-overmind"
+    race_settings.boss_building = "boss_overmind"
+    race_settings.boss_assisted_spawner = "boss_nyduspit"
     --- used to do pathing.
     race_settings.pathing_unit = "zergling"
     --- used for collision checks. It's the largest ground unit.
@@ -182,6 +183,13 @@ local addRaceSettings = function()
 
     race_settings.structure_killed_count_by_planet = race_settings.structure_killed_count_by_planet or {}
     race_settings.unit_killed_count_by_planet = race_settings.unit_killed_count_by_planet or {}
+
+    for _, item in pairs(prototypes.mod_data) do
+        if item.data_type == MOD_NAME..'.boss_data' then
+            race_settings.boss_data = {}
+            race_settings.boss_data = item.data
+        end
+    end
 
     remote.call("enemyracemanager", "register_race", race_settings)
 
@@ -259,9 +267,6 @@ local attack_functions = {
     [TIME_TO_LIVE_CREATED] = function(args)
         CustomAttacks.process_time_to_live_unit_created(args)
     end,
-    [BOSS_SPAWN_ATTACK] = function(args)
-        CustomAttacks.process_boss_units(args)
-    end,
     [UNITS_SPAWN_ATTACK] = function(args)
         CustomAttacks.process_batch_units(args)
     end,
@@ -273,6 +278,15 @@ local attack_functions = {
     end,
     [LARVA_EGG_TRIGGER] = function(args)
         CustomAttacks.process_egg(args)
+    end,
+    [BOSS_SPAWN_ATTACK] = function(args)
+        CustomAttacks.process_boss_units(args)
+    end,
+    [TRIGGER_BOSS_SPAWNED] = function(args)
+        CustomAttacks.boss_spawned(args)
+    end,
+    [TRIGGER_BOSS_ASSIST_DIES] = function(args)
+        CustomAttacks.boss_assisted_spawner_dies(args)
     end
 }
 

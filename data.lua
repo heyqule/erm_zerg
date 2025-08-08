@@ -49,7 +49,6 @@ require "prototypes.building.spawning_pool"
 require "prototypes.building.hatchery"
 require "prototypes.building.lair"
 require "prototypes.building.hive"
-require "prototypes.building.boss_overmind"
 require "prototypes.building.spore_colony"
 require "prototypes.building.sunken_colony"
 require "prototypes.building.chamber"
@@ -60,6 +59,9 @@ require "prototypes.building.defiler_mound"
 require "prototypes.building.ultralisk_cavern"
 require "prototypes.building.nyduspit"
 require "prototypes.building.infested_cmd"
+
+require "prototypes.building.boss_overmind"
+require "prototypes.building.boss_nyduspit"
 
 ---
 --- Register units
@@ -111,9 +113,53 @@ for _, unit in pairs(override_units_ai) do
     data.raw["unit"][MOD_NAME.."--"..unit.."--"..level]["ai_settings"] = boss_unit_ai
 end
 
+--- Define boss prototypes data
+local boss_data = {}
+
+--- FINAL_HP = base * 10 (evolution mulitplier) * quality level
+--- @see prototype/extend-quality.lua for quality level details
+--- appox 10mil, 25mil, 35mil, 50mil, 75mil
+boss_data.hive_hp = {1000000, 1900000, 2200000, 2650000, 3000000}
+boss_data.nyduspit_hp = {5000, 8000, 11000, 14500, 20000}
+--- for spawner's spawning_cooldown
+boss_data.hive_spawn_timer = {
+    {300,300},
+    {270,270},
+    {240,240},
+    {180,180},
+    {150,150}
+}
+
+boss_data.nyduspit_spawn_timer = {
+    {600,600},
+    {480,480},
+    {420,420},
+    {360,360},
+    {300,300}
+}
+--- for spawner's max_count_of_owned_units
+boss_data.hive_units_count = {20, 30, 40, 50, 60}
+boss_data.nyduspit_units_count = {6, 10, 13, 16, 20}
+
 for i = 1, max_boss_tier do
-    ErmZerg.make_boss_hive(i)
+    ErmZerg.make_boss_hive(i, boss_data)
+    ErmZerg.make_boss_nyduspit(i, boss_data)
 end
+
+data.extend({
+    {
+        type = 'mod-data',
+        name = MOD_NAME..'--attack-data',
+        data_type = MOD_NAME..'.boss_data',
+        data = {
+            max_buildable_unit_spawner = {4,6,8,10,12},
+            phase_change = 15000000,
+            defense_attacks={999999, 500000, 250000, 69420, 20000},
+            max_attack_per_heartbeat={3,3,4,4,5},
+        }
+    },
+})
+
 
 
 ---

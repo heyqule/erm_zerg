@@ -128,4 +128,37 @@ function CustomAttacks.process_egg(event)
     CustomAttackHelper.drop_unit(event, MOD_NAME, unit_name, amount)
 end
 
+-- Spawn 4 support spawner structures
+function CustomAttacks.boss_spawned(event)
+    if not event.source_entity then
+        return
+    end
+    
+    local boss_entity = event.source_entity
+    local position = boss_entity.position
+    
+    local positions = {
+        {x = 16, y = 16},
+        {x = 16, y = -16},
+        {x = -16, y = 16},
+        {x = -16, y = -16}
+    }
+
+    local race_settings = CustomAttacks.get_race_settings(MOD_NAME, true)
+    local assisted_spawner_name = race_settings.boss_assisted_spawner
+    for _, offset in ipairs(positions) do
+        local entity = CustomAttacks.boss_build(event, MOD_NAME, assisted_spawner_name, 
+            {x = position.x + offset.x, y = position.y + offset.y})
+    end
+end
+
+function CustomAttacks.boss_assisted_spawner_dies(event)
+    local spawner_entity = event.entity
+    if not spawner_entity then
+        return
+    end
+    
+    storage.boss_assisted_spawners[spawner_entity.unit_number] = nil
+end
+
 return CustomAttacks
