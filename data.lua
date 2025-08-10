@@ -116,7 +116,7 @@ end
 --- Define boss prototypes data
 local boss_data = {}
 
---- FINAL_HP = base * 10 (evolution mulitplier) * quality level
+--- FINAL_HP = base * 10 (evolution mulitplier) * quality multiplier
 --- @see prototype/extend-quality.lua for quality level details
 --- appox 10mil, 25mil, 35mil, 50mil, 75mil
 boss_data.hive_hp = {1000000, 1900000, 2200000, 2650000, 3000000}
@@ -146,6 +146,8 @@ for i = 1, max_boss_tier do
     ErmZerg.make_boss_nyduspit(i, boss_data)
 end
 
+--- Boss general attack data
+--- script/boss_attack.lua defines attack definition and pattern.
 data.extend({
     {
         type = 'mod-data',
@@ -153,9 +155,14 @@ data.extend({
         data_type = MOD_NAME..'.boss_data',
         data = {
             max_buildable_unit_spawner = {4,6,8,10,12},
-            phase_change = 15000000,
-            defense_attacks={999999, 500000, 250000, 69420, 20000},
+            phase_change = 10000000,
+            --- Ulitmate, Ultra, Heavy, Basic
+            defense_attacks={1000000, 500000, 200000, 69420},
             max_attack_per_heartbeat={3,3,4,4,5},
+            --- unit to spawn under boss scripts
+            base_unit_spawn_count = {6,9,12,18,24},
+            --- Spawn unit count when your radar is defeated
+            defeated_unit_count = 60
         }
     },
 })

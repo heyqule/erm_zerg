@@ -18,7 +18,7 @@ local ErmBossAttackProcessor = require("__enemyracemanager__/lib/boss_attack_pro
 ErmBossAttackRemote.basic_attacks =
 {
     --- Change 3rd blood cloud to ground shake
-    attack_name = {"blood-cloud","acid-cloud", "blood-cloud"},
+    attack_name = {"blood-cloud","acid-cloud", "ground-shake"},
     attack_type = {
         ErmBossAttackProcessor.TYPE_PROJECTILE,
         ErmBossAttackProcessor.TYPE_PROJECTILE,

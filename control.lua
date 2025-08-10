@@ -186,8 +186,8 @@ local addRaceSettings = function()
 
     for _, item in pairs(prototypes.mod_data) do
         if item.data_type == MOD_NAME..'.boss_data' then
-            race_settings.boss_data = {}
-            race_settings.boss_data = item.data
+            race_settings.boss_settings = {}
+            race_settings.boss_settings = item.data
         end
     end
 
