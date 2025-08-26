@@ -11,16 +11,17 @@ local AnimationDB = require("__erm_zerg_hd_assets__/animation_db")
 
 
 --- Basic Attack #1
-local create_blood_cloud_projectile = function()
+local create_blood_cloud_projectile = function(type)
+    type = type or "projectile"
     return     {
         type = "projectile",
-        name = MOD_NAME.."--blood-cloud-projectile",
+        name = MOD_NAME.."--blood-cloud--"..type,
         flags = { "not-on-map" },
         acceleration = 0,
         collision_box = {{-0.5,-0.5},{0.5, 0.5}},
         direction_only = true,
         force_condition = "enemy",
-        collision_mask = { layers = {player = true, train = true, [ERMDataHelper.getFlyingLayerName()] =  true} },
+        hit_collision_mask = { layers = {player = true, train = true, car=true, object = true, [ERMDataHelper.getFlyingLayerName()] =  true} },
         final_action = {
             type = "direct",
             action_delivery = {
@@ -44,16 +45,17 @@ local create_blood_cloud_projectile = function()
 end
 
 --- Basic Attack #2
-local create_acid_cloud_projectile = function()
+local create_acid_cloud_projectile = function(type)
+    type = type or "projectile"
     return   {
         type = "projectile",
-        name = MOD_NAME.."--acid-cloud-projectile",
+        name = MOD_NAME.."--acid-cloud--"..type,
         flags = { "not-on-map" },
         acceleration = 0,
         collision_box = {{-0.5,-0.5},{0.5, 0.5}},
         direction_only = true,
         force_condition = "enemy",
-        collision_mask = { layers = {player = true, train = true, [ERMDataHelper.getFlyingLayerName()] =  true} },
+        hit_collision_mask = { layers = {player = true, train = true,car=true, object = true, [ERMDataHelper.getFlyingLayerName()] =  true} },
         final_action = {
             type = "direct",
             action_delivery = {
@@ -69,51 +71,6 @@ local create_acid_cloud_projectile = function()
                         show_in_tooltip = true,
                         entity_name = MOD_NAME .. "--acid-cloud"
                     },
-                }
-            }
-        },
-        animation = AnimationDB.get_single_animation("projectiles","guardian","projectile")
-    }
-end
-
---- Basic Attack #3
-local create_blood_fire_projectile = function()
-    return   {
-        type = "projectile",
-        name = MOD_NAME.."--blood-fire-projectile",
-        flags = { "not-on-map" },
-        acceleration = 0,
-        collision_box = {{-0.5,-0.5},{0.5, 0.5}},
-        direction_only = true,
-        force_condition = "enemy",
-        collision_mask =  { layers = {player = true, train = true, [ERMDataHelper.getFlyingLayerName()] =  true} },
-        final_action = {
-            type = "direct",
-            action_delivery = {
-                type = "instant",
-                target_effects = {
-                    --@TODO new explosion
-                    --{
-                    --    type = "create-entity",
-                    --    entity_name = "erm-small-explosion-blood-1",
-                    --    trigger_created_entity = false
-                    --},
-                    {
-                        type = "nested-result",
-                        action = {
-                            type = "area",
-                            force = "not-same",
-                            radius = 2,
-                            ignore_collision_condition = true,
-                            action_delivery = {
-                                type = "instant",
-                                target_effects = {
-                                    type = "damage",
-                                    damage = { amount = 300, type = "acid" },
-                                }
-                            }
-                        }
-                    }
                 }
             }
         },
@@ -203,17 +160,18 @@ local create_healing_cloud = function (name, target_effects, radius, duration, c
     }
 end
 
--- Advanced Attacks
-local create_blood_explosion_projectile = function(tier)
+
+local create_blood_explosion_projectile = function(type)
+    type = type or "projectile"
     return   {
         type = "projectile",
-        name = MOD_NAME.."--blood-explosion-projectile",
+        name = MOD_NAME.."--blood-explosion--"..type,
         flags = { "not-on-map" },
         acceleration = 0,
         collision_box = {{-0.5,-0.5},{0.5, 0.5}},
         direction_only = true,
         force_condition = "enemy",
-        collision_mask = { layers = {player = true, train = true, [ERMDataHelper.getFlyingLayerName()] =  true} },
+        hit_collision_mask = { layers = {player = true, train = true, car=true, object = true, [ERMDataHelper.getFlyingLayerName()] =  true} },
         final_action = {
             type = "direct",
             action_delivery = {
@@ -248,18 +206,17 @@ local create_blood_explosion_projectile = function(tier)
     }
 end
 
--- Super Attacks
-local create_swamp_cloud_projectile = function(script_attack)
+local create_swamp_cloud_projectile = function(script_attack, type)
+    type = type or "projectile"
     return   {
         type = "projectile",
-        name = MOD_NAME.."--swamp-cloud-"..script_attack.."-projectile",
+        name = MOD_NAME.."--swamp-cloud-"..script_attack.."--"..type,
         flags = { "not-on-map" },
         acceleration = 0,
-
         collision_box = {{-1,-1},{1, 1}},
         direction_only = true,
         force_condition = "enemy",
-        collision_mask = { layers = {player = true, train = true, [ERMDataHelper.getFlyingLayerName()] =  true} },
+        hit_collision_mask = { layers = {player = true, train = true, car=true, object = true, [ERMDataHelper.getFlyingLayerName()] =  true} },
         final_action = {
             type = "direct",
             action_delivery = {
@@ -281,10 +238,104 @@ local create_swamp_cloud_projectile = function(script_attack)
                 }
             }
         },
-        animation = AnimationDB.get_layered_animations("projectiles","dark_swam","explosion")
+        animation = AnimationDB.get_single_animation("projectiles","dark_swam","explosion")
     }
 end
 
+--- Cluster Grenade based on blood cloud projectile
+local create_blood_cluster_grenade = function(type)
+    type = type or "projectile"
+    return {
+        type = "projectile",
+        name = MOD_NAME.."--blood-cluster-grenade--"..type,
+        flags = { "not-on-map" },
+        acceleration = 0,
+        collision_box = {{-0.5,-0.5},{0.5, 0.5}},
+        direction_only = true,
+        force_condition = "enemy",
+        action = {
+            {
+                type = "direct",
+                action_delivery = {
+                    type = "instant",
+                    target_effects = {
+                        {
+                            type = "create-entity",
+                            entity_name = MOD_NAME.."--blood-cloud-explosion",
+                        },
+                        {
+                            type = "create-smoke",
+                            show_in_tooltip = true,
+                            entity_name = MOD_NAME .. "--blood-cloud"
+                        }
+                    }
+                }
+            },
+            {
+                type = "cluster",
+                cluster_count = 4,
+                distance = 10,
+                distance_deviation = 5,
+                action_delivery = {
+                    type = "projectile",
+                    projectile = MOD_NAME.."--blood-cloud--projectile",
+                    direction_deviation = 0.6,
+                    max_range = 32,
+                    starting_speed = 0.25,
+                    starting_speed_deviation = 0.3
+                }
+            }
+        },
+        animation = AnimationDB.get_single_animation("projectiles","guardian","projectile"),
+    }
+end
+
+--- Cluster Grenade based on blood cloud projectile
+local create_acid_cluster_grenade = function(type)
+    type = type or "projectile"
+    return {
+        type = "projectile",
+        name = MOD_NAME.."--acid-cluster-grenade--"..type,
+        flags = { "not-on-map" },
+        acceleration = 0,
+        collision_box = {{-0.5,-0.5},{0.5, 0.5}},
+        direction_only = true,
+        force_condition = "enemy",
+        action = {
+            {
+                type = "direct",
+                action_delivery = {
+                    type = "instant",
+                    target_effects = {
+                        {
+                            type = "create-entity",
+                            entity_name = MOD_NAME.."--acid-cloud-explosion",
+                        },
+                        {
+                            type = "create-smoke",
+                            show_in_tooltip = true,
+                            entity_name = MOD_NAME .. "--acid-cloud"
+                        }
+                    }
+                }
+            },
+            {
+                type = "cluster",
+                cluster_count = 6,
+                distance = 10,
+                distance_deviation = 5,
+                action_delivery = {
+                    type = "projectile",
+                    projectile = MOD_NAME.."--acid-cloud--projectile",
+                    direction_deviation = 0.6,
+                    starting_speed = 0.25,
+                    starting_speed_deviation = 0.3
+                }
+            }
+        },
+        animation = AnimationDB.get_single_animation("projectiles","guardian","projectile"),
+    }
+end
 
 data:extend({
     create_blood_cloud_projectile(),
@@ -305,14 +356,28 @@ data:extend({
                                              sticker = "5-075-slowdown-sticker",
                                              show_in_tooltip = true,
                                          }}, 5,120),
-    create_blood_fire_projectile(),
     create_blood_explosion_projectile(),
     create_swamp_cloud_projectile(BOSS_SPAWN_ATTACK),
     create_swamp_cloud_projectile(UNITS_SPAWN_ATTACK),
+    create_swamp_cloud_projectile(UNITS_SPAWN_ATTACK_2X),
+    create_blood_cluster_grenade('falling_projectile'),
+    create_acid_cluster_grenade('falling_projectile'),
+    create_swamp_cloud_projectile(BOSS_SPAWN_ATTACK,'falling_projectile'),
     create_healing_cloud("swamp-cloud", {{
         type = "damage",
         --- process 4 ticks per second
         damage = { amount = 500 * -1, type = "healing" },
         apply_damage_to_trees = true
     }},  10,180),
+    create_blood_cluster_grenade(),  -- Add the new cluster grenade
 })
+
+-- Basic attack fissure
+local basic_attack_fissure_prototype = make_demolisher_fissure_attack(MOD_NAME..'--basic', MOD_NAME..'-basic', 2,  1)
+-- Rename fissure explosion to be compatible with boss attack
+basic_attack_fissure_prototype[1].name = basic_attack_fissure_prototype[1].name..'--direct'
+for _, prototype in pairs(basic_attack_fissure_prototype) do
+    data:extend({
+        prototype
+    })
+end 

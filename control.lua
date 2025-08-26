@@ -24,9 +24,12 @@ local demolisher_head = {
     [FORCE_NAME.."--small-demolisher"] =  true,
     [FORCE_NAME.."--medium-demolisher"] =  true,
     [FORCE_NAME.."--big-demolisher"] =  true,
+    [FORCE_NAME.."--small-nydusworm"] =  true,
+    [FORCE_NAME.."--medium-nydusworm"] =  true,
+    [FORCE_NAME.."--big-nydusworm"] =  true,    
 }
 
-local demolisher_names = {"small-demolisher","medium-demolisher","big-demolisher"}
+local demolisher_names = {"demolisher","nydusworm"}
 
 
 local populations = {
@@ -82,6 +85,9 @@ local createRace = function()
 
     --- for guerrilla tactic processing
     storage.guerrilla_distances = storage.guerrilla_distances or {}
+    
+    storage.boss_data = storage.boss_data or nil
+    storage.boss_data_cache_time = storage.boss_data_cache_time or 0
 
     if script.active_mods['rso-mod'] then
         remote.call("RSO", "ignoreSurface", "char")
@@ -269,6 +275,11 @@ local attack_functions = {
     end,
     [UNITS_SPAWN_ATTACK] = function(args)
         CustomAttacks.process_batch_units(args)
+        CustomAttacks.build(args, MOD_NAME, 'nyduspit')
+    end,
+    [UNITS_SPAWN_ATTACK_2X] = function(args)
+        CustomAttacks.process_batch_units(args, 24)
+        CustomAttacks.build(args, MOD_NAME, 'nyduspit')
     end,
     [NYDUS_DEATH_ATTACK] = function(args)
         CustomAttacks.process_batch_units(args)
@@ -281,6 +292,7 @@ local attack_functions = {
     end,
     [BOSS_SPAWN_ATTACK] = function(args)
         CustomAttacks.process_boss_units(args)
+        CustomAttacks.build(args, MOD_NAME, 'nyduspit')
     end,
     [TRIGGER_BOSS_SPAWNED] = function(args)
         CustomAttacks.boss_spawned(args)
@@ -350,10 +362,10 @@ script.on_event(defines.events.on_trigger_created_entity, function(event)
     end
 end)
 
-
+--- Handle force change when segment unit spawns
 script.on_event(defines.events.on_segment_entity_created, function(event)
-    if is_compatible_demolisher(event.entity.name) then
-        event.entity.force = FORCE_NAME
+    if is_compatible_demolisher(event.entity.name) and event.entity.segmented_unit then
+        event.entity.segmented_unit.force = FORCE_NAME
     end
 end)
 
@@ -393,11 +405,10 @@ end)
 ---
 --- Register required remote interfaces
 ---
-local BossAttack = require("scripts/boss_attacks")
----
 --- Register boss attacks
 --- Interface Name: {race_name}_boss_attacks
 ---
+local BossAttack = require("scripts/boss_attacks")
 remote.add_interface("erm_zerg_boss_attacks", {
     get_attack_data = BossAttack.get_attack_data,
 })

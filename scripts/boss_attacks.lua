@@ -3,56 +3,171 @@
 --- Created by heyqule.
 --- DateTime: 8/28/2022 8:19 PM
 ---
-local ErmBossAttackRemote = require("__enemyracemanager__/lib/boss_attack_data")
-local ErmBossAttackProcessor = require("__enemyracemanager__/lib/boss_attack_processor")
+local BossAttackRemote = require("__enemyracemanager__/lib/boss_attack_data")
+local BossAttackProcessor = require("__enemyracemanager__/lib/boss_attack_processor")
 ---
 ---
 --- Boss perform attacks when it take around the following damage numbers
---- 999999 - super attack
---- 250000 - Spawn boss level units or spawn new defense structure
---- 69420 - Advanced attack (may spawn legendary units)
---- 20000 - Basic attack
+--- 50000 - basic attack
+--- 100000 - heavy attack
+--- 250000 - ultra attack
+--- 1000000 - ultimate attack
 ---
---- Basic attack happens when boss take 20000 damage
+--- ref: erm_zerg/data.lua:159
 ---
-ErmBossAttackRemote.basic_attacks =
+BossAttackRemote.basic_attacks =
 {
     --- Change 3rd blood cloud to ground shake
-    attack_name = {"blood-cloud","acid-cloud", "ground-shake"},
+    attack_name = {"blood-cloud", "acid-cloud", "swamp-cloud-"..UNITS_SPAWN_ATTACK},
     attack_type = {
-        ErmBossAttackProcessor.TYPE_PROJECTILE,
-        ErmBossAttackProcessor.TYPE_PROJECTILE,
-        ErmBossAttackProcessor.TYPE_PROJECTILE
+        BossAttackProcessor.TYPE_PROJECTILE,
+        BossAttackProcessor.TYPE_PROJECTILE,
+        BossAttackProcessor.TYPE_PROJECTILE,
     },
-    attack_chance = {20, 33, 100},
-    attack_count = {1, 1, 5},
-    attack_spread = {1, 1, 2},
+    attack_chance = {
+        {10, 10, 15, 20, 25},
+        {15, 20, 25, 33, 33},
+        --- Final attack always roll 100%, but up to the dev.
+        {100, 100, 100, 100, 100}
+    },
+
+    attack_count = {1, 1, 1},
+    attack_spread = {2, 2, 2},
     attack_use_multiplier = {true, true, true},
     attack_count_multiplier = {
-        {1, 1, 1, 1, 2},
-        {1, 1, 1, 1, 2},
-        {1, 2, 2, 3, 3}
+        {1, 1, 2, 2, 3},
+        {1, 1, 2, 2, 3},
+        {1, 1, 1, 2, 2}
     },
     attack_spread_multiplier = {
-        {1, 1, 2, 2, 2},
-        {1, 1, 2, 2, 2},
-        {1, 1, 1, 1, 1}
+        {1, 1, 1, 2, 2},
+        {1, 1, 1, 2, 2},
+        {1, 2, 2, 3, 3},
     },
 }
 
 ---
---- Advanced attack happens when boss take 250000 damage
+--- heavy_attacks
 ---
-ErmBossAttackRemote.advanced_attacks =
+BossAttackRemote.heavy_attacks =
 {
-    attack_name = {"swamp-cloud-"..UNITS_SPAWN_ATTACK , "blood-explosion"},
+    attack_name = {"basic-fissure", "blood-explosion", "swamp-cloud-"..UNITS_SPAWN_ATTACK_2X,  'overlord' ,'devourer'},
     attack_type = {
-        ErmBossAttackProcessor.TYPE_PROJECTILE,
-        ErmBossAttackProcessor.TYPE_PROJECTILE,
+        BossAttackProcessor.TYPE_DIRECT,
+        BossAttackProcessor.TYPE_PROJECTILE,
+        BossAttackProcessor.TYPE_PROJECTILE,
+        BossAttackProcessor.TYPE_UNIT_SPAWN,
+        BossAttackProcessor.TYPE_UNIT_SPAWN,
     },
-    attack_chance = {25, 100},
-    attack_count = {1, 1},
-    attack_spread = {1, 3},
+    attack_chance = {
+        {20, 20, 20, 20, 20},
+        {20, 20, 20, 20, 20},
+        {20, 20, 20, 20, 20},
+        {33, 33, 33, 33, 33},
+        {100, 100, 100, 100, 100},
+    },
+    attack_count = {1, 1, 1, 12, 16},
+    attack_spread = {3, 3, 2, 1, 1},
+    attack_use_multiplier = {false, false, false, false, false},
+    attack_count_multiplier = {
+        {},
+    },
+    attack_spread_multiplier = {
+        {},
+    },
+}
+
+---
+--- assist_attacks
+---
+BossAttackRemote.assist_attacks =
+{
+    attack_name = {"swamp-cloud-"..BOSS_SPAWN_ATTACK, 'boss_nyduspit'},
+    attack_type = {
+        BossAttackProcessor.TYPE_PROJECTILE,
+        BossAttackProcessor.TYPE_STRUCT_SPAWN,
+    },
+    attack_chance = {
+        {50,50,50,50,50},
+        {100,100,100,100,100}
+    },
+    attack_count = {2, 2},
+    attack_spread = {2, 1},
+    attack_use_multiplier = {false, false},
+    attack_count_multiplier = {
+        {},
+    },
+    attack_spread_multiplier = {
+        {},
+    },
+}
+
+---
+--- special_attacks
+---
+BossAttackRemote.special_attacks =
+{
+    attack_name = {"blood-cluster-grenade", "acid-cluster-grenade", "swamp-cloud-"..BOSS_SPAWN_ATTACK},
+    attack_type = {
+        BossAttackProcessor.TYPE_FALLING_PROJECTILE,
+        BossAttackProcessor.TYPE_FALLING_PROJECTILE,
+        BossAttackProcessor.TYPE_FALLING_PROJECTILE,
+    },
+    attack_chance = {
+        {20,20,20,20,20},
+        {33,33,33,33,33},
+        {100,100,100,100,100}
+    },
+    attack_count = {1, 1, 1},
+    attack_spread = {1, 1, 1},
+    attack_use_multiplier = {true, true, true},
+    attack_count_multiplier = {
+        {1,1,1,1,1},
+        {1,1,1,1,1},
+        {2,2,2,3,3},
+    },
+    attack_spread_multiplier = {
+        {2,2,3,3,4},
+        {2,2,3,3,4},
+        {2,2,2,3,3},
+    },
+}
+
+BossAttackRemote.ultimate_attacks =
+{
+    attack_name = {"big-nydusworm","medium-nydusworm","small-nydusworm"},
+    attack_type = {
+        BossAttackProcessor.TYPE_SEGMENTED_UNIT_SPAWN,
+        BossAttackProcessor.TYPE_SEGMENTED_UNIT_SPAWN,
+        BossAttackProcessor.TYPE_SEGMENTED_UNIT_SPAWN,
+    },
+    attack_chance = {
+        {100,100,100,100,100},
+        {100,100,100,100,100},
+        {100,100,100,100,100}
+    },
+    attack_count = {1, 1, 1},
+    attack_spread = {1, 1, 1},
+    attack_use_multiplier = {false,false,false},
+    attack_count_multiplier = {
+        {},
+    },
+    attack_spread_multiplier = {
+        {},
+    },
+}
+
+BossAttackRemote.despawn_attacks =
+{
+    attack_name = {"swamp-cloud-"..UNITS_SPAWN_ATTACK_2X},
+    attack_type = {
+        BossAttackProcessor.TYPE,
+    },
+    attack_chance = {
+        {100,100,100,100,100}
+    },
+    attack_count = {2},
+    attack_spread = {5},
     attack_use_multiplier = {false},
     attack_count_multiplier = {
         {},
@@ -62,18 +177,22 @@ ErmBossAttackRemote.advanced_attacks =
     },
 }
 
-----
----250000
-ErmBossAttackRemote.super_attacks =
+BossAttackRemote.idle_attacks =
 {
-    attack_name = {"swamp-cloud-"..BOSS_SPAWN_ATTACK},
+    attack_name = {"swamp-cloud-"..BOSS_SPAWN_ATTACK, "swamp-cloud-"..UNITS_SPAWN_ATTACK_2X, "swamp-cloud-"..UNITS_SPAWN_ATTACK},
     attack_type = {
-        ErmBossAttackProcessor.TYPE_PROJECTILE,
+        BossAttackProcessor.TYPE_PROJECTILE,
+        BossAttackProcessor.TYPE_PROJECTILE,
+        BossAttackProcessor.TYPE_PROJECTILE,
     },
-    attack_chance = {100},
-    attack_count = {1},
-    attack_spread = {1},
-    attack_use_multiplier = {false},
+    attack_chance = {
+        {20,20,20,20,20},
+        {50,50,50,50,50},
+        {100,100,100,100,100}
+    },
+    attack_count = {1, 1, 1},
+    attack_spread = {2, 2, 3},
+    attack_use_multiplier = {false,false,false},
     attack_count_multiplier = {
         {},
     },
@@ -82,22 +201,4 @@ ErmBossAttackRemote.super_attacks =
     },
 }
 
-ErmBossAttackRemote.despawn_attacks =
-{
-    attack_name = {"swamp-cloud-"..UNITS_SPAWN_ATTACK},
-    attack_type = {
-        ErmBossAttackProcessor.TYPE_PROJECTILE,
-    },
-    attack_chance = {100},
-    attack_count = {1},
-    attack_spread = {12},
-    attack_use_multiplier = {false},
-    attack_count_multiplier = {
-        {},
-    },
-    attack_spread_multiplier = {
-        {},
-    },
-}
-
-return ErmBossAttackRemote
+return BossAttackRemote

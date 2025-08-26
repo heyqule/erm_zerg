@@ -2,8 +2,17 @@
 Version: 2.0.11
 Date: 2025-??-??
 
+  Features:
+    - Added Overmind Boss, see in-game
+    - Added Psi Scanner to discover boss. It's only placeable on planet char.
+
   Changes:
-    - Add Psi Scanner for Zerg Gram.
+    - Nydus worms no longer have harvestable corpses and preserve player building ghosts.
+    - Increased Nydus worms health by 5x (depends on ERM health setting).  But it's no longer regenerate health.
+    - Decreased Nydus worms resistances with higher than 95% to cap at 95%, except impact.    
+
+  Bugfixes:    
+    - Fixed nydus worm compatibility issues with LuaSegmentedUnit on 2.0.61+.    
 
 ---------------------------------------------------------------------------------------------------
 Version: 2.0.10

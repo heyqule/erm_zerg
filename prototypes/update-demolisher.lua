@@ -3,18 +3,71 @@
 --- Created by heyqule.
 --- DateTime: 11/14/2024 6:07 PM
 ---
-
+local String = require("__erm_libs__/stdlib/string")
 local demolisher = {
     ["small-demolisher"] = 1,
     ["medium-demolisher"] = 2,
     ["big-demolisher"] = 4
 }
 
-local name_map = {
-    ["small-demolisher"] = "small-nydusworm",
-    ["medium-demolisher"] = "medium-nydusworm",
-    ["big-demolisher"] = "big-nydusworm"
-}
+local search_word = "demolisher"
+local replace_word = "nydusworm"
+
+--- Default: **20** / 4 = 5
+local health_multiplier = settings.startup["enemyracemanager-max-hitpoint-multipliers"].value / 4
+
+local function convert_segment_name(demolisher_segment_name)
+    return string.gsub(demolisher_segment_name, search_word, replace_word)
+end
+
+local function update_segmented_unit_specification(specification)
+    if not specification.segments then return end
+    
+    for i, segment in pairs(specification.segments) do
+        segment.segment = MOD_NAME.."--"..convert_segment_name(segment.segment)
+    end
+end
+
+local function change_common_entity_data(entity)
+    entity.max_health = entity.max_health * health_multiplier
+    entity.healing_per_tick = 0
+    entity.create_ghost_on_death = false
+    if entity.resistances then
+        for idx, resistance in pairs(entity.resistances) do
+            if resistance.type ~= 'impact' and resistance.percent > 95 then
+                resistance.percent = 95
+            end
+            entity.resistances[idx] = resistance
+        end
+    end
+
+    if entity.dying_trigger_effect then
+        for index, effect in pairs(entity.dying_trigger_effect) do
+            if effect.type == 'create-entity' and string.find(effect.entity_name, "demolisher-corpse", nil, true) then
+                table.remove(entity.dying_trigger_effect, index)
+            end
+        end
+    end
+    entity.corpse = nil
+end
+
+for _, unit in pairs(data.raw['segment']) do
+    local zerg_nydus_segment = util.table.deepcopy(unit)
+    if string.find(unit.name, search_word, nil, true) then
+        local new_name = convert_segment_name(unit.name)
+        local name_token = String.split(new_name,'-')
+        zerg_nydus_segment.name = MOD_NAME.."--"..new_name
+        zerg_nydus_segment.localised_name = { "entity-name." .. MOD_NAME.."--"..name_token[1]..'-'..name_token[2] }
+        zerg_nydus_segment.order = MOD_NAME.."-"..zerg_nydus_segment.name
+        
+        change_common_entity_data(zerg_nydus_segment)
+        
+
+        data:extend {
+            zerg_nydus_segment
+        }
+    end
+end
 
 for _, unit in pairs(data.raw['segmented-unit']) do
     if demolisher[unit.name] then
@@ -28,10 +81,12 @@ for _, unit in pairs(data.raw['segmented-unit']) do
             end
         end
         local zerg_nydus = util.table.deepcopy(unit)
-        zerg_nydus.name = MOD_NAME.."--"..name_map[unit.name]
-        zerg_nydus.localized_name = { "entity-name." .. MOD_NAME.."--"..unit.name }
+        local new_name = convert_segment_name(unit.name)
+        zerg_nydus.name = MOD_NAME.."--"..new_name
+        zerg_nydus.localised_name = { "entity-name." .. MOD_NAME.."--"..new_name }
         zerg_nydus.order = MOD_NAME.."-"..zerg_nydus.name
-
+        change_common_entity_data(zerg_nydus)
+        update_segmented_unit_specification(zerg_nydus.segment_engine)
 
         if zerg_nydus.revenge_attack_parameters.ammo_type.action.action_delivery.source_effects == nil then
             zerg_nydus.revenge_attack_parameters.ammo_type.action.action_delivery.source_effects = {}
@@ -45,7 +100,7 @@ for _, unit in pairs(data.raw['segmented-unit']) do
                 {8,8},
                 {-8,-8}
             },
-            probability = 0.33,
+            probability = 0.25,
             repeat_count = 3 * demolisher[unit.name],
             repeat_count_deviation = 2,
             trigger_created_entity = true,
@@ -61,7 +116,7 @@ for _, unit in pairs(data.raw['segmented-unit']) do
                 {8,8},
                 {-8,-8}
             },
-            probability = 0.25,
+            probability = 0.2,
             repeat_count = 2 * demolisher[unit.name],
             repeat_count_deviation = 1,
             trigger_created_entity = true,
@@ -77,8 +132,8 @@ for _, unit in pairs(data.raw['segmented-unit']) do
                 {8,8},
                 {-8,-8}
             },
-            probability = 0.2,
-            repeat_count = 2 * demolisher[unit.name],
+            probability = 0.15,
+            repeat_count = demolisher[unit.name],
             repeat_count_deviation = 1,
             trigger_created_entity = true,
             find_non_colliding_position = true,
@@ -129,7 +184,7 @@ for _, unit in pairs(data.raw['segmented-unit']) do
                     {8,8},
                     {-8,-8}
                 },
-                probability = 0.1,
+                probability = 0.05,
                 repeat_count = demolisher[unit.name],
                 trigger_created_entity = true,
                 find_non_colliding_position = true,
@@ -138,11 +193,19 @@ for _, unit in pairs(data.raw['segmented-unit']) do
             })
         end
 
+        if not zerg_nydus.dying_trigger_effect then
+            zerg_nydus.dying_trigger_effect = {}
+        end
         table.insert(zerg_nydus.dying_trigger_effect, {
             type = "script",
             effect_id = NYDUS_DEATH_ATTACK
         })
+        table.insert(zerg_nydus.dying_trigger_effect, {
+            type = "script",
+            effect_id = BOSS_SEGMENT_UNIT_DIES
+        })
 
+        
         data:extend {
             zerg_nydus
         }
@@ -158,5 +221,6 @@ for _, unit in pairs(data.raw['segment']) do
                 end
             end
         end
-    end 
+    end
 end
+

@@ -118,8 +118,8 @@ local boss_data = {}
 
 --- FINAL_HP = base * 10 (evolution mulitplier) * quality multiplier
 --- @see prototype/extend-quality.lua for quality level details
---- appox 10mil, 25mil, 35mil, 50mil, 75mil
-boss_data.hive_hp = {1000000, 1900000, 2200000, 2650000, 3000000}
+--- appox 20mil, 35mil, 50mil, 75mil, 100mil
+boss_data.hive_hp = {2000000, 2700000, 3250000, 4000000, 4050000}
 boss_data.nyduspit_hp = {5000, 8000, 11000, 14500, 20000}
 --- for spawner's spawning_cooldown
 boss_data.hive_spawn_timer = {
@@ -154,15 +154,16 @@ data.extend({
         name = MOD_NAME..'--attack-data',
         data_type = MOD_NAME..'.boss_data',
         data = {
-            max_buildable_unit_spawner = {4,6,8,10,12},
-            phase_change = 10000000,
-            --- Ulitmate, Ultra, Heavy, Basic
-            defense_attacks={1000000, 500000, 200000, 69420},
-            max_attack_per_heartbeat={3,3,4,4,5},
-            --- unit to spawn under boss scripts
-            base_unit_spawn_count = {6,9,12,18,24},
+            --- Max assist spawner
+            max_buildable_unit_spawner = {6, 8, 10, 12, 15},
+            --- Phase_change, Ulitmate, Special, Assist, Heavy, Basic
+            defense_attacks={10000000, 2500000, 250000, 100000, 50000, 20000},
+            --- max defense attacks per heartbeat.
+            max_attacks_per_heartbeat={3,3,4,4,5},
             --- Spawn unit count when your radar is defeated
-            defeated_unit_count = 60
+            defeated_unit_count = 60,
+            --- Idle attack (in heartbeats)
+            idle_attack_interval = 15, -- 30s
         }
     },
 })
