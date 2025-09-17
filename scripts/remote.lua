@@ -27,17 +27,17 @@ function RemoteAPI.milestones_preset_addons()
         },
     }
 
-    --preset["erm_zerg_boss"] = {
-    --    required_mods = {"erm_zerg"},
-    --    milestones = {
-    --        {type="group", name="ERM Boss Kills"},
-    --        {type="kill", name="enemy_erm_zerg--overmind--"..boss_level[1],  quantity=1},
-    --        {type="kill", name="enemy_erm_zerg--overmind--"..boss_level[2],  quantity=1},
-    --        {type="kill", name="enemy_erm_zerg--overmind--"..boss_level[3],  quantity=1},
-    --        {type="kill", name="enemy_erm_zerg--overmind--"..boss_level[4],  quantity=1},
-    --        {type="kill", name="enemy_erm_zerg--overmind--"..boss_level[5],  quantity=1},
-    --    }
-    --}
+    preset["erm_zerg_boss"] = {
+        required_mods = {"erm_zerg"},
+        milestones = {
+            {type="group", name="ERM Boss Kills"},
+            {type="kill", name="enemy_erm_zerg--boss_overmind--1",  quantity=1},
+            {type="kill", name="enemy_erm_zerg--boss_overmind--2",  quantity=1},
+            {type="kill", name="enemy_erm_zerg--boss_overmind--3",  quantity=1},
+            {type="kill", name="enemy_erm_zerg--boss_overmind--4",  quantity=1},
+            {type="kill", name="enemy_erm_zerg--boss_overmind--5",  quantity=1},
+        }
+    }
 
     return preset
 end

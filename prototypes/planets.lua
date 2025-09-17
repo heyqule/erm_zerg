@@ -144,7 +144,7 @@ local icons = {
     },
 }
 local surface_conditions = {
-    { property = 'zerg_influence', min=50, max=100 }
+    { property = 'zerg_influence', min=75, max=100 }
 } 
 local ingredients = {
     {type= "item", name= "steel-plate", amount= 100},
@@ -586,7 +586,7 @@ data:extend({
             ["day-night-cycle"] = 5 * minute,
             ["magnetic-field"] = 25,
             ["solar-power"] = 400,
-            pressure = 4000,
+            pressure = 4250,
             gravity = 40,
             zerg_influence = 100,
         },

@@ -71,7 +71,8 @@ function ErmZerg.make_boss_hive(level, boss_data)
                 { type = "explosion", percent = 75 },
                 { type = "laser", percent = 75 },
                 { type = "electric", percent = 75 },
-                { type = "cold", percent = 75 }
+                { type = "cold", percent = 75 },
+                { type = "radioactive", percent = 66 }
             },
             healing_per_tick = 0,
             map_color = ERM_UnitHelper.format_map_color(settings.startup["enemy_erm_zerg-map-color"].value),

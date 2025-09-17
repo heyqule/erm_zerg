@@ -9,11 +9,11 @@ local ERMConfig = require("__enemyracemanager__/lib/global_config")
 local ERMDataHelper = require("__enemyracemanager__/lib/rig/data_helper")
 local AnimationDB = require("__erm_zerg_hd_assets__/animation_db")
 
-
+local FALLING_PROJECTILE = 'falling_projectile'
 --- Basic Attack #1
 local create_blood_cloud_projectile = function(type)
     type = type or "projectile"
-    return     {
+    local data = {
         type = "projectile",
         name = MOD_NAME.."--blood-cloud--"..type,
         flags = { "not-on-map" },
@@ -42,12 +42,14 @@ local create_blood_cloud_projectile = function(type)
         },
         animation = AnimationDB.get_single_animation("projectiles","guardian","projectile")
     }
+
+    return data
 end
 
 --- Basic Attack #2
 local create_acid_cloud_projectile = function(type)
     type = type or "projectile"
-    return   {
+    local data = {
         type = "projectile",
         name = MOD_NAME.."--acid-cloud--"..type,
         flags = { "not-on-map" },
@@ -76,6 +78,8 @@ local create_acid_cloud_projectile = function(type)
         },
         animation = AnimationDB.get_single_animation("projectiles","guardian","projectile")
     }
+    
+    return data
 end
 
 local create_damage_cloud = function (name, target_effects, radius, duration, cooldown)
@@ -163,7 +167,7 @@ end
 
 local create_blood_explosion_projectile = function(type)
     type = type or "projectile"
-    return   {
+    local data = {
         type = "projectile",
         name = MOD_NAME.."--blood-explosion--"..type,
         flags = { "not-on-map" },
@@ -204,11 +208,17 @@ local create_blood_explosion_projectile = function(type)
         },
         animation = AnimationDB.get_single_animation("projectiles","guardian","projectile")
     }
+    
+    if type == FALLING_PROJECTILE then
+        data.collision_box = nil
+    end
+
+    return data
 end
 
 local create_swamp_cloud_projectile = function(script_attack, type)
     type = type or "projectile"
-    return   {
+    local data =  {
         type = "projectile",
         name = MOD_NAME.."--swamp-cloud-"..script_attack.."--"..type,
         flags = { "not-on-map" },
@@ -240,17 +250,23 @@ local create_swamp_cloud_projectile = function(script_attack, type)
         },
         animation = AnimationDB.get_single_animation("projectiles","dark_swam","explosion")
     }
+
+    if type == FALLING_PROJECTILE then
+        data.collision_box = nil
+    end
+    
+    return data
 end
 
 --- Cluster Grenade based on blood cloud projectile
 local create_blood_cluster_grenade = function(type)
     type = type or "projectile"
-    return {
+    local data =  {
         type = "projectile",
         name = MOD_NAME.."--blood-cluster-grenade--"..type,
         flags = { "not-on-map" },
         acceleration = 0,
-        collision_box = {{-0.5,-0.5},{0.5, 0.5}},
+        --collision_box = {{-0.5,-0.5},{0.5, 0.5}},
         direction_only = true,
         force_condition = "enemy",
         action = {
@@ -274,7 +290,7 @@ local create_blood_cluster_grenade = function(type)
             {
                 type = "cluster",
                 cluster_count = 4,
-                distance = 10,
+                distance = 16,
                 distance_deviation = 5,
                 action_delivery = {
                     type = "projectile",
@@ -288,17 +304,19 @@ local create_blood_cluster_grenade = function(type)
         },
         animation = AnimationDB.get_single_animation("projectiles","guardian","projectile"),
     }
+    
+    return data
 end
 
 --- Cluster Grenade based on blood cloud projectile
 local create_acid_cluster_grenade = function(type)
     type = type or "projectile"
-    return {
+    local data = {
         type = "projectile",
         name = MOD_NAME.."--acid-cluster-grenade--"..type,
         flags = { "not-on-map" },
         acceleration = 0,
-        collision_box = {{-0.5,-0.5},{0.5, 0.5}},
+        --collision_box = {{-0.5,-0.5},{0.5, 0.5}},
         direction_only = true,
         force_condition = "enemy",
         action = {
@@ -322,19 +340,27 @@ local create_acid_cluster_grenade = function(type)
             {
                 type = "cluster",
                 cluster_count = 6,
-                distance = 10,
+                distance = 8,
                 distance_deviation = 5,
                 action_delivery = {
                     type = "projectile",
                     projectile = MOD_NAME.."--acid-cloud--projectile",
                     direction_deviation = 0.6,
                     starting_speed = 0.25,
-                    starting_speed_deviation = 0.3
+                    starting_speed_deviation = 0.05,
+                    max_range = 32
                 }
             }
         },
         animation = AnimationDB.get_single_animation("projectiles","guardian","projectile"),
     }
+
+
+    if type == FALLING_PROJECTILE then
+        data.collision_box = nil
+    end
+    
+    return data
 end
 
 data:extend({
@@ -342,14 +368,14 @@ data:extend({
     create_damage_cloud("blood-cloud", {
         type = "damage",
         --- process 4 ticks per second
-        damage = { amount = 300, type = "acid" },
+        damage = { amount = 150, type = "acid" },
         apply_damage_to_trees = true
     },  5,120),
     create_acid_cloud_projectile(),
     create_damage_cloud("acid-cloud", {{
                                              type = "damage",
                                              --- process 4 ticks per second
-                                             damage = { amount = 150, type = "acid" },
+                                             damage = { amount = 100, type = "acid" },
                                              apply_damage_to_trees = false
                                          },{
                                              type = "create-sticker",
@@ -360,9 +386,9 @@ data:extend({
     create_swamp_cloud_projectile(BOSS_SPAWN_ATTACK),
     create_swamp_cloud_projectile(UNITS_SPAWN_ATTACK),
     create_swamp_cloud_projectile(UNITS_SPAWN_ATTACK_2X),
-    create_blood_cluster_grenade('falling_projectile'),
-    create_acid_cluster_grenade('falling_projectile'),
-    create_swamp_cloud_projectile(BOSS_SPAWN_ATTACK,'falling_projectile'),
+    create_blood_cluster_grenade(FALLING_PROJECTILE),
+    create_acid_cluster_grenade(FALLING_PROJECTILE),
+    create_swamp_cloud_projectile(BOSS_SPAWN_ATTACK,FALLING_PROJECTILE),
     create_healing_cloud("swamp-cloud", {{
         type = "damage",
         --- process 4 ticks per second
@@ -373,7 +399,7 @@ data:extend({
 })
 
 -- Basic attack fissure
-local basic_attack_fissure_prototype = make_demolisher_fissure_attack(MOD_NAME..'--basic', MOD_NAME..'-basic', 2,  1)
+local basic_attack_fissure_prototype = make_demolisher_fissure_attack(MOD_NAME..'--basic', MOD_NAME..'-basic', 2,  2.5)
 -- Rename fissure explosion to be compatible with boss attack
 basic_attack_fissure_prototype[1].name = basic_attack_fissure_prototype[1].name..'--direct'
 for _, prototype in pairs(basic_attack_fissure_prototype) do

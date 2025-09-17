@@ -57,7 +57,7 @@ end
 
 
 function CustomAttacks.process_boss_units(event, batch_size)
-    batch_size = batch_size or 12
+    batch_size = batch_size or 8
     CustomAttackHelper.drop_boss_units(event, MOD_NAME, ERMConfig.batch_spawn_size * batch_size)
 end
 
@@ -111,7 +111,6 @@ function CustomAttacks.demolisher_units_attack()
                 remote.call("enemyracemanager", "process_attack_position", {
                     group = surface_group,
                     distraction = defines.distraction.by_anything,
-                    target_force = 'player',
                 })
             end
         end
@@ -170,7 +169,9 @@ function CustomAttacks.boss_assisted_spawner_dies(event)
     end
     
     update_boss_data()
-    if not storage.boss_data or not storage.boss_data.radar.valid then
+    if not storage.boss_data or 
+       not storage.boss_data.radar or
+       not storage.boss_data.radar.valid then
         return
     end        
     local surface = spawner_entity.surface

@@ -1,6 +1,6 @@
 {
   "name": "erm_zerg",
-  "version": "2.0.10",
+  "version": "2.0.11",
   "date": "2021-07-10",
   "title": "ERM - Zerg / Garm Brood",
   "author": "heyqule",
@@ -8,7 +8,7 @@
   "factorio_version": "2.0",
   "dependencies": [
     "base >= 2.0.43",
-    "enemyracemanager >= 2.0.29",
+    "enemyracemanager >= 2.0.39",
     "erm_zerg_hd_assets >= 2.0.3",
     "erm_shared_economy >= 1.0.0",
     "erm_zerg_economy >= 1.0.0",

@@ -55,7 +55,7 @@ function ErmZerg.make_boss_nyduspit(level, boss_data)
         {
             type = "unit-spawner",
             name = MOD_NAME .. "--boss_" .. name .. "--" .. level,
-            localised_name = { "entity-name." .. MOD_NAME .. "--" .. name, GlobalConfig.QUALITY_MAPPING[level] },
+            localised_name = { "entity-name." .. MOD_NAME .. "--" .. name, GlobalConfig.QUALITY_MAPPING[6] },
             icon = "__erm_zerg_hd_assets__/graphics/entity/icons/buildings/advisor.png",
             icon_size = 64,
             flags = { "placeable-player", "placeable-enemy", "breaths-air" },
@@ -66,14 +66,15 @@ function ErmZerg.make_boss_nyduspit(level, boss_data)
             working_sound = ZergSound.building_working_sound(name, 0.9),
             dying_sound = ZergSound.building_dying_sound(0.9),
             resistances = {
-                { type = "acid", percent = 75 },
-                { type = "poison", percent = 75 },
-                { type = "physical", percent = 80 },
-                { type = "fire", percent = 75 },
-                { type = "explosion", percent = 75 },
-                { type = "laser", percent = 75 },
-                { type = "electric", percent = 75 },
-                { type = "cold", percent = 75 }
+                { type = "acid", percent = 50 },
+                { type = "poison", percent = 50 },
+                { type = "physical", percent = 66 },
+                { type = "fire", percent = 50 },
+                { type = "explosion", percent = 50 },
+                { type = "laser", percent = 50 },
+                { type = "electric", percent = 50 },
+                { type = "cold", percent = 50 },
+                { type = "radioactive", percent = 50 }
             },
             healing_per_tick = 0,
             collision_box = collision_box,

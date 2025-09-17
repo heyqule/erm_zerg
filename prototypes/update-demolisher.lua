@@ -10,11 +10,17 @@ local demolisher = {
     ["big-demolisher"] = 4
 }
 
+local health_balance = {
+    ["small"] = 4,
+    ["medium"] = 2,
+    ["big"] = 1
+}
+
 local search_word = "demolisher"
 local replace_word = "nydusworm"
 
 --- Default: **20** / 4 = 5
-local health_multiplier = settings.startup["enemyracemanager-max-hitpoint-multipliers"].value / 4
+local health_multiplier = math.floor(settings.startup["enemyracemanager-max-hitpoint-multipliers"].value / 4)
 
 local function convert_segment_name(demolisher_segment_name)
     return string.gsub(demolisher_segment_name, search_word, replace_word)
@@ -30,6 +36,11 @@ end
 
 local function change_common_entity_data(entity)
     entity.max_health = entity.max_health * health_multiplier
+    for key, balance in pairs(health_balance) do
+        if string.find(entity.name, key, nil, true) then
+            entity.max_health = entity.max_health * balance 
+        end  
+    end
     entity.healing_per_tick = 0
     entity.create_ghost_on_death = false
     if entity.resistances then
@@ -41,6 +52,7 @@ local function change_common_entity_data(entity)
         end
     end
 
+    --- Preserve player ghost when worm dies.
     if entity.dying_trigger_effect then
         for index, effect in pairs(entity.dying_trigger_effect) do
             if effect.type == 'create-entity' and string.find(effect.entity_name, "demolisher-corpse", nil, true) then
@@ -132,7 +144,7 @@ for _, unit in pairs(data.raw['segmented-unit']) do
                 {8,8},
                 {-8,-8}
             },
-            probability = 0.15,
+            probability = 0.1,
             repeat_count = demolisher[unit.name],
             repeat_count_deviation = 1,
             trigger_created_entity = true,
@@ -150,7 +162,7 @@ for _, unit in pairs(data.raw['segmented-unit']) do
                     {8,8},
                     {-8,-8}
                 },
-                probability = 0.15,
+                probability = 0.1,
                 repeat_count = demolisher[unit.name],
                 trigger_created_entity = true,
                 find_non_colliding_position = true,
@@ -166,7 +178,7 @@ for _, unit in pairs(data.raw['segmented-unit']) do
                     {8,8},
                     {-8,-8}
                 },
-                probability = 0.2,
+                probability = 0.1,
                 repeat_count = 2 * demolisher[unit.name],
                 trigger_created_entity = true,
                 find_non_colliding_position = true,

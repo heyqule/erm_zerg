@@ -13,8 +13,6 @@ FORCE_NAME = "enemy_erm_zerg"
 -- Must be in the format of {MOD_NAME}-enemy-base or {MOD_NAME}_enemy-base
 AUTOCONTROL_NAME = MOD_NAME.."-enemy-base"
 
-DEBUG_MODE = false
-
 
 -- Attack Types for on_script_trigger_effect
 OVERLORD_SPAWN = "emzrg-ovl"

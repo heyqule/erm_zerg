@@ -51,10 +51,20 @@ if mods['space-age'] then
             },
             {
                 type = "tips-and-tricks-item",
+                tag = "[entity="..FORCE_NAME.."--boss_overmind--1]",
+                name = FORCE_NAME.."-overmind",
+                category = FORCE_NAME,
+                order = "d",
+                indent = 2,
+                starting_status = "suggested",
+                simulation = simulations.overmind
+            },
+            {
+                type = "tips-and-tricks-item",
                 tag = "[item=enemy_erm_zerg--larva_egg]",
                 name = FORCE_NAME.."-economy",
                 category = FORCE_NAME,
-                order = "c",
+                order = "e",
                 indent = 1,
                 starting_status = "suggested",
                 image = "__erm_zerg_hd_assets__/graphics/economy/erm-zerg.png"
