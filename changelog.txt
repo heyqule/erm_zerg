@@ -1,6 +1,6 @@
 ---------------------------------------------------------------------------------------------------
 Version: 2.0.11
-Date: 2025-??-??
+Date: 2025-09-24
 
   Features:
     - Redesigned Overmind Boss, see in-game trick and tips for details
