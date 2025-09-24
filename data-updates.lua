@@ -8,10 +8,6 @@ require("__erm_zerg__/global")
 require "prototypes.update-teamcolour"
 local MapGenFunctions = require('__erm_libs__/prototypes/map_gen')
 
-if mods["space-age"] then
-    require "prototypes.update-demolisher"
-end
-
 -- Update RTS world
 local mapgen = data.raw["map-gen-presets"]["default"]
 mapgen["erm-rts-death-world"]["basic_settings"]["autoplace_controls"][AUTOCONTROL_NAME] = { frequency = "very-high", size = "very-big" }
@@ -41,7 +37,6 @@ if map_gen_settings then
 end
 
 
-
 if mods["space-age"] and settings.startup["enemy_erm_zerg-on_vulcanus"].value then
     local vulcanus = data.raw.planet.vulcanus
     vulcanus.map_gen_settings.autoplace_controls[AUTOCONTROL_NAME] = {}
@@ -52,3 +47,19 @@ if mods["space-age"] and settings.startup["enemy_erm_zerg-on_vulcanus"].value th
         MOD_NAME .. "--big-nydusworm",
     }
 end
+
+
+if mods["space-age"] then
+    require "prototypes.update-demolisher"
+    
+    --- Bump recipe max pressure to match Char and beyond. 
+    for _, recipe in pairs(data.raw.recipe) do
+        if recipe.surface_conditions  then
+            for _, surface_condition in pairs(recipe.surface_conditions) do
+                if surface_condition.property == "pressure" and surface_condition.max == 4000  then
+                    surface_condition.max = 4500
+                end
+            end
+        end
+    end
+end 

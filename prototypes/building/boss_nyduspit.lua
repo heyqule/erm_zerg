@@ -16,7 +16,7 @@ local ZergSound = require("__erm_zerg_hd_assets__/sound")
 local CreepFunction = require("__erm_zerg__/prototypes/creep_function")
 local AnimationDB = require("__erm_zerg_hd_assets__/animation_db")
 local enemy_autoplace = require ("__enemyracemanager__/prototypes/enemy-autoplace")
-local name = "overmind"
+local name = "nyduspit"
 
 -- Hitpoints
 
@@ -33,59 +33,65 @@ local max_friends_around_to_spawn = 100
 local spawn_table = function()
     local res = {}
     --Tire 2
-    res[1] = { MOD_NAME .. "--lurker--6", { { 0.0, 0.2 } } }
-    res[2] = { MOD_NAME .. "--guardian--6", { { 0.0, 0.15 } } }
-    res[3] = { MOD_NAME .. "--devourer--6", { { 0.0, 0.15 } } }
+    res[1] = { MOD_NAME .. "--zergling--6", { { 0.0, 0.35 } } }
+    res[2] = { MOD_NAME .. "--hydralisk--6", { { 0.0, 0.25 } } }
+    --Tire 2
+    res[3] = { MOD_NAME .. "--lurker--6", { { 0.0, 0.1 } } }
+    res[4] = { MOD_NAME .. "--guardian--6", { { 0.0, 0.1 } } }
+    res[5] = { MOD_NAME .. "--devourer--6", { { 0.0, 0.1 } } }
     --Tier 3
-    res[4] = { MOD_NAME .. "--ultralisk--6", { { 0.0, 0.2 } } }
-    res[5] = { MOD_NAME .. "--defiler--6", { { 0.0, 0.1 } } }
-    res[6] = { MOD_NAME .. "--queen--6", { { 0.0, 0.1 } } }
-    res[7] = { MOD_NAME .. "--drone--6", { { 0.0, 0.1 } } }
+    res[6] = { MOD_NAME .. "--ultralisk--6", { { 0.0, 0.05 } } }
+    res[7] = { MOD_NAME .. "--drone--6", { { 0.0, 0.05 } } }
     return res
 end
 
-local collision_box = { { -3.5, -4.25 }, { 3.25, 3 } }
--- Map generator bounding box should always at least 1 unit wider than collision_box. This prevent units from getting stuck.
-local map_generator_bounding_box = { { -4.5, -5.25 }, { 4.25, 4 } }
-local selection_box = { { -3.5, -4.25 }, { 3.25, 3 } }
+local collision_box = { { -2.25, -2.25 }, { 2.25, 2.25 } }
+local map_generator_bounding_box = { { -3.25, -3.25 }, { 3.25, 3.25 } }
+local selection_box = { { -2.25, -2.25 }, { 2.25, 2.25 } }
 
-function ErmZerg.make_boss_hive(level, boss_data)
+function ErmZerg.make_boss_nyduspit(level, boss_data)
+
     data:extend({
         {
             type = "unit-spawner",
             name = MOD_NAME .. "--boss_" .. name .. "--" .. level,
-            localised_name = { "entity-name." .. MOD_NAME .. "--" .. name, GlobalConfig.QUALITY_MAPPING[level] },
+            localised_name = { "entity-name." .. MOD_NAME .. "--" .. name, GlobalConfig.QUALITY_MAPPING[6] },
             icon = "__erm_zerg_hd_assets__/graphics/entity/icons/buildings/advisor.png",
             icon_size = 64,
             flags = { "placeable-player", "placeable-enemy", "breaths-air" },
-            max_health = boss_data.hive_hp[level],
+            max_health = boss_data.nyduspit_hp[level], 
             order = MOD_NAME .. "--building--" .. name .. "--".. level,
             subgroup = "enemies",
-            working_sound = ZergSound.building_working_sound("hive", 0.9),
+            map_color = ERM_UnitHelper.format_map_color(settings.startup["enemy_erm_zerg-map-color"].value),
+            working_sound = ZergSound.building_working_sound(name, 0.9),
             dying_sound = ZergSound.building_dying_sound(0.9),
             resistances = {
-                { type = "acid", percent = 75 },
-                { type = "poison", percent = 75 },
-                { type = "physical", percent = 80 },
-                { type = "fire", percent = 75 },
-                { type = "explosion", percent = 75 },
-                { type = "laser", percent = 75 },
-                { type = "electric", percent = 75 },
-                { type = "cold", percent = 75 },
-                { type = "radioactive", percent = 66 }
+                { type = "acid", percent = 50 },
+                { type = "poison", percent = 50 },
+                { type = "physical", percent = 66 },
+                { type = "fire", percent = 50 },
+                { type = "explosion", percent = 50 },
+                { type = "laser", percent = 50 },
+                { type = "electric", percent = 50 },
+                { type = "cold", percent = 50 },
+                { type = "radioactive", percent = 50 }
             },
             healing_per_tick = 0,
-            map_color = ERM_UnitHelper.format_map_color(settings.startup["enemy_erm_zerg-map-color"].value),
             collision_box = collision_box,
             map_generator_bounding_box = map_generator_bounding_box,
             selection_box = selection_box,
             absorptions_per_second = { pollution = { absolute = pollution_absorption_absolute, proportional = 0.01 } },
-            corpse = "zerg--large-base-corpse",
+            corpse = "zerg--small-base-corpse",
             dying_explosion = "zerg--building-explosion",
+            max_count_of_owned_units = boss_data.nyduspit_units_count[level],
+            max_friends_around_to_spawn = max_friends_around_to_spawn,
+            graphics_set = {
+                animations = AnimationDB.get_layered_animations("buildings", name, "run")
+            },
             dying_trigger_effect = {
                 {
                     type = "script",
-                    effect_id = TRIGGER_BOSS_DIES,
+                    effect_id = TRIGGER_BOSS_ASSIST_DIES,
                 }
             },
             created_effect = {
@@ -95,19 +101,14 @@ function ErmZerg.make_boss_hive(level, boss_data)
                     source_effects = {
                         {
                             type = "script",
-                            effect_id = TRIGGER_BOSS_SPAWNED
+                            effect_id = TRIGGER_BOSS_ASSIST_SPAWNED
                         }
                     }
                 }
             },
-            max_count_of_owned_units = boss_data.hive_units_count[level],
-            max_friends_around_to_spawn = max_friends_around_to_spawn,
-            graphics_set = {
-                animations = AnimationDB.get_layered_animations("buildings", name, "run")
-            },
-            result_units = spawn_table(ERM_Config.MAX_LEVELS),
+            result_units = spawn_table(level),
             -- With zero evolution the spawn rate is 6 seconds, with max evolution it is 2.5 seconds
-            spawning_cooldown = boss_data.hive_spawn_timer[level],
+            spawning_cooldown = boss_data.nyduspit_spawn_timer[level],
             spawning_radius = spawning_radius,
             spawning_spacing = 3,
             max_spawn_shift = 0,
@@ -117,7 +118,6 @@ function ErmZerg.make_boss_hive(level, boss_data)
             -- (2018-12-07)
             autoplace = nil,
             call_for_help_radius = 50,
-            -- Remove the following if you don"t want creep under your base.
             spawn_decorations_on_expansion = true,
             spawn_decoration =  CreepFunction.getSpawnerCreep(),
         }

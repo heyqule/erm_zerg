@@ -9,10 +9,12 @@
 local String = require("__erm_libs__/stdlib/string")
 local ForceHelper = require("__enemyracemanager__/lib/helper/force_helper")
 local CustomAttacks = require("__erm_zerg__/scripts/custom_attacks")
-local AttackGroupBeaconProcessor = require("__enemyracemanager__/lib/attack_group_beacon_processor")
+
+local EmotionConstants = require('__enemyracemanager__/lib/emotion_constants')
+local AttackGroupBeaconConstants = require("__enemyracemanager__/lib/attack_group_beacon_constants")
 
 require("__erm_zerg__/global")
--- Constants
+
 
 local using_demolisher_nydus_worm = script.active_mods["space-age"]
 
@@ -21,16 +23,17 @@ local zerg_on_vulcanus = script.active_mods["space-age"] and settings.startup["e
 local HOME_PLANET = 'char'
 
 local demolisher_head = {
-    [FORCE_NAME.."--small-demolisher"] =  true,
-    [FORCE_NAME.."--medium-demolisher"] =  true,
-    [FORCE_NAME.."--big-demolisher"] =  true,
+    [FORCE_NAME.."--small-nydusworm"] =  true,
+    [FORCE_NAME.."--medium-nydusworm"] =  true,
+    [FORCE_NAME.."--big-nydusworm"] =  true,    
 }
 
 local demolisher_names = {"small-demolisher","medium-demolisher","big-demolisher"}
+local demolisher_type_names = {"demolisher", "nydusworm"}
 
 
 local populations = {
-    ["ultralisk"] = 5,
+    ["ultralisk"] = 4,
     ["guardian"] = 3,
     ["mutalisk"] = 2,
     ["hydralisk"] = 1,
@@ -82,6 +85,9 @@ local createRace = function()
 
     --- for guerrilla tactic processing
     storage.guerrilla_distances = storage.guerrilla_distances or {}
+    
+    storage.boss_data = storage.boss_data or nil
+    storage.boss_data_cache_time = storage.boss_data_cache_time or 0
 
     if script.active_mods['rso-mod'] then
         remote.call("RSO", "ignoreSurface", "char")
@@ -138,6 +144,7 @@ local addRaceSettings = function()
         scourge=true,
         broodling=true
     }
+    race_settings.builder = 'drone'
     race_settings.dropship = "overlord"
     race_settings.droppable_units = {
         {{ "hydralisk" },{1}},
@@ -168,8 +175,26 @@ local addRaceSettings = function()
         {{"overlord", "mutalisk"}, {1, 2}, 50 },
         {{"overlord", "mutalisk", "guardian"}, {1,3,2}, 50},
     }
+    
+    --- Arrange it from lowest chance to highest chance, as it starts from first item
+    race_settings.emotion_data = {
+        -- emotion_type, spawn_chance, compare as dark/light, darkness_value (0-1),cooldown_interval, group_size_multiplier
+        {EmotionConstants.EMO_RAPID_EXPAND, 10, EmotionConstants.DARK, 0.65, 2 * minute, 0.2},
+        {EmotionConstants.EMO_RUSH, 10, EmotionConstants.LIGHT, 0.5, 30 * second, 0.33},
+        {EmotionConstants.EMO_DOUBLE_TAP, 15, EmotionConstants.LIGHT, 0.65, 5 * minute, 0.8},
+        {EmotionConstants.EMO_SIEGE, 20, EmotionConstants.LIGHT, 0.5, 3 * minute, 1},
+    }
+    
+    race_settings.boss_emotion_data = {
+        -- emotion_type, spawn_chance, compare as dark/light, darkness_value (0-1),cooldown_interval, group_size_multiplier
+        {EmotionConstants.EMO_RUSH, 33, EmotionConstants.ALL_DAY, 0, 15 * second, 0.5},
+        {EmotionConstants.EMO_DOUBLE_TAP, 50, EmotionConstants.ALL_DAY, 0, 3 * minute, 1},
+        {EmotionConstants.EMO_SIEGE, 100, EmotionConstants.ALL_DAY, 0, 2 * minute, 1.2},
+    } 
+    
 
-    race_settings.boss_building = "overmind"
+    race_settings.boss_building = "boss_overmind"
+    race_settings.boss_assisted_spawner = "boss_nyduspit"
     --- used to do pathing.
     race_settings.pathing_unit = "zergling"
     --- used for collision checks. It's the largest ground unit.
@@ -182,6 +207,13 @@ local addRaceSettings = function()
 
     race_settings.structure_killed_count_by_planet = race_settings.structure_killed_count_by_planet or {}
     race_settings.unit_killed_count_by_planet = race_settings.unit_killed_count_by_planet or {}
+
+    for _, item in pairs(prototypes.mod_data) do
+        if item.data_type == MOD_NAME..'.boss_data' then
+            race_settings.boss_settings = {}
+            race_settings.boss_settings = item.data
+        end
+    end
 
     remote.call("enemyracemanager", "register_race", race_settings)
 
@@ -210,7 +242,7 @@ local update_world = function()
         --- Convert segments
         local seg_entities = vulcanus.find_entities_filtered({type = "segment" })
         for _, entity in pairs(seg_entities) do
-            for _, name in pairs(demolisher_names) do
+            for _, name in pairs(demolisher_type_names) do
                 if string.find(entity.name, name, nil, true) then
                     entity.force = FORCE_NAME
                     break;
@@ -259,20 +291,32 @@ local attack_functions = {
     [TIME_TO_LIVE_CREATED] = function(args)
         CustomAttacks.process_time_to_live_unit_created(args)
     end,
-    [BOSS_SPAWN_ATTACK] = function(args)
-        CustomAttacks.process_boss_units(args)
-    end,
     [UNITS_SPAWN_ATTACK] = function(args)
         CustomAttacks.process_batch_units(args)
+        CustomAttacks.build(args, MOD_NAME, 'nyduspit')
+    end,
+    [UNITS_SPAWN_ATTACK_2X] = function(args)
+        CustomAttacks.process_batch_units(args, 24)
+        CustomAttacks.build(args, MOD_NAME, 'nyduspit')
     end,
     [NYDUS_DEATH_ATTACK] = function(args)
-        CustomAttacks.process_batch_units(args)
+        CustomAttacks.process_batch_units(args, 48)
     end,
     [GUERRILLA_ATTACK] = function(args)
         CustomAttacks.process_guerrilla(args)
     end,
     [LARVA_EGG_TRIGGER] = function(args)
         CustomAttacks.process_egg(args)
+    end,
+    [BOSS_SPAWN_ATTACK] = function(args)
+        CustomAttacks.process_boss_units(args)
+        CustomAttacks.build(args, MOD_NAME, 'nyduspit')
+    end,
+    [TRIGGER_BOSS_SPAWNED] = function(args)
+        CustomAttacks.boss_spawned(args)
+    end,
+    [TRIGGER_BOSS_ASSIST_DIES] = function(args)
+        CustomAttacks.boss_assisted_spawner_dies(args)
     end
 }
 
@@ -336,10 +380,10 @@ script.on_event(defines.events.on_trigger_created_entity, function(event)
     end
 end)
 
-
+--- Handle force change when segment unit spawns
 script.on_event(defines.events.on_segment_entity_created, function(event)
-    if is_compatible_demolisher(event.entity.name) then
-        event.entity.force = FORCE_NAME
+    if is_compatible_demolisher(event.entity.name) and event.entity.segmented_unit then
+        event.entity.segmented_unit.force = FORCE_NAME
     end
 end)
 
@@ -361,7 +405,7 @@ script.on_nth_tick(13 * minute + 13, function(event)
             return
         end
 
-        local has_entity = vulcanus.count_entities_filtered({type=AttackGroupBeaconProcessor.get_attackable_entity_types(), limit = 1})
+        local has_entity = vulcanus.count_entities_filtered({type=AttackGroupBeaconConstants.ATTACKABLE_ENTITY_TYPES, limit = 1})
         if has_entity < 1 then
             return
         end
@@ -379,11 +423,10 @@ end)
 ---
 --- Register required remote interfaces
 ---
-local BossAttack = require("scripts/boss_attacks")
----
 --- Register boss attacks
 --- Interface Name: {race_name}_boss_attacks
 ---
+local BossAttack = require("scripts/boss_attacks")
 remote.add_interface("erm_zerg_boss_attacks", {
     get_attack_data = BossAttack.get_attack_data,
 })

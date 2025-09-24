@@ -58,7 +58,7 @@ data:extend({
         direction_only = true,
         collision_box = {{-0.5,-0.5},{0.5,0.5}},
         force_condition = "not-same",
-        hit_collision_mask = { layers = {player = true, train = true, rail=true, transport_belt=true, trigger_target=true, [ERMDataHelper.getFlyingLayerName()] =  true} },
+        hit_collision_mask = { layers = {player = true, train = true, rail=true, transport_belt=true, car=true, [ERMDataHelper.getFlyingLayerName()] =  true} },
         hit_at_collision_position = false,
 
         action = {
@@ -167,4 +167,15 @@ data:extend({
         flags = { "not-on-map" },
         animations = AnimationDB.get_layered_animations("projectiles","scourge_explosion","explosion")
     }
+})
+
+local blood_swarm = {
+    type = "explosion",
+    name = MOD_NAME.."--dark-swarm-80-blood-explosion",
+    flags = { "not-on-map" },
+    animations = AnimationDB.get_layered_animations("projectiles","dark_swam_80","explosion")
+}
+blood_swarm.animations.layers[1].tint = {r=1,g=0,b=0,a=1}
+data:extend({
+    blood_swarm 
 })

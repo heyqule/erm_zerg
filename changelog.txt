@@ -1,4 +1,30 @@
 ---------------------------------------------------------------------------------------------------
+Version: 2.0.11
+Date: 2025-09-24
+
+  Features:
+    - Redesigned Overmind Boss, see in-game trick and tips for details
+    - Added Zerg Akira Psi Scanner to discover boss. It's only placeable on planet with property zerg_influence > 90%.
+    - Added support for Emotional Damage system.   
+    - Added Milestone mod support for killing each tier of Overmind.
+    - Added Achievements for killing Tier 1, Tier 3, Tier 5 Overmind.
+    - Added tip and trick about Overmind.
+
+  Changes:
+    - Nydus worms no longer have harvestable corpses and preserve player building ghosts.
+    - Increased Nydus worms health by at least 4x (depends on ERM health setting).
+    - Nydus worms are no longer regenerate health. 
+    - Decreased Nydus worms resistances with higher than 95% to cap at 95%, except impact.
+    - Increased Nydus worms on death spawn size from 12 to 36 units.
+    - Changed Planet Char pressure to 4250 to avoid atomic bomb creating a lava hole. That instant kills any structure on it.
+    - Overrided all recipes with max pressure of 4000 with 4500.   
+    - Changed Synthetic Ultralisk pop from 5 to 4.
+    - Added tier 6 (Divine) to Advanced Target Priorities
+
+  Bugfixes:    
+    - Fixed nydus worm compatibility issues with LuaSegmentedUnit on 2.0.61+.    
+
+---------------------------------------------------------------------------------------------------
 Version: 2.0.10
 Date: 2025-04-18
 
