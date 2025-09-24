@@ -21,7 +21,7 @@ Date: 2025-09-24
     - Changed Synthetic Ultralisk pop from 5 to 4.
     - Added tier 6 (Divine) to Advanced Target Priorities
 
-  Bugfixes:    
+  Bugfixes:
     - Fixed nydus worm compatibility issues with LuaSegmentedUnit on 2.0.61+.    
 
 ---------------------------------------------------------------------------------------------------
