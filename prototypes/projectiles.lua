@@ -168,3 +168,14 @@ data:extend({
         animations = AnimationDB.get_layered_animations("projectiles","scourge_explosion","explosion")
     }
 })
+
+local blood_swarm = {
+    type = "explosion",
+    name = MOD_NAME.."--dark-swarm-80-blood-explosion",
+    flags = { "not-on-map" },
+    animations = AnimationDB.get_layered_animations("projectiles","dark_swam_80","explosion")
+}
+blood_swarm.animations.layers[1].tint = {r=1,g=0,b=0,a=1}
+data:extend({
+    blood_swarm 
+})

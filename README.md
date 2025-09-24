@@ -79,4 +79,4 @@ Physical resistance: 85, Weak elemental resistance: 75, Elemental resistance: 80
 - Lava planet
 - New resources, 2 types of minerals and one gas geyser.
 - Patrolled by nydus worm.
-- [Coming soon] Boss summoning ritual
+- Master control entity: Overmind. Defeat it for rewards.

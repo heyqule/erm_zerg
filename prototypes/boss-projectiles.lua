@@ -10,6 +10,7 @@ local ERMDataHelper = require("__enemyracemanager__/lib/rig/data_helper")
 local AnimationDB = require("__erm_zerg_hd_assets__/animation_db")
 
 local FALLING_PROJECTILE = 'falling_projectile'
+local damage_multiplier = settings.startup["enemyracemanager-damage-multipliers"].value
 --- Basic Attack #1
 local create_blood_cloud_projectile = function(type)
     type = type or "projectile"
@@ -17,7 +18,8 @@ local create_blood_cloud_projectile = function(type)
         type = "projectile",
         name = MOD_NAME.."--blood-cloud--"..type,
         flags = { "not-on-map" },
-        acceleration = 0,
+        acceleration = 0.01,
+        max_speed = 0.8,
         collision_box = {{-0.5,-0.5},{0.5, 0.5}},
         direction_only = true,
         force_condition = "enemy",
@@ -53,7 +55,8 @@ local create_acid_cloud_projectile = function(type)
         type = "projectile",
         name = MOD_NAME.."--acid-cloud--"..type,
         flags = { "not-on-map" },
-        acceleration = 0,
+        acceleration = 0.02,
+        max_speed = 1,
         collision_box = {{-0.5,-0.5},{0.5, 0.5}},
         direction_only = true,
         force_condition = "enemy",
@@ -165,13 +168,16 @@ local create_healing_cloud = function (name, target_effects, radius, duration, c
 end
 
 
-local create_blood_explosion_projectile = function(type)
+local create_blood_mist_projectile = function(type, radius, damage)
     type = type or "projectile"
+    radius  = radius or 8
+    damage  = damage or 1000
     local data = {
         type = "projectile",
-        name = MOD_NAME.."--blood-explosion--"..type,
+        name = MOD_NAME.."--blood-mist--"..type,
         flags = { "not-on-map" },
-        acceleration = 0,
+        acceleration = 0.0025,
+        max_speed = 0.6,
         collision_box = {{-0.5,-0.5},{0.5, 0.5}},
         direction_only = true,
         force_condition = "enemy",
@@ -181,28 +187,16 @@ local create_blood_explosion_projectile = function(type)
             action_delivery = {
                 type = "instant",
                 target_effects = {
-                    --@TODO new explosion
-                    --{
-                    --    type = "create-entity",
-                    --    entity_name = "erm-ball-explosion-blood-1",
-                    --    trigger_created_entity = false
-                    --},
                     {
-                        type = "nested-result",
-                        action = {
-                            type = "area",
-                            force = "not-same",
-                            radius = 6,
-                            ignore_collision_condition = true,
-                            action_delivery = {
-                                type = "instant",
-                                target_effects = {
-                                    type = "damage",
-                                    damage = { amount = 1000, type = "acid" },
-                                }
-                            }
-                        }
-                    }
+                        type = "create-entity",
+                        entity_name = MOD_NAME.."--dark-swarm-80-blood-explosion",
+                        trigger_created_entity = false
+                    },
+                    {
+                        type = "create-smoke",
+                        show_in_tooltip = true,
+                        entity_name = MOD_NAME .. "--blood-mist"
+                    },
                 }
             }
         },
@@ -222,7 +216,8 @@ local create_swamp_cloud_projectile = function(script_attack, type)
         type = "projectile",
         name = MOD_NAME.."--swamp-cloud-"..script_attack.."--"..type,
         flags = { "not-on-map" },
-        acceleration = 0,
+        acceleration = 0.0025,
+        max_speed = 0.5,
         collision_box = {{-1,-1},{1, 1}},
         direction_only = true,
         force_condition = "enemy",
@@ -368,21 +363,32 @@ data:extend({
     create_damage_cloud("blood-cloud", {
         type = "damage",
         --- process 4 ticks per second
-        damage = { amount = 150, type = "acid" },
+        damage = { amount = 150 * damage_multiplier, type = "acid" },
         apply_damage_to_trees = true
     },  5,120),
     create_acid_cloud_projectile(),
     create_damage_cloud("acid-cloud", {{
                                              type = "damage",
                                              --- process 4 ticks per second
-                                             damage = { amount = 100, type = "acid" },
+                                             damage = { amount = 100 * damage_multiplier, type = "acid" },
                                              apply_damage_to_trees = false
                                          },{
                                              type = "create-sticker",
                                              sticker = "5-075-slowdown-sticker",
                                              show_in_tooltip = true,
                                          }}, 5,120),
-    create_blood_explosion_projectile(),
+    create_blood_mist_projectile(),
+    create_damage_cloud("blood-mist", {{
+                                           type = "damage",
+                                           --- process 4 ticks per second
+                                           damage = { amount = 125 * damage_multiplier, type = "acid" },
+                                           apply_damage_to_trees = false
+                                           },{
+                                               type = "damage",
+                                               --- process 4 ticks per second
+                                               damage = { amount = 75 * damage_multiplier, type = "poison" },
+                                               apply_damage_to_trees = false
+                                        }}, 8,120),
     create_swamp_cloud_projectile(BOSS_SPAWN_ATTACK),
     create_swamp_cloud_projectile(UNITS_SPAWN_ATTACK),
     create_swamp_cloud_projectile(UNITS_SPAWN_ATTACK_2X),
@@ -399,7 +405,7 @@ data:extend({
 })
 
 -- Basic attack fissure
-local basic_attack_fissure_prototype = make_demolisher_fissure_attack(MOD_NAME..'--basic', MOD_NAME..'-basic', 2,  2.5)
+local basic_attack_fissure_prototype = make_demolisher_fissure_attack(MOD_NAME..'--basic', MOD_NAME..'-basic', 2,  2.5 * damage_multiplier)
 -- Rename fissure explosion to be compatible with boss attack
 basic_attack_fissure_prototype[1].name = basic_attack_fissure_prototype[1].name..'--direct'
 for _, prototype in pairs(basic_attack_fissure_prototype) do

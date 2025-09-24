@@ -87,7 +87,7 @@ function RemoteAPI.advanced_target_priorities_register_section_data()
                   "broodling", "scourge", 
                   "infested", "defiler",  
                 },
-                {1,2,3,4,5}
+                {1,2,3,4,5,6}
             },
             unit_type_columns = 2,
             --- controls order of text concatenation

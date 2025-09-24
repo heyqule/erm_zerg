@@ -225,6 +225,11 @@ if mods["space-age"] and mods['quality'] then
                     "electronic-circuit",
                     "coal",
                     "concrete",
+                    "explosives",
+                    "battery",
+                    "nutrients",
+                    "express-transport-belt",
+                    "turbo-transport-belt",
                 }
             }
         },

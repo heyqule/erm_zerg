@@ -144,7 +144,7 @@ local icons = {
     },
 }
 local surface_conditions = {
-    { property = 'zerg_influence', min=75, max=100 }
+    { property = 'zerg_influence', min=90, max=100 }
 } 
 local ingredients = {
     {type= "item", name= "steel-plate", amount= 100},

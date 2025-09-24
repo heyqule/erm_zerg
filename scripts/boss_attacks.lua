@@ -16,7 +16,7 @@ BossAttackRemote.basic_attacks =
 {
     --- direct attack, a very high acid damage AOE,  AOE DOT (explosion damage),  AOE DOT (acid damage)
     --- 
-    attack_name = {"basic-fissure", "blood-explosion", "blood-cloud", "acid-cloud"},
+    attack_name = {"basic-fissure", "blood-mist", "blood-cloud", "acid-cloud"},
     attack_type = {
         BossAttackProcessor.TYPE_DIRECT,
         BossAttackProcessor.TYPE_PROJECTILE,
@@ -24,7 +24,7 @@ BossAttackRemote.basic_attacks =
         BossAttackProcessor.TYPE_PROJECTILE,
     },
     attack_chance = {
-        {15, 20, 25, 30, 35},
+        {10, 15, 20, 25, 25},
         {20, 25, 30, 35, 40},
         {25, 30, 35, 40, 50},
         --- Final attack always roll 100%, but up to the dev.
@@ -38,11 +38,11 @@ BossAttackRemote.basic_attacks =
         {1, 1, 2, 2, 2},
         {1, 1, 2, 2, 2},
         {1, 1, 2, 2, 2},
-        {1, 1, 1, 2, 2}
+        {1, 2, 2, 3, 3}
     },
     attack_spread_multiplier = {
-        {1, 1, 1, 1, 2},
-        {1, 1, 1, 1, 2},
+        {1, 1, 1, 1, 1},
+        {1, 1, 1, 2, 2},
         {1, 1, 1, 2, 2},
         {1, 1, 2, 2, 2},
     },
@@ -86,7 +86,7 @@ BossAttackRemote.heavy_attacks =
 --- 1 selecting full size unit group near the base to command an attack.
 BossAttackRemote.assist_attacks =
 {
-    attack_name = {"swamp-cloud-"..BOSS_SPAWN_ATTACK, 'boss_nyduspit', "swamp-cloud-"..UNITS_SPAWN_ATTACK_2X, 'select_attack_1x'},
+    attack_name = {"swamp-cloud-"..BOSS_SPAWN_ATTACK, 'boss_nyduspit', "swamp-cloud-"..UNITS_SPAWN_ATTACK_2X, 'select_attack_1.5x'},
     attack_type = {
         BossAttackProcessor.TYPE_FALLING_PROJECTILE,
         BossAttackProcessor.TYPE_STRUCT_SPAWN,
@@ -101,7 +101,7 @@ BossAttackRemote.assist_attacks =
     },
     attack_count = {1, 1, 1, 1},
     attack_spread = {1, 2, 2, 1},
-    select_neayby_enemy_count = {0, 0, 0, 1},
+    select_neayby_enemy_count = {0, 0, 0, 1.5},
     attack_use_multiplier = {false, false, false, false},
     can_aim_attackable_targets = {false, false, true, true},
     attack_count_multiplier = {
@@ -144,7 +144,7 @@ BossAttackRemote.special_attacks =
     attack_spread_multiplier = {
         {2,2,2,3,3},
         {2,2,2,3,3},
-        {2,2,3,3,4},
+        {2,2,3,3,3},
         {1,1,2,2,3},
     },
 }
@@ -196,7 +196,7 @@ BossAttackRemote.despawn_attacks =
 
 BossAttackRemote.idle_attacks =
 {
-    attack_name = {"medium-nydusworm","small-nydusworm","select_unit_1.25x","select_unit_0.75x", "basic-fissure"},
+    attack_name = {"medium-nydusworm","small-nydusworm","select_unit_1.5x","select_unit_1x", "basic-fissure"},
     attack_type = {
         BossAttackProcessor.TYPE_SEGMENTED_UNIT_SPAWN,
         BossAttackProcessor.TYPE_SEGMENTED_UNIT_SPAWN,
@@ -215,7 +215,7 @@ BossAttackRemote.idle_attacks =
     attack_spread = {1, 1, 1, 1, 2},
     attack_use_multiplier = {false, false, false,false,false},
     only_targets_radar = {true, true, true, true, true},
-    select_neayby_enemy_count = {0, 0, 1.25, 0.75, 0},
+    select_neayby_enemy_count = {0, 0, 1.5, 1, 0},
     attack_count_multiplier = {
         {},
     },
