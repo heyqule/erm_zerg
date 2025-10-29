@@ -1,4 +1,15 @@
 ---------------------------------------------------------------------------------------------------
+Version: 2.0.12
+Date: 2025-10-29
+  
+  Changes:
+    - Increased max_friends_around_to_spawn value to match max_count_of_owned_units for boss spawners.
+
+  Bugfixes:
+    - Fixed an crash when other mods made demolisher corpse entity to generate on_trigger_created_entity event.
+    - Fixed an data phase crash when other mods removes valcanus planet music.
+
+---------------------------------------------------------------------------------------------------
 Version: 2.0.11
 Date: 2025-09-24
 

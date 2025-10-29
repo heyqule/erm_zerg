@@ -101,7 +101,7 @@ function ErmZerg.make_boss_hive(level, boss_data)
                 }
             },
             max_count_of_owned_units = boss_data.hive_units_count[level],
-            max_friends_around_to_spawn = max_friends_around_to_spawn,
+            max_friends_around_to_spawn = boss_data.hive_units_count[level],
             graphics_set = {
                 animations = AnimationDB.get_layered_animations("buildings", name, "run")
             },

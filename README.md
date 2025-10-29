@@ -12,6 +12,7 @@ ERM - Features Reel: [https://www.youtube.com/watch?v=phLRReAjxHA](https://www.y
 - Default to HD graphic. erm_zerg_hd is no longer required.
 - [space-age] Zerg on Vulcanus.  Demolish pairs them as nydus worms.
 - [space-age] Planet Char as new planet. Home of Legendary forces.
+- [space-age] Beat the boss, Overmind, on planet Char for rewards
 - This is an experimental release.
 
 
@@ -78,5 +79,6 @@ Physical resistance: 85, Weak elemental resistance: 75, Elemental resistance: 80
 ### Planet Char
 - Lava planet
 - New resources, 2 types of minerals and one gas geyser.
+- New techs and recipes
 - Patrolled by nydus worm.
-- Master control entity: Overmind. Defeat it for rewards.
+- Master control entity: Overmind. Defeat it for rewards. (Experimental)

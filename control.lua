@@ -347,9 +347,13 @@ local is_compatible_demolisher = function(name)
     return false
 end
 
+local valid_unit_types = {
+    ["unit"] = true
+}
+
 local on_trigger_created_entity_handlers = {
     ["segmented-unit"] = function(entity, source)
-        if is_compatible_demolisher(source.name) then
+        if is_compatible_demolisher(source.name) and valid_unit_types[entity.type] then
             entity.force = FORCE_NAME
             local surface_name = entity.surface.name
             if storage.demolisher_units[surface_name] == nil then
@@ -360,16 +364,17 @@ local on_trigger_created_entity_handlers = {
                 entity = entity,
                 tick = game.tick
             }
-        end
 
-        if entity.commandable then
-            remote.call("enemyracemanager", "process_attack_position", {
-                group = entity.commandable,
-                distraction = defines.distraction.by_enemy,
-            })
+            if entity.commandable then
+                remote.call("enemyracemanager", "process_attack_position", {
+                    group = entity.commandable,
+                    distraction = defines.distraction.by_enemy,
+                })
+            end
         end
     end
 }
+
 
 --- Handles custom logic for units spawned by demolisher
 script.on_event(defines.events.on_trigger_created_entity, function(event)

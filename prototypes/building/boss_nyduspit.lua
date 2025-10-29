@@ -84,7 +84,7 @@ function ErmZerg.make_boss_nyduspit(level, boss_data)
             corpse = "zerg--small-base-corpse",
             dying_explosion = "zerg--building-explosion",
             max_count_of_owned_units = boss_data.nyduspit_units_count[level],
-            max_friends_around_to_spawn = max_friends_around_to_spawn,
+            max_friends_around_to_spawn = boss_data.nyduspit_units_count[level],
             graphics_set = {
                 animations = AnimationDB.get_layered_animations("buildings", name, "run")
             },
