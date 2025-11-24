@@ -42,7 +42,7 @@ local incremental_cold_resistance = 70
 -- Handles damages
 
 local base_acid_damage = 1
-local incremental_acid_damage = 5
+local incremental_acid_damage = 12
 
 -- Handles Attack Speed
 
@@ -92,6 +92,7 @@ function ErmZerg.make_mutalisk(level)
             selection_box = selection_box,
             sticker_box = selection_box,
             vision_distance = vision_distance,
+            can_open_gate = true,
             movement_speed = ERM_UnitHelper.get_movement_speed(base_movement_speed, incremental_movement_speed,  level),
             absorptions_to_join_attack = { pollution = ERM_UnitHelper.get_pollution_attack(pollution_to_join_attack, level)},
             distraction_cooldown = distraction_cooldown,

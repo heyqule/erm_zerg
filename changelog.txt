@@ -1,4 +1,13 @@
 ---------------------------------------------------------------------------------------------------
+Version: 2.0.13
+Date: 2025-11-24
+
+  Changes:
+    - Added can_open_gate=true to all units.
+    - Added proper prerequisite for zerg egg research.
+    - Significantly increased mutalisk damage (guerilla unit buff). 120 -> 260
+
+---------------------------------------------------------------------------------------------------
 Version: 2.0.12
 Date: 2025-10-29
   
