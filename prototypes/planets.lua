@@ -560,8 +560,8 @@ data:extend({
     {
         type = "planet",
         name = "char",
-        icon = "__space-age__/graphics/icons/vulcanus.png",
-        starmap_icon = "__space-age__/graphics/icons/starmap-planet-vulcanus.png",
+        icon = "__erm_zerg_hd_assets__/graphics/entity/icons/planets/char_64.png",
+        starmap_icon = "__erm_zerg_hd_assets__/graphics/entity/icons/planets/char_512.png",
         starmap_icon_size = 512,
         gravity_pull = 10,
         distance = 12.5,
@@ -674,7 +674,7 @@ data:extend({
     {
         type = "technology",
         name = "planet-discovery-char",
-        icons = util.technology_icon_constant_planet("__space-age__/graphics/technology/vulcanus.png"),
+        icons = util.technology_icon_constant_planet("__erm_zerg_hd_assets__/graphics/entity/icons/planets/char_256.png"),
         icon_size = 256,
         essential = false,
         effects = {

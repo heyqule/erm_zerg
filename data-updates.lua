@@ -62,4 +62,16 @@ if mods["space-age"] then
             end
         end
     end
+
+    data.raw['mod-data'][MOD_DATA_SURFACE_BRIDGE_TILES].data['char'] = 'volcanic-ash-soil'
+
+    local erm_rts_death_world = data.raw["map-gen-presets"]["default"]["erm-rts-death-world"]["basic_settings"]["autoplace_controls"]
+    local erm_rts_world = data.raw["map-gen-presets"]["default"]["erm-rts-world"]["basic_settings"]["autoplace_controls"]
+    local erm_preset_value = { frequency="very-high", richness = "very-poor"}
+    erm_rts_world['char_mineral'] = erm_preset_value
+    erm_rts_world['char_mineral_2'] = erm_preset_value
+    erm_rts_world['char_geyser'] = erm_preset_value
+    erm_rts_death_world['char_mineral'] = erm_preset_value
+    erm_rts_death_world['char_mineral_2'] = erm_preset_value
+    erm_rts_death_world['char_geyser'] = erm_preset_value
 end 

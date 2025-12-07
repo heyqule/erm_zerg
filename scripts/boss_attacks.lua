@@ -101,7 +101,7 @@ BossAttackRemote.assist_attacks =
     },
     attack_count = {1, 1, 1, 1},
     attack_spread = {1, 2, 2, 1},
-    select_neayby_enemy_count = {0, 0, 0, 1.5},
+    select_nearby_enemy_count = {0, 0, 0, 1.5},
     attack_use_multiplier = {false, false, false, false},
     can_aim_attackable_targets = {false, false, true, true},
     attack_count_multiplier = {
@@ -215,7 +215,7 @@ BossAttackRemote.idle_attacks =
     attack_spread = {1, 1, 1, 1, 2},
     attack_use_multiplier = {false, false, false,false,false},
     only_targets_radar = {true, true, true, true, true},
-    select_neayby_enemy_count = {0, 0, 1.5, 1, 0},
+    select_nearby_enemy_count = {0, 0, 1.5, 1, 0},
     attack_count_multiplier = {
         {},
     },

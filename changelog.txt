@@ -1,4 +1,12 @@
 ---------------------------------------------------------------------------------------------------
+Version: 2.0.14
+Date: 2025-12-08
+
+  Changes:
+    - Changed planet char resources to very-high frequency and very-low richness in ERM RTS world and ERM RTS deathworld preset.
+    - Changed planet char icons (gen AI).    
+
+---------------------------------------------------------------------------------------------------
 Version: 2.0.13
 Date: 2025-11-24
 
