@@ -415,7 +415,7 @@ script.on_nth_tick(13 * minute + 13, function(event)
             return
         end
 
-        if CustomAttacks.can_spawn(10) then
+        if CustomAttacks.can_spawn(10) then 
             remote.call("enemyracemanager", "generate_dropship_group", FORCE_NAME, 15, {surface=vulcanus})
         elseif CustomAttacks.can_spawn(33) then
             remote.call("enemyracemanager", "generate_flying_group", FORCE_NAME, 25, {surface=vulcanus})

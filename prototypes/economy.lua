@@ -125,7 +125,6 @@ ZergPlayableRecipes.hatchery(MOD_NAME,{
 --- Create technology for zerg
 ZergPlayableRecipes.technologies(MOD_NAME)
 
-
 --- Assign larva egg to applicable spawners as loot
 local lootable_spawners = {
     'hatchery', 'hive', 'lair'

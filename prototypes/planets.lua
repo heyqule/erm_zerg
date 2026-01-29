@@ -16,6 +16,7 @@ local Geyser = require('__erm_shared_economy__/prototypes/geyser')
 local Refinery = require('__erm_shared_economy__/prototypes/refinery')
 local SoundUtil = require('__erm_libs__/prototypes/sound_util')
 local PsiRadar = require('__erm_libs__/prototypes/psi_scanner')
+local UnitHelper = require("__enemyracemanager__/lib/rig/unit_helper")
 --- Char mineral uses vulcanus_calcite_probability for placement
 local mineral_name = 'char_mineral'
 Minerals.add_resource({
@@ -131,7 +132,7 @@ data.extend({
 
 local icons = {
     {
-        icon = "__base__/graphics/icons/radar.png",
+        icon = "__enemyracemanager_assets__/graphics/psi_emitter/psi_emitter_icon.png",
         icon_size = 64,
         scale = 0.5,
         shift = {-9,-9}
@@ -154,7 +155,49 @@ local ingredients = {
     {type = "item", name = "supercapacitor", amount = 1},
     {type= "item", name= MOD_NAME..'--larva_egg', amount= 1000}
 }
-PsiRadar.make_entity(MOD_NAME, icons, surface_conditions)
+local teamcolor = UnitHelper.format_team_color(
+        settings.startup["enemy_erm_zerg-team_color"].value,
+        settings.startup["enemy_erm_zerg-team_blend_mode"].value
+)
+local animations = {
+    layers =
+    {
+        {
+            filename = "__enemyracemanager_assets__/graphics/psi_emitter/psi_emitter.png",
+            priority = "low",
+            width = 100,
+            height = 100,
+            apply_projection = false,
+            direction_count = 6,
+            line_length = 6,
+            scale = 0.8
+        },
+        {
+            filename = "__enemyracemanager_assets__/graphics/psi_emitter/psi_emitter.png",
+            priority = "low",
+            width = 100,
+            height = 100,
+            apply_projection = false,
+            direction_count = 6,
+            line_length = 6,
+            scale = 0.8,
+            shift = util.by_pixel(5, -1),
+            draw_as_shadow = true,
+        },
+        {
+            filename = "__enemyracemanager_assets__/graphics/psi_emitter/psi_emitter_mask.png",
+            priority = "low",
+            width = 100,
+            height = 100,
+            apply_projection = false,
+            direction_count = 6,
+            line_length = 6,
+            scale = 0.8,
+            tint = teamcolor
+        }
+    }
+}
+PsiRadar.make_entity(MOD_NAME, icons, surface_conditions, animations)
 PsiRadar.make_item(MOD_NAME, icons)
 PsiRadar.make_recipe(MOD_NAME, ingredients)
 

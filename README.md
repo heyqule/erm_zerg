@@ -81,4 +81,5 @@ Physical resistance: 85, Weak elemental resistance: 75, Elemental resistance: 80
 - New resources, 2 types of minerals and one gas geyser.
 - New techs and recipes
 - Patrolled by nydus worm.
+- When interplanetary attack is enabled, killing an unit spawner on Chars will activate it.
 - Master control entity: Overmind. Defeat it for rewards. (Experimental)

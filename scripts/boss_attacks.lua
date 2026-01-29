@@ -24,7 +24,7 @@ BossAttackRemote.basic_attacks =
         BossAttackProcessor.TYPE_PROJECTILE,
     },
     attack_chance = {
-        {10, 15, 20, 25, 25},
+        {10, 15, 20, 25, 33},
         {20, 25, 30, 35, 40},
         {25, 30, 35, 40, 50},
         --- Final attack always roll 100%, but up to the dev.
@@ -62,13 +62,13 @@ BossAttackRemote.heavy_attacks =
         BossAttackProcessor.TYPE_PROJECTILE,
     },
     attack_chance = {
-        {10, 10, 10, 10, 10},
-        {15, 15, 15, 15, 15},
-        {25, 25, 25, 25, 25},
+        {10, 10, 10, 15, 20},
+        {15, 15, 20, 20, 25},
+        {25, 33, 33, 33, 33},
         {50, 50, 50, 50, 50},
         {100, 100, 100, 100, 100},
     },
-    attack_count = {3, 5, 8, 12, 1},
+    attack_count = {6, 8, 12, 12, 1},
     attack_spread = {1, 1, 1, 1, 2},
     attack_use_multiplier = {false, false, false, false, false},
     attack_count_multiplier = {
@@ -151,20 +151,18 @@ BossAttackRemote.special_attacks =
 
 BossAttackRemote.ultimate_attacks =
 {
-    attack_name = {"big-nydusworm","medium-nydusworm","small-nydusworm"},
+    attack_name = {"big-nydusworm","medium-nydusworm"},
     attack_type = {
-        BossAttackProcessor.TYPE_SEGMENTED_UNIT_SPAWN,
         BossAttackProcessor.TYPE_SEGMENTED_UNIT_SPAWN,
         BossAttackProcessor.TYPE_SEGMENTED_UNIT_SPAWN,
     },
     attack_chance = {
-        {25,33,50,66,75},
-        {50,75,100,100,100},
-        {100,100,100,100,100}
+        {33,50,66,80,100},
+        {100,100,100,100,100},
     },
-    attack_count = {1, 1, 1},
-    attack_spread = {1, 1, 1},
-    attack_use_multiplier = {false,false,false},
+    attack_count = {1, 1},
+    attack_spread = {1, 1},
+    attack_use_multiplier = {false,false},
     attack_count_multiplier = {
         {},
     },
@@ -177,7 +175,7 @@ BossAttackRemote.despawn_attacks =
 {
     attack_name = {"swamp-cloud-"..UNITS_SPAWN_ATTACK_2X},
     attack_type = {
-        BossAttackProcessor.TYPE,
+        BossAttackProcessor.TYPE_PROJECTILE,
     },
     attack_chance = {
         {100,100,100,100,100}
@@ -196,26 +194,24 @@ BossAttackRemote.despawn_attacks =
 
 BossAttackRemote.idle_attacks =
 {
-    attack_name = {"medium-nydusworm","small-nydusworm","select_unit_1.5x","select_unit_1x", "basic-fissure"},
+    attack_name = {"big-nydusworm","medium-nydusworm", "select_unit_1.5x", "basic-fissure"},
     attack_type = {
         BossAttackProcessor.TYPE_SEGMENTED_UNIT_SPAWN,
         BossAttackProcessor.TYPE_SEGMENTED_UNIT_SPAWN,
         BossAttackProcessor.TYPE_SELECT_NEARBY_ENEMY,
-        BossAttackProcessor.TYPE_SELECT_NEARBY_ENEMY,
         BossAttackProcessor.TYPE_DIRECT,
     },
     attack_chance = {
-        {0,0,0,2,5},
-        {0,0,0,5,10},
-        {10,15,20,25,33},
+        {0,0,2,5,10},
+        {0,0,5,10,12},
         {50,50,50,50,50},
         {100,100,100,100,100}
     },
-    attack_count = {1, 1, 1, 1, 1},
-    attack_spread = {1, 1, 1, 1, 2},
-    attack_use_multiplier = {false, false, false,false,false},
-    only_targets_radar = {true, true, true, true, true},
-    select_nearby_enemy_count = {0, 0, 1.5, 1, 0},
+    attack_count = {1, 1, 1, 1},
+    attack_spread = {1, 1, 1, 2},
+    attack_use_multiplier = {false, false, false,false},
+    only_targets_radar = {true, true, true, true},
+    select_nearby_enemy_count = {0, 0, 1.5, 0},
     attack_count_multiplier = {
         {},
     },

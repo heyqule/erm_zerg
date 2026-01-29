@@ -1,4 +1,15 @@
 ---------------------------------------------------------------------------------------------------
+Version: 2.0.15
+Date: 2026-01-29
+
+  Changes:
+    - Boss' fissure attacks will spawn a group of legendary units.
+    - Changed boss ultimate attack's nydus worm spawn rates.
+    - Adjusted boss heavy attacks spawn rates.
+    - Removed small-nydus-worm from boss attack.
+    - Replaced boss radar graphic with PSI emitter.
+
+---------------------------------------------------------------------------------------------------
 Version: 2.0.14
 Date: 2025-12-08
 

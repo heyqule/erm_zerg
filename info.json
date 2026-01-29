@@ -8,7 +8,7 @@
   "factorio_version": "2.0",
   "dependencies": [
     "base >= 2.0.72",
-    "enemyracemanager >= 2.0.46",
+    "enemyracemanager >= 2.0.65",
     "erm_zerg_hd_assets >= 2.0.4",
     "erm_shared_economy >= 1.0.0",
     "erm_zerg_economy >= 1.0.4",
