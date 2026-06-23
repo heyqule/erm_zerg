@@ -1,6 +1,6 @@
 {
   "name": "erm_zerg",
-  "version": "2.0.15",
+  "version": "2.0.16",
   "date": "2021-07-10",
   "title": "ERM - Zerg / Garm Brood",
   "author": "heyqule",
@@ -12,6 +12,7 @@
     "erm_zerg_hd_assets >= 2.0.4",
     "erm_shared_economy >= 1.0.0",
     "erm_zerg_economy >= 1.0.4",
+    "?advanced_spaceship_repair >= 1.0.0",
     "? starcraft-music >= 1.0.1",
     "(?) alien-biomes >= 0.7.2"
   ]

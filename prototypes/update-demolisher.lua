@@ -100,108 +100,124 @@ for _, unit in pairs(data.raw['segmented-unit']) do
         change_common_entity_data(zerg_nydus)
         update_segmented_unit_specification(zerg_nydus.segment_engine)
 
-        if zerg_nydus.revenge_attack_parameters.ammo_type.action.action_delivery.source_effects == nil then
-            zerg_nydus.revenge_attack_parameters.ammo_type.action.action_delivery.source_effects = {}
-        end
-        table.insert(zerg_nydus.revenge_attack_parameters.ammo_type.action.action_delivery.source_effects, {
-            type = "create-entity",
-            --- Spawn tier 1 and let quality system take care the rest.
-            entity_name = MOD_NAME.."--zergling--1",
-            offset_deviation = {{-8, -8}, {8, 8}},
-            offsets = {
-                {8,8},
-                {-8,-8}
-            },
-            probability = 0.25,
-            repeat_count = 3 * demolisher[unit.name],
-            repeat_count_deviation = 2,
-            trigger_created_entity = true,
-            find_non_colliding_position = true,
-            non_colliding_search_radius = 8,
-            non_colliding_search_precision = 2,
+        table.insert(zerg_nydus.update_effects_while_enraged, {
+            time_cooldown = 300,
+            effect = {
+                type = "create-entity",
+                --- Spawn tier 1 and let quality system take care the rest.
+                entity_name = MOD_NAME.."--zergling--1",
+                offset_deviation = {{-8, -8}, {8, 8}},
+                offsets = {
+                    {8,8},
+                    {-8,-8}
+                },
+                probability = 1,
+                repeat_count = 4 * demolisher[unit.name],
+                repeat_count_deviation = 2,
+                trigger_created_entity = true,
+                find_non_colliding_position = true,
+                non_colliding_search_radius = 8,
+                non_colliding_search_precision = 2,
+            }
         })
-        table.insert(zerg_nydus.revenge_attack_parameters.ammo_type.action.action_delivery.source_effects, {
-            type = "create-entity",
-            entity_name = MOD_NAME.."--hydralisk--1",
-            offset_deviation = {{-8, -8}, {8, 8}},
-            offsets = {
-                {8,8},
-                {-8,-8}
+        table.insert(zerg_nydus.update_effects_while_enraged, {
+            time_cooldown = 300,
+            effect = {
+                type = "create-entity",
+                entity_name = MOD_NAME.."--hydralisk--1",
+                offset_deviation = {{-8, -8}, {8, 8}},
+                offsets = {
+                    {8,8},
+                    {-8,-8}
+                },
+                probability = 0.5,
+                repeat_count = 2 * demolisher[unit.name],
+                repeat_count_deviation = 1,
+                trigger_created_entity = true,
+                find_non_colliding_position = true,
+                non_colliding_search_radius = 8,
+                non_colliding_search_precision = 2,
             },
-            probability = 0.2,
-            repeat_count = 2 * demolisher[unit.name],
-            repeat_count_deviation = 1,
-            trigger_created_entity = true,
-            find_non_colliding_position = true,
-            non_colliding_search_radius = 8,
-            non_colliding_search_precision = 2,
         })
-        table.insert(zerg_nydus.revenge_attack_parameters.ammo_type.action.action_delivery.source_effects, {
-            type = "create-entity",
-            entity_name = MOD_NAME.."--mutalisk--1",
-            offset_deviation = {{-8, -8}, {8, 8}},
-            offsets = {
-                {8,8},
-                {-8,-8}
-            },
-            probability = 0.1,
-            repeat_count = demolisher[unit.name],
-            repeat_count_deviation = 1,
-            trigger_created_entity = true,
-            find_non_colliding_position = true,
-            non_colliding_search_radius = 8,
-            non_colliding_search_precision = 2,
+        table.insert(zerg_nydus.update_effects_while_enraged, {
+            time_cooldown = 300,
+            effect = {
+                type = "create-entity",
+                entity_name = MOD_NAME.."--mutalisk--1",
+                offset_deviation = {{-8, -8}, {8, 8}},
+                offsets = {
+                    {8,8},
+                    {-8,-8}
+                },
+                probability = 0.33,
+                repeat_count = demolisher[unit.name],
+                repeat_count_deviation = 1,
+                trigger_created_entity = true,
+                find_non_colliding_position = true,
+                non_colliding_search_radius = 8,
+                non_colliding_search_precision = 2,
+            }
         })
 
+
         if  demolisher[zerg_nydus.name] == 2 then
-            table.insert(zerg_nydus.revenge_attack_parameters.ammo_type.action.action_delivery.source_effects, {
-                type = "create-entity",
-                entity_name = MOD_NAME.."--lurker--1",
-                offset_deviation = {{-8, -8}, {8, 8}},
-                offsets = {
-                    {8,8},
-                    {-8,-8}
-                },
-                probability = 0.1,
-                repeat_count = demolisher[unit.name],
-                trigger_created_entity = true,
-                find_non_colliding_position = true,
-                non_colliding_search_radius = 8,
-                non_colliding_search_precision = 2,
+            table.insert(zerg_nydus.update_effects_while_enraged, {
+                time_cooldown = 450,
+                effect = {
+                    type = "create-entity",
+                    entity_name = MOD_NAME.."--lurker--1",
+                    offset_deviation = {{-8, -8}, {8, 8}},
+                    offsets = {
+                        {8,8},
+                        {-8,-8}
+                    },
+                    probability = 0.5,
+                    repeat_count = demolisher[unit.name],
+                    trigger_created_entity = true,
+                    find_non_colliding_position = true,
+                    non_colliding_search_radius = 8,
+                    non_colliding_search_precision = 2,
+                }
             })
-            table.insert(zerg_nydus.revenge_attack_parameters.ammo_type.action.action_delivery.source_effects, {
-                type = "create-entity",
-                entity_name = MOD_NAME.."--infested--1",
-                repeat_count_deviation = 1,
-                offset_deviation = {{-8, -8}, {8, 8}},
-                offsets = {
-                    {8,8},
-                    {-8,-8}
-                },
-                probability = 0.1,
-                repeat_count = 2 * demolisher[unit.name],
-                trigger_created_entity = true,
-                find_non_colliding_position = true,
-                non_colliding_search_radius = 8,
-                non_colliding_search_precision = 2,
+            table.insert(zerg_nydus.update_effects_while_enraged, {
+                time_cooldown = 450,
+                effect = {
+                    type = "create-entity",
+                    entity_name = MOD_NAME.."--infested--1",
+                    repeat_count_deviation = 1,
+                    offset_deviation = {{-8, -8}, {8, 8}},
+                    offsets = {
+                        {8,8},
+                        {-8,-8}
+                    },
+                    probability = 0.5,
+                    repeat_count = 2 * demolisher[unit.name],
+                    trigger_created_entity = true,
+                    find_non_colliding_position = true,
+                    non_colliding_search_radius = 8,
+                    non_colliding_search_precision = 2,
+                }
             })
         end
 
         if demolisher[unit.name] == 4 then
-            table.insert(zerg_nydus.revenge_attack_parameters.ammo_type.action.action_delivery.source_effects, {
-                type = "create-entity",
-                entity_name = MOD_NAME.."--ultralisk--1",
-                offset_deviation = {{-8, -8}, {8, 8}},
-                offsets = {
-                    {8,8},
-                    {-8,-8}
-                },
-                probability = 0.05,
-                repeat_count = demolisher[unit.name],
-                trigger_created_entity = true,
-                find_non_colliding_position = true,
-                non_colliding_search_radius = 8,
-                non_colliding_search_precision = 2,
+            table.insert(zerg_nydus.update_effects_while_enraged, {
+                time_cooldown = 600,
+                effect = {
+                    type = "create-entity",
+                    entity_name = MOD_NAME.."--ultralisk--1",
+                    offset_deviation = {{-8, -8}, {8, 8}},
+                    offsets = {
+                        {8,8},
+                        {-8,-8}
+                    },
+                    probability = 0.4,
+                    repeat_count = demolisher[unit.name],
+                    trigger_created_entity = true,
+                    find_non_colliding_position = true,
+                    non_colliding_search_radius = 8,
+                    non_colliding_search_precision = 2,
+                }   
             })
         end
 

@@ -145,6 +145,10 @@ function CustomAttacks.boss_spawned(event)
     end
     
     local boss_entity = event.source_entity
+    if boss_entity.force.name ~= FORCE_NAME then
+        return
+    end
+    
     local position = boss_entity.position
     
     local positions = {
@@ -154,10 +158,10 @@ function CustomAttacks.boss_spawned(event)
         {x = -16, y = -16}
     }
 
-    local race_settings = CustomAttacks.get_race_settings(MOD_NAME, true)
+    local race_settings = CustomAttacks.get_race_settings(FORCE_NAME, true)
     local assisted_spawner_name = race_settings.boss_assisted_spawner
     for _, offset in ipairs(positions) do
-        local entity = CustomAttacks.boss_build(event, MOD_NAME, assisted_spawner_name, 
+        local entity = CustomAttacks.boss_build(event, FORCE_NAME, assisted_spawner_name, 
             {x = position.x + offset.x, y = position.y + offset.y})
     end
 end

@@ -106,6 +106,7 @@ local addRaceSettings = function()
     race_settings.race =  race_settings.race or MOD_NAME
     race_settings.label = {"gui.label-erm-zerg"}
     race_settings.tier =  race_settings.tier or 1
+    --- When a race is primitive, they bypass ERM control
     race_settings.is_primitive = race_settings.is_primitive or false
     race_settings.autoplace_name = AUTOCONTROL_NAME
     race_settings.attack_meter = race_settings.attack_meter or 0
@@ -120,6 +121,8 @@ local addRaceSettings = function()
         { "overlord", "devourer", "drone", "mutalisk", "lurker" },
         { "guardian", "ultralisk", "queen", "infested", "defiler" },
     }
+    
+    ---
     race_settings.turrets = {
         { "sunken_colony", "spore_colony" },
         {},
@@ -140,6 +143,8 @@ local addRaceSettings = function()
         {"devourer"},
         {"guardian","queen"}
     }
+    
+    --- These unit dies after a certain period. They shares a global spawn limit.  Older unit die if the limit hits.
     race_settings.timed_units = {
         scourge=true,
         broodling=true
@@ -402,28 +407,61 @@ script.on_nth_tick(907, function(event)
     end
 end)
 
---- Spawn attack group periodically once evolution reach 10%
-script.on_nth_tick(13 * minute + 13, function(event)
+local max_group_size = settings.global['enemyracemanager-max-group-size'].value
+local dropship_group_size = math.floor(max_group_size / 6)
+local flyer_group_size = math.floor(max_group_size / 4)
+local general_attack_group_size = math.floor(max_group_size / 2)
+local can_fly = settings.global['enemyracemanager-flying-squad-enable'].value
+local can_dropship = settings.global['enemyracemanager-dropship-squad-enable'].value
+local fly_chance = settings.global['enemyracemanager-flying-squad-chance'].value
+local dropship_chance = settings.global['enemyracemanager-flying-squad-chance'].value
+local min_attackable_entities = 10
+
+--- Spawn attack group periodically once evolution reach 35%
+script.on_nth_tick(20 * minute + 13, function(event)
     local vulcanus = game.surfaces['vulcanus']
-    if vulcanus and zerg_on_vulcanus and CustomAttacks.can_spawn(40) then
-        if game.forces[FORCE_NAME].get_evolution_factor(vulcanus) < 0.1 then
+    if vulcanus and zerg_on_vulcanus and CustomAttacks.can_spawn(35) then
+        if game.forces[FORCE_NAME].get_evolution_factor(vulcanus) < 0.35 then
             return
         end
 
-        local has_entity = vulcanus.count_entities_filtered({type=AttackGroupBeaconConstants.ATTACKABLE_ENTITY_TYPES, limit = 1})
-        if has_entity < 1 then
+        local has_entity = vulcanus.count_entities_filtered({type=AttackGroupBeaconConstants.ATTACKABLE_ENTITY_TYPES, limit = min_attackable_entities})
+        if has_entity <= min_attackable_entities then
             return
         end
 
-        if CustomAttacks.can_spawn(10) then 
-            remote.call("enemyracemanager", "generate_dropship_group", FORCE_NAME, 15, {surface=vulcanus})
-        elseif CustomAttacks.can_spawn(33) then
-            remote.call("enemyracemanager", "generate_flying_group", FORCE_NAME, 25, {surface=vulcanus})
+        if can_dropship and CustomAttacks.can_spawn(fly_chance) then 
+            remote.call("enemyracemanager", "generate_dropship_group", FORCE_NAME, dropship_group_size, {surface=vulcanus})
+        elseif can_fly and CustomAttacks.can_spawn(dropship_chance) then
+            remote.call("enemyracemanager", "generate_flying_group", FORCE_NAME, flyer_group_size, {surface=vulcanus})
         else
-            remote.call("enemyracemanager", "generate_attack_group", FORCE_NAME, 60, {surface=vulcanus})
+            remote.call("enemyracemanager", "generate_attack_group", FORCE_NAME, general_attack_group_size, {surface=vulcanus})
         end
     end
 end)
+
+
+--script.on_nth_tick(15 * minute + 13, function(event)
+--    local char = game.surfaces['char']
+--    if char and CustomAttacks.can_spawn(35) then
+--        if game.forces[FORCE_NAME].get_evolution_factor(char) < 0.35 then
+--            return
+--        end
+--
+--        local has_entity =  char.count_entities_filtered({type=AttackGroupBeaconConstants.ATTACKABLE_ENTITY_TYPES, limit = min_attackable_entities})
+--        if has_entity <= min_attackable_entities then
+--            return
+--        end
+--
+--        if can_dropship and CustomAttacks.can_spawn(dropship_chance) then
+--            remote.call("enemyracemanager", "generate_dropship_group", FORCE_NAME, dropship_group_size, {surface=char})
+--        elseif can_fly and CustomAttacks.can_spawn(fly_chance) then
+--            remote.call("enemyracemanager", "generate_flying_group", FORCE_NAME, flyer_group_size, {surface=char})
+--        else
+--            remote.call("enemyracemanager", "generate_attack_group", FORCE_NAME, general_attack_group_size, {surface=char})
+--        end
+--    end
+--end)
 
 ---
 --- Register required remote interfaces
