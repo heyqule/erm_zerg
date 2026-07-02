@@ -19,8 +19,9 @@ local GlobalConfig = require("__enemyracemanager__/lib/global_config")
 local ERMDataHelper = require("__enemyracemanager__/lib/rig/data_helper")
 local ERM_DebugHelper = require("__enemyracemanager__/lib/debug_helper")
 local ZergSound = require("__erm_zerg_hd_assets__/sound")
-local biter_ai_settings = require ("__base__.prototypes.entity.biter-ai-settings")
+local AiHelper = require ("__erm_libs__/prototypes/ai_helper")
 local AnimationDB = require("__erm_zerg_hd_assets__/animation_db")
+local ERM_ZERG = require("__erm_zerg__/global")
 local name = "scourge"
 
 
@@ -71,17 +72,21 @@ local selection_box = { { -0.75, -0.75 }, { 0.75, 0.75 } }
 function ErmZerg.make_scourge(level)
     level = level or 1
 
+    local buildable_entities = ERM_UnitHelper.get_buildable_entities(ERM_ZERG.MOD_NAME, {
+        "spore_colony", "sunken_colony"
+    }, level)
+
     data:extend({
         {
             type = "unit",
-            name = MOD_NAME .. "--" .. name .. "--" .. level,
-            localised_name = { "entity-name." .. MOD_NAME .. "--" .. name, GlobalConfig.QUALITY_MAPPING[level] },
+            name = ERM_ZERG.MOD_NAME .. "--" .. name .. "--" .. level,
+            localised_name = { "entity-name." .. ERM_ZERG.MOD_NAME .. "--" .. name, GlobalConfig.QUALITY_MAPPING[level] },
             icon = "__erm_zerg_hd_assets__/graphics/entity/icons/units/" .. name .. ".png",
             icon_size = 64,
             flags = { "placeable-enemy", "placeable-player", "placeable-off-grid", "breaths-air" },
             has_belt_immunity = false,
             max_health = ERM_UnitHelper.get_health(hitpoint, max_hitpoint_multiplier,  level),
-            order = MOD_NAME .. "--unit--" .. name .. "--".. level,
+            order = ERM_ZERG.MOD_NAME .. "--unit--" .. name .. "--".. level,
             subgroup = "erm-flying-enemies",
             map_color = ERM_UnitHelper.format_map_color(settings.startup["enemy_erm_zerg-map-color"].value),
             shooting_cursor_size = 2,
@@ -106,7 +111,7 @@ function ErmZerg.make_scourge(level)
             movement_speed = ERM_UnitHelper.get_movement_speed(base_movement_speed, incremental_movement_speed,  level),
             absorptions_to_join_attack = { pollution = ERM_UnitHelper.get_pollution_attack(pollution_to_join_attack, level)},
             distraction_cooldown = distraction_cooldown,
-            ai_settings = biter_ai_settings,
+            ai_settings = AiHelper.get_enemy_unit_settings(1),
             spawning_time_modifier = 1.5,
             attack_parameters = {
                 type = "projectile",
@@ -128,11 +133,11 @@ function ErmZerg.make_scourge(level)
                             {
                                 {
                                     type = "script",
-                                    effect_id = SELF_DESTRUCT_ATTACK,
+                                    effect_id = ERM_ZERG.SELF_DESTRUCT_ATTACK,
                                 },
                                 {
                                     type = "create-entity",
-                                    entity_name =  MOD_NAME.."--scourge-explosion"
+                                    entity_name =  ERM_ZERG.MOD_NAME.."--scourge-explosion"
                                 },
                                 {
                                     type = "nested-result",
@@ -170,7 +175,7 @@ function ErmZerg.make_scourge(level)
                     source_effects = {
                         {
                             type = "script",
-                            effect_id = TIME_TO_LIVE_CREATED,
+                            effect_id = ERM_ZERG.TIME_TO_LIVE_CREATED,
                         }
                     }
                 }
@@ -178,13 +183,21 @@ function ErmZerg.make_scourge(level)
             dying_trigger_effect = {
                 {
                     type = "script",
-                    effect_id = TIME_TO_LIVE_DIED,
+                    effect_id = ERM_ZERG.TIME_TO_LIVE_DIED,
                 },
             },
             dying_explosion = name .. "-air-death",
             dying_sound = ZergSound.enemy_death(name, 0.9),
-
-            corpse = name .. "-corpse"
+            buildable_entities = buildable_entities,
+            corpse = name .. "-corpse",
+            steering = {
+                move = {
+                    radius = 3
+                },
+                stay = {
+                    radius = 5.25
+                },
+            },
         },
         {
             type = "corpse",

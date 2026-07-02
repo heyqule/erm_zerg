@@ -3,7 +3,7 @@
 --- Created by heyqule.
 --- DateTime: 7/29/2023 11:02 PM
 ---
-require("global")
+local ERM_ZERG = require("global")
 
 data:extend {
     --- Startup Tab
@@ -12,7 +12,7 @@ data:extend {
         name = "enemy_erm_zerg-map-color",
         description = "enemy_erm_zerg-map-color",
         setting_type = "startup",
-        default_value = ZERG_MAP_COLOR,
+        default_value = ERM_ZERG.ZERG_MAP_COLOR,
         order = "enemy_erm_zerg-100"
     },
     {
@@ -28,7 +28,7 @@ data:extend {
         name = "enemy_erm_zerg-team_color",
         description = "enemy_erm_zerg-team_color",
         setting_type = "startup",
-        default_value = ZERG_TEAM_COLOR,
+        default_value = ERM_ZERG.ZERG_TEAM_COLOR,
         order = "enemy_erm_zerg-111",
     },
     {

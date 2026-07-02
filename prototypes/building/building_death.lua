@@ -5,6 +5,7 @@
 ---
 require("__base__/prototypes/entity/spawner-animation")
 
+local ERM_ZERG = require("__erm_zerg__/global")
 local AnimationDB = require("__erm_zerg_hd_assets__/animation_db")
 data:extend({
     {
@@ -53,7 +54,7 @@ data:extend({
     },
     {
         type = "explosion",
-        name = MOD_NAME.."--terran-building-xlarge-explosion",
+        name = ERM_ZERG.MOD_NAME.."--terran-building-xlarge-explosion",
         flags = { "not-on-map" },
         subgroup = "explosions",
         order = "zerg-terran-xlarge-explosion",

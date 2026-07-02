@@ -9,6 +9,7 @@
 
 local CustomAttackHelper = require("__enemyracemanager__/lib/helper/custom_attack_helper")
 local ERMConfig = require("__enemyracemanager__/lib/global_config")
+local ERM_ZERG = require("__erm_zerg__/global")
 
 
 local CustomAttacks = CustomAttackHelper
@@ -21,49 +22,49 @@ local update_boss_data = function()
 end
 
 function CustomAttacks.process_overlord(event)
-    local race_settings = CustomAttackHelper.get_race_settings(MOD_NAME)
-    CustomAttackHelper.drop_unit(event, MOD_NAME, "broodling", 3)
-    CustomAttackHelper.drop_unit(event, MOD_NAME, "scourge", 2)
+    local race_settings = CustomAttackHelper.get_race_settings(ERM_ZERG.MOD_NAME)
+    CustomAttackHelper.drop_unit(event, ERM_ZERG.MOD_NAME, "broodling", 3)
+    CustomAttackHelper.drop_unit(event, ERM_ZERG.MOD_NAME, "scourge", 2)
     if CustomAttackHelper.can_spawn(75) then
-        CustomAttackHelper.drop_unit(event, MOD_NAME, CustomAttackHelper.get_unit(MOD_NAME, "droppable_units"))
+        CustomAttackHelper.drop_unit(event, ERM_ZERG.MOD_NAME, CustomAttackHelper.get_unit(ERM_ZERG.MOD_NAME, "droppable_units"))
     end
     if race_settings.tier == 3 and CustomAttackHelper.can_spawn(40) then
-        CustomAttackHelper.drop_unit(event, MOD_NAME, "zergling", 2)
+        CustomAttackHelper.drop_unit(event, ERM_ZERG.MOD_NAME, "zergling", 2)
         if CustomAttackHelper.can_spawn(20) then
-            CustomAttackHelper.drop_unit(event, MOD_NAME,  CustomAttackHelper.get_unit(MOD_NAME, "droppable_units"))
+            CustomAttackHelper.drop_unit(event, ERM_ZERG.MOD_NAME,  CustomAttackHelper.get_unit(ERM_ZERG.MOD_NAME, "droppable_units"))
         end
     end
 end
 
 function CustomAttacks.process_queen(event)
-    local race_settings = CustomAttackHelper.get_race_settings(MOD_NAME)
-    CustomAttackHelper.drop_unit_at_target(event, MOD_NAME, "broodling", 2)
+    local race_settings = CustomAttackHelper.get_race_settings(ERM_ZERG.MOD_NAME)
+    CustomAttackHelper.drop_unit_at_target(event, ERM_ZERG.MOD_NAME, "broodling", 2)
     if CustomAttackHelper.can_spawn(33) then
-        CustomAttackHelper.drop_unit_at_target(event, MOD_NAME, "broodling", 1)
+        CustomAttackHelper.drop_unit_at_target(event, ERM_ZERG.MOD_NAME, "broodling", 1)
     end
     if race_settings.tier == 3 and CustomAttackHelper.can_spawn(10) then
-        CustomAttackHelper.drop_unit_at_target(event, MOD_NAME, "zergling", 2)
+        CustomAttackHelper.drop_unit_at_target(event, ERM_ZERG.MOD_NAME, "zergling", 2)
     end
 end
 
 function CustomAttacks.process_scourge_spawn(event)
-    CustomAttackHelper.drop_unit(event, MOD_NAME, "scourge", 1)
+    CustomAttackHelper.drop_unit(event, ERM_ZERG.MOD_NAME, "scourge", 1)
 end
 
 function CustomAttacks.process_drone(event)
-    CustomAttackHelper.build(event, MOD_NAME, CustomAttackHelper.get_unit(MOD_NAME, "construction_buildings"))
+    CustomAttackHelper.build(event, ERM_ZERG.MOD_NAME, CustomAttackHelper.get_unit(ERM_ZERG.MOD_NAME, "construction_buildings"))
     event.source_entity.destroy()
 end
 
 
 function CustomAttacks.process_boss_units(event, batch_size)
     batch_size = batch_size or 8
-    CustomAttackHelper.drop_boss_units(event, MOD_NAME, ERMConfig.batch_spawn_size * batch_size)
+    CustomAttackHelper.drop_boss_units(event, ERM_ZERG.MOD_NAME, ERMConfig.batch_spawn_size * batch_size)
 end
 
 function CustomAttacks.process_batch_units(event, batch_size)
     batch_size = batch_size or 12
-    CustomAttackHelper.drop_batch_units(event, MOD_NAME, ERMConfig.batch_spawn_size * batch_size)
+    CustomAttackHelper.drop_batch_units(event, ERM_ZERG.MOD_NAME, ERMConfig.batch_spawn_size * batch_size)
 end
 
 ---
@@ -135,7 +136,7 @@ function CustomAttacks.process_egg(event)
         unit_name = "hydralisk"
         amount = 1
     end
-    CustomAttackHelper.drop_unit(event, MOD_NAME, unit_name, amount)
+    CustomAttackHelper.drop_unit(event, ERM_ZERG.MOD_NAME, unit_name, amount)
 end
 
 -- Spawn 4 support spawner structures
@@ -145,7 +146,7 @@ function CustomAttacks.boss_spawned(event)
     end
     
     local boss_entity = event.source_entity
-    if boss_entity.force.name ~= FORCE_NAME then
+    if boss_entity.force.name ~= ERM_ZERG.FORCE_NAME then
         return
     end
     
@@ -158,10 +159,10 @@ function CustomAttacks.boss_spawned(event)
         {x = -16, y = -16}
     }
 
-    local race_settings = CustomAttacks.get_race_settings(FORCE_NAME, true)
+    local race_settings = CustomAttacks.get_race_settings(ERM_ZERG.FORCE_NAME, true)
     local assisted_spawner_name = race_settings.boss_assisted_spawner
     for _, offset in ipairs(positions) do
-        local entity = CustomAttacks.boss_build(event, FORCE_NAME, assisted_spawner_name, 
+        local entity = CustomAttacks.boss_build(event, ERM_ZERG.FORCE_NAME, assisted_spawner_name, 
             {x = position.x + offset.x, y = position.y + offset.y})
     end
 end
@@ -181,12 +182,12 @@ function CustomAttacks.boss_assisted_spawner_dies(event)
     local surface = spawner_entity.surface
     local position = spawner_entity.position
 
-    local unit_group =  surface.create_unit_group({position = position, force = MOD_NAME})
+    local unit_group =  surface.create_unit_group({position = position, force = ERM_ZERG.MOD_NAME})
     for i = 1, 10 do
         local member = surface.create_entity({
-            name = MOD_NAME..'--broodling--6',
+            name = ERM_ZERG.MOD_NAME..'--broodling--6',
             position = position,
-            force = MOD_NAME
+            force = ERM_ZERG.MOD_NAME
         })
         unit_group.add_member(member)
     end

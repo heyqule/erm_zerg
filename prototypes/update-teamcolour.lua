@@ -5,7 +5,7 @@
 ---
 local ERM_UnitHelper = require("__enemyracemanager__/lib/rig/unit_helper")
 local TeamColorManager = require("__erm_libs__/prototypes/teamcolor_manager")
-require("__erm_zerg__/global")
+local ERM_ZERG = require("__erm_zerg__/global")
 
 local color = ERM_UnitHelper.format_team_color(
     settings.startup["enemy_erm_zerg-team_color"].value,
@@ -32,4 +32,4 @@ else
     color.b = color.b * strength_multipler
 end
 
-TeamColorManager.change_team_color(MOD_NAME, color, disable_mask, preserve_gloss)
+TeamColorManager.change_team_color(ERM_ZERG.MOD_NAME, color, disable_mask, preserve_gloss)

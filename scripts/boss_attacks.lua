@@ -5,6 +5,7 @@
 ---
 local BossAttackRemote = require("__enemyracemanager__/lib/boss_attack_data")
 local BossAttackProcessor = require("__enemyracemanager__/lib/boss_attack_processor")
+local ERM_ZERG = require("__erm_zerg__/global")
 ---
 ---
 --- Boss perform attacks when it take around the following damage numbers
@@ -53,7 +54,7 @@ BossAttackRemote.basic_attacks =
 ---
 BossAttackRemote.heavy_attacks =
 {
-    attack_name = {'ultralisk', 'overlord' ,'devourer', "zergling", "swamp-cloud-"..UNITS_SPAWN_ATTACK},
+    attack_name = {'ultralisk', 'overlord' ,'devourer', "zergling", "swamp-cloud-"..ERM_ZERG.UNITS_SPAWN_ATTACK},
     attack_type = {
         BossAttackProcessor.TYPE_UNIT_SPAWN,
         BossAttackProcessor.TYPE_UNIT_SPAWN,
@@ -86,7 +87,7 @@ BossAttackRemote.heavy_attacks =
 --- 1 selecting full size unit group near the base to command an attack.
 BossAttackRemote.assist_attacks =
 {
-    attack_name = {"swamp-cloud-"..BOSS_SPAWN_ATTACK, 'boss_nyduspit', "swamp-cloud-"..UNITS_SPAWN_ATTACK_2X, 'select_attack_1.5x'},
+    attack_name = {"swamp-cloud-"..ERM_ZERG.BOSS_SPAWN_ATTACK, 'boss_nyduspit', "swamp-cloud-"..ERM_ZERG.UNITS_SPAWN_ATTACK_2X, 'select_attack_1.5x'},
     attack_type = {
         BossAttackProcessor.TYPE_FALLING_PROJECTILE,
         BossAttackProcessor.TYPE_STRUCT_SPAWN,
@@ -117,7 +118,7 @@ BossAttackRemote.assist_attacks =
 ---
 BossAttackRemote.special_attacks =
 {
-    attack_name = {"blood-cluster-grenade", "acid-cluster-grenade", "basic-fissure", "swamp-cloud-"..BOSS_SPAWN_ATTACK},
+    attack_name = {"blood-cluster-grenade", "acid-cluster-grenade", "basic-fissure", "swamp-cloud-"..ERM_ZERG.BOSS_SPAWN_ATTACK},
     attack_type = {
         BossAttackProcessor.TYPE_FALLING_PROJECTILE,
         BossAttackProcessor.TYPE_FALLING_PROJECTILE,
@@ -173,7 +174,7 @@ BossAttackRemote.ultimate_attacks =
 
 BossAttackRemote.despawn_attacks =
 {
-    attack_name = {"swamp-cloud-"..UNITS_SPAWN_ATTACK_2X},
+    attack_name = {"swamp-cloud-"..ERM_ZERG.UNITS_SPAWN_ATTACK_2X},
     attack_type = {
         BossAttackProcessor.TYPE_PROJECTILE,
     },

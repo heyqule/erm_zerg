@@ -3,7 +3,7 @@
 --- Created by heyqule.
 --- DateTime: 8/26/2022 11:52 PM
 ---
-require("__erm_zerg__/global")
+local ERM_ZERG = require("__erm_zerg__/global")
 
 local ERMConfig = require("__enemyracemanager__/lib/global_config")
 local ERMDataHelper = require("__enemyracemanager__/lib/rig/data_helper")
@@ -16,7 +16,7 @@ local create_blood_cloud_projectile = function(type)
     type = type or "projectile"
     local data = {
         type = "projectile",
-        name = MOD_NAME.."--blood-cloud--"..type,
+        name = ERM_ZERG.MOD_NAME.."--blood-cloud--"..type,
         flags = { "not-on-map" },
         acceleration = 0.01,
         max_speed = 0.8,
@@ -31,13 +31,13 @@ local create_blood_cloud_projectile = function(type)
                 target_effects = {
                     {
                         type = "create-entity",
-                        entity_name = MOD_NAME.."--blood-cloud-explosion",
+                        entity_name = ERM_ZERG.MOD_NAME.."--blood-cloud-explosion",
                         trigger_created_entity = false
                     },
                     {
                         type = "create-smoke",
                         show_in_tooltip = true,
-                        entity_name = MOD_NAME .. "--blood-cloud"
+                        entity_name = ERM_ZERG.MOD_NAME .. "--blood-cloud"
                     },
                 }
             }
@@ -53,7 +53,7 @@ local create_acid_cloud_projectile = function(type)
     type = type or "projectile"
     local data = {
         type = "projectile",
-        name = MOD_NAME.."--acid-cloud--"..type,
+        name = ERM_ZERG.MOD_NAME.."--acid-cloud--"..type,
         flags = { "not-on-map" },
         acceleration = 0.02,
         max_speed = 1,
@@ -68,13 +68,13 @@ local create_acid_cloud_projectile = function(type)
                 target_effects = {
                     {
                         type = "create-entity",
-                        entity_name = MOD_NAME.."--acid-cloud-explosion",
+                        entity_name = ERM_ZERG.MOD_NAME.."--acid-cloud-explosion",
                         trigger_created_entity = false
                     },
                     {
                         type = "create-smoke",
                         show_in_tooltip = true,
-                        entity_name = MOD_NAME .. "--acid-cloud"
+                        entity_name = ERM_ZERG.MOD_NAME .. "--acid-cloud"
                     },
                 }
             }
@@ -90,7 +90,7 @@ local create_damage_cloud = function (name, target_effects, radius, duration, co
     duration = duration or 120
     cooldown = cooldown or 15
     return  {
-        name = MOD_NAME.."--"..name,
+        name = ERM_ZERG.MOD_NAME.."--"..name,
         type = "smoke-with-trigger",
         flags = { "not-on-map" },
         show_when_smoke_off = true,
@@ -131,7 +131,7 @@ local create_healing_cloud = function (name, target_effects, radius, duration, c
     duration = duration or 120
     cooldown = cooldown or 15
     return  {
-        name = MOD_NAME.."--"..name,
+        name = ERM_ZERG.MOD_NAME.."--"..name,
         type = "smoke-with-trigger",
         flags = { "not-on-map" },
         show_when_smoke_off = true,
@@ -174,7 +174,7 @@ local create_blood_mist_projectile = function(type, radius, damage)
     damage  = damage or 1000
     local data = {
         type = "projectile",
-        name = MOD_NAME.."--blood-mist--"..type,
+        name = ERM_ZERG.MOD_NAME.."--blood-mist--"..type,
         flags = { "not-on-map" },
         acceleration = 0.0025,
         max_speed = 0.6,
@@ -189,13 +189,13 @@ local create_blood_mist_projectile = function(type, radius, damage)
                 target_effects = {
                     {
                         type = "create-entity",
-                        entity_name = MOD_NAME.."--dark-swarm-80-blood-explosion",
+                        entity_name = ERM_ZERG.MOD_NAME.."--dark-swarm-80-blood-explosion",
                         trigger_created_entity = false
                     },
                     {
                         type = "create-smoke",
                         show_in_tooltip = true,
-                        entity_name = MOD_NAME .. "--blood-mist"
+                        entity_name = ERM_ZERG.MOD_NAME .. "--blood-mist"
                     },
                 }
             }
@@ -214,7 +214,7 @@ local create_swamp_cloud_projectile = function(script_attack, type)
     type = type or "projectile"
     local data =  {
         type = "projectile",
-        name = MOD_NAME.."--swamp-cloud-"..script_attack.."--"..type,
+        name = ERM_ZERG.MOD_NAME.."--swamp-cloud-"..script_attack.."--"..type,
         flags = { "not-on-map" },
         acceleration = 0.0025,
         max_speed = 0.5,
@@ -229,12 +229,12 @@ local create_swamp_cloud_projectile = function(script_attack, type)
                 target_effects = {
                     {
                         type = "create-entity",
-                        entity_name = MOD_NAME.."--dark-swarm-explosion",
+                        entity_name = ERM_ZERG.MOD_NAME.."--dark-swarm-explosion",
                     },
                     {
                         type = "create-smoke",
                         show_in_tooltip = true,
-                        entity_name = MOD_NAME .. "--swamp-cloud"
+                        entity_name = ERM_ZERG.MOD_NAME .. "--swamp-cloud"
                     },
                     {
                         type = "script",
@@ -258,7 +258,7 @@ local create_blood_cluster_grenade = function(type)
     type = type or "projectile"
     local data =  {
         type = "projectile",
-        name = MOD_NAME.."--blood-cluster-grenade--"..type,
+        name = ERM_ZERG.MOD_NAME.."--blood-cluster-grenade--"..type,
         flags = { "not-on-map" },
         acceleration = 0,
         --collision_box = {{-0.5,-0.5},{0.5, 0.5}},
@@ -272,12 +272,12 @@ local create_blood_cluster_grenade = function(type)
                     target_effects = {
                         {
                             type = "create-entity",
-                            entity_name = MOD_NAME.."--blood-cloud-explosion",
+                            entity_name = ERM_ZERG.MOD_NAME.."--blood-cloud-explosion",
                         },
                         {
                             type = "create-smoke",
                             show_in_tooltip = true,
-                            entity_name = MOD_NAME .. "--blood-cloud"
+                            entity_name = ERM_ZERG.MOD_NAME .. "--blood-cloud"
                         }
                     }
                 }
@@ -289,7 +289,7 @@ local create_blood_cluster_grenade = function(type)
                 distance_deviation = 5,
                 action_delivery = {
                     type = "projectile",
-                    projectile = MOD_NAME.."--blood-cloud--projectile",
+                    projectile = ERM_ZERG.MOD_NAME.."--blood-cloud--projectile",
                     direction_deviation = 0.6,
                     max_range = 32,
                     starting_speed = 0.25,
@@ -308,7 +308,7 @@ local create_acid_cluster_grenade = function(type)
     type = type or "projectile"
     local data = {
         type = "projectile",
-        name = MOD_NAME.."--acid-cluster-grenade--"..type,
+        name = ERM_ZERG.MOD_NAME.."--acid-cluster-grenade--"..type,
         flags = { "not-on-map" },
         acceleration = 0,
         --collision_box = {{-0.5,-0.5},{0.5, 0.5}},
@@ -322,12 +322,12 @@ local create_acid_cluster_grenade = function(type)
                     target_effects = {
                         {
                             type = "create-entity",
-                            entity_name = MOD_NAME.."--acid-cloud-explosion",
+                            entity_name = ERM_ZERG.MOD_NAME.."--acid-cloud-explosion",
                         },
                         {
                             type = "create-smoke",
                             show_in_tooltip = true,
-                            entity_name = MOD_NAME .. "--acid-cloud"
+                            entity_name = ERM_ZERG.MOD_NAME .. "--acid-cloud"
                         }
                     }
                 }
@@ -339,7 +339,7 @@ local create_acid_cluster_grenade = function(type)
                 distance_deviation = 5,
                 action_delivery = {
                     type = "projectile",
-                    projectile = MOD_NAME.."--acid-cloud--projectile",
+                    projectile = ERM_ZERG.MOD_NAME.."--acid-cloud--projectile",
                     direction_deviation = 0.6,
                     starting_speed = 0.25,
                     starting_speed_deviation = 0.05,
@@ -389,12 +389,12 @@ data:extend({
                                                damage = { amount = 75 * damage_multiplier, type = "poison" },
                                                apply_damage_to_trees = false
                                         }}, 8,120),
-    create_swamp_cloud_projectile(BOSS_SPAWN_ATTACK),
-    create_swamp_cloud_projectile(UNITS_SPAWN_ATTACK),
-    create_swamp_cloud_projectile(UNITS_SPAWN_ATTACK_2X),
+    create_swamp_cloud_projectile(ERM_ZERG.BOSS_SPAWN_ATTACK),
+    create_swamp_cloud_projectile(ERM_ZERG.UNITS_SPAWN_ATTACK),
+    create_swamp_cloud_projectile(ERM_ZERG.UNITS_SPAWN_ATTACK_2X),
     create_blood_cluster_grenade(FALLING_PROJECTILE),
     create_acid_cluster_grenade(FALLING_PROJECTILE),
-    create_swamp_cloud_projectile(BOSS_SPAWN_ATTACK,FALLING_PROJECTILE),
+    create_swamp_cloud_projectile(ERM_ZERG.BOSS_SPAWN_ATTACK,FALLING_PROJECTILE),
     create_healing_cloud("swamp-cloud", {{
         type = "damage",
         --- process 4 ticks per second
@@ -405,7 +405,7 @@ data:extend({
 })
 
 -- Basic attack fissure
-local basic_attack_fissure_prototype = make_demolisher_fissure_attack(MOD_NAME..'--basic', MOD_NAME..'-basic', 2,  2.5 * damage_multiplier)
+local basic_attack_fissure_prototype = make_demolisher_fissure_attack(ERM_ZERG.MOD_NAME..'--basic', ERM_ZERG.MOD_NAME..'-basic', 2,  2.5 * damage_multiplier)
 -- Rename fissure explosion to be compatible with boss attack
 basic_attack_fissure_prototype[1].name = basic_attack_fissure_prototype[1].name..'--direct'
 for _, prototype in pairs(basic_attack_fissure_prototype) do

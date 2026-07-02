@@ -5,6 +5,7 @@
 ---
 require("util")
 local ErmConfig = require("__enemyracemanager__/lib/global_config")
+local ERM_ZERG = require("__erm_zerg__/global")
 local CustomAttacks = require("scripts/custom_attacks")
 
 local RemoteAPI = {}
@@ -53,12 +54,12 @@ end
 --- This is REQUIRED to register ERM mods for control stage.
 ---
 function RemoteAPI.register_new_enemy_race()
-    return MOD_NAME
+    return ERM_ZERG.MOD_NAME
 end
 
 --- Refresh custom attack race setting cache
 function RemoteAPI.refresh_custom_attack_cache()
-    CustomAttacks.get_race_settings(MOD_NAME, true)
+    CustomAttacks.get_race_settings(ERM_ZERG.MOD_NAME, true)
 end
 
 --- Add home planet to ignore list

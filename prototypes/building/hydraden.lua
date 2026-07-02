@@ -14,6 +14,7 @@ local ZergSound = require("__erm_zerg_hd_assets__/sound")
 local CreepFunction = require("__erm_zerg__/prototypes/creep_function")
 local AnimationDB = require("__erm_zerg_hd_assets__/animation_db")
 local enemy_autoplace = require ("__enemyracemanager__/prototypes/enemy-autoplace")
+local ERM_ZERG = require("__erm_zerg__/global")
 local name = "hydraden"
 
 -- Hitpoints
@@ -46,8 +47,8 @@ local max_count_of_owned_units = 12
 local max_friends_around_to_spawn = 7
 local spawn_table = function(level)
     local res = {}
-    res[1] = { MOD_NAME .. "--hydralisk--" .. level, { { 0.0, 1 }, { 0.2, 1 }, { 0.4, 95 }, { 0.6, 0.8 }, { 0.8, 0.65 }, {1.0, 0.5} } }
-    res[2] = { MOD_NAME .. "--lurker--" .. level, { { 0.0, 0 }, { 0.2, 0 }, { 0.4, 0.05 }, { 0.6, 0.2 }, { 0.8, 0.35 }, {1.0, 0.5} } }
+    res[1] = { ERM_ZERG.MOD_NAME .. "--hydralisk--" .. level, { { 0.0, 1 }, { 0.2, 1 }, { 0.4, 95 }, { 0.6, 0.8 }, { 0.8, 0.65 }, {1.0, 0.5} } }
+    res[2] = { ERM_ZERG.MOD_NAME .. "--lurker--" .. level, { { 0.0, 0 }, { 0.2, 0 }, { 0.4, 0.05 }, { 0.6, 0.2 }, { 0.8, 0.35 }, {1.0, 0.5} } }
     return res
 end
 
@@ -61,13 +62,13 @@ function ErmZerg.make_hydraden(level)
     data:extend({
         {
             type = "unit-spawner",
-            name = MOD_NAME .. "--" .. name .. "--" .. level,
-            localised_name = { "entity-name." .. MOD_NAME .. "--" .. name, GlobalConfig.QUALITY_MAPPING[level] },
+            name = ERM_ZERG.MOD_NAME .. "--" .. name .. "--" .. level,
+            localised_name = { "entity-name." .. ERM_ZERG.MOD_NAME .. "--" .. name, GlobalConfig.QUALITY_MAPPING[level] },
             icon = "__erm_zerg_hd_assets__/graphics/entity/icons/buildings/advisor.png",
             icon_size = 64,
             flags = { "placeable-player", "placeable-enemy", "breaths-air" },
             max_health = ERM_UnitHelper.get_building_health(hitpoint, max_hitpoint_multiplier,  level),
-            order = MOD_NAME .. "--building--" .. name .. "--".. level,
+            order = ERM_ZERG.MOD_NAME .. "--building--" .. name .. "--".. level,
             subgroup = "enemies",
             map_color = ERM_UnitHelper.format_map_color(settings.startup["enemy_erm_zerg-map-color"].value),
             working_sound = ZergSound.building_working_sound(name, 0.9),
@@ -107,8 +108,8 @@ function ErmZerg.make_hydraden(level)
             -- (2018-12-07)
             autoplace = enemy_autoplace.enemy_spawner_autoplace({
                 probability_expression = "erm_zerg_autoplace_base(0, 8)",
-                force = FORCE_NAME,
-                control = AUTOCONTROL_NAME
+                force = ERM_ZERG.FORCE_NAME,
+                control = ERM_ZERG.AUTOCONTROL_NAME
             }),
             call_for_help_radius = 50,
             spawn_decorations_on_expansion = true,

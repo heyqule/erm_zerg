@@ -13,6 +13,7 @@ local ZergSound = require("__erm_zerg_hd_assets__/sound")
 local AnimationDB = require("__erm_zerg_hd_assets__/animation_db")
 
 local enemy_autoplace = require ("__enemyracemanager__/prototypes/enemy-autoplace")
+local ERM_ZERG = require("__erm_zerg__/global")
 local name = "spore_colony"
 local shortrange_name = "spore_colony_shortrange"
 
@@ -67,13 +68,13 @@ function ErmZerg.make_spore_colony(level)
     data:extend({
         {
             type = "turret",
-            name = MOD_NAME .. "--" .. name .. "--" .. level,
-            localised_name = { "entity-name." .. MOD_NAME .. "--" .. name, GlobalConfig.QUALITY_MAPPING[level] },
+            name = ERM_ZERG.MOD_NAME .. "--" .. name .. "--" .. level,
+            localised_name = { "entity-name." .. ERM_ZERG.MOD_NAME .. "--" .. name, GlobalConfig.QUALITY_MAPPING[level] },
             icon = "__erm_zerg_hd_assets__/graphics/entity/icons/buildings/advisor.png",
             icon_size = 64,
             flags = { "placeable-player", "placeable-enemy",  "breaths-air" },
             max_health = ERM_UnitHelper.get_building_health(hitpoint, max_hitpoint_multiplier,  level),
-            order = MOD_NAME .. "--building--" .. name .. "--".. level,
+            order = ERM_ZERG.MOD_NAME .. "--building--" .. name .. "--".. level,
             subgroup = "enemies",
             map_color = ERM_UnitHelper.format_map_color(settings.startup["enemy_erm_zerg-map-color"].value),
             resistances = {
@@ -103,8 +104,8 @@ function ErmZerg.make_spore_colony(level)
             working_sound = ZergSound.spore_idle(1),
             autoplace = enemy_autoplace.enemy_worm_autoplace({
                 probability_expression = "erm_zerg_autoplace_base(0, 2)",
-                force = FORCE_NAME,
-                control = AUTOCONTROL_NAME
+                force = ERM_ZERG.FORCE_NAME,
+                control = ERM_ZERG.AUTOCONTROL_NAME
             }),
             attack_from_start_frame = true,
             prepare_range = attack_range,
