@@ -10,6 +10,7 @@ end
 
 local effects = require("__core__.lualib.surface-render-parameter-effects")
 local planet_catalogue_vulcanus = require("__space-age__.prototypes.planet.procession-catalogue-vulcanus")
+local ERM_ZERG = require("__erm_zerg__/global")
 local asteroid_triggers = require("__erm_libs__.prototypes.asteroid_triggers")
 local Minerals = require('__erm_shared_economy__/prototypes/mineral')
 local Geyser = require('__erm_shared_economy__/prototypes/geyser')
@@ -28,6 +29,7 @@ Minerals.add_resource({
     ---autoplace
     has_starting_area_placement = true,
     base_density = 8,
+    candidate_spot_count = 32,
     regular_rq_factor_multiplier = 1.2,
     starting_rq_factor_multiplier = 1.5,
 })
@@ -40,11 +42,11 @@ Minerals.add_recycle_recipe({
         {type = "item", name = mineral_name, amount = 1}
     },
     results = {
-        {type = "item", name = "calcite",  amount = 1, probability = 0.66, show_details_in_recipe_tooltip = false},
-        {type = "item", name = "coal",  amount = 1, probability = 0.2, show_details_in_recipe_tooltip = false},
-        {type = "item", name = "tungsten-ore",  amount = 1, probability = 0.02, show_details_in_recipe_tooltip = false},
-        {type = "item", name = "holmium-ore", amount = 1, probability = 0.01, show_details_in_recipe_tooltip = false},
-        {type = "item", name = MOD_NAME..'--larva_egg',  amount = 1, probability = 0.005, show_details_in_recipe_tooltip = false},
+        {type = "item", name = "calcite",  amount = 1, independent_probability = 0.66, show_details_in_recipe_tooltip = false},
+        {type = "item", name = "coal",  amount = 1, independent_probability = 0.2, show_details_in_recipe_tooltip = false},
+        {type = "item", name = "tungsten-ore",  amount = 1, independent_probability = 0.02, show_details_in_recipe_tooltip = false},
+        {type = "item", name = "holmium-ore", amount = 1, independent_probability = 0.01, show_details_in_recipe_tooltip = false},
+        {type = "item", name = ERM_ZERG.MOD_NAME..'--larva_egg',  amount = 1, independent_probability = 0.005, show_details_in_recipe_tooltip = false},
     }
 })
 
@@ -58,6 +60,7 @@ Minerals.add_resource({
     ---autoplace
     has_starting_area_placement = true,
     base_density = 4,
+    candidate_spot_count = 32,
     regular_rq_factor_multiplier = 1.2,
     starting_rq_factor_multiplier = 1.5,
 })
@@ -70,11 +73,11 @@ Minerals.add_recycle_recipe({
         {type = "item", name = mineral_name2, amount = 1}
     },
     results = {
-        {type = "item", name = "tungsten-ore", amount = 1, probability = 0.5, show_details_in_recipe_tooltip = false},
-        {type = "item", name = "calcite",  amount = 1, probability = 0.1, show_details_in_recipe_tooltip = false},
-        {type = "item", name = "coal",  amount = 1, probability = 0.25, show_details_in_recipe_tooltip = false},
-        {type = "item", name = "uranium-ore",  amount = 1, probability = 0.01, show_details_in_recipe_tooltip = false},
-        {type = "item", name = MOD_NAME..'--larva_egg',  amount = 1, probability = 0.005, show_details_in_recipe_tooltip = false},
+        {type = "item", name = "tungsten-ore", amount = 1, independent_probability = 0.5, show_details_in_recipe_tooltip = false},
+        {type = "item", name = "calcite",  amount = 1, independent_probability = 0.1, show_details_in_recipe_tooltip = false},
+        {type = "item", name = "coal",  amount = 1, independent_probability = 0.25, show_details_in_recipe_tooltip = false},
+        {type = "item", name = "uranium-ore",  amount = 1, independent_probability = 0.01, show_details_in_recipe_tooltip = false},
+        {type = "item", name = ERM_ZERG.MOD_NAME..'--larva_egg',  amount = 1, independent_probability = 0.005, show_details_in_recipe_tooltip = false},
     }
 })
 
@@ -153,7 +156,7 @@ local ingredients = {
     {type = "item", name = "quantum-processor", amount = 1},
     {type = "item", name = "superconductor", amount = 1},
     {type = "item", name = "supercapacitor", amount = 1},
-    {type= "item", name= MOD_NAME..'--larva_egg', amount= 1000}
+    {type= "item", name= ERM_ZERG.MOD_NAME..'--larva_egg', amount= 1000}
 }
 local teamcolor = UnitHelper.format_team_color(
         settings.startup["enemy_erm_zerg-team_color"].value,
@@ -197,9 +200,9 @@ local animations = {
         }
     }
 }
-PsiRadar.make_entity(MOD_NAME, icons, surface_conditions, animations)
-PsiRadar.make_item(MOD_NAME, icons)
-PsiRadar.make_recipe(MOD_NAME, ingredients)
+PsiRadar.make_entity(ERM_ZERG.MOD_NAME, icons, surface_conditions, animations)
+PsiRadar.make_item(ERM_ZERG.MOD_NAME, icons)
+PsiRadar.make_recipe(ERM_ZERG.MOD_NAME, ingredients)
 
 data.extend({
     --- Changed from 80000 to 50000
@@ -258,7 +261,65 @@ data.extend({
         name = "char_vespene_geyser_probability",
         expression = "(control:char_geyser:size > 0) * (0.025 * ((char_vespene_geyser_region_patchy > 0) + 2 * char_vespene_geyser_region_patchy))"
     },
-    
+
+    {
+        type = "noise-expression",
+        name = "char_mineral_size",
+        expression = "slider_rescale(control:char_mineral:size, 2)"
+    },
+    {
+        type = "noise-expression",
+        name = "char_mineral_region",
+        -- -1 to 1: needs a positive region for resources & decoratives plus a subzero baseline and skirt for surrounding decoratives.
+        expression = "max(vulcanus_starting_calcite,\z
+                      min(1 - vulcanus_starting_circle,\z
+                          vulcanus_place_non_metal_spots(749, 12, 1,\z
+                                                         char_mineral_size * min(1.2, vulcanus_ore_dist) * 25,\z
+                                                         control:char_mineral:frequency,\z
+                                                         vulcanus_mountains_resource_favorability)))"
+    },
+    {
+        type = "noise-expression",
+        name = "char_mineral_probability",
+        expression = "(control:char_mineral:size > 0) * (1000 * ((1 + char_mineral_region) * random_penalty_between(0.9, 1, 1) - 1))"
+    },
+    {
+        type = "noise-expression",
+        name = "char_mineral_richness",
+        expression = "char_mineral_region * random_penalty_between(0.9, 1, 1)\z
+                  * 24000 * vulcanus_starting_area_multiplier\z
+                  * control:char_mineral:richness / char_mineral_size"
+    },
+
+
+    {
+        type = "noise-expression",
+        name = "char_mineral_2_size",
+        expression = "slider_rescale(control:char_mineral_2:size, 2)"
+    },
+    {
+        type = "noise-expression",
+        name = "char_mineral_2_region",
+        -- -1 to 1: needs a positive region for resources & decoratives plus a subzero baseline and skirt for surrounding decoratives.
+        expression = "max(vulcanus_starting_tungsten,\z
+                      min(1 - vulcanus_starting_circle,\z
+                          vulcanus_place_metal_spots(789, 15, 2,\z
+                                                     char_mineral_2_size * min(1.2, vulcanus_ore_dist) * 25,\z
+                                                     control:char_mineral_2:frequency,\z
+                                                     vulcanus_basalts_resource_favorability)))"
+    },
+    {
+        type = "noise-expression",
+        name = "char_mineral_2_probability",
+        expression = "(control:char_mineral_2:size > 0) * (1000 * ((1 + char_mineral_2_region) * random_penalty_between(0.9, 1, 1) - 1))"
+    },
+    {
+        type = "noise-expression",
+        name = "char_mineral_2_richness",
+        expression = "char_mineral_2_region * random_penalty_between(0.9, 1, 1)\z
+                  * 10000 * vulcanus_starting_area_multiplier\z
+                  * control:char_mineral_2:richness / char_mineral_2_size"
+    },
 })
 
 local char_mapgen = {
@@ -270,12 +331,10 @@ local char_mapgen = {
         aux = "vulcanus_aux",
         cliffiness = "cliffiness_basic",
         cliff_elevation = "cliff_elevation_from_elevation",
-        ["entity:coal:probability"] = "vulcanus_coal_probability",
-        ["entity:coal:richness"] = "vulcanus_coal_richness",
-        ["entity:"..mineral_name..":probability"] = "vulcanus_calcite_probability",
-        ["entity:"..mineral_name..":richness"] = "vulcanus_calcite_richness",
-        ["entity:"..mineral_name2..":probability"] = "vulcanus_tungsten_ore_probability",
-        ["entity:"..mineral_name2..":richness"] = "vulcanus_tungsten_ore_richness",
+        ["entity:"..mineral_name..":probability"] = "char_mineral_probability",
+        ["entity:"..mineral_name..":richness"] = "char_mineral_richness",
+        ["entity:"..mineral_name2..":probability"] = "char_mineral_2_probability",
+        ["entity:"..mineral_name2..":richness"] = "char_mineral_2_richness",
         ["entity:"..geyser_name..":probability"] = "char_vespene_geyser_probability",
         ["entity:"..geyser_name..":richness"] = "char_vespene_geyser_richness",
     },
@@ -286,8 +345,8 @@ local char_mapgen = {
     },
     territory_settings = {
         units = {
-            MOD_NAME .. "--medium-nydusworm",
-            MOD_NAME .. "--big-nydusworm",
+            ERM_ZERG.MOD_NAME .. "--medium-nydusworm",
+            ERM_ZERG.MOD_NAME .. "--big-nydusworm",
         },
         territory_index_expression = "demolisher_territory_expression",
         territory_variation_expression = "demolisher_variation_expression",
@@ -297,7 +356,7 @@ local char_mapgen = {
         [mineral_name] = {},
         [mineral_name2] = {},
         [geyser_name] = {},
-        [AUTOCONTROL_NAME] = {},
+        [ERM_ZERG.AUTOCONTROL_NAME] = {},
         --["rocks"] = {}, -- can"t add the rocks control otherwise nauvis rocks spawn
     },
     autoplace_settings = {
@@ -380,15 +439,15 @@ local char_mapgen = {
 }
 
 ----- Add Large asteroid that spawn units
-local oxide_name = MOD_NAME.."--medium-infested-oxide-asteroid"
+local oxide_name = ERM_ZERG.MOD_NAME.."--medium-infested-oxide-asteroid"
 local zerg_spawning_oxide_asteroid = util.table.deepcopy(data.raw['asteroid']['medium-oxide-asteroid'])
 zerg_spawning_oxide_asteroid["name"] = oxide_name
 
-local carbonic_name = MOD_NAME.."--medium-infested-carbonic-asteroid"
+local carbonic_name = ERM_ZERG.MOD_NAME.."--medium-infested-carbonic-asteroid"
 local zerg_spawning_carbonic_asteroid = util.table.deepcopy(data.raw['asteroid']['medium-carbonic-asteroid'])
 zerg_spawning_carbonic_asteroid["name"]  = carbonic_name
 
-local metallic_name = MOD_NAME.."--medium-infested-metallic-asteroid"
+local metallic_name = ERM_ZERG.MOD_NAME.."--medium-infested-metallic-asteroid"
 local zerg_spawning_metallic_asteroid = util.table.deepcopy(data.raw['asteroid']['medium-metallic-asteroid'])
 zerg_spawning_metallic_asteroid["name"]  = metallic_name
 
@@ -418,7 +477,7 @@ local astreroid_data = {
 for key, a_data in pairs(astreroid_data) do
     for unit_name, spawn_data in pairs(a_data) do
         for tier, chance in pairs(spawn_data) do
-            asteroid_triggers.add_unit_to_asteroid(new_asteroids[key], MOD_NAME, unit_name, tier, chance)
+            asteroid_triggers.add_unit_to_asteroid(new_asteroids[key], ERM_ZERG.MOD_NAME, unit_name, tier, chance)
         end
     end
 end
@@ -746,7 +805,7 @@ data:extend({
             },
             {
                 type = "unlock-recipe",
-                recipe = MOD_NAME.."--psi-radar"
+                recipe = ERM_ZERG.MOD_NAME.."--psi-radar"
             }
         },
         prerequisites = { "space-platform-thruster", "landfill" },
@@ -762,6 +821,67 @@ data:extend({
         }
     },
 })
+
+data.raw.planet["char"].platform_surface_render_parameters = util.table.deepcopy(data.raw.planet["nauvis"].platform_surface_render_parameters)
+data.raw.planet["char"].platform_surface_render_parameters.platform_backdrop =
+{
+    emission_scales_with_shadow = false,
+    radius = 600,
+    rotation_seconds = data.raw.planet["nauvis"].platform_surface_render_parameters.platform_backdrop.rotation_seconds / 0.6,
+    light_radius = data.raw.planet["nauvis"].platform_surface_render_parameters.platform_backdrop.light_radius * 0.75,
+    cloudiness = 0.5,
+    surface_vertical_offset = 0.1,
+    cloud_vertical_offset = 0.05,
+    specular_intensity = 0,
+    atmosphere_color = {0.072, 0.073, 0.067, 0.1},
+    cloud_flow_intensity = 0.8,
+    cloud_panning_rate = -0.01,
+    planet_axis = {3.0, 13.0},
+    planet_axis_deviation_amplitude = {10.0, 10.0},
+    planet_axis_deviation_seconds = {890.5/0.6, 753.7/0.6},
+    position = {-680, 601},
+    parallax_strength = {0.95, 0.95},
+    light_direction = {-0.42, 0.23, 0.67},
+    light_intensity_contrast = 0.3,
+    light_radius = 13.9,
+
+    planet_surface =
+    {
+        filename = "__erm_zerg_hd_assets__/graphics/planet/char.png",
+        width = 2048,
+        height = 1024
+    },
+    planet_normal =
+    {
+        filename = "__erm_zerg_hd_assets__/graphics/planet/char-normal.png",
+        width = 2048,
+        height = 1024
+    },
+    planet_emission  =
+    {
+        filename = "__erm_zerg_hd_assets__/graphics/planet/char-emissive.png",
+        width = 2048,
+        height = 1024
+    },
+    global_cloud =
+    {
+        filename = "__space-age__/graphics/space/vulcanus-cloud.png",
+        width = 2048,
+        height = 1024
+    },
+    global_cloud_normal =
+    {
+        filename = "__space-age__/graphics/space/vulcanus-cloud-normal.png",
+        width = 2048,
+        height = 1024
+    },
+    global_cloud_flow =
+    {
+        filename = "__space-age__/graphics/space/vulcanus-cloud-flow.png",
+        width = 2048,
+        height = 1024
+    }
+}
 
 data.rso_ignore_resource_entities = data.rso_ignore_resource_entities or {}
 data.rso_ignore_resource_entities[geyser_name] = true

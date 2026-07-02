@@ -16,6 +16,7 @@ local AnimationDB = require("__erm_zerg_hd_assets__/animation_db")
 
 
 local enemy_autoplace = require ("__enemyracemanager__/prototypes/enemy-autoplace")
+local ERM_ZERG = require("__erm_zerg__/global")
 local name = "sunken_colony"
 local short_range_name = "sunken_colony_shortrange"
 -- Hitpoints
@@ -72,13 +73,13 @@ function ErmZerg.make_sunken_colony(level)
     data:extend({
         {
             type = "turret",
-            name = MOD_NAME .. "--" .. name .. "--" .. level,
-            localised_name = { "entity-name." .. MOD_NAME .. "--" .. name, GlobalConfig.QUALITY_MAPPING[level] },
+            name = ERM_ZERG.MOD_NAME .. "--" .. name .. "--" .. level,
+            localised_name = { "entity-name." .. ERM_ZERG.MOD_NAME .. "--" .. name, GlobalConfig.QUALITY_MAPPING[level] },
             icon = "__erm_zerg_hd_assets__/graphics/entity/icons/buildings/advisor.png",
             icon_size = 64,
             flags = { "placeable-player", "placeable-enemy", "breaths-air" },
             max_health = ERM_UnitHelper.get_building_health(hitpoint, max_hitpoint_multiplier,  level),
-            order = MOD_NAME .. "--building--" .. name .. "--".. level,
+            order = ERM_ZERG.MOD_NAME .. "--building--" .. name .. "--".. level,
             subgroup = "enemies",
             map_color = ERM_UnitHelper.format_map_color(settings.startup["enemy_erm_zerg-map-color"].value),
             resistances = {
@@ -111,8 +112,8 @@ function ErmZerg.make_sunken_colony(level)
             starting_attack_sound = ZergSound.sunken_attack(0.9),
             autoplace = enemy_autoplace.enemy_worm_autoplace({
                 probability_expression = "erm_zerg_autoplace_base(0, 3)",
-                force = FORCE_NAME,
-                control = AUTOCONTROL_NAME
+                force = ERM_ZERG.FORCE_NAME,
+                control = ERM_ZERG.AUTOCONTROL_NAME
             }),
             attack_from_start_frame = true,
             prepare_range = attack_range,
@@ -137,7 +138,7 @@ function ErmZerg.make_sunken_colony(level)
                             target_effects = {
                                 {
                                     type = "create-explosion",
-                                    entity_name = MOD_NAME.."--colony-explosion"
+                                    entity_name = ERM_ZERG.MOD_NAME.."--colony-explosion"
                                 },
                                 {
                                     type = "play-sound",
@@ -155,13 +156,13 @@ function ErmZerg.make_sunken_colony(level)
         },
         {
             type = "turret",
-            name = MOD_NAME .. "--" .. short_range_name .. "--" .. level,
-            localised_name = { "entity-name." .. MOD_NAME .. "--" .. short_range_name, GlobalConfig.QUALITY_MAPPING[level] },
+            name = ERM_ZERG.MOD_NAME .. "--" .. short_range_name .. "--" .. level,
+            localised_name = { "entity-name." .. ERM_ZERG.MOD_NAME .. "--" .. short_range_name, GlobalConfig.QUALITY_MAPPING[level] },
             icon = "__erm_zerg_hd_assets__/graphics/entity/icons/buildings/advisor.png",
             icon_size = 64,
             flags = { "placeable-player", "placeable-enemy", "breaths-air" },
             max_health = ERM_UnitHelper.get_building_health(hitpoint, max_hitpoint_multiplier,  level),
-            order = MOD_NAME .. "--building--" .. short_range_name .. "--".. level,
+            order = ERM_ZERG.MOD_NAME .. "--building--" .. short_range_name .. "--".. level,
             subgroup = "enemies",
             map_color = ERM_UnitHelper.format_map_color(settings.startup["enemy_erm_zerg-map-color"].value),
             resistances = {
@@ -182,8 +183,8 @@ function ErmZerg.make_sunken_colony(level)
             rotation_speed = 1,
             autoplace = {
                 probability_expression = "0",
-                force = FORCE_NAME,
-                control = AUTOCONTROL_NAME
+                force = ERM_ZERG.FORCE_NAME,
+                control = ERM_ZERG.AUTOCONTROL_NAME
             },
             corpse = "zerg--small-base-corpse",
             dying_explosion = "zerg--building-explosion-small",
@@ -221,7 +222,7 @@ function ErmZerg.make_sunken_colony(level)
                             target_effects = {
                                 {
                                     type = "create-explosion",
-                                    entity_name = MOD_NAME.."--colony-explosion"
+                                    entity_name = ERM_ZERG.MOD_NAME.."--colony-explosion"
                                 },
                                 {
                                     type = "play-sound",

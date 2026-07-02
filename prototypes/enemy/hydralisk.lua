@@ -11,8 +11,9 @@ local ERM_UnitHelper = require("__enemyracemanager__/lib/rig/unit_helper")
 local ERM_DebugHelper = require("__enemyracemanager__/lib/debug_helper")
 local GlobalConfig = require("__enemyracemanager__/lib/global_config")
 local ZergSound = require("__erm_zerg_hd_assets__/sound")
-local biter_ai_settings = require ("__base__.prototypes.entity.biter-ai-settings")
+local AiHelper = require ("__erm_libs__/prototypes/ai_helper")
 local AnimationDB = require("__erm_zerg_hd_assets__/animation_db")
+local ERM_ZERG = require("__erm_zerg__/global")
 local name = "hydralisk"
 
 
@@ -65,17 +66,22 @@ function ErmZerg.make_hydralisk(level)
     local attack_animation =  AnimationDB.get_layered_animations("units", name, "attack")
     local split_animation =  AnimationDB.get_single_animation("projectiles", name,"attack_attachment")
     table.insert(attack_animation["layers"], 2, split_animation)
+
+    local buildable_entities = ERM_UnitHelper.get_buildable_entities(ERM_ZERG.MOD_NAME, {
+        "hydraden", "nyduspit",  "spore_colony", "chamber"
+    }, level)
+    
     data:extend({
         {
             type = "unit",
-            name = MOD_NAME .. "--" .. name .. "--" .. level,
-            localised_name = { "entity-name." .. MOD_NAME .. "--" .. name, GlobalConfig.QUALITY_MAPPING[level] },
+            name = ERM_ZERG.MOD_NAME .. "--" .. name .. "--" .. level,
+            localised_name = { "entity-name." .. ERM_ZERG.MOD_NAME .. "--" .. name, GlobalConfig.QUALITY_MAPPING[level] },
             icon = "__erm_zerg_hd_assets__/graphics/entity/icons/units/" .. name .. ".png",
             icon_size = 64,
             flags = { "placeable-enemy", "placeable-player", "placeable-off-grid", "breaths-air" },
             has_belt_immunity = false,
             max_health = ERM_UnitHelper.get_health(hitpoint, max_hitpoint_multiplier,  level),
-            order = MOD_NAME .. "--unit--" .. name .. "--".. level,
+            order = ERM_ZERG.MOD_NAME .. "--unit--" .. name .. "--".. level,
             subgroup = "enemies",
             map_color = ERM_UnitHelper.format_map_color(settings.startup["enemy_erm_zerg-map-color"].value),
             shooting_cursor_size = 2,
@@ -99,7 +105,7 @@ function ErmZerg.make_hydralisk(level)
             movement_speed = ERM_UnitHelper.get_movement_speed(base_movement_speed, incremental_movement_speed,  level),
             absorptions_to_join_attack = { pollution = ERM_UnitHelper.get_pollution_attack(pollution_to_join_attack, level)},
             distraction_cooldown = distraction_cooldown,
-            ai_settings = biter_ai_settings,
+            ai_settings = AiHelper.get_enemy_unit_settings(2),
             attack_parameters = {
                 type = "projectile",
                 range_mode = "bounding-box-to-bounding-box",
@@ -117,7 +123,7 @@ function ErmZerg.make_hydralisk(level)
                         type = "direct",
                         action_delivery = {
                             type = "projectile",
-                            projectile = MOD_NAME.."--hydralisk-projectile",
+                            projectile = ERM_ZERG.MOD_NAME.."--hydralisk-projectile",
                             starting_speed = 0.3,
                             max_range = GlobalConfig.get_max_projectile_range(),
                         }
@@ -130,7 +136,16 @@ function ErmZerg.make_hydralisk(level)
             distance_per_frame = 0.24,
             run_animation = AnimationDB.get_layered_animations("units", name, "run"),
             dying_sound = ZergSound.enemy_death(name, 0.9),
-            corpse = name .. "-corpse"
+            corpse = name .. "-corpse",
+            steering = {
+                move = {
+                    radius = 3
+                },
+                stay = {
+                    radius = 5.25
+                },
+            },
+            buildable_entities = buildable_entities
         },
         {
             type = "corpse",

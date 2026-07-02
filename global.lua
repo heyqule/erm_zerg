@@ -4,46 +4,46 @@
 --- DateTime: 12/22/2020 7:15 PM
 ---
 
--- Globals within the mod
--- Must be prefix with "enemy_". The name should be same as the name from info.json
-MOD_NAME = "enemy_erm_zerg"
--- Must be prefix with "enemy_"
-FORCE_NAME = "enemy_erm_zerg"
+local ERM_ZERG = {
+    -- Globals within the mod
+    -- Must be prefix with "enemy_". The name should be same as the name from info.json
+    MOD_NAME = "enemy_erm_zerg",
+    -- Must be prefix with "enemy_"
+    FORCE_NAME = "enemy_erm_zerg",
 
--- Must be in the format of {MOD_NAME}-enemy-base or {MOD_NAME}_enemy-base
-AUTOCONTROL_NAME = MOD_NAME.."-enemy-base"
+    -- Must be in the format of {MOD_NAME}-enemy-base or {MOD_NAME}_enemy-base
+    AUTOCONTROL_NAME = "enemy_erm_zerg-enemy-base",
 
+    -- Attack Types for on_script_trigger_effect
+    OVERLORD_SPAWN = "emzrg-ovl",
+    QUEEN_SPAWN = "emzrg-qun",
+    DRONE_SPAWN = "emzrg-drn",
+    SCOURGE_SPAWN = "emzrg-scg",
 
--- Attack Types for on_script_trigger_effect
-OVERLORD_SPAWN = "emzrg-ovl"
-QUEEN_SPAWN = "emzrg-qun"
-DRONE_SPAWN = "emzrg-drn"
-SCOURGE_SPAWN = "emzrg-scg"
+    SELF_DESTRUCT_ATTACK = "emzrg-slf",
+    TIME_TO_LIVE_DIED = "emzrg-ttld",
+    TIME_TO_LIVE_CREATED = "emzrg-ttlc",
 
-SELF_DESTRUCT_ATTACK = "emzrg-slf"
-TIME_TO_LIVE_DIED = "emzrg-ttld"
-TIME_TO_LIVE_CREATED = "emzrg-ttlc"
+    BOSS_SPAWN_ATTACK = "emzrg-bs1",
+    UNITS_SPAWN_ATTACK = "emzrg-bs2",
+    UNITS_SPAWN_ATTACK_2X = "emzrg-bs3",
 
-BOSS_SPAWN_ATTACK = "emzrg-bs1"
-UNITS_SPAWN_ATTACK = "emzrg-bs2"
-UNITS_SPAWN_ATTACK_2X = "emzrg-bs3"
+    NYDUS_DEATH_ATTACK = "emzrg-nd1",
+    GUERRILLA_ATTACK = "emzrg-grl",
 
-NYDUS_DEATH_ATTACK = "emzrg-nd1"
-GUERRILLA_ATTACK = "emzrg-grl"
+    LARVA_EGG_TRIGGER = "emzrg-egg",
 
-LARVA_EGG_TRIGGER = "emzrg-egg"
+    ZERG_MAP_COLOR = { r = 248, g = 140, b = 20 },
+    ZERG_TEAM_COLOR = { r = 248, g = 140, b = 20 },
 
-ZERG_MAP_COLOR = {r=248, g=140, b=20}
-ZERG_TEAM_COLOR = {r=248, g=140, b=20}
+    --- This set must be the same string for boss to function properly.
+    REGISTER_BOSS_RADAR = "embss-rdr",
+    TRIGGER_BOSS_SPAWNED = "embss-spn",
+    TRIGGER_BOSS_DIES = "embss-die",
+    TRIGGER_BOSS_ASSIST_SPAWNED = "embas_spn",
+    TRIGGER_BOSS_ASSIST_DIES = "embas-die",
+    BOSS_SEGMENT_UNIT_DIES = "embsu-die",
+}
 
---- This set must be the same string for boss to function properly.
-REGISTER_BOSS_RADAR = "embss-rdr"
-TRIGGER_BOSS_SPAWNED = "embss-spn"
-TRIGGER_BOSS_DIES = "embss-die"
-TRIGGER_BOSS_ASSIST_SPAWNED = "embas_spn"
-TRIGGER_BOSS_ASSIST_DIES = "embas-die"
-BOSS_SEGMENT_UNIT_DIES = "embsu-die"
-
-
-
+return ERM_ZERG
 

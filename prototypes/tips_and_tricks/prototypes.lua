@@ -4,20 +4,21 @@
 --- DateTime: 11/2/2024 7:01 PM
 ---
 
+local ERM_ZERG = require("__erm_zerg__/global")
 local simulations = require("__erm_zerg__/prototypes/tips_and_tricks/simulations")
 
 data:extend(
     {
         {
             type = "tips-and-tricks-item-category",
-            name = FORCE_NAME,
-            order = "n01-["..FORCE_NAME.."]"
+            name = ERM_ZERG.FORCE_NAME,
+            order = "n01-["..ERM_ZERG.FORCE_NAME.."]"
         },
         {
             type = "tips-and-tricks-item",
-            name = FORCE_NAME.."-general-info",
-            tag = "[entity="..FORCE_NAME.."--zergling--1]",
-            category = FORCE_NAME,
+            name = ERM_ZERG.FORCE_NAME.."-general-info",
+            tag = "[entity="..ERM_ZERG.FORCE_NAME.."--zergling--1]",
+            category = ERM_ZERG.FORCE_NAME,
             order = "a",
             is_title = true,
             starting_status = "suggested",
@@ -31,9 +32,9 @@ if mods['space-age'] then
         {
             {
                 type = "tips-and-tricks-item",
-                name = FORCE_NAME.."-nydus_worms",
-                tag = "[entity="..FORCE_NAME.."--small-nydusworm]",
-                category = FORCE_NAME,
+                name = ERM_ZERG.FORCE_NAME.."-nydus_worms",
+                tag = "[entity="..ERM_ZERG.FORCE_NAME.."--small-nydusworm]",
+                category = ERM_ZERG.FORCE_NAME,
                 order = "b",
                 indent = 1,
                 starting_status = "suggested",
@@ -42,8 +43,8 @@ if mods['space-age'] then
             {
                 type = "tips-and-tricks-item",
                 tag = "[planet=char]",
-                name = FORCE_NAME.."-planet-char",
-                category = FORCE_NAME,
+                name = ERM_ZERG.FORCE_NAME.."-planet-char",
+                category = ERM_ZERG.FORCE_NAME,
                 order = "c",
                 indent = 1,
                 starting_status = "suggested",
@@ -51,9 +52,9 @@ if mods['space-age'] then
             },
             {
                 type = "tips-and-tricks-item",
-                tag = "[entity="..FORCE_NAME.."--boss_overmind--1]",
-                name = FORCE_NAME.."-overmind",
-                category = FORCE_NAME,
+                tag = "[entity="..ERM_ZERG.FORCE_NAME.."--boss_overmind--1]",
+                name = ERM_ZERG.FORCE_NAME.."-overmind",
+                category = ERM_ZERG.FORCE_NAME,
                 order = "d",
                 indent = 2,
                 starting_status = "suggested",
@@ -62,8 +63,8 @@ if mods['space-age'] then
             {
                 type = "tips-and-tricks-item",
                 tag = "[item=enemy_erm_zerg--larva_egg]",
-                name = FORCE_NAME.."-economy",
-                category = FORCE_NAME,
+                name = ERM_ZERG.FORCE_NAME.."-economy",
+                category = ERM_ZERG.FORCE_NAME,
                 order = "e",
                 indent = 1,
                 starting_status = "suggested",

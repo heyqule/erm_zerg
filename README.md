@@ -29,43 +29,43 @@ All units start with same base health point as original Starcraft. They have uni
 
 #### Tier 1 Units
 
-#####  Zergling
+#####  Zergling (Unit Supply: 1)
 - Attack: Physical
 
-##### Hydralisk
+##### Hydralisk (Unit Supply: 2)
 - Attack: Acid
 
-##### Mutalisk
+##### Mutalisk (Unit Supply: 2)
 - Attack: Acid
 
 #### Tier 2 Units
 
-##### Overlord
+##### Overlord (Unit Supply: 4)
 - Drops units
 
-##### Lurker
+##### Lurker (Unit Supply: 2)
 - Attack: Physical (2 radius AOE)
 
-##### Infested
+##### Infested (Unit Supply: 2)
 - Attack: Explosion (3 radius AOE)
 
-##### Guardian
-- Attack: Acid
+##### Guardian (Unit Supply: 3)
+- Attack: Acid and chance of spawning scourge
 
-##### Devourer
-- Attack: Acid (Slow on hit)
+##### Devourer  (Unit Supply: 3)
+- Attack: Acid (Slow on hit) and chance of spawning scourge
 
-##### Drone
+##### Drone (unit supply: 2)
 - Builds spore colony or nyduspit
 
 #### Tier 3 Units
-##### Queen
-- Attack: Acid (5 radius AOE) (Slow on hit)
+##### Queen (unit supply: 3)
+- Attack: Acid (5 radius AOE) (Slow on hit) and spawning broodling
 
-##### Defiler
+##### Defiler (unit supply: 3)
 - Attack: Acid (5 radius AOE), Dark swamp (Heals friendly unit in 8 radius AOE)
 
-##### Ultralisk
+##### Ultralisk (unit supply: 4)
 - Attack: Physical (3 radius AOE)
 
 Physical resistance: 85, Weak elemental resistance: 75, Elemental resistance: 80 with some exceptions.
@@ -83,3 +83,10 @@ Physical resistance: 85, Weak elemental resistance: 75, Elemental resistance: 80
 - Patrolled by nydus worm.
 - When interplanetary attack is enabled, killing an unit spawner on Chars will activate it.
 - Master control entity: Overmind. Defeat it for rewards. (Experimental)
+
+### How to spawn Overmind
+- Build and place a zerg PSI radar on Char
+- Build defense around your radar.  However, don't build too close to it as there are artillery strike against it from the boss. 
+- Wait for the radar to scan, appox 15 minutes, it will notify you when a boss is found.
+- Good luck, have fun.
+

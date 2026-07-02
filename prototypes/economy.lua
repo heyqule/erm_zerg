@@ -12,6 +12,7 @@ local LarvaEgg = require('__erm_zerg_economy__/prototypes/create-egg')
 local ZergPlayableEntities = require('__erm_zerg_economy__/prototypes/create-zerg-entities')
 local ZergPlayableRecipes = require('__erm_zerg_economy__/prototypes/create-zerg-recipes')
 
+local ERM_ZERG = require("__erm_zerg__/global")
 local ERM_UnitHelper = require("__enemyracemanager__/lib/rig/unit_helper")
 
 local original_color = util.table.deepcopy(settings.startup["enemy_erm_zerg-team_color"].value)
@@ -21,11 +22,11 @@ local blended_color = ERM_UnitHelper.format_team_color(
         settings.startup["enemy_erm_zerg-team_blend_mode"].value
 )
 
-local egg_name = MOD_NAME..'--larva_egg'
+local egg_name = ERM_ZERG.MOD_NAME..'--larva_egg'
 --- Create recipe category and subgroup
 LarvaEgg.init()
 --- Create larva egg based on zerg color
-LarvaEgg.create_item(egg_name, LARVA_EGG_TRIGGER, blended_color)
+LarvaEgg.create_item(egg_name, ERM_ZERG.LARVA_EGG_TRIGGER, blended_color)
 --- Create larva egg duplication recipe (Doesn't fresh spoil timer)
 LarvaEgg.create_larva_egg_duplication_recipe(egg_name, {
     {type = "item", name = "carbon", amount = 10},
@@ -58,55 +59,55 @@ LarvaEgg.create_larva_egg_to_promethium_recipe(egg_name)
 LarvaEgg.create_tech(egg_name)
 
 --- Create playable entities for zerg
-ZergPlayableEntities.init(MOD_NAME)
+ZergPlayableEntities.init(ERM_ZERG.MOD_NAME)
 --- ZergPlayableEntities.zergling(prefix, hp_multiplier = 1, damage_multiplier = 1)
-ZergPlayableEntities.zergling(MOD_NAME)
-ZergPlayableEntities.hydralisk(MOD_NAME)
-ZergPlayableEntities.mutalisk(MOD_NAME)
-ZergPlayableEntities.guardian(MOD_NAME)
+ZergPlayableEntities.zergling(ERM_ZERG.MOD_NAME)
+ZergPlayableEntities.hydralisk(ERM_ZERG.MOD_NAME)
+ZergPlayableEntities.mutalisk(ERM_ZERG.MOD_NAME)
+ZergPlayableEntities.guardian(ERM_ZERG.MOD_NAME)
 --- ZergPlayableEntities.infested(prefix, trigger_action, hp_multiplier = 1, damage_multiplier = 1)
-ZergPlayableEntities.infested(MOD_NAME, SELF_DESTRUCT_ATTACK)
-ZergPlayableEntities.ultralisk(MOD_NAME)
+ZergPlayableEntities.infested(ERM_ZERG.MOD_NAME, ERM_ZERG.SELF_DESTRUCT_ATTACK)
+ZergPlayableEntities.ultralisk(ERM_ZERG.MOD_NAME)
 
-ZergPlayableEntities.hatchery(MOD_NAME)
+ZergPlayableEntities.hatchery(ERM_ZERG.MOD_NAME)
 
 --- Create recipe and item for zerg
-ZergPlayableRecipes.zergling(MOD_NAME, {
+ZergPlayableRecipes.zergling(ERM_ZERG.MOD_NAME, {
     {type = "item", name = "nutrients", amount = 50},
     {type = "item", name = egg_name, amount = 2},
     {type = "item", name = "quantum-processor", amount = 1},
     {type = "item", name = "superconductor", amount = 1},
     {type = "item", name = "supercapacitor", amount = 1},
 })
-ZergPlayableRecipes.hydralisk(MOD_NAME,{
+ZergPlayableRecipes.hydralisk(ERM_ZERG.MOD_NAME,{
     {type = "item", name = "nutrients", amount = 100},
     {type = "item", name = egg_name, amount = 4},
     {type = "item", name = "quantum-processor", amount = 1},
     {type = "item", name = "superconductor", amount = 1},
     {type = "item", name = "supercapacitor", amount = 1},
 })
-ZergPlayableRecipes.mutalisk(MOD_NAME,{
+ZergPlayableRecipes.mutalisk(ERM_ZERG.MOD_NAME,{
     {type = "item", name = "nutrients", amount = 200},
     {type = "item", name = egg_name, amount = 8},
     {type = "item", name = "quantum-processor", amount = 1},
     {type = "item", name = "superconductor", amount = 1},
     {type = "item", name = "supercapacitor", amount = 1},
 })
-ZergPlayableRecipes.guardian(MOD_NAME,{
+ZergPlayableRecipes.guardian(ERM_ZERG.MOD_NAME,{
     {type = "item", name = "nutrients", amount = 300},
     {type = "item", name = egg_name, amount = 16},
     {type = "item", name = "quantum-processor", amount = 1},
     {type = "item", name = "superconductor", amount = 1},
     {type = "item", name = "supercapacitor", amount = 1},
 })
-ZergPlayableRecipes.infested(MOD_NAME,{
+ZergPlayableRecipes.infested(ERM_ZERG.MOD_NAME,{
     {type = "item", name = "nutrients", amount = 100},
     {type = "item", name = egg_name, amount = 4},
     {type = "item", name = "quantum-processor", amount = 1},
     {type = "item", name = "superconductor", amount = 1},
     {type = "item", name = "supercapacitor", amount = 1},
 })
-ZergPlayableRecipes.ultralisk(MOD_NAME,{
+ZergPlayableRecipes.ultralisk(ERM_ZERG.MOD_NAME,{
     {type = "item", name = "nutrients", amount = 500},
     {type = "item", name = egg_name, amount = 32},
     {type = "item", name = "quantum-processor", amount = 2},
@@ -114,7 +115,7 @@ ZergPlayableRecipes.ultralisk(MOD_NAME,{
     {type = "item", name = "supercapacitor", amount = 2},
 })
 
-ZergPlayableRecipes.hatchery(MOD_NAME,{
+ZergPlayableRecipes.hatchery(ERM_ZERG.MOD_NAME,{
     {type = "item", name = "quantum-processor", amount = 10},
     {type = "item", name = "superconductor", amount = 10},
     {type = "item", name = "supercapacitor", amount = 10},
@@ -123,7 +124,7 @@ ZergPlayableRecipes.hatchery(MOD_NAME,{
 })
 
 --- Create technology for zerg
-ZergPlayableRecipes.technologies(MOD_NAME)
+ZergPlayableRecipes.technologies(ERM_ZERG.MOD_NAME)
 
 --- Assign larva egg to applicable spawners as loot
 local lootable_spawners = {
@@ -139,10 +140,10 @@ local loot_multiplier = {
 
 for _, spawner in pairs(lootable_spawners) do
     for tier, multiplier in pairs(loot_multiplier) do
-        local unit_prototype = data.raw['unit-spawner'][MOD_NAME..'--'..spawner..'--'..tier]
+        local unit_prototype = data.raw['unit-spawner'][ERM_ZERG.MOD_NAME..'--'..spawner..'--'..tier]
         if unit_prototype then
             unit_prototype.loot = {
-                {item = egg_name, count_min = multiplier[1], count_max = multiplier[2] }
+                {type = "item", name = egg_name, amount_min = multiplier[1], amount_max = multiplier[2]}
             }
         end
     end
@@ -162,10 +163,10 @@ local loot_multiplier_with_probablity = {
 
 for _, spawner in pairs(lootable_spawner_with_probablity) do
     for tier, multiplier in pairs(loot_multiplier_with_probablity) do
-        local unit_prototype = data.raw['unit-spawner'][MOD_NAME..'--'..spawner..'--'..tier]
+        local unit_prototype = data.raw['unit-spawner'][ERM_ZERG.MOD_NAME..'--'..spawner..'--'..tier]
         if unit_prototype then
             unit_prototype.loot = {
-                {item = egg_name, probability = 0.33, count_min = multiplier[1], count_max = multiplier[2] }
+                {type = "item", name = egg_name, independent_probability = 0.33, amount_min = multiplier[1], amount_max = multiplier[2]}
             }
         end
     end

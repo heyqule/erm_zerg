@@ -4,6 +4,7 @@
 --- DateTime: 11/14/2024 6:07 PM
 ---
 local String = require("__erm_libs__/stdlib/string")
+local ERM_ZERG = require("__erm_zerg__/global")
 local demolisher = {
     ["small-demolisher"] = 1,
     ["medium-demolisher"] = 2,
@@ -30,7 +31,7 @@ local function update_segmented_unit_specification(specification)
     if not specification.segments then return end
     
     for i, segment in pairs(specification.segments) do
-        segment.segment = MOD_NAME.."--"..convert_segment_name(segment.segment)
+        segment.segment = ERM_ZERG.MOD_NAME.."--"..convert_segment_name(segment.segment)
     end
 end
 
@@ -68,9 +69,9 @@ for _, unit in pairs(data.raw['segment']) do
     if string.find(unit.name, search_word, nil, true) then
         local new_name = convert_segment_name(unit.name)
         local name_token = String.split(new_name,'-')
-        zerg_nydus_segment.name = MOD_NAME.."--"..new_name
-        zerg_nydus_segment.localised_name = { "entity-name." .. MOD_NAME.."--"..name_token[1]..'-'..name_token[2] }
-        zerg_nydus_segment.order = MOD_NAME.."-"..zerg_nydus_segment.name
+        zerg_nydus_segment.name = ERM_ZERG.MOD_NAME.."--"..new_name
+        zerg_nydus_segment.localised_name = { "entity-name." .. ERM_ZERG.MOD_NAME.."--"..name_token[1]..'-'..name_token[2] }
+        zerg_nydus_segment.order = ERM_ZERG.MOD_NAME.."-"..zerg_nydus_segment.name
         
         change_common_entity_data(zerg_nydus_segment)
         
@@ -94,9 +95,9 @@ for _, unit in pairs(data.raw['segmented-unit']) do
         end
         local zerg_nydus = util.table.deepcopy(unit)
         local new_name = convert_segment_name(unit.name)
-        zerg_nydus.name = MOD_NAME.."--"..new_name
-        zerg_nydus.localised_name = { "entity-name." .. MOD_NAME.."--"..new_name }
-        zerg_nydus.order = MOD_NAME.."-"..zerg_nydus.name
+        zerg_nydus.name = ERM_ZERG.MOD_NAME.."--"..new_name
+        zerg_nydus.localised_name = { "entity-name." .. ERM_ZERG.MOD_NAME.."--"..new_name }
+        zerg_nydus.order = ERM_ZERG.MOD_NAME.."-"..zerg_nydus.name
         change_common_entity_data(zerg_nydus)
         update_segmented_unit_specification(zerg_nydus.segment_engine)
 
@@ -105,7 +106,7 @@ for _, unit in pairs(data.raw['segmented-unit']) do
             effect = {
                 type = "create-entity",
                 --- Spawn tier 1 and let quality system take care the rest.
-                entity_name = MOD_NAME.."--zergling--1",
+                entity_name = ERM_ZERG.MOD_NAME.."--zergling--1",
                 offset_deviation = {{-8, -8}, {8, 8}},
                 offsets = {
                     {8,8},
@@ -124,7 +125,7 @@ for _, unit in pairs(data.raw['segmented-unit']) do
             time_cooldown = 300,
             effect = {
                 type = "create-entity",
-                entity_name = MOD_NAME.."--hydralisk--1",
+                entity_name = ERM_ZERG.MOD_NAME.."--hydralisk--1",
                 offset_deviation = {{-8, -8}, {8, 8}},
                 offsets = {
                     {8,8},
@@ -143,7 +144,7 @@ for _, unit in pairs(data.raw['segmented-unit']) do
             time_cooldown = 300,
             effect = {
                 type = "create-entity",
-                entity_name = MOD_NAME.."--mutalisk--1",
+                entity_name = ERM_ZERG.MOD_NAME.."--mutalisk--1",
                 offset_deviation = {{-8, -8}, {8, 8}},
                 offsets = {
                     {8,8},
@@ -165,7 +166,7 @@ for _, unit in pairs(data.raw['segmented-unit']) do
                 time_cooldown = 450,
                 effect = {
                     type = "create-entity",
-                    entity_name = MOD_NAME.."--lurker--1",
+                    entity_name = ERM_ZERG.MOD_NAME.."--lurker--1",
                     offset_deviation = {{-8, -8}, {8, 8}},
                     offsets = {
                         {8,8},
@@ -183,7 +184,7 @@ for _, unit in pairs(data.raw['segmented-unit']) do
                 time_cooldown = 450,
                 effect = {
                     type = "create-entity",
-                    entity_name = MOD_NAME.."--infested--1",
+                    entity_name = ERM_ZERG.MOD_NAME.."--infested--1",
                     repeat_count_deviation = 1,
                     offset_deviation = {{-8, -8}, {8, 8}},
                     offsets = {
@@ -205,7 +206,7 @@ for _, unit in pairs(data.raw['segmented-unit']) do
                 time_cooldown = 600,
                 effect = {
                     type = "create-entity",
-                    entity_name = MOD_NAME.."--ultralisk--1",
+                    entity_name = ERM_ZERG.MOD_NAME.."--ultralisk--1",
                     offset_deviation = {{-8, -8}, {8, 8}},
                     offsets = {
                         {8,8},
@@ -226,11 +227,11 @@ for _, unit in pairs(data.raw['segmented-unit']) do
         end
         table.insert(zerg_nydus.dying_trigger_effect, {
             type = "script",
-            effect_id = NYDUS_DEATH_ATTACK
+            effect_id = ERM_ZERG.NYDUS_DEATH_ATTACK
         })
         table.insert(zerg_nydus.dying_trigger_effect, {
             type = "script",
-            effect_id = BOSS_SEGMENT_UNIT_DIES
+            effect_id = ERM_ZERG.BOSS_SEGMENT_UNIT_DIES
         })
 
         

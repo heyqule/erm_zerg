@@ -14,6 +14,7 @@ local ZergSound = require("__erm_zerg_hd_assets__/sound")
 local CreepFunction = require("__erm_zerg__/prototypes/creep_function")
 local AnimationDB = require("__erm_zerg_hd_assets__/animation_db")
 local enemy_autoplace = require ("__enemyracemanager__/prototypes/enemy-autoplace")
+local ERM_ZERG = require("__erm_zerg__/global")
 local name = "lair"
 
 -- Hitpoints
@@ -24,19 +25,19 @@ local max_hitpoint_multiplier = settings.startup["enemyracemanager-max-hitpoint-
 
 -- Handles acid and poison resistance
 local base_acid_resistance = 20
-local incremental_acid_resistance = 40
+local incremental_acid_resistance = 30
 -- Handles physical resistance
 local base_physical_resistance = 0
-local incremental_physical_resistance = 65
+local incremental_physical_resistance = 55
 -- Handles fire and explosive resistance
 local base_fire_resistance = 10
-local incremental_fire_resistance = 50
+local incremental_fire_resistance = 40
 -- Handles laser and electric resistance
 local base_electric_resistance = 0
-local incremental_electric_resistance = 55
+local incremental_electric_resistance = 50
 -- Handles cold resistance
 local base_cold_resistance = 0
-local incremental_cold_resistance = 55
+local incremental_cold_resistance = 45
 
 
 local pollution_absorption_absolute = 200
@@ -47,20 +48,20 @@ local max_friends_around_to_spawn = 10
 local spawn_table = function(level)
     local res = {}
     --Tire 1
-    res[1] = { MOD_NAME .. "--zergling--" .. level, { { 0.0, 0.7 }, { 0.2, 0.45 }, { 0.4, 0.3 }, { 0.6, 0.2 }, { 0.8, 0.15 }, {1.0, 0.05} } }
-    res[2] = { MOD_NAME .. "--hydralisk--" .. level, { { 0.0, 0.3 }, { 0.2, 0.5 }, { 0.4, 0.4 }, { 0.6, 0.2 }, { 0.8, 0.15 }, {1.0, 0.05} } }
-    res[3] = { MOD_NAME .. "--mutalisk--" .. level, { { 0.0, 0.0 }, { 0.2, 0.05 }, { 0.4, 0.2 }, { 0.6, 0.2 }, { 0.8, 0.1 }, {1.0, 0.05} } }
+    res[1] = { ERM_ZERG.MOD_NAME .. "--zergling--" .. level, { { 0.0, 0.7 }, { 0.2, 0.45 }, { 0.4, 0.3 }, { 0.6, 0.2 }, { 0.8, 0.15 }, {1.0, 0.05} } }
+    res[2] = { ERM_ZERG.MOD_NAME .. "--hydralisk--" .. level, { { 0.0, 0.3 }, { 0.2, 0.5 }, { 0.4, 0.4 }, { 0.6, 0.2 }, { 0.8, 0.15 }, {1.0, 0.05} } }
+    res[3] = { ERM_ZERG.MOD_NAME .. "--mutalisk--" .. level, { { 0.0, 0.0 }, { 0.2, 0.05 }, { 0.4, 0.2 }, { 0.6, 0.2 }, { 0.8, 0.1 }, {1.0, 0.05} } }
     --Tire 2
-    res[4] = { MOD_NAME .. "--lurker--" .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.05 }, { 0.6, 0.1 }, { 0.8, 0.1 }, {1.0, 0.1} } }
-    res[5] = { MOD_NAME .. "--guardian--" .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.0 }, { 0.8, 0.1 }, {1.0, 0.1} } }
-    res[6] = { MOD_NAME .. "--devourer--" .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.1 }, { 0.8, 0.1 }, {1.0, 0.1} } }
-    res[7] = { MOD_NAME .. "--overlord--" .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.1 }, { 0.8, 0.2 }, {1.0, 0.1} } }
+    res[4] = { ERM_ZERG.MOD_NAME .. "--lurker--" .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.05 }, { 0.6, 0.1 }, { 0.8, 0.1 }, {1.0, 0.1} } }
+    res[5] = { ERM_ZERG.MOD_NAME .. "--guardian--" .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.0 }, { 0.8, 0.1 }, {1.0, 0.1} } }
+    res[6] = { ERM_ZERG.MOD_NAME .. "--devourer--" .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.1 }, { 0.8, 0.1 }, {1.0, 0.1} } }
+    res[7] = { ERM_ZERG.MOD_NAME .. "--overlord--" .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.1 }, { 0.8, 0.2 }, {1.0, 0.1} } }
     --Tier 3
-    res[8] = { MOD_NAME .. "--drone--" .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.05 }, { 0.6, 0.1 }, { 0.8, 0.1 }, {1.0, 0.1} } }
-    res[9] = { MOD_NAME .. "--ultralisk--" .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0 }, { 0.6, 0 }, { 0.8, 0.0 }, {1.0, 0.1} } }
-    res[10] = { MOD_NAME .. "--defiler--" .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0 }, { 0.6, 0 }, { 0.8, 0.0 }, {1.0, 0.1} } }
-    res[11] = { MOD_NAME .. "--queen--" .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0 }, { 0.6, 0 }, { 0.8, 0.0 }, {1.0, 0.1} } }
-    res[12] = { MOD_NAME .. "--infested--" .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0 }, { 0.6, 0 }, { 0.8, 0.0 }, {1.0, 0.05} } }
+    res[8] = { ERM_ZERG.MOD_NAME .. "--drone--" .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.05 }, { 0.6, 0.1 }, { 0.8, 0.1 }, {1.0, 0.1} } }
+    res[9] = { ERM_ZERG.MOD_NAME .. "--ultralisk--" .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0 }, { 0.6, 0 }, { 0.8, 0.0 }, {1.0, 0.1} } }
+    res[10] = { ERM_ZERG.MOD_NAME .. "--defiler--" .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0 }, { 0.6, 0 }, { 0.8, 0.0 }, {1.0, 0.1} } }
+    res[11] = { ERM_ZERG.MOD_NAME .. "--queen--" .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0 }, { 0.6, 0 }, { 0.8, 0.0 }, {1.0, 0.1} } }
+    res[12] = { ERM_ZERG.MOD_NAME .. "--infested--" .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0 }, { 0.6, 0 }, { 0.8, 0.0 }, {1.0, 0.05} } }
     return res
 end
 
@@ -74,13 +75,13 @@ function ErmZerg.make_lair(level)
     data:extend({
         {
             type = "unit-spawner",
-            name = MOD_NAME .. "--" .. name .. "--" .. level,
-            localised_name = { "entity-name." .. MOD_NAME .. "--" .. name, GlobalConfig.QUALITY_MAPPING[level] },
+            name = ERM_ZERG.MOD_NAME .. "--" .. name .. "--" .. level,
+            localised_name = { "entity-name." .. ERM_ZERG.MOD_NAME .. "--" .. name, GlobalConfig.QUALITY_MAPPING[level] },
             icon = "__erm_zerg_hd_assets__/graphics/entity/icons/buildings/advisor.png",
             icon_size = 64,
             flags = { "placeable-player", "placeable-enemy", "breaths-air" },
             max_health = ERM_UnitHelper.get_building_health(hitpoint, max_hitpoint_multiplier,  level),
-            order = MOD_NAME .. "--building--" .. name .. "--".. level,
+            order = ERM_ZERG.MOD_NAME .. "--building--" .. name .. "--".. level,
             subgroup = "enemies",
             map_color = ERM_UnitHelper.format_map_color(settings.startup["enemy_erm_zerg-map-color"].value),
             working_sound = ZergSound.building_working_sound(name, 0.9),
@@ -120,8 +121,8 @@ function ErmZerg.make_lair(level)
             -- (2018-12-07)
             autoplace = enemy_autoplace.enemy_spawner_autoplace({
                 probability_expression = "erm_zerg_autoplace_base(0, 10)",
-                force = FORCE_NAME,
-                control = AUTOCONTROL_NAME
+                force = ERM_ZERG.FORCE_NAME,
+                control = ERM_ZERG.AUTOCONTROL_NAME
             }),
             call_for_help_radius = 50,
             spawn_decorations_on_expansion = true,

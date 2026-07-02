@@ -6,12 +6,13 @@
 
 local ERMDataHelper = require("__enemyracemanager__/lib/rig/data_helper")
 local AnimationDB = require("__erm_zerg_hd_assets__/animation_db")
+local ERM_ZERG = require("__erm_zerg__/global")
 
 data:extend({
     --- Projectiles
     {
         type = "projectile",
-        name = MOD_NAME.."--mutalisk-projectile",
+        name = ERM_ZERG.MOD_NAME.."--mutalisk-projectile",
         flags = { "not-on-map" },
         acceleration = 0.005,
         action = {
@@ -21,7 +22,7 @@ data:extend({
                 target_effects = {
                     {
                         type = "create-entity",
-                        entity_name = MOD_NAME.."--mutalisk-explosion-small"
+                        entity_name = ERM_ZERG.MOD_NAME.."--mutalisk-explosion-small"
                     },
                     {
                         type = "damage",
@@ -34,7 +35,7 @@ data:extend({
     },
     {
         type = "projectile",
-        name = MOD_NAME.."--parasite-projectile",
+        name = ERM_ZERG.MOD_NAME.."--parasite-projectile",
         flags = { "not-on-map" },
         acceleration = 0.005,
         action = {
@@ -43,7 +44,7 @@ data:extend({
                 type = "instant",
                 target_effects = {
                     type = "script",
-                    effect_id = QUEEN_SPAWN,
+                    effect_id = ERM_ZERG.QUEEN_SPAWN,
                 }
             }
         },
@@ -51,7 +52,7 @@ data:extend({
     },
     {
         type = "projectile",
-        name = MOD_NAME.."--hydralisk-projectile",
+        name = ERM_ZERG.MOD_NAME.."--hydralisk-projectile",
         flags = { "not-on-map" },
         acceleration = 0.05,
 
@@ -68,7 +69,7 @@ data:extend({
                 target_effects = {
                     {
                         type = "create-entity",
-                        entity_name = MOD_NAME.."--hydralisk-explosion-small"
+                        entity_name = ERM_ZERG.MOD_NAME.."--hydralisk-explosion-small"
                     },
                     {
                         type = "damage",
@@ -82,7 +83,7 @@ data:extend({
     },
     {
         type = "projectile",
-        name = MOD_NAME.."--guardian-projectile",
+        name = ERM_ZERG.MOD_NAME.."--guardian-projectile",
         flags = { "not-on-map" },
         acceleration = 0.01,
         action = {
@@ -92,7 +93,7 @@ data:extend({
                 target_effects = {
                     {
                         type = "create-entity",
-                        entity_name = MOD_NAME.."--mutalisk-explosion-small"
+                        entity_name = ERM_ZERG.MOD_NAME.."--mutalisk-explosion-small"
                     },
                     {
                         type = "damage",
@@ -107,63 +108,63 @@ data:extend({
     --- Explosions
     {
         type = "explosion",
-        name = MOD_NAME.."--lurker-explosion",
+        name = ERM_ZERG.MOD_NAME.."--lurker-explosion",
         flags = { "not-on-map" },
         render_layer = "projectile",
         animations = AnimationDB.get_single_animation("projectiles","lurker","explosion")
     },
     {
         type = "explosion",
-        name = MOD_NAME.."--colony-explosion",
+        name = ERM_ZERG.MOD_NAME.."--colony-explosion",
         flags = { "not-on-map" },
         render_layer = "projectile",
         animations = AnimationDB.get_layered_animations("projectiles","colony","explosion")
     },
     {
         type = "explosion",
-        name = MOD_NAME.."--mutalisk-explosion-small",
+        name = ERM_ZERG.MOD_NAME.."--mutalisk-explosion-small",
         flags = { "not-on-map" },
         animations = AnimationDB.get_layered_animations("projectiles","mutalisk","explosion")
     },
     {
         type = "explosion",
-        name = MOD_NAME.."--hydralisk-explosion-small",
+        name = ERM_ZERG.MOD_NAME.."--hydralisk-explosion-small",
         flags = { "not-on-map" },
         animations = AnimationDB.get_layered_animations("projectiles","hydralisk","explosion")
     },
     {
         type = "explosion",
-        name = MOD_NAME.."--blood-cloud-explosion",
+        name = ERM_ZERG.MOD_NAME.."--blood-cloud-explosion",
         flags = { "not-on-map" },
         animations = AnimationDB.get_layered_animations("projectiles","blood_cloud","explosion")
     },
     {
         type = "explosion",
-        name = MOD_NAME.."--dark-swarm-80-explosion",
+        name = ERM_ZERG.MOD_NAME.."--dark-swarm-80-explosion",
         flags = { "not-on-map" },
         animations = AnimationDB.get_layered_animations("projectiles","dark_swam_80","explosion")
     },
     {
         type = "explosion",
-        name = MOD_NAME.."--dark-swarm-explosion",
+        name = ERM_ZERG.MOD_NAME.."--dark-swarm-explosion",
         flags = { "not-on-map" },
         animations = AnimationDB.get_layered_animations("projectiles","dark_swam","explosion")
     },
     {
         type = "explosion",
-        name = MOD_NAME.."--acid-cloud-explosion",
+        name = ERM_ZERG.MOD_NAME.."--acid-cloud-explosion",
         flags = { "not-on-map" },
         animations = AnimationDB.get_layered_animations("projectiles","acid_cloud","explosion")
     },
     {
         type = "explosion",
-        name = MOD_NAME.."--devourer-cloud-explosion",
+        name = ERM_ZERG.MOD_NAME.."--devourer-cloud-explosion",
         flags = { "not-on-map" },
         animations = AnimationDB.get_layered_animations("projectiles","devourer","explosion")
     },
     {
         type = "explosion",
-        name = MOD_NAME.."--scourge-explosion",
+        name = ERM_ZERG.MOD_NAME.."--scourge-explosion",
         flags = { "not-on-map" },
         animations = AnimationDB.get_layered_animations("projectiles","scourge_explosion","explosion")
     }
@@ -171,7 +172,7 @@ data:extend({
 
 local blood_swarm = {
     type = "explosion",
-    name = MOD_NAME.."--dark-swarm-80-blood-explosion",
+    name = ERM_ZERG.MOD_NAME.."--dark-swarm-80-blood-explosion",
     flags = { "not-on-map" },
     animations = AnimationDB.get_layered_animations("projectiles","dark_swam_80","explosion")
 }

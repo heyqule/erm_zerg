@@ -14,6 +14,7 @@ local ZergSound = require("__erm_zerg_hd_assets__/sound")
 local CreepFunction = require("__erm_zerg__/prototypes/creep_function")
 local AnimationDB = require("__erm_zerg_hd_assets__/animation_db")
 local enemy_autoplace = require ("__enemyracemanager__/prototypes/enemy-autoplace")
+local ERM_ZERG = require("__erm_zerg__/global")
 local name = "nyduspit"
 
 -- Hitpoints
@@ -46,19 +47,19 @@ local max_friends_around_to_spawn = 7
 local spawn_table = function(level)
     local res = {}
     --Tire 1
-    res[1] = { MOD_NAME .. "--zergling--" .. level, { { 0.0, 0.7 }, { 0.2, 0.5 }, { 0.4, 0.4 }, { 0.6, 0.3 }, { 0.8, 0.2 }, { 1.0, 0.125 } } }
-    res[2] = { MOD_NAME .. "--hydralisk--" .. level, { { 0.0, 0.3 }, { 0.2, 0.45 }, { 0.4, 0.4 }, { 0.6, 0.2 }, { 0.8, 0.15 }, { 1.0, 0.125 } } }
-    res[3] = { MOD_NAME .. "--mutalisk--" .. level, { { 0.0, 0.0 }, { 0.2, 0.05 }, { 0.4, 0.15 }, { 0.6, 0.2 }, { 0.8, 0.1 }, { 1.0, 0.125 } } }
+    res[1] = { ERM_ZERG.MOD_NAME .. "--zergling--" .. level, { { 0.0, 0.7 }, { 0.2, 0.5 }, { 0.4, 0.4 }, { 0.6, 0.3 }, { 0.8, 0.2 }, { 1.0, 0.125 } } }
+    res[2] = { ERM_ZERG.MOD_NAME .. "--hydralisk--" .. level, { { 0.0, 0.3 }, { 0.2, 0.45 }, { 0.4, 0.4 }, { 0.6, 0.2 }, { 0.8, 0.15 }, { 1.0, 0.125 } } }
+    res[3] = { ERM_ZERG.MOD_NAME .. "--mutalisk--" .. level, { { 0.0, 0.0 }, { 0.2, 0.05 }, { 0.4, 0.15 }, { 0.6, 0.2 }, { 0.8, 0.1 }, { 1.0, 0.125 } } }
     --Tire 2
-    res[4] = { MOD_NAME .. "--lurker--" .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.05 }, { 0.6, 0.1}, { 0.8, 0.1 }, { 1.0, 0.125 } } }
-    res[5] = { MOD_NAME .. "--guardian--" .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.0 }, { 0.8, 0.1 }, { 1.0, 0.125 } } }
-    res[6] = { MOD_NAME .. "--devourer--" .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.1 }, { 0.8, 0.1 }, { 1.0, 0.125 } } }
+    res[4] = { ERM_ZERG.MOD_NAME .. "--lurker--" .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.05 }, { 0.6, 0.1}, { 0.8, 0.1 }, { 1.0, 0.125 } } }
+    res[5] = { ERM_ZERG.MOD_NAME .. "--guardian--" .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.0 }, { 0.8, 0.1 }, { 1.0, 0.125 } } }
+    res[6] = { ERM_ZERG.MOD_NAME .. "--devourer--" .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.1 }, { 0.8, 0.1 }, { 1.0, 0.125 } } }
     --Tier 3
-    res[7] = { MOD_NAME .. "--drone--" .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.1 }, { 0.8, 0.1 }, { 1.0, 0.05 } } }
-    res[8] = { MOD_NAME .. "--ultralisk--" .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0 }, { 0.6, 0 }, { 0.8, 0.05 }, { 1.0, 0.05 } } }
-    res[9] = { MOD_NAME .. "--defiler--" .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0 }, { 0.6, 0 }, { 0.8, 0.0 }, { 1.0, 0.05 } } }
-    res[10] = { MOD_NAME .. "--queen--" .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0 }, { 0.6, 0 }, { 0.8, 0.0 }, { 1.0, 0.05 } } }
-    res[11] = { MOD_NAME .. "--infested--" .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0 }, { 0.6, 0 }, { 0.8, 0.05 }, {1.0, 0.05} } }
+    res[7] = { ERM_ZERG.MOD_NAME .. "--drone--" .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.1 }, { 0.8, 0.1 }, { 1.0, 0.05 } } }
+    res[8] = { ERM_ZERG.MOD_NAME .. "--ultralisk--" .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0 }, { 0.6, 0 }, { 0.8, 0.05 }, { 1.0, 0.05 } } }
+    res[9] = { ERM_ZERG.MOD_NAME .. "--defiler--" .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0 }, { 0.6, 0 }, { 0.8, 0.0 }, { 1.0, 0.05 } } }
+    res[10] = { ERM_ZERG.MOD_NAME .. "--queen--" .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0 }, { 0.6, 0 }, { 0.8, 0.0 }, { 1.0, 0.05 } } }
+    res[11] = { ERM_ZERG.MOD_NAME .. "--infested--" .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0 }, { 0.6, 0 }, { 0.8, 0.05 }, {1.0, 0.05} } }
     return res
 end
 
@@ -72,13 +73,13 @@ function ErmZerg.make_nyduspit(level)
     data:extend({
         {
             type = "unit-spawner",
-            name = MOD_NAME .. "--" .. name .. "--" .. level,
-            localised_name = { "entity-name." .. MOD_NAME .. "--" .. name, GlobalConfig.QUALITY_MAPPING[level] },
+            name = ERM_ZERG.MOD_NAME .. "--" .. name .. "--" .. level,
+            localised_name = { "entity-name." .. ERM_ZERG.MOD_NAME .. "--" .. name, GlobalConfig.QUALITY_MAPPING[level] },
             icon = "__erm_zerg_hd_assets__/graphics/entity/icons/buildings/advisor.png",
             icon_size = 64,
             flags = { "placeable-player", "placeable-enemy", "breaths-air" },
             max_health = ERM_UnitHelper.get_building_health(hitpoint, max_hitpoint_multiplier,  level),
-            order = MOD_NAME .. "--building--" .. name .. "--".. level,
+            order = ERM_ZERG.MOD_NAME .. "--building--" .. name .. "--".. level,
             subgroup = "enemies",
             map_color = ERM_UnitHelper.format_map_color(settings.startup["enemy_erm_zerg-map-color"].value),
             working_sound = ZergSound.building_working_sound(name, 0.9),
@@ -118,8 +119,8 @@ graphics_set = {
             -- (2018-12-07)
             autoplace = enemy_autoplace.enemy_spawner_autoplace({
                 probability_expression = "erm_zerg_autoplace_base(0, 4)",
-                force = FORCE_NAME,
-                control = AUTOCONTROL_NAME
+                force = ERM_ZERG.FORCE_NAME,
+                control = ERM_ZERG.AUTOCONTROL_NAME
             }),
             call_for_help_radius = 50,
             spawn_decorations_on_expansion = true,

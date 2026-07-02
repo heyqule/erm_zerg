@@ -4,11 +4,13 @@
 --- DateTime: 10/28/2024 10:53 PM
 ---
 
+local ERM_ZERG = require("__erm_zerg__/global")
+
 data:extend{
     {
         type = "autoplace-control",
-        name = AUTOCONTROL_NAME,
-        order = AUTOCONTROL_NAME,
+        name = ERM_ZERG.AUTOCONTROL_NAME,
+        order = ERM_ZERG.AUTOCONTROL_NAME,
         category = "enemy",
         can_be_disabled = false
     },
@@ -21,13 +23,13 @@ data:extend{
     {
         type = "noise-expression",
         name = "erm_zerg_base_radius",
-        expression = "sqrt(var('control:"..AUTOCONTROL_NAME..":size')) * (15 + 4 * erm_zerg_base_intensity)"
+        expression = "sqrt(var('control:"..ERM_ZERG.AUTOCONTROL_NAME..":size')) * (15 + 4 * erm_zerg_base_intensity)"
     },
     {
         type = "noise-expression",
         name = "erm_zerg_base_frequency",
         -- bases_per_km2 = 10 + 3 * erm_zerg_base_intensity
-        expression = "(0.00001 + 0.000003 * erm_zerg_base_intensity) * var('control:"..AUTOCONTROL_NAME..":frequency')"
+        expression = "(0.00001 + 0.000003 * erm_zerg_base_intensity) * var('control:"..ERM_ZERG.AUTOCONTROL_NAME..":frequency')"
     },
     ---- Seed1 must have a different value between each probablity expression.  Otherwise it causes map gen slider conflict.
     ---- https://forums.factorio.com/viewtopic.php?f=23&t=123582

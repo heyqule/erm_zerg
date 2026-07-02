@@ -16,6 +16,7 @@ local ZergSound = require("__erm_zerg_hd_assets__/sound")
 local CreepFunction = require("__erm_zerg__/prototypes/creep_function")
 local AnimationDB = require("__erm_zerg_hd_assets__/animation_db")
 local enemy_autoplace = require ("__enemyracemanager__/prototypes/enemy-autoplace")
+local ERM_ZERG = require("__erm_zerg__/global")
 local name = "overmind"
 
 -- Hitpoints
@@ -33,14 +34,14 @@ local max_friends_around_to_spawn = 100
 local spawn_table = function()
     local res = {}
     --Tire 2
-    res[1] = { MOD_NAME .. "--lurker--6", { { 0.0, 0.2 } } }
-    res[2] = { MOD_NAME .. "--guardian--6", { { 0.0, 0.15 } } }
-    res[3] = { MOD_NAME .. "--devourer--6", { { 0.0, 0.15 } } }
+    res[1] = { ERM_ZERG.MOD_NAME .. "--lurker--6", { { 0.0, 0.2 } } }
+    res[2] = { ERM_ZERG.MOD_NAME .. "--guardian--6", { { 0.0, 0.15 } } }
+    res[3] = { ERM_ZERG.MOD_NAME .. "--devourer--6", { { 0.0, 0.15 } } }
     --Tier 3
-    res[4] = { MOD_NAME .. "--ultralisk--6", { { 0.0, 0.2 } } }
-    res[5] = { MOD_NAME .. "--defiler--6", { { 0.0, 0.1 } } }
-    res[6] = { MOD_NAME .. "--queen--6", { { 0.0, 0.1 } } }
-    res[7] = { MOD_NAME .. "--drone--6", { { 0.0, 0.1 } } }
+    res[4] = { ERM_ZERG.MOD_NAME .. "--ultralisk--6", { { 0.0, 0.2 } } }
+    res[5] = { ERM_ZERG.MOD_NAME .. "--defiler--6", { { 0.0, 0.1 } } }
+    res[6] = { ERM_ZERG.MOD_NAME .. "--queen--6", { { 0.0, 0.1 } } }
+    res[7] = { ERM_ZERG.MOD_NAME .. "--drone--6", { { 0.0, 0.1 } } }
     return res
 end
 
@@ -53,13 +54,13 @@ function ErmZerg.make_boss_hive(level, boss_data)
     data:extend({
         {
             type = "unit-spawner",
-            name = MOD_NAME .. "--boss_" .. name .. "--" .. level,
-            localised_name = { "entity-name." .. MOD_NAME .. "--" .. name, GlobalConfig.QUALITY_MAPPING[level] },
+            name = ERM_ZERG.MOD_NAME .. "--boss_" .. name .. "--" .. level,
+            localised_name = { "entity-name." .. ERM_ZERG.MOD_NAME .. "--" .. name, GlobalConfig.QUALITY_MAPPING[level] },
             icon = "__erm_zerg_hd_assets__/graphics/entity/icons/buildings/advisor.png",
             icon_size = 64,
             flags = { "placeable-player", "placeable-enemy", "breaths-air" },
             max_health = boss_data.hive_hp[level],
-            order = MOD_NAME .. "--building--" .. name .. "--".. level,
+            order = ERM_ZERG.MOD_NAME .. "--building--" .. name .. "--".. level,
             subgroup = "enemies",
             working_sound = ZergSound.building_working_sound("hive", 0.9),
             dying_sound = ZergSound.building_dying_sound(0.9),
@@ -85,7 +86,7 @@ function ErmZerg.make_boss_hive(level, boss_data)
             dying_trigger_effect = {
                 {
                     type = "script",
-                    effect_id = TRIGGER_BOSS_DIES,
+                    effect_id = ERM_ZERG.TRIGGER_BOSS_DIES,
                 }
             },
             created_effect = {
@@ -95,7 +96,7 @@ function ErmZerg.make_boss_hive(level, boss_data)
                     source_effects = {
                         {
                             type = "script",
-                            effect_id = TRIGGER_BOSS_SPAWNED
+                            effect_id = ERM_ZERG.TRIGGER_BOSS_SPAWNED
                         }
                     }
                 }
