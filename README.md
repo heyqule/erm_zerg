@@ -29,44 +29,56 @@ All units start with same base health point as original Starcraft. They have uni
 
 #### Tier 1 Units
 
-#####  Zergling (Unit Supply: 1)
+#####  Zergling
 - Attack: Physical
+- Unit Supply: 1 
 
-##### Hydralisk (Unit Supply: 2)
+##### Hydralisk
 - Attack: Acid
+- Unit Supply: 2
 
-##### Mutalisk (Unit Supply: 2)
+##### Mutalisk
 - Attack: Acid
+- Unit Supply: 2
 
 #### Tier 2 Units
 
-##### Overlord (Unit Supply: 4)
+##### Overlord
 - Drops units
+- Unit Supply: 4
 
-##### Lurker (Unit Supply: 2)
+##### Lurker
 - Attack: Physical (2 radius AOE)
+- Unit Supply: 2
 
-##### Infested (Unit Supply: 2)
+##### Infested
 - Attack: Explosion (3 radius AOE)
+- Unit Supply: 1
 
-##### Guardian (Unit Supply: 3)
+##### Guardian
 - Attack: Acid and chance of spawning scourge
+- Unit Supply: 3
 
-##### Devourer  (Unit Supply: 3)
+##### Devourer
 - Attack: Acid (Slow on hit) and chance of spawning scourge
+- Unit Supply: 3
 
-##### Drone (unit supply: 2)
+##### Drone
 - Builds spore colony or nyduspit
+- Unit Supply: 2
 
 #### Tier 3 Units
-##### Queen (unit supply: 3)
+##### Queen
 - Attack: Acid (5 radius AOE) (Slow on hit) and spawning broodling
+- Unit Supply: 3
 
-##### Defiler (unit supply: 3)
+##### Defiler
 - Attack: Acid (5 radius AOE), Dark swamp (Heals friendly unit in 8 radius AOE)
+- Unit Supply: 3
 
-##### Ultralisk (unit supply: 4)
+##### Ultralisk
 - Attack: Physical (3 radius AOE)
+- Unit Supply: 4 
 
 Physical resistance: 85, Weak elemental resistance: 75, Elemental resistance: 80 with some exceptions.
 
