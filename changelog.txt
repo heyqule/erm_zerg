@@ -1,4 +1,12 @@
 ---------------------------------------------------------------------------------------------------
+Version: 2.1.2
+Date: 2026-07-15
+
+  Changes:
+    - Added "recommended" to advanced_spaceship_repair.
+    - Changed SC music pack dependency to erm_starcraft_music to have better controls and Factorio 2.1 support.
+
+---------------------------------------------------------------------------------------------------
 Version: 2.1.1
 Date: 2026-07-08
 

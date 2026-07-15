@@ -3,7 +3,8 @@
 --- Created by heyqule.
 --- DateTime: 10/29/2024 2:29 AM
 ---
-local ERM = require("__enemyracemanager__/global") 
+local ERM = require("__enemyracemanager__/global")
+local ERM_SETTING_CONST = require("__enemyracemanager__/setting-constants")
 local ERM_ZERG = require("__erm_zerg__/global")
 
 require "prototypes.update-teamcolour"
@@ -32,7 +33,7 @@ if map_gen_settings then
 
         nauvis_autocontrols[ERM_ZERG.AUTOCONTROL_NAME] = {}
         --- Inject itself autocontrol for mixed mode    
-    elseif nauvis_enemy_settings == NAUVIS_MIXED then
+    elseif nauvis_enemy_settings == ERM_SETTING_CONST.NAUVIS_MIXED then
         nauvis_autocontrols[ERM_ZERG.AUTOCONTROL_NAME] = {}
     end
 end

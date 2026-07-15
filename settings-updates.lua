@@ -17,3 +17,10 @@ end
 if data.raw["string-setting"]["enemyracemanager-4way-southwest"].default_value ~= ERM_ZERG.MOD_NAME then
     data.raw["string-setting"]["enemyracemanager-4way-southwest"].default_value = ERM_ZERG.MOD_NAME
 end
+
+if mods['erm_starcraft_music'] then
+    data.raw['bool-setting']['ermscmusic_nauvis'].default_value = false
+    data.raw['bool-setting']['ermscmusic_vulcanus'].default_value = false
+    data.raw['bool-setting']['ermscmusic_fulgora'].default_value = false
+    data.raw['bool-setting']['ermscmusic_gleba'].default_value = false
+end 

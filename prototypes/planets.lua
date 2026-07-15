@@ -892,8 +892,8 @@ data.rso_ignore_resource_entities[mineral_name2] = true
 data.rso_ignore_planets = data.rso_ignore_planets or {}
 data.rso_ignore_planets['char'] = true
 
-if mods['starcraft-music'] then
-    local source_path = "__starcraft-music__/sounds/"
+if mods['erm_starcraft_music'] then
+    local source_path = "__erm_starcraft_music__/sounds/"
     data:extend({
         {
             type = "ambient-sound",
