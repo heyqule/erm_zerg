@@ -1,3 +1,7 @@
+### IMPORTANT NOTICE:
+
+EMR for Factorio 2.1 build is now available. Double check the settings since some default setting have changed.
+
 # ERM_Zerg
 Add Zergs to factorio as biters.
 
@@ -7,13 +11,14 @@ Discord:  [https://discord.gg/BwWXygyEyQ](https://discord.gg/BwWXygyEyQ)
 
 ERM - Features Reel: [https://www.youtube.com/watch?v=phLRReAjxHA](https://www.youtube.com/watch?v=phLRReAjxHA)
 
-#### Changes in 2.0
-- Support Factorio 2.0
-- Default to HD graphic. erm_zerg_hd is no longer required.
-- [space-age] Zerg on Vulcanus.  Demolish pairs them as nydus worms.
-- [space-age] Planet Char as new planet. Home of Legendary forces.
+#### Feature List
+- Add Zerg units and structures as a new enemy force.
+- [space-age] Zerg on Vulcanus.  Demolisher pairs them as nydus worms. (Optional)
+- [space-age] Planet Char as new planet. Home of Legendary forces.  Features 2 new mineral types and one gas type. Nydus worms also patrols the planet.
+- [space-age] Space route to Char are patrolled by zergs.  Requires different ship building strategy.
+- [space-age] Recipes to build sythetic zerg army and biter eggs for science.
 - [space-age] Beat the boss, Overmind, on planet Char for rewards
-- This is an experimental release.
+- Additional detail in Feature Details section
 
 
 ##### Licenses
@@ -24,7 +29,7 @@ However, Starcraft graphic and sound assets are properties of Blizzard Entertain
 ![Zerg](https://assets-mod.factorio.com/assets/61d215c834495f728f67998664973dd514635303.png "Zerg")
 
 
-# Features
+# Feature Details
 All units start with same base health point as original Starcraft. They have unique health multiplier to balance bullet damage on higher tiers.
 
 #### Tier 1 Units
@@ -94,7 +99,7 @@ Physical resistance: 85, Weak elemental resistance: 75, Elemental resistance: 80
 - New techs and recipes
 - Patrolled by nydus worm.
 - When interplanetary attack is enabled, killing an unit spawner on Chars will activate it.
-- Master control entity: Overmind. Defeat it for rewards. (Experimental)
+- Master control entity: Overmind. Defeat it for rewards.
 
 ### How to spawn Overmind
 - Build and place a zerg PSI radar on Char
