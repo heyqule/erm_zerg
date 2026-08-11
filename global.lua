@@ -30,7 +30,7 @@ local ERM_ZERG = {
 
     NYDUS_DEATH_ATTACK = "emzrg-nd1",
     GUERRILLA_ATTACK = "emzrg-grl",
-
+    
     LARVA_EGG_TRIGGER = "emzrg-egg",
 
     ZERG_MAP_COLOR = { r = 248, g = 140, b = 20 },

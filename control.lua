@@ -184,16 +184,16 @@ local addRaceSettings = function()
     --- Arrange it from lowest chance to highest chance, as it starts from first item
     race_settings.emotion_data = {
         -- emotion_type, spawn_chance, compare as dark/light, darkness_value (0-1),cooldown_interval, group_size_multiplier
-        {EmotionConstants.EMO_RAPID_EXPAND, 10, EmotionConstants.DARK, 0.65, 2 * minute, 0.2},
-        {EmotionConstants.EMO_RUSH, 10, EmotionConstants.LIGHT, 0.5, 30 * second, 0.33},
-        {EmotionConstants.EMO_DOUBLE_TAP, 15, EmotionConstants.LIGHT, 0.65, 5 * minute, 0.8},
-        {EmotionConstants.EMO_SIEGE, 20, EmotionConstants.LIGHT, 0.5, 3 * minute, 1},
+        {EmotionConstants.EMO_RAPID_EXPAND, 10, EmotionConstants.DARK, 0.65, 3 * minute, 0.2},
+        {EmotionConstants.EMO_DOUBLE_TAP, 15, EmotionConstants.LIGHT, 0.65, 2 * minute, 0.8},
+        {EmotionConstants.EMO_SIEGE, 20, EmotionConstants.LIGHT, 0.5, 2 * minute, 1},
+        {EmotionConstants.EMO_RUSH, 25, EmotionConstants.ALL_DAY, 0, 30 * second, 0.66},
     }
     
     race_settings.boss_emotion_data = {
         -- emotion_type, spawn_chance, compare as dark/light, darkness_value (0-1),cooldown_interval, group_size_multiplier
         {EmotionConstants.EMO_RUSH, 33, EmotionConstants.ALL_DAY, 0, 15 * second, 0.5},
-        {EmotionConstants.EMO_DOUBLE_TAP, 50, EmotionConstants.ALL_DAY, 0, 3 * minute, 1},
+        {EmotionConstants.EMO_DOUBLE_TAP, 50, EmotionConstants.ALL_DAY, 0, 2 * minute, 1},
         {EmotionConstants.EMO_SIEGE, 100, EmotionConstants.ALL_DAY, 0, 2 * minute, 1.2},
     } 
     
@@ -209,6 +209,7 @@ local addRaceSettings = function()
     
     race_settings.boss_tier = race_settings.boss_tier or 1
     race_settings.boss_kill_count = race_settings.boss_kill_count or 0
+    race_settings.boss_tech_upgrade_name = ERM_ZERG.MOD_NAME..'--larva_egg-productivity'
 
     race_settings.structure_killed_count_by_planet = race_settings.structure_killed_count_by_planet or {}
     race_settings.unit_killed_count_by_planet = race_settings.unit_killed_count_by_planet or {}
@@ -439,29 +440,6 @@ script.on_nth_tick(20 * minute + 13, function(event)
         end
     end
 end)
-
-
---script.on_nth_tick(15 * minute + 13, function(event)
---    local char = game.surfaces['char']
---    if char and CustomAttacks.can_spawn(35) then
---        if game.forces[ERM_ZERG.FORCE_NAME].get_evolution_factor(char) < 0.35 then
---            return
---        end
---
---        local has_entity =  char.count_entities_filtered({type=AttackGroupBeaconConstants.ATTACKABLE_ENTITY_TYPES, limit = min_attackable_entities})
---        if has_entity <= min_attackable_entities then
---            return
---        end
---
---        if can_dropship and CustomAttacks.can_spawn(dropship_chance) then
---            remote.call("enemyracemanager", "generate_dropship_group", ERM_ZERG.FORCE_NAME, dropship_group_size, {surface=char})
---        elseif can_fly and CustomAttacks.can_spawn(fly_chance) then
---            remote.call("enemyracemanager", "generate_flying_group", ERM_ZERG.FORCE_NAME, flyer_group_size, {surface=char})
---        else
---            remote.call("enemyracemanager", "generate_attack_group", ERM_ZERG.FORCE_NAME, general_attack_group_size, {surface=char})
---        end
---    end
---end)
 
 ---
 --- Register required remote interfaces

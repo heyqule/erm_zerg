@@ -893,33 +893,10 @@ data.rso_ignore_planets = data.rso_ignore_planets or {}
 data.rso_ignore_planets['char'] = true
 
 if mods['erm_starcraft_music'] then
-    local source_path = "__erm_starcraft_music__/sounds/"
-    data:extend({
-        {
-            type = "ambient-sound",
-            planet = "char",
-            track_type = "main-track",
-            name = "char-zerg-1",
-            sound = { filename = source_path .. "Zerg One.ogg" }
-        },
-        {
-            type = "ambient-sound",
-            planet = "char",
-            track_type = "main-track",
-            name = "char-zerg-2",
-            sound = { filename = source_path .. "Zerg Two.ogg" }
-        },
-        {
-            type = "ambient-sound",
-            planet = "char",
-            track_type = "main-track",
-            name = "char-zerg-3",
-            sound = { filename = source_path .. "Zerg Three.ogg" }
-        },
-    })
+    local MusicSetup = require('__erm_starcraft_music__/music_setup')
+    MusicSetup.add_track_to("z1", { "char" })
+    MusicSetup.add_track_to("z2", { "char" })
+    MusicSetup.add_track_to("z3", { "char" })
 else
-    local sound_data = SoundUtil.dupe_planet_music('vulcanus','char')
-    if table_size(sound_data) > 0 then
-        data:extend(sound_data)
-    end
+    SoundUtil.dupe_planet_music('vulcanus','char')
 end 

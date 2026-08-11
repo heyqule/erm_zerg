@@ -1,6 +1,6 @@
 {
   "name": "erm_zerg",
-  "version": "2.1.2",
+  "version": "2.1.3",
   "date": "2021-07-10",
   "title": "ERM - Zerg / Garm Brood",
   "author": "heyqule",
@@ -8,12 +8,12 @@
   "factorio_version": "2.1",
   "dependencies": [
     "base >= 2.1.0",
-    "enemyracemanager >= 2.1.4",
+    "enemyracemanager >= 2.1.8",
     "erm_zerg_hd_assets >= 2.1.0",
     "erm_shared_economy >= 2.1.0",
     "erm_zerg_economy >= 2.1.0",
     "+advanced_spaceship_repair >= 2.1.0",
-    "+erm_starcraft_music >= 2.1.0",
+    "+erm_starcraft_music >= 2.1.1",
     "(?) alien-biomes >= 0.7.2"
   ]
 }
